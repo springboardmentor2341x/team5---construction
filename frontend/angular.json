@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "frontend": {
+    "buildtrack-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -24,14 +24,16 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/material-theme.scss", "src/styles.css"
+           "styles": [
+             "node_modules/bootstrap/dist/css/bootstrap.min.css",
+             "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+             "src/material-theme.scss",
+             "src/styles.css"
+          ]    
 
-             
-            ]
-
-  
-
+          "scripts": [
+             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+          ]
 
           },
           "configurations": {
@@ -62,10 +64,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "frontend:build:production"
+              "buildTarget": "buildtrack-frontend:build:production"
             },
             "development": {
-              "buildTarget": "frontend:build:development"
+              "buildTarget": "buildtrack-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

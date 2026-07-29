@@ -1,0 +1,105 @@
+.container-fluid{
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+h2{
+    color:#1e293b;
+}
+
+.btn-primary{
+    background:#2563eb;
+    border:none;
+    padding:10px 20px;
+    border-radius:10px;
+}
+
+.btn-primary:hover{
+    background:#1d4ed8;
+}
+
+.card{
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.card h2{
+    margin-top: 10px;
+    font-size: 32px;
+}
+
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.container-fluid {
+  padding: 30px;
+}
+
+
+.form-control,
+.form-select{
+    height:45px;
+    border-radius:10px;
+}
+
+.card{
+    border-radius:16px;
+    transition: all 0.3s ease;
+}
+
+.form-label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+
+.table th{
+    font-weight:600;
+}
+
+
+
+.badge{
+    padding:8px 12px;
+    font-size:12px;
+}
+
+.table td,
+.table th{
+    vertical-align:middle;
+}
+
+
+.progress {
+  height: 10px;
+  border-radius: 20px;
+  background: #e5e7eb;
+}
+
+.progress-bar {
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* .table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 1200px;
+} */
