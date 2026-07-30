@@ -1,0 +1,167 @@
+<div class="app-layout">
+
+  @if (sidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- ================= Sidebar ================= -->
+
+  <aside class="sidebar" [class.sidebar-open]="sidebarOpen">
+
+    <div class="sidebar-header">
+
+      <div class="logo">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">BuildTrack</span>
+      </div>
+
+      <button class="close-sidebar" (click)="closeSidebar()">
+        ✕
+      </button>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="/site-engineer/dashboard"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📊</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/site-engineer/assigned-projects"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📁</span>
+        <span>Assigned Projects</span>
+      </a>
+
+      <a routerLink="/site-engineer/project-details"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>🏗️</span>
+        <span>Project Details</span>
+      </a>
+
+      <a routerLink="/site-engineer/daily-progress"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📈</span>
+        <span>Daily Progress</span>
+      </a>
+
+      <a routerLink="/site-engineer/equipment-status"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>🚜</span>
+        <span>Equipment Status</span>
+      </a>
+
+      <a routerLink="/site-engineer/resources"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📦</span>
+        <span>Resources</span>
+      </a>
+
+      <a routerLink="/site-engineer/activity-logs"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📝</span>
+        <span>Activity Logs</span>
+      </a>
+
+      <a routerLink="/site-engineer/weekly-reports"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>📄</span>
+        <span>Weekly Reports</span>
+      </a>
+
+      <a routerLink="/site-engineer/notifications"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>🔔</span>
+        <span>Notifications</span>
+      </a>
+
+      <a routerLink="/site-engineer/profile"
+         routerLinkActive="active"
+         class="nav-item"
+         (click)="closeSidebar()">
+        <span>👤</span>
+        <span>Profile</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button class="logout-btn" (click)="logout()">
+        <span>🚪</span>
+        <span>Logout</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- ================= Main ================= -->
+
+  <main class="main-content">
+
+    <header class="top-navbar">
+
+      <button class="menu-btn" (click)="toggleSidebar()">
+        ☰
+      </button>
+
+      <div class="page-title">
+        <h1>BuildTrack</h1>
+        <p>Site Engineer Panel</p>
+      </div>
+
+      <div class="navbar-actions">
+
+        <button class="notification-btn">
+          🔔
+        </button>
+
+        <div class="user-info">
+
+          <div class="user-avatar">
+            SE
+          </div>
+
+          <div class="user-details">
+            <strong>Site Engineer</strong>
+            <span>Construction Team</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- Every Site Engineer page will render here -->
+
+    <section class="layout-content">
+
+      <router-outlet></router-outlet>
+
+    </section>
+
+  </main>
+
+</div>

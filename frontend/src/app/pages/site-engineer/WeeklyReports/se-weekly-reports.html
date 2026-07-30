@@ -1,1 +1,412 @@
-<p>se-weekly-reports works!</p>
+<div class="app-layout">
+
+  <!-- Mobile Overlay -->
+  @if (sidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar-open]="sidebarOpen">
+
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">BuildTrack</span>
+      </div>
+
+      <button class="close-sidebar" (click)="closeSidebar()">
+        ✕
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a
+        routerLink="/site-engineer/dashboard"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📊</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/assigned-projects"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📁</span>
+        <span>Assigned Projects</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/daily-progress"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📈</span>
+        <span>Daily Progress</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/equipment-status"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>⚙️</span>
+        <span>Equipment Status</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/resources"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📦</span>
+        <span>Resources</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/activity-logs"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📝</span>
+        <span>Activity Logs</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/weekly-reports"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📄</span>
+        <span>Weekly Reports</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/notifications"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>🔔</span>
+        <span>Notifications</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/profile"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>👤</span>
+        <span>Profile</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout-btn">
+        <span>🚪</span>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+
+      <button
+        class="menu-btn"
+        (click)="toggleSidebar()"
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+      <div class="page-title">
+        <h1>Weekly Reports</h1>
+        <p>Manage and track your weekly project reports</p>
+      </div>
+
+      <div class="navbar-actions">
+
+        <button class="notification-btn">
+          🔔
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="user-info">
+          <div class="user-avatar">SE</div>
+
+          <div class="user-details">
+            <strong>Site Engineer</strong>
+            <span>Field Team</span>
+          </div>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Page Content -->
+    <section class="page-content">
+
+      <!-- Heading -->
+      <div class="content-heading">
+
+        <div>
+          <h2>Weekly Reports</h2>
+          <p>
+            Review, track and manage weekly reports submitted for your projects.
+          </p>
+        </div>
+
+        <button
+          class="create-report-btn"
+          (click)="createReport()"
+        >
+          + Create Report
+        </button>
+
+      </div>
+
+
+      <!-- Summary Cards -->
+      <div class="summary-grid">
+
+        <div class="summary-card">
+
+          <div class="summary-icon total-icon">
+            📄
+          </div>
+
+          <div class="summary-info">
+            <span>Total Reports</span>
+            <strong>{{ totalReports }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon approved-icon">
+            ✓
+          </div>
+
+          <div class="summary-info">
+            <span>Approved</span>
+            <strong>{{ approvedReports }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon pending-icon">
+            ⏳
+          </div>
+
+          <div class="summary-info">
+            <span>Pending</span>
+            <strong>{{ pendingReports }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon rejected-icon">
+            !
+          </div>
+
+          <div class="summary-info">
+            <span>Rejected</span>
+            <strong>{{ rejectedReports }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Reports Card -->
+      <div class="reports-card">
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+
+          <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+              type="text"
+              placeholder="Search report, project or ID..."
+              [(ngModel)]="searchText"
+            />
+
+          </div>
+
+
+          <div class="filter-box">
+
+            <label for="status">
+              Status
+            </label>
+
+            <select
+              id="status"
+              [(ngModel)]="selectedStatus"
+            >
+              <option value="All">All Status</option>
+              <option value="Approved">Approved</option>
+              <option value="Pending">Pending</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- Reports List -->
+        <div class="reports-list">
+
+          @for (report of filteredReports; track report.id) {
+
+            <div class="report-item">
+
+              <!-- Report Icon -->
+              <div class="report-icon">
+                📄
+              </div>
+
+
+              <!-- Report Details -->
+              <div class="report-content">
+
+                <div class="report-heading">
+
+                  <div>
+                    <h3>
+                      {{ report.title }}
+                    </h3>
+
+                    <span class="report-id">
+                      {{ report.id }}
+                    </span>
+                  </div>
+
+                  <span
+                    class="status-badge"
+                    [class.status-approved]="report.status === 'Approved'"
+                    [class.status-pending]="report.status === 'Pending'"
+                    [class.status-rejected]="report.status === 'Rejected'"
+                  >
+                    {{ report.status }}
+                  </span>
+
+                </div>
+
+
+                <div class="report-meta">
+
+                  <div class="meta-item">
+                    <span>📁</span>
+                    <strong>Project:</strong>
+                    <span>{{ report.project }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <span>📅</span>
+                    <strong>Week:</strong>
+                    <span>{{ report.week }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <span>🕐</span>
+                    <strong>Submitted:</strong>
+                    <span>{{ report.submittedDate }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <span>👤</span>
+                    <strong>By:</strong>
+                    <span>{{ report.submittedBy }}</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Actions -->
+              <div class="report-actions">
+
+                <button
+                  class="view-btn"
+                  (click)="viewReport(report)"
+                >
+                  View
+                </button>
+
+                <button
+                  class="download-btn"
+                  (click)="downloadReport(report)"
+                >
+                  Download
+                </button>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          <!-- Empty State -->
+          @if (filteredReports.length === 0) {
+
+            <div class="empty-state">
+
+              <span>🔍</span>
+
+              <strong>
+                No reports found
+              </strong>
+
+              <p>
+                Try changing your search or status filter.
+              </p>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

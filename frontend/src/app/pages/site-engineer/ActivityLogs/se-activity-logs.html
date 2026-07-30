@@ -1,1 +1,413 @@
-<p>se-activity-logs works!</p>
+<div class="app-layout">
+
+  <!-- Mobile Overlay -->
+  @if (sidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar-open]="sidebarOpen">
+
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">BuildTrack</span>
+      </div>
+
+      <button class="close-sidebar" (click)="closeSidebar()">
+        ✕
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a
+        routerLink="/site-engineer/dashboard"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📊</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/assigned-projects"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📁</span>
+        <span>Assigned Projects</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/daily-progress"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📈</span>
+        <span>Daily Progress</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/equipment-status"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>⚙️</span>
+        <span>Equipment Status</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/resources"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📦</span>
+        <span>Resources</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/activity-logs"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📝</span>
+        <span>Activity Logs</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/weekly-reports"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>📄</span>
+        <span>Weekly Reports</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/notifications"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>🔔</span>
+        <span>Notifications</span>
+      </a>
+
+      <a
+        routerLink="/site-engineer/profile"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeSidebar()"
+      >
+        <span>👤</span>
+        <span>Profile</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout-btn">
+        <span>🚪</span>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+
+      <button
+        class="menu-btn"
+        (click)="toggleSidebar()"
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+      <div class="page-title">
+        <h1>Activity Logs</h1>
+        <p>Track all site activities and updates</p>
+      </div>
+
+      <div class="navbar-actions">
+
+        <button class="notification-btn">
+          🔔
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="user-info">
+          <div class="user-avatar">SE</div>
+
+          <div class="user-details">
+            <strong>Site Engineer</strong>
+            <span>Field Team</span>
+          </div>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Page Content -->
+    <section class="page-content">
+
+      <!-- Heading -->
+      <div class="content-heading">
+
+        <div>
+          <h2>Activity Overview</h2>
+          <p>
+            Monitor recent activities and updates performed across your projects.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- Summary Cards -->
+      <div class="summary-grid">
+
+        <div class="summary-card">
+
+          <div class="summary-icon total-icon">
+            📋
+          </div>
+
+          <div class="summary-info">
+            <span>Total Activities</span>
+            <strong>{{ totalActivities }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon completed-icon">
+            ✓
+          </div>
+
+          <div class="summary-info">
+            <span>Completed</span>
+            <strong>{{ completedActivities }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon progress-icon">
+            🔄
+          </div>
+
+          <div class="summary-info">
+            <span>In Progress</span>
+            <strong>{{ inProgressActivities }}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <div class="summary-icon pending-icon">
+            !
+          </div>
+
+          <div class="summary-info">
+            <span>Pending</span>
+            <strong>{{ pendingActivities }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Activity Card -->
+      <div class="activity-card">
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+
+          <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+              type="text"
+              placeholder="Search activity, project or ID..."
+              [(ngModel)]="searchText"
+            />
+
+          </div>
+
+
+          <div class="filters">
+
+            <div class="filter-box">
+
+              <label for="status">
+                Status
+              </label>
+
+              <select
+                id="status"
+                [(ngModel)]="selectedStatus"
+              >
+                <option value="All">All</option>
+                <option value="Completed">Completed</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Pending">Pending</option>
+              </select>
+
+            </div>
+
+
+            <div class="filter-box">
+
+              <label for="date">
+                Date
+              </label>
+
+              <input
+                id="date"
+                type="text"
+                placeholder="e.g. 29 Jul 2026"
+                [(ngModel)]="selectedDate"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Activity List -->
+        <div class="activity-list">
+
+          @for (activity of filteredActivities; track activity.id) {
+
+            <div class="activity-item">
+
+              <!-- Activity Icon -->
+              <div class="activity-icon">
+                📝
+              </div>
+
+
+              <!-- Activity Content -->
+              <div class="activity-content">
+
+                <div class="activity-top">
+
+                  <div>
+
+                    <h3>
+                      {{ activity.title }}
+                    </h3>
+
+                    <span class="activity-id">
+                      {{ activity.id }}
+                    </span>
+
+                  </div>
+
+
+                  <span
+                    class="status-badge"
+                    [class.status-completed]="activity.status === 'Completed'"
+                    [class.status-progress]="activity.status === 'In Progress'"
+                    [class.status-pending]="activity.status === 'Pending'"
+                  >
+                    {{ activity.status }}
+                  </span>
+
+                </div>
+
+
+                <p class="activity-description">
+                  {{ activity.description }}
+                </p>
+
+
+                <div class="activity-meta">
+
+                  <div class="meta-item">
+                    <span>📁</span>
+                    <strong>Project:</strong>
+                    <span>{{ activity.project }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <span>👤</span>
+                    <strong>By:</strong>
+                    <span>{{ activity.performedBy }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <span>🕐</span>
+                    <span>{{ activity.date }}</span>
+                    <span>{{ activity.time }}</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Action -->
+              <button class="view-btn">
+                View
+              </button>
+
+            </div>
+
+          }
+
+
+          <!-- Empty State -->
+          @if (filteredActivities.length === 0) {
+
+            <div class="empty-state">
+
+              <span>🔍</span>
+
+              <strong>
+                No activities found
+              </strong>
+
+              <p>
+                Try changing your search or filters.
+              </p>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

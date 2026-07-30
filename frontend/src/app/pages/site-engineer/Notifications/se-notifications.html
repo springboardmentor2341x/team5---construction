@@ -1,1 +1,312 @@
-<p>se-notifications works!</p>
+<div class="app-layout">
+
+  @if (sidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- ================= Sidebar ================= -->
+
+  <aside class="sidebar" [class.sidebar-open]="sidebarOpen">
+
+    <div class="sidebar-header">
+
+      <div class="logo">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">BuildTrack</span>
+      </div>
+
+      <button class="close-sidebar" (click)="closeSidebar()">✕</button>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="/site-engineer/dashboard" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📊</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/site-engineer/assigned-projects" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📁</span>
+        <span>Assigned Projects</span>
+      </a>
+
+      <a routerLink="/site-engineer/project-details" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>🏗️</span>
+        <span>Project Details</span>
+      </a>
+
+      <a routerLink="/site-engineer/daily-progress" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📈</span>
+        <span>Daily Progress</span>
+      </a>
+
+      <a routerLink="/site-engineer/equipment-status" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>🚜</span>
+        <span>Equipment Status</span>
+      </a>
+
+      <a routerLink="/site-engineer/resources" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📦</span>
+        <span>Resources</span>
+      </a>
+
+      <a routerLink="/site-engineer/activity-logs" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📝</span>
+        <span>Activity Logs</span>
+      </a>
+
+      <a routerLink="/site-engineer/weekly-reports" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>📄</span>
+        <span>Weekly Reports</span>
+      </a>
+
+      <a routerLink="/site-engineer/notifications" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>🔔</span>
+        <span>Notifications</span>
+      </a>
+
+      <a routerLink="/site-engineer/profile" routerLinkActive="active" class="nav-item" (click)="closeSidebar()">
+        <span>👤</span>
+        <span>Profile</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button class="logout-btn">
+        <span>🚪</span>
+        <span>Logout</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- ================= Main ================= -->
+
+  <main class="main-content">
+
+    <header class="top-navbar">
+
+      <button class="menu-btn" (click)="toggleSidebar()">☰</button>
+
+      <div class="page-title">
+        <h1>Notifications</h1>
+        <p>Stay updated with project activities and alerts.</p>
+      </div>
+
+      <div class="navbar-actions">
+
+        <button class="notification-btn">
+          🔔
+          @if (unreadCount > 0) {
+            <span class="notification-dot"></span>
+          }
+        </button>
+
+        <div class="user-info">
+
+          <div class="user-avatar">
+            SE
+          </div>
+
+          <div class="user-details">
+            <strong>Site Engineer</strong>
+            <span>Construction Team</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- ================= Page ================= -->
+
+    <section class="page-content">
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>Notifications</h2>
+
+          <p>
+            View all project updates, alerts and important messages.
+          </p>
+
+        </div>
+
+        <button class="mark-btn" (click)="markAllAsRead()">
+          ✓ Mark All as Read
+        </button>
+
+      </div>
+
+      <!-- Summary -->
+
+      <div class="summary-grid">
+
+        <div class="summary-card">
+          <div class="summary-icon">🔔</div>
+
+          <div class="summary-info">
+            <span>Total</span>
+            <strong>{{ notifications.length }}</strong>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">🟢</div>
+
+          <div class="summary-info">
+            <span>Unread</span>
+            <strong>{{ unreadCount }}</strong>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">✅</div>
+
+          <div class="summary-info">
+            <span>Read</span>
+            <strong>{{ readCount }}</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Notification Card -->
+
+      <div class="notification-card">
+
+        <div class="toolbar">
+
+          <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+              type="text"
+              placeholder="Search notifications..."
+              [(ngModel)]="searchText">
+
+          </div>
+
+          <div class="filter-box">
+
+            <label>Status</label>
+
+            <select [(ngModel)]="selectedFilter">
+
+              <option>All</option>
+              <option>Unread</option>
+              <option>Read</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <!-- List -->
+
+        <div class="notification-list">
+
+          @for(notification of filteredNotifications; track notification.id){
+
+          <div class="notification-item">
+
+            <div class="notification-icon">
+              🔔
+            </div>
+
+            <div class="notification-content">
+
+              <div class="notification-top">
+
+                <div>
+
+                  <h3>{{ notification.title }}</h3>
+
+                  <span class="type-badge">
+                    {{ notification.type }}
+                  </span>
+
+                </div>
+
+                @if(!notification.read){
+                  <span class="unread-badge">
+                    New
+                  </span>
+                }
+
+              </div>
+
+              <p>
+                {{ notification.message }}
+              </p>
+
+              <div class="notification-bottom">
+
+                <span>🕒 {{ notification.time }}</span>
+
+                <div class="actions">
+
+                  @if(!notification.read){
+
+                  <button (click)="markAsRead(notification)">
+                    Mark Read
+                  </button>
+
+                  } @else {
+
+                  <button (click)="markAsUnread(notification)">
+                    Mark Unread
+                  </button>
+
+                  }
+
+                  <button
+                    class="delete-btn"
+                    (click)="deleteNotification(notification.id)">
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          }
+
+          @if(filteredNotifications.length===0){
+
+          <div class="empty-state">
+
+            <span>🔕</span>
+
+            <strong>No Notifications Found</strong>
+
+            <p>
+              Try another search or filter.
+            </p>
+
+          </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

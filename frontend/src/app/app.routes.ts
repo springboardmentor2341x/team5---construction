@@ -285,75 +285,93 @@ export const routes: Routes = [
   // SITE ENGINEER
   // =========================
 
-  {
-    path: 'site-engineer',
+ {
+  path: 'site-engineer',
 
-    children: [
+  loadComponent: () =>
+    import('./layouts/site-engineer-layout/site-engineer-layout')
+      .then(m => m.SiteEngineerLayout),
 
-      {
-        path: 'dashboard',
-        loadComponent: () =>
-          import('./pages/site-engineer/Dashboard/site-engineer-dashboard')
-            .then(m => m.SiteEngineerDashboard)
-      },
+  children: [
 
-      {
-        path: 'activity-logs',
-        loadComponent: () =>
-          import('./pages/site-engineer/ActivityLogs/se-activity-logs')
-            .then(m => m.SeActivityLogs)
-      },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full'
+    },
 
-      {
-        path: 'assigned-projects',
-        loadComponent: () =>
-          import('./pages/site-engineer/AssignedProjects/se-assigned-projects')
-            .then(m => m.SeAssignedProjects)
-      },
+    {
+      path: 'dashboard',
+      loadComponent: () =>
+        import('./pages/site-engineer/Dashboard/site-engineer-dashboard')
+          .then(m => m.SiteEngineerDashboard)
+    },
 
-      {
-        path: 'daily-progress',
-        loadComponent: () =>
-          import('./pages/site-engineer/DailyProgress/se-daily-progress')
-            .then(m => m.SeDailyProgress)
-      },
+    {
+      path: 'activity-logs',
+      loadComponent: () =>
+        import('./pages/site-engineer/ActivityLogs/se-activity-logs')
+          .then(m => m.SeActivityLogs)
+    },
 
-      {
-        path: 'equipment-status',
-        loadComponent: () =>
-          import('./pages/site-engineer/EquipmentStatus/se-equipment-status')
-            .then(m => m.SeEquipmentStatus)
-      },
+    {
+      path: 'assigned-projects',
+      loadComponent: () =>
+        import('./pages/site-engineer/AssignedProjects/se-assigned-projects')
+          .then(m => m.SeAssignedProjects)
+    },
 
-      {
-        path: 'notifications',
-        loadComponent: () =>
-          import('./pages/site-engineer/Notifications/se-notifications')
-            .then(m => m.SeNotifications)
-      },
+    {
+      path: 'project-details',
+      loadComponent: () =>
+        import('./pages/site-engineer/ProjectDetails/se-project-details')
+          .then(m => m.SeProjectDetails)
+    },
 
-      {
-        path: 'profile',
-        loadComponent: () =>
-          import('./pages/site-engineer/Profile/se-profile')
-            .then(m => m.SeProfile)
-      },
+    {
+      path: 'daily-progress',
+      loadComponent: () =>
+        import('./pages/site-engineer/DailyProgress/se-daily-progress')
+          .then(m => m.SeDailyProgress)
+    },
 
-      {
-        path: 'resources',
-        loadComponent: () =>
-          import('./pages/site-engineer/Resources/se-resources')
-            .then(m => m.SeResources)
-      },
+    {
+      path: 'equipment-status',
+      loadComponent: () =>
+        import('./pages/site-engineer/EquipmentStatus/se-equipment-status')
+          .then(m => m.SeEquipmentStatus)
+    },
 
-      {
-        path: 'weekly-reports',
-        loadComponent: () =>
-          import('./pages/site-engineer/WeeklyReports/se-weekly-reports')
-            .then(m => m.SeWeeklyReports)
-      }
-    ]
-  },
+    {
+      path: 'notifications',
+      loadComponent: () =>
+        import('./pages/site-engineer/Notifications/se-notifications')
+          .then(m => m.SeNotifications)
+    },
+
+    {
+      path: 'profile',
+      loadComponent: () =>
+        import('./pages/site-engineer/Profile/se-profile')
+          .then(m => m.SeProfile)
+    },
+
+    {
+      path: 'resources',
+      loadComponent: () =>
+        import('./pages/site-engineer/Resources/se-resources')
+          .then(m => m.SeResources)
+    },
+
+    {
+      path: 'weekly-reports',
+      loadComponent: () =>
+        import('./pages/site-engineer/WeeklyReports/se-weekly-reports')
+          .then(m => m.SeWeeklyReports)
+    }
+
+  ]
+},
 
 
   // =========================
