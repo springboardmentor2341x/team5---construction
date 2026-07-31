@@ -1,0 +1,601 @@
+/* =====================
+   MAIN CONTAINER
+===================== */
+
+.page-container {
+
+  padding: 25px;
+  background: #f7f9fc;
+  min-height: 100vh;
+
+}
+
+
+/* =====================
+   BREADCRUMB
+===================== */
+
+.breadcrumb span:hover {
+
+  color: #2563eb;
+
+} 
+ .breadcrumb {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:20px;
+  font-size:14px;
+}
+.breadcrumb a {
+  color:#102a43;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+}
+.breadcrumb a:hover {
+  color:#2563eb;
+}
+.breadcrumb span {
+  color:#9ca3af;
+}
+.breadcrumb strong {
+  color:#6b7280;
+}
+
+
+
+
+
+/* =====================
+   HEADER
+===================== */
+
+.page-header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+}
+
+
+.page-header h2 {
+
+  color: #1e293b;
+  margin: 0;
+
+}
+
+
+.page-header p {
+
+  color: #64748b;
+
+}
+
+
+
+
+
+/* =====================
+   BUTTON
+===================== */
+
+.primary-btn {
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+
+  padding: 12px 22px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+}
+
+
+.primary-btn:hover {
+
+  background: #1d4ed8;
+
+}
+
+
+
+
+
+/* =====================
+   CARD
+===================== */
+
+.card {
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+  overflow-x: auto;
+
+}
+
+
+.card h3 {
+
+  color: #1e293b;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+
+
+/* =====================
+   MILESTONE TIMELINE
+===================== */
+
+.timeline {
+
+  display: grid;
+
+  grid-template-columns: repeat(4,1fr);
+
+  gap: 20px;
+
+}
+
+
+
+.milestone {
+
+  padding: 15px 20px;
+
+  border-radius: 25px;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  min-height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  white-space: normal;
+
+}
+
+
+
+.line {
+
+  display: none;
+
+}
+
+
+
+.milestone.completed {
+
+  background: #16a34a;
+
+}
+
+
+.milestone.progress {
+
+  background: #2563eb;
+
+}
+
+
+.milestone.pending {
+
+  background: #f59e0b;
+
+}
+
+
+
+
+
+/* =====================
+   TABLE
+===================== */
+
+
+.table-wrapper {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+}
+
+
+
+table {
+
+  width: 1300px;
+
+  border-collapse: collapse;
+
+}
+
+
+
+thead {
+
+  background: #eff6ff;
+
+}
+
+
+
+th {
+
+  padding: 15px;
+
+  text-align: left;
+
+  color: #1e293b;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+
+}
+
+
+
+td {
+
+  padding: 15px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #475569;
+
+  font-size: 14px;
+
+}
+
+
+
+
+
+/* Milestone Column */
+
+th:nth-child(1),
+td:nth-child(1){
+
+  min-width: 220px;
+
+}
+
+
+
+
+
+/* Planned Date */
+
+th:nth-child(2),
+td:nth-child(2){
+
+  min-width: 150px;
+
+}
+
+
+
+
+
+/* Actual Date */
+
+th:nth-child(3),
+td:nth-child(3){
+
+  min-width: 150px;
+
+}
+
+
+
+
+
+/* Status Column */
+
+th:nth-child(4),
+td:nth-child(4){
+
+  min-width: 220px;
+
+  text-align: center;
+
+}
+
+
+
+
+
+/* Delay */
+
+th:nth-child(5),
+td:nth-child(5){
+
+  min-width: 130px;
+
+}
+
+
+
+
+
+/* Remarks */
+
+th:nth-child(6),
+td:nth-child(6){
+
+  min-width: 250px;
+
+}
+
+
+
+
+
+/* Actions */
+
+th:nth-child(7),
+td:nth-child(7){
+
+  min-width: 200px;
+
+  white-space: nowrap;
+
+}
+
+
+
+
+
+/* =====================
+   STATUS BADGE
+===================== */
+
+
+.status {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 130px;
+
+  height: 38px;
+
+  padding: 0 22px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+}
+
+
+
+.status.completed {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+
+
+.status.progress {
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+}
+
+
+
+.status.pending {
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+}
+
+
+
+
+
+/* =====================
+   ACTION BUTTONS
+===================== */
+
+
+.edit-btn {
+
+  background: #f59e0b;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+}
+
+
+
+.complete-btn {
+
+  background: #16a34a;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  margin-left: 8px;
+
+  cursor: pointer;
+
+}
+
+
+
+
+
+/* =====================
+   FORM
+===================== */
+
+
+.form-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3,1fr);
+
+  gap: 15px;
+
+}
+
+
+
+input,
+select {
+
+  padding: 12px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+}
+
+
+
+input:focus,
+select:focus {
+
+  border-color: #2563eb;
+
+}
+
+
+
+.save-btn {
+
+  margin-top: 20px;
+
+}
+
+
+
+
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+
+@media(max-width:1000px){
+
+
+.timeline {
+
+  grid-template-columns: repeat(2,1fr);
+
+}
+
+
+.form-grid {
+
+  grid-template-columns: repeat(2,1fr);
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.page-header {
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+}
+
+
+.timeline {
+
+  grid-template-columns: 1fr;
+
+}
+
+
+.form-grid {
+
+  grid-template-columns: 1fr;
+
+}
+
+
+table {
+
+  width: 1300px;
+
+}
+
+
+}

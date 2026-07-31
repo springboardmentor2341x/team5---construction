@@ -1,0 +1,117 @@
+.top-navbar{
+
+    height:80px;
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+    border-bottom:1px solid #e5e7eb;
+}
+
+.breadcrumb{
+
+    display:flex;
+
+    gap:10px;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+.right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#f1f5f9;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+}
+
+.search-box input{
+
+    border:none;
+
+    background:transparent;
+
+    outline:none;
+
+    width:220px;
+}
+
+.icon-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#f1f5f9;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.icon-btn:hover{
+
+    background:#dbeafe;
+}
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-left:15px;
+}
+
+.profile img{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+}
+
+.profile h6{
+
+    margin:0;
+
+    font-size:15px;
+}
+
+.profile span{
+
+    color:gray;
+
+    font-size:12px;
+}

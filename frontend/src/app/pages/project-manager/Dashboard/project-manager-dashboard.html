@@ -1,0 +1,588 @@
+<div class="dashboard">
+
+        <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <h2>BuildTrack</h2>
+
+            <p>Project Manager</p>
+
+        </div>
+
+        <ul class="menu">
+
+          
+                <ul class="sidebar-menu">
+
+  <li>
+    <a routerLink="/project-manager/dashboard">
+      🏠 Dashboard
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/my-projects">
+      📁 My Projects
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/project-details">
+      📋 Project Details
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/project-schedule">
+      📅 Project Schedule
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/milestones">
+      🎯 Milestone Management
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/site-engineers">
+      👷 Site Engineers
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/contractors">
+      🏗 Contractors
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/site-progress">
+      📈 Site Progress
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/resource-allocation">
+      ⚙ Resource Allocation
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/workforce">
+      👥 Workforce
+    </a>
+  </li>
+
+<li>
+    <a routerLink="/project-manager/procurement-requests">
+      📦 Procurement Requests
+    </a>
+  </li> 
+
+
+  <li>
+    <a routerLink="/project-manager/budget-tracking">
+      💰 Budget Tracking
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/reports">
+      📄 Reports
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/notifications">
+      🔔 Notifications
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/profile">
+      👤 Profile
+    </a>
+  </li>
+
+
+  <li>
+    <a routerLink="/project-manager/logout" class="logout">
+      🚪 Logout
+    </a>
+  </li>
+
+
+</ul>
+
+        </ul>
+
+    </aside>
+     
+        <main class="content">
+
+                <header class="header">
+
+            <div>
+
+                <h1>Project Manager Dashboard</h1>
+
+                <p>Construction Project Management & Site Monitoring Platform</p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <input type="text" placeholder="Search Project">
+
+                <button>🔍</button>
+
+            </div>
+
+        </header>
+
+                <section id="dashboard" class="card-container">
+
+            <div class="card" *ngFor="let card of dashboardCards">
+
+                <h2>{{card.value}}</h2>
+
+                <p>{{card.title}}</p>
+
+            </div>
+
+        </section> 
+        <section id="assigned-projects" class="table-section">
+
+            <h2>Assigned Projects</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Project</th>
+
+                        <th>Client</th>
+
+                        <th>Status</th>
+
+                        <th>Completion</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let project of projects">
+
+                        <td>{{project.name}}</td>
+
+                        <td>{{project.client}}</td>
+
+                        <td>{{project.status}}</td>
+
+                        <td>{{project.progress}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+                <section id="milestones" class="table-section">
+
+            <h2>Project Milestones</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Milestone</th>
+
+                        <th>Completion %</th>
+
+                        <th>Deadline</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let item of milestones">
+
+                        <td>{{item.task}}</td>
+
+                        <td>
+
+                            <div class="progress">
+
+                                <div class="progress-fill"
+                                     [style.width]="item.percentage">
+                                </div>
+
+                            </div>
+
+                            {{item.percentage}}
+
+                        </td>
+
+                        <td>{{item.deadline}}</td>
+
+                        <td>{{item.status}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+        <section id="site-progress" class="table-section">
+
+            <h2>Site Progress</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Site</th>
+                        <th>Engineer</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let site of siteProgress">
+
+                        <td>{{site.site}}</td>
+                        <td>{{site.engineer}}</td>
+                        <td>{{site.progress}}</td>
+                        <td>{{site.status}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section> 
+
+        <section id="resource-allocation" class="table-section">
+
+            <h2>Resource Allocation</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Resource</th>
+                        <th>Assigned Project</th>
+                        <th>Availability</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let resource of resources">
+
+                        <td>{{resource.name}}</td>
+                        <td>{{resource.project}}</td>
+                        <td>{{resource.status}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+         <!-- Workforce --> 
+
+        <section id="workforce" class="table-section">
+
+            <h2>Workforce Summary</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Team</th>
+                        <th>Workers</th>
+                        <th>Supervisor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let worker of workforce">
+
+                        <td>{{worker.team}}</td>
+                        <td>{{worker.count}}</td>
+                        <td>{{worker.supervisor}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section id="procurement" class="table-section">
+
+            <h2>Procurement Requests</h2>
+
+            <table>
+
+                <thead> 
+
+                    <tr>
+
+                        <th>Material</th>
+                        <th>Supplier</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let item of procurement">
+
+                        <td>{{item.material}}</td>
+                        <td>{{item.supplier}}</td>
+                        <td>{{item.status}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section id="budget" class="table-section">
+
+            <h2>Budget Tracking</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Project</th>
+                        <th>Budget</th>
+                        <th>Spent</th>
+                        <th>Remaining</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let budget of budgets">
+
+                        <td>{{budget.project}}</td>
+                        <td>{{budget.total}}</td>
+                        <td>{{budget.spent}}</td>
+                        <td>{{budget.remaining}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section class="table-section">
+
+            <h2>Delayed Activities</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Activity</th>
+                        <th>Reason</th>
+                        <th>Delay</th>
+
+                    </tr>
+
+                </thead> 
+
+                 <tbody>
+
+                    <tr *ngFor="let delay of delayedActivities">
+
+                        <td>{{delay.activity}}</td>
+                        <td>{{delay.reason}}</td>
+                        <td>{{delay.days}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                
+        <section id="reports" class="table-section">
+
+            <h2>Project Analytics</h2>
+
+            <div class="analytics-cards">
+
+                <div class="analytics-card">
+                    <h3>Project Completion</h3>
+                    <p>78%</p>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Resource Utilization</h3>
+                    <p>82%</p>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Budget Utilization</h3>
+                    <p>70%</p>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>On-Time Delivery</h3>
+                    <p>90%</p>
+                </div>
+
+            </div>
+
+        </section>
+
+         <!-- Reports  -->
+
+        <section class="table-section">
+
+            <h2>Reports</h2>
+
+            <div class="button-group">
+
+                <button>Daily Report</button>
+
+                <button>Weekly Report</button>
+
+                <button>Monthly Report</button>
+
+                <button>Export PDF</button>
+
+            </div>
+
+        </section>
+
+            <section class="table-section">
+
+            <h2>Recent Updates</h2>
+
+            <ul class="notification-list">
+
+                <li *ngFor="let update of recentUpdates">
+
+                    {{update}}
+
+                </li>
+
+            </ul>
+
+        </section>
+
+                <section id="notifications" class="table-section">
+
+            <h2>Notifications</h2>
+
+            <ul class="notification-list">
+
+                <li *ngFor="let notification of notifications">
+
+                    {{notification}}
+
+                </li>
+
+            </ul>
+
+        </section>
+
+                <section id="profile" class="table-section">
+
+            <h2>Profile</h2>
+
+            <div class="profile-card">
+
+                <div class="profile-info">
+
+                    <h3>Project Manager</h3>
+
+                    <p>Email : manager@buildtrack.com</p>
+
+                    <p>Department : Project Management</p>
+
+                    <p>Role : Project Manager</p>
+
+                </div> 
+
+            </div>
+
+        </section>
+
+                <footer class="footer">
+
+            <p>
+
+                © 2026 BuildTrack - Construction Project Management & Site Monitoring Platform
+
+            </p>
+
+        </footer>  
+
+    
+ 

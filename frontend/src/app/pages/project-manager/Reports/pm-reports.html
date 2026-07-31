@@ -1,0 +1,457 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+<div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/site-progress">
+      
+    Site Progress
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/resource-allocation">
+      
+    Resource Allocation
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/workforce">
+      
+    WorkForce
+    </a>
+    <span></span>
+     <a routerLink="/project-manager/procurement-requests">
+      
+    Procurement Requests
+    </a>
+    <span></span>
+     <a routerLink="/project-manager/procurement-requests">
+      
+    Budget Tracking
+    </a>
+    <span></span>
+    <strong>
+      Reports
+    </strong>
+</div>
+
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Reports
+      </h2>
+
+      <p>
+        Generate and export project reports.
+      </p>
+
+    </div>
+
+    <button class="primary-btn">
+
+      Generate Report
+
+    </button>
+
+  </div>
+
+
+
+  <!-- Report Types -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>
+        Project Report
+      </h3>
+
+      <p>
+        Complete project summary and status.
+      </p>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Progress Report
+      </h3>
+
+      <p>
+        Daily, weekly and monthly project progress.
+      </p>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Budget Report
+      </h3>
+
+      <p>
+        Budget utilization and expense details.
+      </p>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Milestone Report
+      </h3>
+
+      <p>
+        Milestone completion and pending milestones.
+      </p>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Engineer Report
+      </h3>
+
+      <p>
+        Site Engineer activities and performance.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Continue with Search & Report Table in Part 2 -->
+   <!-- ==========================================
+     Search & Filters
+========================================== -->
+
+<div class="filter-section">
+
+  <input
+    type="text"
+    placeholder="Search Report">
+
+  <select>
+
+    <option>
+      All Report Types
+    </option>
+
+    <option>
+      Project Report
+    </option>
+
+    <option>
+      Progress Report
+    </option>
+
+    <option>
+      Budget Report
+    </option>
+
+    <option>
+      Milestone Report
+    </option>
+
+    <option>
+      Engineer Report
+    </option>
+
+  </select>
+
+  <button class="primary-btn">
+
+    Search
+
+  </button>
+
+</div>
+
+
+
+<!-- ==========================================
+     Reports Table
+========================================== -->
+
+<div class="card">
+
+  <h3>
+    Available Reports
+  </h3>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Report ID
+          </th>
+
+          <th>
+            Report Name
+          </th>
+
+          <th>
+            Project
+          </th>
+
+          <th>
+            Generated Date
+          </th>
+
+          <th>
+            Export
+          </th>
+
+          <th>
+            Action
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>RPT001</td>
+
+          <td>Project Report</td>
+
+          <td>Metro Rail Project</td>
+
+          <td>25-07-2026</td>
+
+          <td>PDF</td>
+
+          <td>
+
+            <button class="view-btn">
+              View
+            </button>
+
+            <button class="edit-btn">
+              Download
+            </button>
+
+          </td>
+
+        </tr>
+
+
+
+        <tr>
+
+          <td>RPT002</td>
+
+          <td>Progress Report</td>
+
+          <td>Commercial Complex</td>
+
+          <td>26-07-2026</td>
+
+          <td>Excel</td>
+
+          <td>
+
+            <button class="view-btn">
+              View
+            </button>
+
+            <button class="edit-btn">
+              Download
+            </button>
+
+          </td>
+
+        </tr>
+
+
+
+        <tr>
+
+          <td>RPT003</td>
+
+          <td>Budget Report</td>
+
+          <td>Hospital Project</td>
+
+          <td>27-07-2026</td>
+
+          <td>PDF</td>
+
+          <td>
+
+            <button class="view-btn">
+              View
+            </button>
+
+            <button class="edit-btn">
+              Download
+            </button>
+
+          </td>
+
+        </tr>
+
+
+
+        <tr>
+
+          <td>RPT004</td>
+
+          <td>Milestone Report</td>
+
+          <td>Shopping Mall</td>
+
+          <td>28-07-2026</td>
+
+          <td>Excel</td>
+
+          <td>
+
+            <button class="view-btn">
+              View
+            </button>
+
+            <button class="edit-btn">
+              Download
+            </button>
+
+          </td>
+
+        </tr>
+
+
+
+        <tr>
+
+          <td>RPT005</td>
+
+          <td>Engineer Report</td>
+
+          <td>Residential Tower</td>
+
+          <td>29-07-2026</td>
+
+          <td>PDF</td>
+
+          <td>
+
+            <button class="view-btn">
+              View
+            </button>
+
+            <button class="edit-btn">
+              Download
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     Export Section
+========================================== -->
+
+<div class="card">
+
+  <h3>
+    Export Reports
+  </h3>
+
+  <p>
+    Export reports in the required format.
+  </p>
+
+  <div class="export-buttons">
+
+    <button class="primary-btn">
+
+      Export PDF
+
+    </button>
+
+    <button class="primary-btn">
+
+      Export Excel
+
+    </button>
+
+  </div>
+
+</div>
+
+<div class="next-page">
+
+  <button
+    class="primary-btn"
+    routerLink="/project-manager/notifications">
+
+    View Notifications →
+
+  </button>
+
+</div>
+
+</div>

@@ -1,0 +1,565 @@
+<div class="page-container">
+
+
+  <div class="breadcrumb"> 
+
+   <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+   
+ 
+
+    <strong>
+      Site Engineers
+    </strong>
+
+  </div>
+
+
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+
+    <div>
+
+      <h2>
+        Site Engineer Management
+      </h2>
+
+
+      <p>
+        Assign and manage site engineers for projects
+      </p>
+
+    </div>
+
+
+
+
+    <button class="primary-btn">
+
+      + Assign Engineer
+
+    </button>
+       <button
+  class="primary-btn"
+  routerLink="/project-manager/contractors">
+
+  View Contractors
+
+</button>
+
+  </div>
+
+
+
+
+
+  <!-- KPI Cards -->
+
+  <div class="kpi-container">
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Total Engineers
+      </h3>
+
+      <h1>
+        {{totalEngineers}}
+      </h1>
+
+      <span>
+        Registered Engineers
+      </span>
+
+    </div>
+
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Assigned Engineers
+      </h3>
+
+      <h1>
+        {{assignedEngineers}}
+      </h1>
+
+      <span>
+        Currently Assigned
+      </span>
+
+    </div>
+
+
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Available Engineers
+      </h3>
+
+      <h1>
+        {{availableEngineers}}
+      </h1>
+
+      <span>
+        Ready For Assignment
+      </span>
+
+    </div>
+
+
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        On Leave
+      </h3>
+
+      <h1>
+        {{leaveEngineers}}
+      </h1>
+
+      <span>
+        Temporary Unavailable
+      </span>
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- Search And Filter -->
+
+
+  <div class="filter-section">
+
+
+    <input
+
+      type="text"
+
+      placeholder="Search Engineer..."
+
+      [(ngModel)]="searchText">
+
+
+    <select>
+
+      <option>
+        All Projects
+      </option>
+
+      <option>
+        Metro Project
+      </option>
+
+      <option>
+        Building Project
+      </option>
+
+    </select>
+
+
+
+    <select>
+
+
+      <option>
+        All Status
+      </option>
+
+
+      <option>
+        Active
+      </option>
+
+
+      <option>
+        On Leave
+      </option>
+
+
+    </select>
+
+
+
+
+    <select>
+
+
+      <option>
+        Assigned Area
+      </option>
+
+
+      <option>
+        Foundation
+      </option>
+
+
+      <option>
+        Structure
+      </option>
+
+
+      <option>
+        Electrical
+      </option>
+
+
+    </select>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- Engineer Details Table -->
+
+
+  <div class="card">
+
+
+    <h3>
+      Engineer Details
+    </h3>
+
+
+
+    <div class="table-wrapper">
+
+
+      <table>
+
+
+        <thead>
+
+
+          <tr>
+
+            <th>
+              Name
+            </th>
+
+
+            <th>
+              Employee ID
+            </th>
+
+
+            <th>
+              Contact
+            </th>
+
+
+            <th>
+              Assigned Area
+            </th>
+
+
+            <th>
+              Project
+            </th>
+
+
+            <th>
+              Status
+            </th>
+
+
+            <th>
+              Actions
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+
+
+        <tbody>
+
+
+          <tr *ngFor="let engineer of filteredEngineers()">
+
+
+
+            <td>
+              {{engineer.name}}
+            </td>
+
+
+
+            <td>
+              {{engineer.id}}
+            </td>
+
+
+
+            <td>
+              {{engineer.contact}}
+            </td>
+
+
+
+            <td>
+              {{engineer.area}}
+            </td>
+
+
+
+            <td>
+              {{engineer.project}}
+            </td>
+
+
+
+
+            <td>
+
+
+              <span 
+              class="status"
+
+              [class.active]="engineer.status === 'Active'"
+
+              [class.leave]="engineer.status === 'On Leave'">
+
+
+                {{engineer.status}}
+
+
+              </span>
+
+
+            </td>
+
+
+
+
+
+            <td>
+
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+
+
+
+              <button
+
+              class="remove-btn"
+
+              (click)="removeEngineer(engineer.name)">
+
+
+                Remove
+
+
+              </button>
+
+
+
+            </td>
+
+
+
+          </tr>
+
+
+
+        </tbody>
+
+
+
+      </table>
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Assign Engineer Form -->
+
+
+  <div class="card">
+
+
+    <h3>
+      Assign Engineer
+    </h3>
+
+
+
+    <div class="form-grid">
+
+
+
+      <input
+
+      placeholder="Engineer Name">
+
+
+
+
+
+      <input
+
+      placeholder="Employee ID">
+
+
+
+
+
+      <input
+
+      placeholder="Contact Number">
+
+
+
+
+
+      <select>
+
+
+        <option>
+          Select Project
+        </option>
+
+
+        <option>
+          Metro Project
+        </option>
+
+
+        <option>
+          Building Project
+        </option>
+
+
+      </select>
+
+
+
+
+
+      <input
+
+      placeholder="Assigned Area">
+
+
+
+
+
+      <select>
+
+
+        <option>
+          Current Status
+        </option>
+
+
+        <option>
+          Active
+        </option>
+
+
+        <option>
+          On Leave
+        </option>
+
+
+      </select>
+
+
+
+
+    </div>
+
+
+
+
+
+    <button
+
+    class="primary-btn save-btn"
+
+    (click)="assignEngineer()">
+
+
+
+      Assign Engineer
+
+
+
+    </button>
+
+
+
+  </div>
+   
+</div>

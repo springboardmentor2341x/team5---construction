@@ -1,0 +1,755 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/site-progress">
+      
+    Site Progress
+    </a>
+    <span>></span>
+ 
+    <strong>
+      Resource Allocation
+    </strong>
+  
+  </div>
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Resource Allocation
+      </h2>
+
+      <p>
+        Allocate and monitor construction resources across all active projects.
+      </p>
+
+    </div>
+
+    <button class="primary-btn">
+
+      + Allocate Resource
+
+    </button>
+
+  </div>
+
+
+
+
+  <!-- KPI Cards -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>
+        Total Resources
+      </h3>
+
+      <h1>
+        320
+      </h1>
+
+      <span>
+        Registered Resources
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        Allocated
+      </h3>
+
+      <h1>
+        245
+      </h1>
+
+      <span>
+        Currently Assigned
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        Available
+      </h3>
+
+      <h1>
+        75
+      </h1>
+
+      <span>
+        Ready for Allocation
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        Utilization
+      </h3>
+
+      <h1>
+        77%
+      </h1>
+
+      <span>
+        Overall Resource Usage
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Search & Filter -->
+
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search Resource...">
+
+    <select>
+
+      <option>
+        All Resource Types
+      </option>
+
+      <option>
+        Machinery
+      </option>
+
+      <option>
+        Materials
+      </option>
+
+      <option>
+        Vehicles
+      </option>
+
+      <option>
+        Safety Equipment
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Projects
+      </option>
+
+      <option>
+        Metro Rail Project
+      </option>
+
+      <option>
+        Commercial Complex
+      </option>
+
+      <option>
+        Residential Tower
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Status
+      </option>
+
+      <option>
+        Allocated
+      </option>
+
+      <option>
+        Available
+      </option>
+
+      <option>
+        Maintenance
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+
+  <!-- Resource Allocation Table -->
+
+  <div class="card">
+
+    <h3>
+      Resource Allocation Details
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Resource ID</th>
+
+            <th>Resource Name</th>
+
+            <th>Type</th>
+
+            <th>Assigned Project</th>
+
+            <th>Assigned To</th>
+
+            <th>Quantity</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+                      <tr>
+
+            <td>RES001</td>
+
+            <td>Excavator</td>
+
+            <td>Machinery</td>
+
+            <td>Metro Rail Project</td>
+
+            <td>Rahul Kumar</td>
+
+            <td>2</td>
+
+            <td>
+              <span class="status allocated">
+                Allocated
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>RES002</td>
+
+            <td>Concrete Mixer</td>
+
+            <td>Machinery</td>
+
+            <td>Commercial Complex</td>
+
+            <td>Priya Sharma</td>
+
+            <td>3</td>
+
+            <td>
+              <span class="status allocated">
+                Allocated
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>RES003</td>
+
+            <td>Steel Rods</td>
+
+            <td>Material</td>
+
+            <td>Residential Tower</td>
+
+            <td>Arun Kumar</td>
+
+            <td>500</td>
+
+            <td>
+              <span class="status available">
+                Available
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>RES004</td>
+
+            <td>Safety Helmets</td>
+
+            <td>Safety Equipment</td>
+
+            <td>Hospital Project</td>
+
+            <td>Suresh Patel</td>
+
+            <td>120</td>
+
+            <td>
+              <span class="status allocated">
+                Allocated
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>RES005</td>
+
+            <td>Dump Truck</td>
+
+            <td>Vehicle</td>
+
+            <td>Shopping Mall</td>
+
+            <td>Vijay Kumar</td>
+
+            <td>4</td>
+
+            <td>
+              <span class="status maintenance">
+                Maintenance
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>RES006</td>
+
+            <td>Cement Bags</td>
+
+            <td>Material</td>
+
+            <td>Corporate Office</td>
+
+            <td>Karthik Raj</td>
+
+            <td>1000</td>
+
+            <td>
+              <span class="status available">
+                Available
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Resource Categories -->
+
+  <div class="card">
+
+    <h3>
+      Resource Categories
+    </h3>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-card">
+
+        <h4>Construction Materials</h4>
+
+        <p>Cement, Sand, Steel, Bricks</p>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <h4>Machinery</h4>
+
+        <p>Excavators, Cranes, Mixers</p>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <h4>Vehicles</h4>
+
+        <p>Dump Trucks, Loaders, Vans</p>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <h4>Safety Equipment</h4>
+
+        <p>Helmets, Gloves, Jackets</p>
+
+      </div>
+
+    </div>
+
+  </div>
+    <!-- Allocate Resource -->
+
+  <div class="card">
+
+    <h3>
+      Allocate Resource
+    </h3>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Resource Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Resource Name">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Resource Type
+        </label>
+
+        <select>
+
+          <option>Select Type</option>
+          <option>Machinery</option>
+          <option>Material</option>
+          <option>Vehicle</option>
+          <option>Safety Equipment</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Quantity
+        </label>
+
+        <input
+          type="number"
+          placeholder="Enter Quantity">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Assign Project
+        </label>
+
+        <select>
+
+          <option>Select Project</option>
+          <option>Metro Rail Project</option>
+          <option>Commercial Complex</option>
+          <option>Residential Tower</option>
+          <option>Hospital Project</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Assigned To
+        </label>
+
+        <input
+          type="text"
+          placeholder="Site Engineer Name">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Allocation Date
+        </label>
+
+        <input
+          type="date">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Status
+        </label>
+
+        <select>
+
+          <option>Allocated</option>
+          <option>Available</option>
+          <option>Maintenance</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="button-group">
+
+      <button class="primary-btn">
+
+        Allocate Resource
+
+      </button>
+
+      <button
+        class="secondary-btn"
+        type="reset">
+
+        Reset
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Resource Utilization Summary -->
+
+  <div class="card">
+
+    <h3>
+      Resource Utilization Summary
+    </h3>
+
+    <div class="kpi-container">
+
+      <div class="kpi-card">
+
+        <h3>
+          Materials Used
+        </h3>
+
+        <h1>
+          82%
+        </h1>
+
+        <span>
+          Current Usage
+        </span>
+
+      </div>
+
+      <div class="kpi-card">
+
+        <h3>
+          Machinery Usage
+        </h3>
+
+        <h1>
+          74%
+        </h1>
+
+        <span>
+          Equipment in Use
+        </span>
+
+      </div>
+
+      <div class="kpi-card">
+
+        <h3>
+          Available Equipment
+        </h3>
+
+        <h1>
+          28
+        </h1>
+
+        <span>
+          Ready for Allocation
+        </span>
+
+      </div>
+
+      <div class="kpi-card">
+
+        <h3>
+          Pending Requests
+        </h3>
+
+        <h1>
+          12
+        </h1>
+
+        <span>
+          Awaiting Approval
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Next Page -->
+
+  <div class="next-page">
+
+    <button
+      class="primary-btn"
+      routerLink="/project-manager/workforce">
+
+      View Workforce →
+
+    </button>
+
+  </div>
+
+</div>

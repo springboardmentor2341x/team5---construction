@@ -1,0 +1,982 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+
+   <div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/site-progress">
+      
+    Site Progress
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/resource-allocation">
+      
+    Resource Allocation
+    </a>
+    <span>></span>
+    <strong>
+      WorkForce
+    </strong>
+  
+  </div>
+
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Workforce Management
+      </h2>
+
+      <p>
+        Monitor and manage workers assigned across all construction projects.
+      </p>
+
+    </div>
+
+    <button class="primary-btn">
+
+      + Add Worker
+
+    </button>
+
+  </div>
+
+
+
+
+  <!-- KPI Cards -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>
+        Total Workers
+      </h3>
+
+      <h1>
+        185
+      </h1>
+
+      <span>
+        Registered Workers
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        Present Today
+      </h3>
+
+      <h1>
+        171
+      </h1>
+
+      <span>
+        Active Workforce
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        On Leave
+      </h3>
+
+      <h1>
+        9
+      </h1>
+
+      <span>
+        Leave Requests
+      </span>
+
+    </div>
+
+    <div class="kpi-card">
+
+      <h3>
+        Night Shift
+      </h3>
+
+      <h1>
+        42
+      </h1>
+
+      <span>
+        Scheduled Tonight
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Search & Filter -->
+
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search Worker...">
+
+    <select>
+
+      <option>
+        All Departments
+      </option>
+
+      <option>
+        Civil
+      </option>
+
+      <option>
+        Electrical
+      </option>
+
+      <option>
+        Plumbing
+      </option>
+
+      <option>
+        Finishing
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Projects
+      </option>
+
+      <option>
+        Metro Rail Project
+      </option>
+
+      <option>
+        Commercial Complex
+      </option>
+
+      <option>
+        Residential Tower
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        Attendance
+      </option>
+
+      <option>
+        Present
+      </option>
+
+      <option>
+        Absent
+      </option>
+
+      <option>
+        Leave
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+
+  <!-- Workforce Table -->
+
+  <div class="card">
+
+    <h3>
+      Workforce Details
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Worker ID</th>
+
+            <th>Worker Name</th>
+
+            <th>Department</th>
+
+            <th>Assigned Project</th>
+
+            <th>Supervisor</th>
+
+            <th>Attendance</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+                      <tr>
+
+            <td>WR001</td>
+
+            <td>Ramesh Kumar</td>
+
+            <td>Civil</td>
+
+            <td>Metro Rail Project</td>
+
+            <td>Rahul Kumar</td>
+
+            <td>
+              Present
+            </td>
+
+            <td>
+
+              <span class="status active">
+
+                Active
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>WR002</td>
+
+            <td>Suresh Kumar</td>
+
+            <td>Electrical</td>
+
+            <td>Commercial Complex</td>
+
+            <td>Priya Sharma</td>
+
+            <td>
+              Present
+            </td>
+
+            <td>
+
+              <span class="status active">
+
+                Active
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>WR003</td>
+
+            <td>Arun Raj</td>
+
+            <td>Plumbing</td>
+
+            <td>Residential Tower</td>
+
+            <td>Arun Kumar</td>
+
+            <td>
+              Leave
+            </td>
+
+            <td>
+
+              <span class="status leave">
+
+                On Leave
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>WR004</td>
+
+            <td>Vijay Singh</td>
+
+            <td>Finishing</td>
+
+            <td>Hospital Project</td>
+
+            <td>Suresh Patel</td>
+
+            <td>
+              Present
+            </td>
+
+            <td>
+
+              <span class="status active">
+
+                Active
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>WR005</td>
+
+            <td>Karthik Raj</td>
+
+            <td>Civil</td>
+
+            <td>Shopping Mall</td>
+
+            <td>Vijay Kumar</td>
+
+            <td>
+              Absent
+            </td>
+
+            <td>
+
+              <span class="status inactive">
+
+                Absent
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>WR006</td>
+
+            <td>Manoj Kumar</td>
+
+            <td>Electrical</td>
+
+            <td>Corporate Office</td>
+
+            <td>Karthik Raj</td>
+
+            <td>
+              Present
+            </td>
+
+            <td>
+
+              <span class="status active">
+
+                Active
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+              <button class="edit-btn">
+
+                Edit
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Workforce Categories -->
+
+  <div class="card">
+
+    <h3>
+      Workforce Categories
+    </h3>
+
+
+    <div class="gallery-grid">
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Civil Workers
+        </h4>
+
+        <p>
+          Mason, Labour, Steel Workers
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Electrical Team
+        </h4>
+
+        <p>
+          Wiring and Installation Workers
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Plumbing Team
+        </h4>
+
+        <p>
+          Pipe Fitting and Maintenance
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Finishing Team
+        </h4>
+
+        <p>
+          Painting and Interior Work
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+    <!-- Attendance Summary -->
+
+  <div class="card">
+
+    <h3>
+      Attendance Summary
+    </h3>
+
+
+    <div class="kpi-container">
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Present Workers
+        </h3>
+
+        <h1>
+          171
+        </h1>
+
+        <span>
+          Today's Attendance
+        </span>
+
+      </div>
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Absent Workers
+        </h3>
+
+        <h1>
+          5
+        </h1>
+
+        <span>
+          Need Follow Up
+        </span>
+
+      </div>
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Leave Requests
+        </h3>
+
+        <h1>
+          9
+        </h1>
+
+        <span>
+          Pending Approval
+        </span>
+
+      </div>
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Overtime Workers
+        </h3>
+
+        <h1>
+          23
+        </h1>
+
+        <span>
+          Extra Working Hours
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Add Worker Form -->
+
+  <div class="card">
+
+    <h3>
+      Add New Worker
+    </h3>
+
+
+    <div class="form-grid">
+
+
+      <div class="form-group">
+
+        <label>
+          Worker Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Worker Name">
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Department
+        </label>
+
+        <select>
+
+          <option>
+            Select Department
+          </option>
+
+          <option>
+            Civil
+          </option>
+
+          <option>
+            Electrical
+          </option>
+
+          <option>
+            Plumbing
+          </option>
+
+          <option>
+            Finishing
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Assign Project
+        </label>
+
+        <select>
+
+          <option>
+            Select Project
+          </option>
+
+          <option>
+            Metro Rail Project
+          </option>
+
+          <option>
+            Commercial Complex
+          </option>
+
+          <option>
+            Residential Tower
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Supervisor
+        </label>
+
+        <input
+          type="text"
+          placeholder="Supervisor Name">
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Shift Timing
+        </label>
+
+        <select>
+
+          <option>
+            Morning Shift
+          </option>
+
+          <option>
+            Evening Shift
+          </option>
+
+          <option>
+            Night Shift
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Contact Number
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Contact Number">
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="button-group">
+
+
+      <button class="primary-btn">
+
+        Add Worker
+
+      </button>
+
+
+
+      <button
+        class="secondary-btn">
+
+        Reset
+
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Shift Management -->
+
+  <div class="card">
+
+    <h3>
+      Shift Management
+    </h3>
+
+
+    <div class="gallery-grid">
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Morning Shift
+        </h4>
+
+        <p>
+          6:00 AM - 2:00 PM
+        </p>
+
+        <strong>
+          85 Workers
+        </strong>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Evening Shift
+        </h4>
+
+        <p>
+          2:00 PM - 10:00 PM
+        </p>
+
+        <strong>
+          58 Workers
+        </strong>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Night Shift
+        </h4>
+
+        <p>
+          10:00 PM - 6:00 AM
+        </p>
+
+        <strong>
+          42 Workers
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Next Page -->
+
+  <div class="next-page">
+
+<button
+  class="primary-btn"
+  routerLink="/project-manager/procurement-requests">
+
+  View Procurement Requests →
+
+</button>
+
+
+  </div>
+
+
+</div>
