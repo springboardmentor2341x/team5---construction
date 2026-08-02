@@ -1,0 +1,85 @@
+<h1 class="page-title">Admin Dashboard</h1>
+
+<div class="kpi-grid">
+
+    <app-kpi-card
+        title="Total Projects"
+        value="25"
+        icon="business"
+        color="#1E3A8A"
+        trend="+12% this month">
+    </app-kpi-card>
+
+    <app-kpi-card
+        title="Active Projects"
+        value="18"
+        icon="engineering"
+        color="#2563EB"
+        trend="+5% this month">
+    </app-kpi-card>
+
+    <app-kpi-card
+        title="Total Users"
+        value="420"
+        icon="groups"
+        color="#7C3AED"
+        trend="+15 new users">
+    </app-kpi-card>
+
+    <app-kpi-card
+        title="Active Workers"
+        value="356"
+        icon="construction"
+        color="#16A34A"
+        trend="95% attendance">
+    </app-kpi-card>
+
+    <app-kpi-card
+        title="Procurement"
+        value="42"
+        icon="shopping_cart"
+        color="#F59E0B"
+        trend="8 pending">
+    </app-kpi-card>
+
+    <app-kpi-card
+        title="Budget Used"
+        value="72%"
+        icon="account_balance_wallet"
+        color="#DC2626"
+        trend="₹2.4 Cr spent">
+    </app-kpi-card>
+
+</div>
+
+<div class="chart-grid">
+
+    <mat-card>
+
+        <h2>Project Status</h2>
+
+        <app-dashboard-chart
+            [option]="projectChart">
+        </app-dashboard-chart>
+
+    </mat-card>
+
+    <mat-card>
+
+        <h2>Budget Distribution</h2>
+
+        <app-dashboard-chart
+            [option]="budgetChart">
+        </app-dashboard-chart>
+
+    </mat-card>
+
+</div>
+<div class="activity-grid">
+
+    <app-recent-activities></app-recent-activities>
+
+    <app-notification-panel></app-notification-panel>
+
+</div>
+<app-project-table></app-project-table>

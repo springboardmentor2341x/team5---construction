@@ -1,0 +1,29 @@
+<mat-card>
+
+<h2>Notifications</h2>
+
+<mat-list>
+
+@for(item of notifications; track item){
+
+<mat-list-item>
+
+<mat-icon matListItemIcon color="warn">
+
+{{item.icon}}
+
+</mat-icon>
+
+<div matListItemTitle>
+
+{{item.text}}
+
+</div>
+
+</mat-list-item>
+
+}
+
+</mat-list>
+
+</mat-card>

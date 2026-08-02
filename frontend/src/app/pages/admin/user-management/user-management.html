@@ -1,0 +1,207 @@
+<div class="page-header">
+
+    <div>
+
+        <h1>User Management</h1>
+
+        <p>Manage all users across the organization</p>
+
+    </div>
+
+    <button mat-raised-button color="primary">
+
+        <mat-icon>person_add</mat-icon>
+
+        Add User
+
+    </button>
+
+</div>
+
+<!-- KPI Cards -->
+
+<div class="stats-grid">
+
+    <mat-card class="stat-card">
+
+        <h3>Total Users</h3>
+
+        <h1>420</h1>
+
+    </mat-card>
+
+    <mat-card class="stat-card">
+
+        <h3>Active Users</h3>
+
+        <h1>392</h1>
+
+    </mat-card>
+
+    <mat-card class="stat-card">
+
+        <h3>Inactive Users</h3>
+
+        <h1>28</h1>
+
+    </mat-card>
+
+    <mat-card class="stat-card">
+
+        <h3>New This Month</h3>
+
+        <h1>18</h1>
+
+    </mat-card>
+
+</div>
+
+<!-- Search & Filter -->
+
+<mat-card class="filter-card">
+
+    <mat-form-field appearance="outline" class="search-box">
+        <mat-label>Search User</mat-label>
+        <input matInput placeholder="Search by Name or Employee ID">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select>
+            <mat-option>All Roles</mat-option>
+            <mat-option>Project Manager</mat-option>
+            <mat-option>Site Engineer</mat-option>
+            <mat-option>Contractor</mat-option>
+            <mat-option>Worker</mat-option>
+            <mat-option>Client</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select>
+            <mat-option>All</mat-option>
+            <mat-option>Active</mat-option>
+            <mat-option>Inactive</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">
+
+        <mat-icon>person_add</mat-icon>
+
+        Add User
+
+    </button>
+
+</mat-card>
+
+<!-- Table -->
+
+<mat-card>
+
+<table mat-table [dataSource]="users">
+
+    <ng-container matColumnDef="id">
+
+        <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            {{user.id}}
+
+        </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            {{user.name}}
+
+        </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            {{user.role}}
+
+        </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            {{user.email}}
+
+        </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            <span
+                class="status"
+                [class.active]="user.status==='Active'"
+                [class.inactive]="user.status==='Inactive'">
+
+                {{user.status}}
+
+            </span>
+
+        </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+
+        <td mat-cell *matCellDef="let user">
+
+            <button mat-icon-button color="primary">
+
+                <mat-icon>visibility</mat-icon>
+
+            </button>
+
+            <button mat-icon-button color="accent">
+
+                <mat-icon>edit</mat-icon>
+
+            </button>
+
+            <button mat-icon-button color="warn">
+
+                <mat-icon>delete</mat-icon>
+
+            </button>
+
+        </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+</table>
+
+</mat-card>

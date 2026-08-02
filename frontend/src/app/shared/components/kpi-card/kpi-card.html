@@ -1,0 +1,27 @@
+<mat-card class="kpi-card">
+
+    <div class="top-border" [style.background]="color"></div>
+
+    <div class="card-content">
+
+        <div>
+
+            <h3>{{title}}</h3>
+
+            <h1>{{value}}</h1>
+
+            <p>{{trend}}</p>
+
+        </div>
+
+        <div
+            class="icon"
+            [style.background]="color">
+
+            <mat-icon>{{icon}}</mat-icon>
+
+        </div>
+
+    </div>
+
+</mat-card>
