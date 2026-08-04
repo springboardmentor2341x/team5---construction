@@ -1,0 +1,195 @@
+<div class="form-container">
+
+    <div class="page-header">
+
+        <h1>Add New Project</h1>
+
+        <p>
+            Create a new construction project and assign project details.
+        </p>
+
+    </div>
+
+    <form>
+
+        <div class="section">
+
+            <h2>Project Information</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Project Name</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Project ID</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Client Name</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Location</label>
+
+                    <input type="text">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <h2>Management Details</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Project Manager</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Site Engineer</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Status</label>
+
+                    <select>
+
+                        <option>Active</option>
+                        <option>Completed</option>
+                        <option>On Hold</option>
+                        <option>Delayed</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Budget</label>
+
+                    <input type="number">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <h2>Timeline</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Start Date</label>
+
+                    <input type="date">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Expected End Date</label>
+
+                    <input type="date">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <h2>Description</h2>
+
+            <textarea rows="5"></textarea>
+
+        </div>
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                class="cancel-btn">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                class="save-btn"
+                (click)="createProject()">
+
+                Create Project
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@if(showSuccessPopup){
+
+<div class="popup-overlay">
+
+    <div class="popup">
+
+        <div class="success-icon">
+
+            ✅
+
+        </div>
+
+        <h2>
+
+            Project Created Successfully!
+
+        </h2>
+
+        <button
+            class="ok-btn"
+            (click)="closePopup()">
+
+            OK
+
+        </button>
+
+    </div>
+
+</div>
+
+}
