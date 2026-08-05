@@ -1,0 +1,1018 @@
+<div class="page-container">
+
+
+  <!-- Breadcrumb -->
+<div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/site-progress">
+      
+    Site Progress
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/resource-allocation">
+      
+    Resource Allocation
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/workforce">
+      
+    WorkForce
+    </a>
+    <span></span>
+    <strong>
+      Procurement Requests
+    </strong>
+    
+
+  </div>
+
+
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Procurement Management
+      </h2>
+
+      <p>
+        Manage material requests, supplier details and procurement activities.
+      </p>
+
+    </div>
+
+
+    <button class="primary-btn">
+
+      + Create Purchase Request
+
+    </button>
+
+
+  </div>
+
+
+
+
+
+  <!-- KPI Cards -->
+
+
+  <div class="kpi-container">
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Total Requests
+      </h3>
+
+      <h1>
+        156
+      </h1>
+
+      <span>
+        All Procurement Requests
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Approved
+      </h3>
+
+      <h1>
+        112
+      </h1>
+
+      <span>
+        Approved Requests
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Pending
+      </h3>
+
+      <h1>
+        28
+      </h1>
+
+      <span>
+        Waiting Approval
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Suppliers
+      </h3>
+
+      <h1>
+        24
+      </h1>
+
+      <span>
+        Active Suppliers
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Search Filter -->
+
+
+  <div class="filter-section">
+
+
+    <input
+      type="text"
+      placeholder="Search Material / Supplier">
+
+
+    <select>
+
+      <option>
+        All Categories
+      </option>
+
+      <option>
+        Cement
+      </option>
+
+      <option>
+        Steel
+      </option>
+
+      <option>
+        Equipment
+      </option>
+
+      <option>
+        Safety Materials
+      </option>
+
+    </select>
+
+
+
+    <select>
+
+      <option>
+        All Status
+      </option>
+
+      <option>
+        Approved
+      </option>
+
+      <option>
+        Pending
+      </option>
+
+      <option>
+        Rejected
+      </option>
+
+    </select>
+
+
+
+  </div>
+
+
+
+
+
+  <!-- Procurement Table -->
+
+
+  <div class="card">
+
+
+    <h3>
+      Procurement Requests
+    </h3>
+
+
+    <div class="table-wrapper">
+
+
+      <table>
+
+
+        <thead>
+
+
+          <tr>
+
+            <th>
+              Request ID
+            </th>
+
+            <th>
+              Material Name
+            </th>
+
+            <th>
+              Category
+            </th>
+
+            <th>
+              Supplier
+            </th>
+
+            <th>
+              Quantity
+            </th>
+
+            <th>
+              Required Date
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+        <tbody>
+                      <tr>
+
+            <td>
+              PR001
+            </td>
+
+            <td>
+              Cement Bags
+            </td>
+
+            <td>
+              Construction Material
+            </td>
+
+            <td>
+              ABC Suppliers
+            </td>
+
+            <td>
+              1000 Bags
+            </td>
+
+            <td>
+              05-08-2026
+            </td>
+
+            <td>
+
+              <span class="status approved">
+
+                Approved
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>
+              PR002
+            </td>
+
+            <td>
+              Steel Rods
+            </td>
+
+            <td>
+              Construction Material
+            </td>
+
+            <td>
+              XYZ Metals
+            </td>
+
+            <td>
+              500 Units
+            </td>
+
+            <td>
+              10-08-2026
+            </td>
+
+            <td>
+
+              <span class="status pending">
+
+                Pending
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>
+              PR003
+            </td>
+
+            <td>
+              Safety Helmets
+            </td>
+
+            <td>
+              Safety Equipment
+            </td>
+
+            <td>
+              SafeTech Suppliers
+            </td>
+
+            <td>
+              200 Pieces
+            </td>
+
+            <td>
+              15-08-2026
+            </td>
+
+            <td>
+
+              <span class="status approved">
+
+                Approved
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>
+              PR004
+            </td>
+
+            <td>
+              Electrical Cables
+            </td>
+
+            <td>
+              Electrical
+            </td>
+
+            <td>
+              Power Solutions
+            </td>
+
+            <td>
+              300 Meter
+            </td>
+
+            <td>
+              20-08-2026
+            </td>
+
+            <td>
+
+              <span class="status pending">
+
+                Pending
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>
+              PR005
+            </td>
+
+            <td>
+              Concrete Mixer
+            </td>
+
+            <td>
+              Equipment
+            </td>
+
+            <td>
+              Build Equipment Ltd
+            </td>
+
+            <td>
+              2 Units
+            </td>
+
+            <td>
+              25-08-2026
+            </td>
+
+            <td>
+
+              <span class="status rejected">
+
+                Rejected
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+        </tbody>
+
+      </table>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Supplier Summary -->
+
+
+  <div class="card">
+
+
+    <h3>
+      Supplier Overview
+    </h3>
+
+
+    <div class="gallery-grid">
+
+
+      <div class="gallery-card">
+
+        <h4>
+          ABC Suppliers
+        </h4>
+
+        <p>
+          Construction Materials
+        </p>
+
+        <strong>
+          45 Orders
+        </strong>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          XYZ Metals
+        </h4>
+
+        <p>
+          Steel & Metal Supply
+        </p>
+
+        <strong>
+          32 Orders
+        </strong>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          SafeTech Suppliers
+        </h4>
+
+        <p>
+          Safety Equipment
+        </p>
+
+        <strong>
+          18 Orders
+        </strong>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+          Power Solutions
+        </h4>
+
+        <p>
+          Electrical Materials
+        </p>
+
+        <strong>
+          25 Orders
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+    <!-- Create Purchase Request -->
+
+  <div class="card">
+
+    <h3>
+      Create Purchase Request
+    </h3>
+
+
+    <div class="form-grid">
+
+
+      <div class="form-group">
+
+        <label>
+          Request Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Request Name">
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Material Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Material Name">
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Category
+        </label>
+
+        <select>
+
+          <option>
+            Select Category
+          </option>
+
+          <option>
+            Construction Material
+          </option>
+
+          <option>
+            Equipment
+          </option>
+
+          <option>
+            Safety Equipment
+          </option>
+
+          <option>
+            Electrical
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Quantity
+        </label>
+
+        <input
+          type="number"
+          placeholder="Enter Quantity">
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Select Project
+        </label>
+
+        <select>
+
+          <option>
+            Select Project
+          </option>
+
+          <option>
+            Metro Rail Project
+          </option>
+
+          <option>
+            Commercial Complex
+          </option>
+
+          <option>
+            Residential Tower
+          </option>
+
+          <option>
+            Hospital Project
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Required Date
+        </label>
+
+        <input
+          type="date">
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Priority
+        </label>
+
+        <select>
+
+          <option>
+            High
+          </option>
+
+          <option>
+            Medium
+          </option>
+
+          <option>
+            Low
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+      <div class="form-group">
+
+        <label>
+          Preferred Supplier
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Supplier Name">
+
+      </div>
+
+
+    </div>
+
+
+
+
+    <div class="form-group description-box">
+
+      <label>
+        Description
+      </label>
+
+      <textarea
+        placeholder="Enter request details">
+
+      </textarea>
+
+    </div>
+
+
+
+
+    <div class="button-group">
+
+
+      <button class="primary-btn">
+
+        Submit Request
+
+      </button>
+
+
+
+      <button class="secondary-btn">
+
+        Reset
+
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Procurement Summary -->
+
+
+  <div class="card">
+
+
+    <h3>
+      Procurement Summary
+    </h3>
+
+
+    <div class="kpi-container">
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Materials Ordered
+        </h3>
+
+        <h1>
+          420
+        </h1>
+
+        <span>
+          Total Items
+        </span>
+
+      </div>
+
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Pending Approval
+        </h3>
+
+        <h1>
+          28
+        </h1>
+
+        <span>
+          Awaiting Review
+        </span>
+
+      </div>
+
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Delivered
+        </h3>
+
+        <h1>
+          96
+        </h1>
+
+        <span>
+          Completed Orders
+        </span>
+
+      </div>
+
+
+
+
+      <div class="kpi-card">
+
+        <h3>
+          Active Suppliers
+        </h3>
+
+        <h1>
+          24
+        </h1>
+
+        <span>
+          Registered Vendors
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Next Module -->
+
+
+  <div class="next-page">
+
+
+    <button
+
+      class="primary-btn"
+
+      routerLink="/project-manager/budget-tracking">
+
+
+      View Budget →
+
+    </button>
+
+
+  </div>
+
+
+
+</div>

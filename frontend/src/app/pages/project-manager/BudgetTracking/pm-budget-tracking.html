@@ -1,0 +1,1048 @@
+<div class="page-container">
+
+  <!-- =========================
+       Breadcrumb
+  ========================== -->
+
+<div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/site-progress">
+      
+    Site Progress
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/resource-allocation">
+      
+    Resource Allocation
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/workforce">
+      
+    WorkForce
+    </a>
+    <span></span>
+     <a routerLink="/project-manager/procurement-requests">
+      
+    Procurement Requests
+    </a>
+    <span></span>
+    <strong>
+      Budget Tracking
+    </strong>
+</div>
+
+
+
+
+  <!-- =========================
+       Page Header
+  ========================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Budget Tracking
+      </h2>
+
+      <p>
+        Monitor project budget, expenses, utilization and financial performance.
+      </p>
+
+    </div>
+
+    <div class="header-buttons">
+
+      <button class="secondary-btn">
+        Export PDF
+      </button>
+
+      <button class="secondary-btn">
+        Export Excel
+      </button>
+
+      <button class="primary-btn">
+        + Add Expense
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       KPI Cards
+  ========================== -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>Total Budget</h3>
+
+      <h1>$2.5M</h1>
+
+      <span>Allocated Budget</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Used Budget</h3>
+
+      <h1>$1.4M</h1>
+
+      <span>56% Utilized</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Remaining Budget</h3>
+
+      <h1>$1.1M</h1>
+
+      <span>Available Balance</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Pending Payments</h3>
+
+      <h1>$250K</h1>
+
+      <span>Awaiting Approval</span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       Budget Utilization
+  ========================== -->
+
+  <div class="card">
+
+    <div class="section-header">
+
+      <h3>
+        Budget Utilization
+      </h3>
+
+      <span class="badge success">
+
+        Within Budget
+
+      </span>
+
+    </div>
+
+
+    <div class="budget-progress">
+
+      <div class="progress-info">
+
+        <span>
+          Budget Utilized
+        </span>
+
+        <strong>
+          56%
+        </strong>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div class="progress-fill">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="budget-stats">
+
+      <div class="budget-box">
+
+        <h4>
+          Estimated Budget
+        </h4>
+
+        <h2>
+          $2,500,000
+        </h2>
+
+        <p>
+          Initial Project Allocation
+        </p>
+
+      </div>
+
+
+      <div class="budget-box">
+
+        <h4>
+          Amount Spent
+        </h4>
+
+        <h2>
+          $1,400,000
+        </h2>
+
+        <p>
+          Approved Expenses
+        </p>
+
+      </div>
+
+
+      <div class="budget-box">
+
+        <h4>
+          Remaining Budget
+        </h4>
+
+        <h2>
+          $1,100,000
+        </h2>
+
+        <p>
+          Available Funds
+        </p>
+
+      </div>
+
+
+      <div class="budget-box">
+
+        <h4>
+          Forecast Cost
+        </h4>
+
+        <h2>
+          $2,300,000
+        </h2>
+
+        <p>
+          Expected Final Cost
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       Search & Filters
+       (Continue in Part 2)
+  ========================== -->
+  <!-- =========================
+     Search & Filters
+========================== -->
+
+<div class="filter-section">
+
+  <input
+    type="text"
+    placeholder="Search Expense ID / Expense Name">
+
+  <select>
+
+    <option>All Categories</option>
+    <option>Material Cost</option>
+    <option>Labour Cost</option>
+    <option>Equipment Cost</option>
+    <option>Transportation</option>
+    <option>Maintenance</option>
+
+  </select>
+
+  <select>
+
+    <option>All Status</option>
+    <option>Paid</option>
+    <option>Pending</option>
+    <option>Approved</option>
+
+  </select>
+
+  <input type="date">
+
+  <button class="primary-btn">
+
+    Search
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+     Expense Details
+========================== -->
+
+<div class="card">
+
+<h3>
+
+Expense Details
+
+</h3>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Expense ID</th>
+<th>Expense Name</th>
+<th>Category</th>
+<th>Project</th>
+<th>Amount</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>EXP001</td>
+<td>Cement Purchase</td>
+<td>Material Cost</td>
+<td>Metro Rail Project</td>
+<td>$45,000</td>
+<td>05-08-2026</td>
+
+<td>
+
+<span class="status paid">
+
+Paid
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP002</td>
+<td>Steel Purchase</td>
+<td>Material Cost</td>
+<td>Metro Rail Project</td>
+<td>$80,000</td>
+<td>08-08-2026</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP003</td>
+<td>Labour Payment</td>
+<td>Labour Cost</td>
+<td>Commercial Complex</td>
+<td>$75,000</td>
+<td>10-08-2026</td>
+
+<td>
+
+<span class="status pending">
+
+Pending
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP004</td>
+<td>Crane Rental</td>
+<td>Equipment Cost</td>
+<td>Hospital Project</td>
+<td>$32,000</td>
+<td>12-08-2026</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP005</td>
+<td>Generator Fuel</td>
+<td>Maintenance</td>
+<td>Shopping Mall</td>
+<td>$12,000</td>
+<td>14-08-2026</td>
+
+<td>
+
+<span class="status paid">
+
+Paid
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP006</td>
+<td>Electrical Materials</td>
+<td>Material Cost</td>
+<td>Hospital Project</td>
+<td>$56,000</td>
+<td>15-08-2026</td>
+
+<td>
+
+<span class="status pending">
+
+Pending
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP007</td>
+<td>Pipe Installation</td>
+<td>Labour Cost</td>
+<td>Residential Tower</td>
+<td>$27,000</td>
+<td>16-08-2026</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP008</td>
+<td>Transport Charges</td>
+<td>Transportation</td>
+<td>Metro Rail Project</td>
+<td>$18,000</td>
+<td>18-08-2026</td>
+
+<td>
+
+<span class="status paid">
+
+Paid
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP009</td>
+<td>Painting Materials</td>
+<td>Material Cost</td>
+<td>Commercial Complex</td>
+<td>$24,000</td>
+<td>20-08-2026</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>EXP010</td>
+<td>Site Maintenance</td>
+<td>Maintenance</td>
+<td>Shopping Mall</td>
+<td>$18,000</td>
+<td>22-08-2026</td>
+
+<td>
+
+<span class="status pending">
+
+Pending
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn">
+
+View
+
+</button>
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<!-- =========================
+     Budget Analytics
+========================== -->
+
+<div class="card">
+
+  <h3>
+    Budget Analytics
+  </h3>
+
+  <div class="gallery-grid">
+
+    <div class="gallery-card">
+
+      <h4>
+        Material Expenses
+      </h4>
+
+      <p>
+        Cement, Steel, Sand, Bricks and other construction materials.
+      </p>
+
+      <strong>
+        $850K
+      </strong>
+
+    </div>
+
+    <div class="gallery-card">
+
+      <h4>
+        Labour Expenses
+      </h4>
+
+      <p>
+        Engineers, Supervisors and Worker Payments.
+      </p>
+
+      <strong>
+        $420K
+      </strong>
+
+    </div>
+
+    <div class="gallery-card">
+
+      <h4>
+        Equipment Expenses
+      </h4>
+
+      <p>
+        Crane, Excavator, Concrete Mixer and Machinery Rentals.
+      </p>
+
+      <strong>
+        $180K
+      </strong>
+
+    </div>
+
+    <div class="gallery-card">
+
+      <h4>
+        Maintenance Cost
+      </h4>
+
+      <p>
+        Equipment Service, Repairs and Site Maintenance.
+      </p>
+
+      <strong>
+        $75K
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     Monthly Expense Trend
+========================== -->
+
+<div class="card">
+
+  <h3>
+    Monthly Expense Trend
+  </h3>
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>Month</th>
+        <th>Expense</th>
+        <th>Status</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr>
+
+        <td>April</td>
+
+        <td>$280,000</td>
+
+        <td>
+
+          <span class="status approved">
+
+            Completed
+
+          </span>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>May</td>
+
+        <td>$350,000</td>
+
+        <td>
+
+          <span class="status approved">
+
+            Completed
+
+          </span>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>June</td>
+
+        <td>$420,000</td>
+
+        <td>
+
+          <span class="status approved">
+
+            Completed
+
+          </span>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>July</td>
+
+        <td>$380,000</td>
+
+        <td>
+
+          <span class="status pending">
+
+            In Progress
+
+          </span>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+
+
+<!-- =========================
+     Budget Summary
+========================== -->
+
+<div class="card">
+
+  <h3>
+    Budget Summary
+  </h3>
+
+  <div class="summary-grid">
+
+    <div class="summary-box">
+
+      <h4>
+        Estimated Budget
+      </h4>
+
+      <h2>
+        $2.5M
+      </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+      <h4>
+        Total Expenses
+      </h4>
+
+      <h2>
+        $1.4M
+      </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+      <h4>
+        Remaining Budget
+      </h4>
+
+      <h2>
+        $1.1M
+      </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+      <h4>
+        Budget Utilization
+      </h4>
+
+      <h2>
+        56%
+      </h2>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     Export Reports
+========================== -->
+
+<div class="card">
+
+  <h3>
+    Export Reports
+  </h3>
+
+  <p>
+    Download budget reports for project review and financial analysis.
+  </p>
+
+  <div class="export-buttons">
+
+    <button class="primary-btn">
+
+      Export PDF
+
+    </button>
+
+    <button class="primary-btn">
+
+      Export Excel
+
+    </button>
+<button
+  class="primary-btn"
+  routerLink="/project-manager/reports">
+
+  Print Report
+
+</button>
+
+  </div>
+
+</div>
+
+</div>

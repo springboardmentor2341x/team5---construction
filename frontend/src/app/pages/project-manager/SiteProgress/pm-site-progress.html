@@ -1,0 +1,678 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+<div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+     <a routerLink="/project-manager/contractors">
+      
+    Contractors
+    </a>
+    <span>></span>
+ 
+    <strong>
+      Site Progress
+    </strong>
+  
+  </div>
+
+  
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Site Progress
+      </h2>
+
+      <p>
+        Monitor daily construction progress, updates, photos and issues.
+      </p>
+
+    </div>
+
+    <button class="primary-btn">
+
+      + Upload Progress
+
+    </button>
+
+  </div>
+
+
+
+
+  <!-- KPI Cards -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>
+        Total Updates
+      </h3>
+
+      <h1>
+        245
+      </h1>
+
+      <span>
+        Progress Reports
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Today's Updates
+      </h3>
+
+      <h1>
+        18
+      </h1>
+
+      <span>
+        New Reports
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Pending Issues
+      </h3>
+
+      <h1>
+        7
+      </h1>
+
+      <span>
+        Need Attention
+      </span>
+
+    </div>
+
+
+
+    <div class="kpi-card">
+
+      <h3>
+        Completed Tasks
+      </h3>
+
+      <h1>
+        164
+      </h1>
+
+      <span>
+        Successfully Finished
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Search & Filter -->
+
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search Project...">
+
+    <select>
+
+      <option>
+        All Projects
+      </option>
+
+      <option>
+        Metro Rail Project
+      </option>
+
+      <option>
+        Commercial Complex
+      </option>
+
+      <option>
+        Residential Tower
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Engineers
+      </option>
+
+      <option>
+        Rahul Kumar
+      </option>
+
+      <option>
+        Priya Sharma
+      </option>
+
+      <option>
+        Arun Kumar
+      </option>
+
+    </select>
+
+    <input
+      type="date">
+
+  </div>
+
+
+
+
+  <!-- Daily Progress Table -->
+
+  <div class="card">
+
+    <h3>
+
+      Daily Progress Updates
+
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Date</th>
+
+            <th>Project</th>
+
+            <th>Site Engineer</th>
+
+            <th>Progress Summary</th>
+
+            <th>Completed Tasks</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+                      <tr>
+
+            <td>29-07-2026</td>
+
+            <td>Metro Rail Project</td>
+
+            <td>Rahul Kumar</td>
+
+            <td>Foundation excavation completed</td>
+
+            <td>Excavation, Soil Testing</td>
+
+            <td>
+              <span class="status completed">
+                Completed
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>29-07-2026</td>
+
+            <td>Commercial Complex</td>
+
+            <td>Priya Sharma</td>
+
+            <td>Electrical conduit installation</td>
+
+            <td>Ground Floor Wiring</td>
+
+            <td>
+              <span class="status progress">
+                In Progress
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>28-07-2026</td>
+
+            <td>Residential Tower</td>
+
+            <td>Arun Kumar</td>
+
+            <td>Concrete slab completed</td>
+
+            <td>Level 2 Slab</td>
+
+            <td>
+              <span class="status completed">
+                Completed
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>28-07-2026</td>
+
+            <td>Hospital Project</td>
+
+            <td>Suresh Patel</td>
+
+            <td>Material delivery delayed</td>
+
+            <td>Steel Reinforcement</td>
+
+            <td>
+              <span class="status delayed">
+                Delayed
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>27-07-2026</td>
+
+            <td>Shopping Mall</td>
+
+            <td>Vijay Kumar</td>
+
+            <td>Painting work started</td>
+
+            <td>Interior Painting</td>
+
+            <td>
+              <span class="status progress">
+                In Progress
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Site Photos & Videos -->
+
+  <div class="card">
+
+    <h3>
+      Site Photos & Videos
+    </h3>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-card">
+
+        <h4>Foundation Progress</h4>
+
+        <p>Latest Site Photo</p>
+
+        <button class="view-btn">
+          View Photo
+        </button>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <h4>Electrical Work</h4>
+
+        <p>Latest Progress Video</p>
+
+        <button class="view-btn">
+          View Video
+        </button>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <h4>Concrete Work</h4>
+
+        <p>Drone Inspection</p>
+
+        <button class="view-btn">
+          View Media
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+    <!-- Delay Reports -->
+
+  <div class="card">
+
+    <h3>
+      Delay Reports
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Delay Reason</th>
+
+            <th>Affected Area</th>
+
+            <th>Delay Days</th>
+
+            <th>Reported By</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>Heavy Rainfall</td>
+
+            <td>Foundation Work</td>
+
+            <td>3 Days</td>
+
+            <td>Rahul Kumar</td>
+
+            <td>
+              <span class="status delayed">
+                Open
+              </span>
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>Material Shortage</td>
+
+            <td>Electrical Section</td>
+
+            <td>2 Days</td>
+
+            <td>Priya Sharma</td>
+
+            <td>
+              <span class="status progress">
+                In Progress
+              </span>
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>Machine Breakdown</td>
+
+            <td>Concrete Mixing</td>
+
+            <td>1 Day</td>
+
+            <td>Arun Kumar</td>
+
+            <td>
+              <span class="status completed">
+                Resolved
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Issues Reported -->
+
+  <div class="card">
+
+    <h3>
+      Site Issues
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Issue ID</th>
+
+            <th>Description</th>
+
+            <th>Priority</th>
+
+            <th>Reported By</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>ISS001</td>
+
+            <td>Crack observed in retaining wall</td>
+
+            <td>High</td>
+
+            <td>Rahul Kumar</td>
+
+            <td>
+              <span class="status delayed">
+                Open
+              </span>
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>ISS002</td>
+
+            <td>Electrical cable damaged</td>
+
+            <td>Medium</td>
+
+            <td>Priya Sharma</td>
+
+            <td>
+              <span class="status progress">
+                Under Review
+              </span>
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>ISS003</td>
+
+            <td>Safety helmet shortage</td>
+
+            <td>Low</td>
+
+            <td>Arun Kumar</td>
+
+            <td>
+              <span class="status completed">
+                Closed
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Navigation -->
+
+  <div class="button-group">
+
+    <button
+      class="secondary-btn"
+      routerLink="/project-manager/contractors">
+
+      ← View Contractors
+
+    </button>
+
+    <button
+      class="primary-btn"
+      routerLink="/project-manager/resource-allocation">
+
+      View Resource Allocation →
+
+    </button>
+
+  </div>
+
+</div>

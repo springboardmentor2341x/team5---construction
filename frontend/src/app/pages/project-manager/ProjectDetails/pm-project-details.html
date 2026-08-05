@@ -1,0 +1,295 @@
+<div class="page-container">
+
+ <div class="breadcrumb">
+    <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+    <strong>
+      Project Details
+    </strong>
+    
+
+  </div>
+  <div class="page-header">
+    <div>
+
+      <h2>
+        {{project.name}}
+      </h2>
+
+      <p>
+        Project Management Overview
+      </p>
+       <button class="primary-btn">
+      Edit Project
+    </button>
+    </div>
+   <button class="primary-btn" routerLink="/project-manager/project-schedule">
+  View Project Schedule</button>
+  <button class="primary-btn"
+routerLink="/project-manager/milestones">
+
+View Milestones
+
+</button>
+
+<button class="primary-btn" routerLink="/project-manager/site-engineers">
+  <span>👷</span>
+  Site Engineers
+</button>
+  </div>
+  <div class="section-card">
+
+    <h3>
+      Basic Information
+    </h3>
+    <div class="info-grid">
+      <div class="info-box">
+        <label>Project Code</label>
+        <p>{{project.code}}</p>
+      </div>
+
+      <div class="info-box">
+        <label>Client</label>
+        <p>{{project.client}}</p>
+      </div>
+      <div class="info-box">
+        <label>Location</label>
+        <p>{{project.location}}</p>
+      </div>
+      <div class="info-box">
+        <label>Budget</label>
+        <p>{{project.budget}}</p>
+      </div>
+      <div class="info-box">
+        <label>Start Date</label>
+        <p>{{project.startDate}}</p>
+      </div>
+      <div class="info-box">
+        <label>End Date</label>
+        <p>{{project.endDate}}</p>
+      </div>
+      <div class="info-box">
+        <label>Status</label>
+        <span class="status-badge">
+          {{project.status}}
+        </span>
+      </div>
+      <div class="info-box">
+        <label>Priority</label>
+        <span class="priority-badge">
+          {{project.priority}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="section-card">
+    <h3>
+      Project Progress
+    </h3>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress"
+        [style.width.%]="project.completion">
+        </div>
+      </div>
+      <h4>
+        {{project.completion}}% Completed
+      </h4>
+    </div>
+  </div>
+  <div class="section-card">
+    <h3>
+      Milestones
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Milestone
+          </th>
+          <th>
+            Planned Date
+          </th>
+          <th>
+            Actual Date
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Delay
+          </th>
+
+          <th>
+            Remarks
+          </th>
+
+
+        </tr>
+
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let milestone of project.milestones">
+          <td>
+            {{milestone.name}}
+          </td>
+          <td>
+            {{milestone.planned}}
+          </td>
+          <td>
+            {{milestone.actual}}
+          </td>
+          <td>
+            {{milestone.status}}
+          </td>
+          <td>
+            {{milestone.delay}}
+          </td>
+          <td>
+            {{milestone.remarks}}
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="section-card">
+    <h3>
+      Site Engineers
+    </h3>
+    <table>
+      <thead>
+
+        <tr>
+
+          <th>Name</th>
+          <th>Employee ID</th>
+          <th>Contact</th>
+          <th>Assigned Area</th>
+
+        </tr>
+
+
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let engineer of project.engineers">
+          <td>
+            {{engineer.name}}
+          </td>
+          <td>
+            {{engineer.id}}
+          </td>
+          <td>
+            {{engineer.contact}}
+          </td>
+          <td>
+            {{engineer.area}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-card">
+    <h3>
+      Contractors
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Specialization</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contractor of project.contractors">
+          <td>
+            {{contractor.name}}
+          </td>
+          <td>
+            {{contractor.company}}
+          </td>
+          <td>
+            {{contractor.specialization}}
+          </td>
+          <td>
+            {{contractor.contact}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-card">
+    <h3>
+      Resources
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>Quantity</th>
+          <th>Available</th>
+          <th>Allocated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resource of project.resources">
+          <td>
+            {{resource.name}}
+          </td>
+          <td>
+            {{resource.quantity}}
+          </td>
+          <td>
+            {{resource.available}}
+          </td>
+          <td>
+            {{resource.allocated}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-card">
+    <h3>
+      Materials
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Quantity</th>
+          <th>Status</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let material of project.materials">
+          <td>
+            {{material.name}}
+          </td>
+          <td>
+            {{material.quantity}}
+          </td>
+          <td>
+            {{material.status}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

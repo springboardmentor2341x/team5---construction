@@ -1,0 +1,355 @@
+<div class="page-container">
+
+
+<!-- Breadcrumb -->
+
+<div class="breadcrumb">
+
+
+<a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-details">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+  
+  
+<strong>
+Milestones
+</strong>
+
+
+</div>
+
+
+
+
+
+<!-- Header -->
+
+
+<div class="page-header">
+
+
+<div>
+
+<h2>
+Milestone Management
+</h2>
+
+
+<p>
+Track project milestones and completion status
+</p>
+
+
+</div>
+
+
+
+<button class="primary-btn">
+
++ Add Milestone
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<!-- Timeline -->
+
+
+<div class="card">
+
+
+<h3>
+Project Milestone Timeline
+</h3>
+
+
+
+<div class="timeline">
+
+
+<div class="milestone completed">
+Foundation Complete
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone progress">
+Structure Complete
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone pending">
+Electrical Complete
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone pending">
+Plumbing Complete
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone pending">
+Interior Complete
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone pending">
+Final Inspection
+</div>
+
+
+<div class="line"></div>
+
+
+<div class="milestone pending">
+Handover
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Table -->
+
+
+<div class="card">
+
+
+<h3>
+Milestone Details
+</h3>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Milestone</th>
+
+<th>Planned Date</th>
+
+<th>Actual Date</th>
+
+<th>Status</th>
+
+<th>Delay</th>
+
+<th>Remarks</th>
+
+<th>Actions</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+<tr *ngFor="let item of milestones; let i=index">
+
+
+<td>
+{{item.name}}
+</td>
+
+
+<td>
+{{item.plannedDate}}
+</td>
+
+
+<td>
+{{item.actualDate}}
+</td>
+
+
+<td>
+
+
+<span class="status"
+[class.completed]="item.status=='Completed'"
+[class.progress]="item.status=='In Progress'"
+[class.pending]="item.status=='Pending'">
+
+
+{{item.status}}
+
+
+</span>
+
+
+</td>
+
+
+<td>
+{{item.delay}}
+</td>
+
+
+<td>
+{{item.remarks}}
+</td>
+
+
+
+<td>
+
+
+<button class="edit-btn">
+Edit
+</button>
+
+
+<button class="complete-btn"
+(click)="completeMilestone(i)">
+
+Complete
+
+</button>
+
+
+</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Add Milestone -->
+
+
+<div class="card">
+
+
+<h3>
+Add New Milestone
+</h3>
+
+
+
+<div class="form-grid">
+
+
+<input placeholder="Milestone Name">
+
+
+<input type="date">
+
+
+<input type="date">
+
+
+<select>
+
+<option>
+Select Status
+</option>
+
+<option>
+Pending
+</option>
+
+<option>
+In Progress
+</option>
+
+<option>
+Completed
+</option>
+
+
+</select>
+
+
+
+<input placeholder="Delay">
+
+
+<input placeholder="Remarks">
+
+
+
+</div>
+
+
+
+
+<button class="primary-btn save-btn">
+
+Save Milestone
+
+</button>
+
+
+</div>
+
+
+
+</div>

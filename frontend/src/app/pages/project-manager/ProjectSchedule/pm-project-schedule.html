@@ -1,0 +1,329 @@
+<div class="page-container">
+
+  <div class="breadcrumb">
+
+  <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+
+  <strong>
+    Project Schedule
+  </strong>
+
+</div>
+
+
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h2>Project Schedule</h2>
+
+      <p>
+        Create and manage complete project planning activities
+      </p>
+    </div>
+
+
+    <button class="primary-btn">
+      + Add Schedule
+    </button>
+
+
+  </div>
+
+
+
+
+  <!-- Gantt Timeline -->
+
+  <div class="card">
+
+    <h3>Project Timeline</h3>
+
+
+    <div class="timeline">
+
+
+      <div class="timeline-item completed">
+        Foundation
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item active">
+        Structure
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Electrical
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Plumbing
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Painting
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Finishing
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Inspection
+      </div>
+
+
+      <div class="arrow">
+        →
+      </div>
+
+
+      <div class="timeline-item pending">
+        Handover
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Schedule Table -->
+
+
+  <div class="card">
+
+
+    <div class="table-header">
+
+      <h3>Activity Schedule</h3>
+
+    </div>
+
+
+
+    <table>
+
+
+      <thead>
+
+        <tr>
+
+          <th>Task Name</th>
+
+          <th>Start Date</th>
+
+          <th>End Date</th>
+
+          <th>Duration</th>
+
+          <th>Assigned Engineer</th>
+
+          <th>Status</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+
+      </thead>
+
+
+
+
+      <tbody>
+
+
+        <tr *ngFor="let schedule of schedules; let i=index">
+
+
+          <td>
+            {{schedule.taskName}}
+          </td>
+
+
+          <td>
+            {{schedule.startDate}}
+          </td>
+
+
+          <td>
+            {{schedule.endDate}}
+          </td>
+
+
+          <td>
+            {{schedule.duration}}
+          </td>
+
+
+          <td>
+            {{schedule.engineer}}
+          </td>
+
+
+
+          <td>
+
+            <span class="status"
+            [ngClass]="schedule.status">
+
+              {{schedule.status}}
+
+            </span>
+
+          </td>
+
+
+
+
+          <td>
+
+
+            <button class="edit-btn">
+              Edit
+            </button>
+
+
+            <button class="delete-btn"
+            (click)="deleteSchedule(i)">
+
+              Delete
+
+            </button>
+
+
+          </td>
+
+
+        </tr>
+
+
+      </tbody>
+
+
+    </table>
+
+
+  </div>
+
+
+
+
+
+  <!-- Add Schedule Form -->
+
+
+  <div class="card">
+
+
+    <h3>Add New Schedule</h3>
+
+
+    <div class="form-grid">
+
+
+      <input placeholder="Task Name">
+
+
+      <input type="date">
+
+
+      <input type="date">
+
+
+      <input placeholder="Assigned Engineer">
+
+
+
+      <select>
+
+        <option>
+          Select Status
+        </option>
+
+        <option>
+          Pending
+        </option>
+
+        <option>
+          In Progress
+        </option>
+
+        <option>
+          Completed
+        </option>
+
+      </select>
+
+
+
+    </div>
+
+
+
+    <button class="primary-btn save-btn">
+      Save Schedule
+    </button>
+
+
+  </div>
+
+
+
+</div>

@@ -1,0 +1,266 @@
+/* ==========================================
+   PAGE CONTAINER
+========================================== */
+
+.page-container{
+    padding:30px;
+    background:#f4f7fc;
+    min-height:100vh;
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+}
+
+/* ==========================================
+   BREADCRUMB
+========================================== */
+
+.breadcrumb {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:20px;
+  font-size:14px;
+}
+.breadcrumb a {
+  color:#102a43;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+}
+.breadcrumb a:hover {
+  color:#2563eb;
+}
+.breadcrumb span {
+  color:#9ca3af;
+}
+.breadcrumb strong {
+  color:#6b7280;
+}
+
+
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h2{
+    margin:0;
+    color:#1e293b;
+    font-size:30px;
+}
+
+.page-header p{
+    margin-top:8px;
+    color:#64748b;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.primary-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================================
+   FILTER SECTION
+========================================== */
+
+.filter-section{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.filter-section input,
+.filter-section select{
+    flex:1;
+    min-width:200px;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:#fff;
+}
+
+.filter-section input:focus,
+.filter-section select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+.card h3{
+    margin-top:0;
+    margin-bottom:20px;
+    color:#1e293b;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#2563eb;
+    color:#fff;
+}
+
+th{
+    padding:14px;
+    text-align:left;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.status{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.pending{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.approved{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.view-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================================
+   RECENT NOTIFICATIONS
+========================================== */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.gallery-card{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:20px;
+    transition:.3s;
+}
+
+.gallery-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.gallery-card h4{
+    margin:0 0 10px;
+    color:#2563eb;
+}
+
+.gallery-card p{
+    margin:0;
+    color:#64748b;
+    line-height:1.5;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.filter-section{
+    flex-direction:column;
+}
+
+.filter-section input,
+.filter-section select,
+.filter-section button{
+    width:100%;
+}
+
+.gallery-grid{
+    grid-template-columns:1fr;
+}
+
+th,
+td{
+    font-size:13px;
+    padding:10px;
+}
+
+.view-btn{
+    width:100%;
+}
+
+}
