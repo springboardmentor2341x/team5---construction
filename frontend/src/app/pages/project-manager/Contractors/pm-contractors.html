@@ -1,0 +1,690 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+
+  <div class="breadcrumb">
+
+ <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+    <a routerLink="/project-manager/my-projects">
+      My Projects
+    </a>
+    <span>></span>
+      
+    <a routerLink="/project-manager/project-details">
+      Project Details
+    </a>
+    <span>></span>
+    
+<a routerLink="/project-manager/project-schedule">
+      
+    Project Schedule
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/milestones">
+      
+    Milestones
+    </a>
+    <span>></span>
+    <a routerLink="/project-manager/site-engineers">
+      
+    Site Engineers
+    </a>
+    <span>></span>
+ 
+    <strong>
+      Contractors
+    </strong>
+  
+  </div>
+
+
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Contractor Management
+      </h2>
+
+      <p>
+        Assign and manage contractors for construction projects
+      </p>
+
+    </div>
+
+    <button class="primary-btn">
+      + Assign Contractor
+    </button>
+
+  </div>
+
+
+
+
+  <!-- KPI Cards -->
+
+  <div class="kpi-container">
+
+    <div class="kpi-card">
+
+      <h3>Total Contractors</h3>
+
+      <h1>42</h1>
+
+      <span>Registered Contractors</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Assigned Contractors</h3>
+
+      <h1>35</h1>
+
+      <span>Currently Assigned</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Active Contractors</h3>
+
+      <h1>30</h1>
+
+      <span>Working On Site</span>
+
+    </div>
+
+
+    <div class="kpi-card">
+
+      <h3>Available Contractors</h3>
+
+      <h1>7</h1>
+
+      <span>Ready For Assignment</span>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Search & Filters -->
+
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search Contractor...">
+
+    <select>
+
+      <option>
+        All Projects
+      </option>
+
+      <option>
+        Metro Rail Project
+      </option>
+
+      <option>
+        Commercial Complex
+      </option>
+
+      <option>
+        Residential Tower
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Specializations
+      </option>
+
+      <option>
+        Civil
+      </option>
+
+      <option>
+        Electrical
+      </option>
+
+      <option>
+        Plumbing
+      </option>
+
+      <option>
+        Interior
+      </option>
+
+      <option>
+        Painting
+      </option>
+
+      <option>
+        HVAC
+      </option>
+
+      <option>
+        Landscaping
+      </option>
+
+    </select>
+
+    <select>
+
+      <option>
+        All Status
+      </option>
+
+      <option>
+        Active
+      </option>
+
+      <option>
+        Assigned
+      </option>
+
+      <option>
+        Available
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+
+
+  <!-- Contractor Details -->
+
+  <div class="card">
+
+    <h3>
+      Contractor Details
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Contractor Name
+            </th>
+
+            <th>
+              Company
+            </th>
+
+            <th>
+              Specialization
+            </th>
+
+            <th>
+              Contact
+            </th>
+
+            <th>
+              Assigned Project
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+          <tr>
+
+            <td>ABC Constructions</td>
+
+            <td>ABC Builders Pvt. Ltd.</td>
+
+            <td>Civil</td>
+
+            <td>9876543210</td>
+
+            <td>Metro Rail Project</td>
+
+            <td>
+              <span class="status active">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>Bright Electricals</td>
+
+            <td>Bright Engineering</td>
+
+            <td>Electrical</td>
+
+            <td>9876543211</td>
+
+            <td>Commercial Complex</td>
+
+            <td>
+              <span class="status assigned">
+                Assigned
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>Perfect Plumbing</td>
+
+            <td>Perfect Services</td>
+
+            <td>Plumbing</td>
+
+            <td>9876543212</td>
+
+            <td>Residential Tower</td>
+
+            <td>
+              <span class="status active">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>Dream Interiors</td>
+
+            <td>Dream Designers</td>
+
+            <td>Interior</td>
+
+            <td>9876543213</td>
+
+            <td>Corporate Office</td>
+
+            <td>
+              <span class="status available">
+                Available
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>Royal Painters</td>
+
+            <td>Royal Paint Works</td>
+
+            <td>Painting</td>
+
+            <td>9876543214</td>
+
+            <td>Shopping Mall</td>
+
+            <td>
+              <span class="status assigned">
+                Assigned
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+
+          <tr>
+
+            <td>Cool Air HVAC</td>
+
+            <td>Cool Air Systems</td>
+
+            <td>HVAC</td>
+
+            <td>9876543215</td>
+
+            <td>Hospital Project</td>
+
+            <td>
+              <span class="status active">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+                View
+              </button>
+
+              <button class="edit-btn">
+                Change
+              </button>
+
+              <button class="remove-btn">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+    <!-- Assign Contractor -->
+
+  <div class="card">
+
+    <h3>
+      Assign Contractor
+    </h3>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Contractor Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Contractor Name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Company Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Company Name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Specialization
+        </label>
+
+        <select>
+
+          <option>
+            Select Specialization
+          </option>
+
+          <option>
+            Civil
+          </option>
+
+          <option>
+            Electrical
+          </option>
+
+          <option>
+            Plumbing
+          </option>
+
+          <option>
+            Interior
+          </option>
+
+          <option>
+            Painting
+          </option>
+
+          <option>
+            HVAC
+          </option>
+
+          <option>
+            Landscaping
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Contact Number
+        </label>
+
+        <input
+          type="tel"
+          placeholder="Enter Contact Number">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Assign Project
+        </label>
+
+        <select>
+
+          <option>
+            Select Project
+          </option>
+
+          <option>
+            Metro Rail Project
+          </option>
+
+          <option>
+            Commercial Complex
+          </option>
+
+          <option>
+            Residential Tower
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Status
+        </label>
+
+        <select>
+
+          <option>
+            Active
+          </option>
+
+          <option>
+            Assigned
+          </option>
+
+          <option>
+            Available
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="button-group">
+
+      <button class="primary-btn">
+
+        Assign Contractor
+
+      </button>
+
+      <button
+        class="secondary-btn"
+        type="reset">
+
+        Reset
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Next Page Navigation -->
+
+  <div class="next-page">
+
+    <button
+      class="primary-btn"
+      routerLink="/project-manager/site-progress">
+
+      View Site Progress →
+
+    </button>
+
+  </div>
+
+</div>

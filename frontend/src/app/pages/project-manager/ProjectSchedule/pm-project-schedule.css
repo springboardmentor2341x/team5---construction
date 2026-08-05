@@ -1,0 +1,412 @@
+/* Main Container */
+
+.page-container {
+
+  padding: 25px;
+  background: #f7f9fc;
+  min-height: 100vh;
+
+}
+
+
+ .breadcrumb {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:20px;
+  font-size:14px;
+}
+.breadcrumb a {
+  color:#102a43;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+}
+.breadcrumb a:hover {
+  color:#2563eb;
+}
+.breadcrumb span {
+  color:#9ca3af;
+}
+.breadcrumb strong {
+  color:#6b7280;
+}
+
+
+
+/* Page Header */
+
+.page-header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+}
+
+
+.page-header h2 {
+
+  color: #1e293b;
+  margin-bottom: 5px;
+
+}
+
+
+.page-header p {
+
+  color: #64748b;
+  margin: 0;
+
+}
+
+
+
+/* Primary Button */
+
+.primary-btn {
+
+  background: #2563eb;
+  color: white;
+  border: none;
+
+  padding: 12px 22px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+}
+
+
+
+.primary-btn:hover {
+
+  background: #1d4ed8;
+
+}
+
+
+
+
+/* Card */
+
+.card {
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+.card h3 {
+
+  color: #1e293b;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+
+
+/* Timeline */
+
+.timeline {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.timeline-item {
+
+  padding: 12px 18px;
+
+  border-radius: 25px;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+
+
+.completed {
+
+  background: #16a34a;
+
+}
+
+
+
+.active {
+
+  background: #2563eb;
+
+}
+
+
+
+.pending {
+
+  background: #f59e0b;
+
+}
+
+
+
+.arrow {
+
+  color: #64748b;
+
+  font-size: 20px;
+
+}
+
+
+
+
+
+/* Table */
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+
+
+
+thead {
+
+  background: #eff6ff;
+
+}
+
+
+
+th {
+
+  padding: 14px;
+
+  text-align: left;
+
+  color: #1e293b;
+
+  font-size: 14px;
+
+}
+
+
+
+td {
+
+  padding: 14px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #475569;
+
+}
+
+
+
+
+
+/* Status Badge */
+
+.status {
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+
+
+.status.Completed {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+
+
+.status.In\ Progress {
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+}
+
+
+
+.status.Pending {
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+}
+
+
+
+
+
+/* Action Buttons */
+
+
+.edit-btn {
+
+  background: #f59e0b;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+}
+
+
+
+.delete-btn {
+
+  background: #ef4444;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  margin-left: 8px;
+
+  cursor: pointer;
+
+}
+
+
+
+
+
+/* Add Schedule Form */
+
+
+.form-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3,1fr);
+
+  gap: 15px;
+
+}
+
+
+
+input,
+select {
+
+  padding: 12px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  outline: none;
+
+}
+
+
+
+input:focus,
+select:focus {
+
+  border-color: #2563eb;
+
+}
+
+
+
+.save-btn {
+
+  margin-top: 20px;
+
+}
+
+
+
+
+
+/* Responsive */
+
+@media(max-width:900px){
+
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+.page-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:15px;
+
+}
+
+
+table{
+
+display:block;
+
+overflow-x:auto;
+
+}
+
+
+}

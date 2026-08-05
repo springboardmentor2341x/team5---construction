@@ -1,0 +1,241 @@
+<div class="page-container">
+  <div class="breadcrumb">
+
+    <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+
+    <strong>
+      My Projects
+    </strong>
+
+  </div>
+  <div class="page-header">
+
+    <div>
+      <h2>My Projects</h2>
+      <p>View and manage all projects assigned to you</p>
+    </div>
+
+
+    <button class="primary-btn">
+      + Add Project
+    </button>
+
+  </div>
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="icon">
+        📁
+      </div>
+
+      <div>
+        <h3>{{projects.length}}</h3>
+        <p>Total Projects</p>
+      </div>
+
+    </div>
+    <div class="summary-card">
+
+      <div class="icon">
+        🚧
+      </div>
+
+      <div>
+        <h3>{{getActiveProjects()}}</h3>
+        <p>Active Projects</p>
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="icon">
+        ✅
+      </div>
+
+      <div>
+        <h3>{{getCompletedProjects()}}</h3>
+        <p>Completed</p>
+      </div>
+
+    </div>
+    <div class="summary-card">
+
+      <div class="icon">
+        ⚠️
+      </div>
+
+      <div>
+        <h3>{{getDelayedProjects()}}</h3>
+        <p>Delayed</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="filter-card">
+    <input
+    type="text"
+    class="search-box"
+    placeholder="Search project or client..."
+    [(ngModel)]="searchText"
+    (input)="applyFilters()">
+    <select
+    class="filter-select"
+    [(ngModel)]="selectedStatus"
+    (change)="applyFilters()">
+      <option>All Status</option>
+      <option>Ongoing</option>
+      <option>Completed</option>
+      <option>Delayed</option>
+      <option>Pending</option>
+    </select>
+    <select
+    class="filter-select"
+    [(ngModel)]="selectedPriority"
+    (change)="applyFilters()">
+      <option>All Priority</option>
+      <option>High</option>
+      <option>Medium</option>
+      <option>Low</option>
+    </select>
+  </div>
+  <div class="table-card">
+    <div class="table-header">
+      <h3>
+        Project List
+      </h3>
+      <span>
+        {{filteredProjects.length}} Projects
+      </span>
+
+
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Project Name</th>
+
+          <th>Code</th>
+
+          <th>Client</th>
+
+          <th>Location</th>
+
+          <th>Status</th>
+
+          <th>Priority</th>
+
+          <th>Budget</th>
+
+          <th>Completion</th>
+
+          <th>Start Date</th>
+
+          <th>End Date</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of filteredProjects">
+          <td>
+
+            <div class="project-name">
+
+              <strong>
+                {{project.name}}
+              </strong>
+
+              <small>
+                Construction Project
+              </small>
+
+            </div>
+
+
+          </td>
+          <td>
+            {{project.code}}
+          </td>
+
+          <td>
+            {{project.client}}
+          </td>
+
+          <td>
+            {{project.location}}
+          </td>
+          <td>
+
+            <span class="status"
+            [ngClass]="project.status.toLowerCase()">
+
+              {{project.status}}
+
+            </span>
+
+         </td>
+          <td>
+
+            <span class="priority"
+            [ngClass]="project.priority.toLowerCase()">
+
+              {{project.priority}}
+
+            </span>
+
+
+          </td>
+          <td>
+            {{project.budget}}
+          </td>
+          <td>
+
+
+            <div class="progress-area">
+
+
+              <div class="progress-bar">
+
+                <div class="progress"
+                [style.width.%]="project.completion">
+
+                </div>
+              </div>
+              <span>
+                {{project.completion}}%
+              </span>
+            </div>
+          </td>
+          <td>
+            {{project.startDate}}
+          </td>
+          <td>
+            {{project.endDate}}
+          </td>
+        <td>
+            <button class="view-btn">
+              View
+            </button>
+            <button class="edit-btn">
+              Edit
+            </button>
+            <button 
+            class="open-btn"
+            (click)="openProject(project)">
+              Open
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 

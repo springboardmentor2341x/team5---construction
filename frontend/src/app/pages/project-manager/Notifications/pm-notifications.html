@@ -1,0 +1,407 @@
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+
+  <div class="breadcrumb">
+
+    <a routerLink="/project-manager/dashboard">
+      Dashboard
+    </a>
+
+    <span>></span>
+     <a routerLink="/project-manager/reports">
+      
+    Reports
+    </a>
+    <span></span>
+
+    <strong>
+      Notifications
+    </strong>
+
+  </div>
+
+
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        Notifications
+      </h2>
+
+      <p>
+        View all project notifications and alerts.
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Search & Filter -->
+
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search Notification">
+
+    <select>
+
+      <option>All Notifications</option>
+
+      <option>Deadline Alerts</option>
+
+      <option>Budget Alerts</option>
+
+      <option>Delays</option>
+
+      <option>Material Updates</option>
+
+      <option>Engineer Updates</option>
+
+    </select>
+
+    <button class="primary-btn">
+
+      Search
+
+    </button>
+
+  </div>
+
+
+
+  <!-- Notifications Table -->
+
+  <div class="card">
+
+    <h3>
+
+      Notification Details
+
+    </h3>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Notification ID</th>
+
+            <th>Type</th>
+
+            <th>Message</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>NOT001</td>
+
+            <td>Deadline Alert</td>
+
+            <td>Foundation work deadline is tomorrow.</td>
+
+            <td>30-07-2026</td>
+
+            <td>
+
+              <span class="status pending">
+
+                Pending
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>NOT002</td>
+
+            <td>Budget Alert</td>
+
+            <td>Project budget utilization reached 80%.</td>
+
+            <td>29-07-2026</td>
+
+            <td>
+
+              <span class="status approved">
+
+                Viewed
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>NOT003</td>
+
+            <td>Delay</td>
+
+            <td>Electrical work delayed due to heavy rainfall.</td>
+
+            <td>28-07-2026</td>
+
+            <td>
+
+              <span class="status pending">
+
+                Pending
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+            </td>
+
+          </tr>
+          <tr>
+
+            <td>NOT004</td>
+
+            <td>Material Update</td>
+
+            <td>Steel materials delivered successfully.</td>
+
+            <td>27-07-2026</td>
+
+            <td>
+
+              <span class="status approved">
+
+                Viewed
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+            </td>
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>NOT005</td>
+
+            <td>Engineer Update</td>
+
+            <td>Site Engineer submitted today's progress report.</td>
+
+            <td>26-07-2026</td>
+
+            <td>
+
+              <span class="status pending">
+
+                Pending
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="view-btn">
+
+                View
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Recent Notifications -->
+
+  <div class="card">
+
+    <h3>
+
+      Recent Notifications
+
+    </h3>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-card">
+
+        <h4>
+
+          Deadline Alert
+
+        </h4>
+
+        <p>
+
+          Foundation work deadline is tomorrow.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+
+          Budget Alert
+
+        </h4>
+
+        <p>
+
+          Budget utilization reached 80%.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+
+          Material Update
+
+        </h4>
+
+        <p>
+
+          Cement and steel materials received.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+
+          Engineer Update
+
+        </h4>
+
+        <p>
+
+          Site Engineer uploaded today's progress.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="gallery-card">
+
+        <h4>
+
+          Delay Alert
+
+        </h4>
+
+        <p>
+
+          Plumbing work delayed due to heavy rainfall.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+   <div class="next-page">
+
+
+    <button
+
+      class="primary-btn"
+
+      routerLink="/project-manager/profile">
+
+
+      View Profile →
+
+    </button>
+
+
+  </div>
+
+</div>
