@@ -1,0 +1,119 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+.sidebar{
+width:270px;
+background:#1E3A8A;
+color:white;
+position:fixed;
+top:0;
+left:0;
+bottom:0;
+padding:25px;
+overflow-y:auto;
+z-index:1000;
+}
+
+/* Logo Section */
+
+.logo-section{
+text-align:center;
+margin-bottom:30px;
+}
+
+.logo-section h2{
+color:#F59E0B;
+font-size:28px;
+margin-bottom:8px;
+}
+
+.logo-section p{
+color:#E5E7EB;
+font-size:15px;
+}
+
+/* Menu */
+
+.sidebar-menu{
+list-style:none;
+padding:0;
+}
+
+.sidebar-menu li{
+margin-bottom:10px;
+}
+
+.sidebar-menu li a{
+display:block;
+text-decoration:none;
+color:white;
+padding:14px 18px;
+border-radius:10px;
+font-size:16px;
+transition:0.3s;
+}
+
+.sidebar-menu li a:hover{
+background:#F59E0B;
+padding-left:25px;
+}
+
+.sidebar-menu li a.active{
+background:#F59E0B;
+color:white;
+}
+
+/* Logout */
+
+.logout{
+background:#DC2626;
+color:white !important;
+font-weight:bold;
+}
+
+.logout:hover{
+background:#B91C1C !important;
+}
+
+/* Scrollbar */
+
+.sidebar::-webkit-scrollbar{
+width:7px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+background:#1E3A8A;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+background:#F59E0B;
+border-radius:10px;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+    position:relative;
+    width:100%;
+    height:auto;
+
+}
+
+}

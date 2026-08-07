@@ -15,6 +15,7 @@ import { AddUser } from './pages/admin/user-management/add-user/add-user';
 import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
 
+import { ProjectManagerLayoutComponent } from './layouts/project-manager-layout/project-manager-layout';
 export const routes: Routes = [
 
 
@@ -119,6 +120,7 @@ export const routes: Routes = [
 
   {
     path: 'project-manager',
+      component: ProjectManagerLayoutComponent,
     children: [
 
       {

@@ -173,13 +173,14 @@
 
 }
 
-table {
+ table {
 
   width:100%;
 
   border-collapse:collapse;
 
-}
+} 
+
 
 thead {
 
@@ -347,6 +348,7 @@ td {
   cursor:pointer;
 
   font-size:12px;
+
 
 }
 .view-btn {

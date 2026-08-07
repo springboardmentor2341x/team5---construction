@@ -280,27 +280,22 @@ body{
 /* ==========================================
    TABLE
 ========================================== */
-
-.table-wrapper{
-
-  width:100%;
-
-  overflow-x:auto;
-
-  border-radius:10px;
-
+.table-wrapper {
+  width: 100%;
+  overflow: hidden;
 }
 
-table{
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
 
-  width:100%;
-
-  min-width:1450px;
-
-  border-collapse:collapse;
-
-  background:#ffffff;
-
+th, td {
+  padding: 12px;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 thead{
@@ -849,34 +844,3 @@ td:nth-child(8){
 
 
 
-/* ==========================================
-   CUSTOM SCROLLBAR
-========================================== */
-
-.table-wrapper::-webkit-scrollbar{
-
-  height:8px;
-
-}
-
-.table-wrapper::-webkit-scrollbar-track{
-
-  background:#e5e7eb;
-
-  border-radius:10px;
-
-}
-
-.table-wrapper::-webkit-scrollbar-thumb{
-
-  background:#2563eb;
-
-  border-radius:10px;
-
-}
-
-.table-wrapper::-webkit-scrollbar-thumb:hover{
-
-  background:#1d4ed8;
-
-}
