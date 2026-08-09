@@ -1,1 +1,316 @@
-<p>se-activity-logs works!</p>
+<div class="page-content">
+
+  <!-- ================= Heading ================= -->
+
+  <div class="content-heading">
+
+    <div>
+
+      <h2>Site Activity Logs</h2>
+
+      <p>
+        Record and monitor important activities performed at the construction site.
+      </p>
+
+    </div>
+
+    <button class="add-btn"
+    type="button"
+    (click)=" openAddActivity()">
+      ➕ Add Activity
+    </button>
+
+  </div>
+
+  <!-- ================= Summary Cards ================= -->
+
+ <div class="summary-grid">
+
+  <div class="summary-card">
+    <div class="summary-icon">📋</div>
+    <h3>{{ totalActivities }}</h3>
+    <p>Total Activities</p>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-icon">✅</div>
+    <h3>{{ completedActivities }}</h3>
+    <p>Completed</p>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-icon">⏳</div>
+    <h3>{{ inProgressActivities }}</h3>
+    <p>In Progress</p>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-icon">⚠️</div>
+    <h3>{{ pendingActivities }}</h3>
+    <p>Pending</p>
+  </div>
+
+</div>
+
+<div class="toolbar">
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="Search Activity..."
+      [(ngModel)]="searchText">
+
+  </div>
+
+  <select [(ngModel)]="selectedProject">
+
+    <option value="All">All Projects</option>
+    <option>City Mall Construction</option>
+
+  </select>
+
+  <select [(ngModel)]="selectedType">
+
+    <option value="All">All Activity Types</option>
+    <option>Material Arrival</option>
+    <option>Machinery Maintenance</option>
+    <option>Safety Training</option>
+    <option>Client Visit</option>
+    <option>Government Inspection</option>
+
+  </select>
+
+  <select [(ngModel)]="selectedStatus">
+
+    <option value="All">All Status</option>
+    <option>Completed</option>
+    <option>In Progress</option>
+    <option>Pending</option>
+
+  </select>
+
+</div>
+
+  <!-- ================= Activity Logs Table ================= -->
+
+  <div class="table-card">
+
+    <table class="activity-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Date</th>
+          <th>Project</th>
+          <th>Time</th>
+
+          <th>Activity Type</th>
+
+          <th>Description</th>
+
+          <th>Responsible Person</th>
+
+          <th>Status</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(activity of  filteredActivities; track activity.id){
+
+        <tr>
+
+          <td>{{ activity.date }}</td>
+          <td>{{ activity.projectName }}</td>
+          <td>{{ activity.time }}</td>
+
+          <td>{{ activity.activityType }}</td>
+
+          <td>{{ activity.description }}</td>
+
+          <td>{{ activity.responsiblePerson }}</td>
+
+          <td>
+
+           <span
+class="status-badge"
+[class.completed]="activity.status==='Completed'"
+[class.progress]="activity.status==='In Progress'"
+[class.pending]="activity.status==='Pending'">
+
+{{ activity.status }}
+
+</span>
+
+          </td>
+
+          <td>
+
+            <button class="view-btn"
+            type="button"
+            routerLink="/site-engineer/activity-details"
+            >
+
+              👁 View
+
+            </button>
+
+          </td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= Activity Types ================= -->
+
+  <div class="activity-info">
+
+    <h3>Activity Types Covered</h3>
+
+    <div class="activity-grid">
+
+      <div>🚜 Machinery Maintenance</div>
+
+      <div>📦 Material Arrival</div>
+
+      <div>🦺 Safety Training</div>
+
+      <div>👥 Client Visit</div>
+
+      <div>🏛 Government Inspection</div>
+
+      <div>✅ Quality Audit</div>
+
+      <div>⚠ Accident Report</div>
+
+      <div>🤝 Contractor Meeting</div>
+
+      <div>🔧 Equipment Servicing</div>
+
+    </div>
+
+  </div>
+
+  @if(showAddActivityModal){
+
+<div class="modal-overlay">
+
+<div class="activity-modal">
+
+<h2>Add Activity</h2>
+
+<div class="form-grid">
+
+<input
+type="date"
+[(ngModel)]="activity.date">
+
+<input
+type="time"
+[(ngModel)]="activity.time">
+
+<!-- <input
+type="text"
+placeholder="Activity Type"
+[(ngModel)]="activity.activityType"> -->
+
+    
+<select [(ngModel)]="activity.activityType">
+ 
+  <option >Activity Type</option>
+  <option >Client Visit</option>
+  <option >Safety Training</option>
+  <option >Machinery Maintenance</option>
+  <option >Material delivery</option>
+  <option >Government Inspection</option>
+  <option >Quality audit</option>
+  <option >Accident</option>
+  <option >Meeting</option>
+  <option >Equipment Service</option>
+  <option >Other</option>
+</select>
+
+
+
+
+<input
+  type="file"
+  accept="image/*"
+  capture="environment"
+  (change)="onPhotoSelected($event)"
+/>
+
+<div >
+  @if(photoPreview){
+    <img
+     
+      [src]="photoPreview"
+      alt="Preview"
+       style="width: 200;
+      height:auto;"
+    />    }
+</div>
+
+
+
+<input  type="text"
+placeholder="Responsible Person"
+[(ngModel)]="activity.responsiblePerson">
+
+<textarea
+rows="4"
+placeholder="Activity Description"
+[(ngModel)]="activity.description">
+</textarea>
+
+<select [(ngModel)]="activity.status">
+
+<option>Completed</option>
+<option>In Progress</option>
+<option>Pending</option>
+
+</select>
+
+</div>
+
+<div class="modal-buttons">
+
+<button
+class="save-btn"
+type="button"
+(click)="saveActivity()">
+
+Save
+
+</button>
+
+<button
+class="cancel-btn"
+type="button"
+(click)="closeAddActivity()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+}
+
+</div>
