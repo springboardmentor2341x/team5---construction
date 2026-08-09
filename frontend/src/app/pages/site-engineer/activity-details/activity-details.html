@@ -1,0 +1,131 @@
+<div class="page-content">
+
+  <!-- ================= Header ================= -->
+
+  
+    <button class="back-btn"
+    type="button"
+    routerLink="/site-engineer/activity-logs">
+    <-Back to Activity-Logs
+   </button>
+  
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>Activity Details</h2>
+
+      <p>Complete information about the selected site activity.</p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Project Information ================= -->
+
+  <div class="details-card">
+
+    <h3>Project Information</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Project Name</label>
+        <span>{{ activity.projectName }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Activity Type</label>
+        <span>{{ activity.activityType }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Date</label>
+        <span>{{ activity.date }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Time</label>
+        <span>{{ activity.time }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Responsibility ================= -->
+
+  <div class="details-card">
+
+    <h3>Responsibility</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Responsible Person</label>
+        <span>{{ activity.responsiblePerson }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Created By</label>
+        <span>{{ activity.createdBy }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Description ================= -->
+
+  <div class="details-card">
+
+    <h3>Activity Description</h3>
+
+    <div class="remarks-box">
+
+      {{ activity.description }}
+
+    </div>
+
+  </div>
+
+  <!-- ================= Status ================= -->
+
+  <div class="details-card">
+
+    <h3>Current Status</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+
+        <label>Status</label>
+
+        <span class="status-badge success">
+
+          {{ activity.status }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Remarks ================= -->
+
+  <div class="details-card">
+
+    <h3>Remarks</h3>
+
+    <div class="remarks-box">
+
+      {{ activity.remarks }}
+
+    </div>
+
+  </div>
+
+</div>
