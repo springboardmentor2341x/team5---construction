@@ -1,1 +1,491 @@
-<p>se-daily-progress works!</p>
+<div class="page-content">
+
+  <div class="content-heading">
+
+    <div>
+      <h2>Daily Progress Report</h2>
+      <p>Record today's construction progress and site activities.</p>
+    </div>
+
+  </div>
+
+  <form class="progress-form"  (ngSubmit)="saveReport()">
+
+    <!-- Project Information -->
+
+    <div class="form-card">
+
+      <h3>Project Information</h3>
+    
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Project Name</label>
+
+          <select [(ngModel)]="progress.projectName" name="projectName">
+            <option>City Mall Construction</option>
+            <option>Green Valley Residential Project</option>
+            <option>Highway Expansion Project</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Report Date</label>
+
+          <input
+            type="date"
+            [(ngModel)]="progress.reportDate"
+            name="reportDate">
+        </div>
+
+        <div class="form-group">
+          <label>Work Category</label>
+
+          <select [(ngModel)]="progress.workCategory" name="workCategory">
+            <option>Foundation</option>
+            <option>Structural</option>
+            <option>Electrical</option>
+            <option>Plumbing</option>
+            <option>Finishing</option>
+            <option>Inspection</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Work Details -->
+
+    <div class="form-card">
+
+      <h3>Work Details</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+
+          <label>Activity Performed</label>
+
+          <textarea
+            rows="4"
+            [(ngModel)]="progress.activity"
+            name="activity">
+          </textarea>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Work Completion (%)</label>
+
+          <input
+            type="number"
+            min="0"
+            max="100"
+            [(ngModel)]="progress.completion"
+            name="completion">
+
+        </div>
+
+      </div>
+
+    </div>
+
+        <!-- Contractor & Workforce -->
+
+    <div class="form-card">
+
+      <h3>Contractor & Workforce</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Contractor</label>
+
+          <input
+            type="text"
+            [(ngModel)]="progress.contractor"
+            name="contractor">
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Workers Present</label>
+
+          <input
+            type="number"
+            [(ngModel)]="progress.workersPresent"
+            name="workersPresent">
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Workers Absent</label>
+
+          <input
+            type="number"
+            [(ngModel)]="progress.workersAbsent"
+            name="workersAbsent">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Equipment & Materials -->
+
+    <div class="form-card">
+
+      <h3>Equipment & Materials</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Equipment Used</label>
+
+          <input
+            type="text"
+            placeholder="Excavator, Crane, Mixer..."
+            [(ngModel)]="progress.equipment"
+            name="equipment">
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Materials Consumed</label>
+
+          <textarea
+            rows="3"
+            placeholder="Example: Cement - 300 Bags"
+            [(ngModel)]="progress.materials"
+            name="materials">
+          </textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Weather -->
+
+    <div class="form-card">
+
+      <h3>Weather Conditions</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Weather</label>
+
+          <select
+            [(ngModel)]="progress.weather"
+            name="weather">
+
+            <option>Sunny</option>
+            <option>Cloudy</option>
+            <option>Rainy</option>
+            <option>Windy</option>
+            <option>Stormy</option>
+            <option>Snowy</option>
+            <option>Foggy</option>
+            <option>Hailstorm</option>
+            <option>Overcast</option>
+            <option>Partly Cloudy</option>
+            <option>Tornado</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+        <!-- Safety & Quality -->
+
+    <div class="form-card">
+
+      <h3>Safety & Quality</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+
+          <label>Safety Observation</label>
+
+          <textarea
+            rows="3"
+            placeholder="Enter safety observations..."
+            [(ngModel)]="progress.safetyObservation"
+            name="safetyObservation">
+          </textarea>
+
+        </div>
+
+        <div class="form-group full-width">
+
+          <label>Quality Inspection Remarks</label>
+
+          <textarea
+            rows="3"
+            placeholder="Enter quality inspection remarks..."
+            [(ngModel)]="progress.qualityRemarks"
+            name="qualityRemarks">
+          </textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Progress Photos -->
+
+    <div class="form-card">
+
+      <h3>Progress Photos</h3>
+
+      <div class="form-group">
+
+        <label>Upload Site Photos</label>
+
+        <input
+          type="file"
+          multiple>
+
+      </div>
+
+        <div class="form-group" >
+           <label>Upload Site Photos</label>
+            <textarea
+                  rows="4"
+                  placeholder="about Photos..."
+                  [(ngModel)]="progress.photodescription"
+                  name="photodescription">
+            </textarea>
+          </div>
+
+    </div>
+
+    <!-- Delay Tracking -->
+
+    <div class="form-card">
+
+      <h3>Delay Tracking</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Delay Encountered</label>
+
+          <select
+            [(ngModel)]="progress.delay"
+            name="delay">
+
+            <option>No</option>
+            <option>Yes</option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Delay Reason</label>
+
+          <!-- <input
+            type="text"
+            placeholder="Heavy Rain, Material Delay..."
+            [(ngModel)]="progress.delayReason"
+            name="delayReason"> -->
+
+            <select  [(ngModel)]="progress.delayReason" name="delayReason" >
+              <option >Rain</option>
+              <option >labour shorted</option>
+              <option >Material Delay</option>
+              <option >Machinery breakdown</option>
+              <option >financial</option>
+              <option >Design change</option>
+              <option >government approval</option>
+              <option >Other</option>
+             
+            </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Additional Comments -->
+
+    <div class="form-card">
+
+      <h3>Additional Comments</h3>
+
+      <textarea
+        rows="5"
+        class="full-textarea"
+        placeholder="Write additional comments..."
+        [(ngModel)]="progress.comments"
+        name="comments">
+      </textarea>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-btn">
+        Cancel
+      </button>
+
+      @if(!isEditing){
+
+        <button
+            type="submit"
+           class="save-btn">
+       Save Daily Report
+          </button>
+
+        } @else {
+
+        <button
+            type="button"
+           class="save-btn"
+           (click)="updateReport()">
+            Update Report
+        </button>
+
+}
+
+    </div>
+
+  </form>
+
+
+  <!-- Submitted Reports -->
+
+  <div class="reports-card">
+
+    <div class="reports-header">
+
+       <h2>Submitted Daily Reports</h2>
+
+       <p>History of all submitted daily progress reports.</p>
+
+   </div>
+
+  <table class="reports-table">
+
+    <thead>
+
+      <tr>
+
+        <th>Date</th>
+
+        <th>Project</th>
+
+        <th>Category</th>
+
+        <th>Progress</th>
+
+        <th>Contractor</th>
+
+        <th>Status</th>
+
+        <th>Action</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      @for(report of dailyReports; track report.reportDate){
+
+      <tr>
+
+        <td>{{ report.reportDate }}</td>
+
+        <td>{{ report.projectName }}</td>
+
+        <td>{{ report.workCategory }}</td>
+
+        <td>{{ report.completion }}%</td>
+
+        <td>{{ report.contractor }}</td>
+
+        <td>
+
+          <span class="status-badge">
+            Submitted
+          </span>
+
+        </td>
+
+        <td>
+
+       <button
+          class="view-btn"
+          type="button"
+            
+            [routerLink]="['/site-engineer/daily-report-details']"
+            >
+           👁 View
+        </button>
+
+          
+
+      
+        <button
+           class="delete-btn"
+          (click)="deleteReport(report)">
+           🗑 Delete
+         </button>
+
+       </td>
+
+      </tr>
+
+      }
+
+      @if(dailyReports.length===0){
+
+      <tr>
+
+        <td colspan="6" class="no-data">
+
+          No Daily Reports Submitted Yet
+
+        </td>
+
+      </tr>
+
+      }
+
+
+      
+
+    </tbody>
+
+  </table>
+
+  </div>
+
+</div>
