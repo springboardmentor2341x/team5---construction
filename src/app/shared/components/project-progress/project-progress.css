@@ -1,0 +1,89 @@
+.progress-card{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.card-header h2{
+
+    margin:0;
+
+    color:#1F2937;
+
+}
+
+.card-header button{
+
+    background:#F97316;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.project{
+
+    margin-bottom:22px;
+
+}
+
+.project-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.progress-bar{
+
+    height:10px;
+
+    background:#E5E7EB;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:#F97316;
+
+    border-radius:20px;
+
+}
