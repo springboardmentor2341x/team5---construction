@@ -44,7 +44,7 @@ export class ProjectDetails {
 
     this.showSuccessPopup = false;
 
-    this.router.navigate(['/project-details']);
+    this.router.navigate(['/admin/projects']);
 
   }
 

@@ -24,7 +24,7 @@ export class EditUser {
 
     this.showSuccessPopup = false;
 
-    this.router.navigate(['/user-details']);
+    this.router.navigate(['/admin/user-details']);
 
   }
 

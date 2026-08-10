@@ -22,7 +22,7 @@ export class AddUser {
 
     this.showSuccessPopup = false;
 
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/admin/dashboard']);
 
   }
 

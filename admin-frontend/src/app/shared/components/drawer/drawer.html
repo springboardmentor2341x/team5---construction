@@ -19,7 +19,7 @@
 
     <h4>GENERAL</h4>
 
-    <a routerLink="/dashboard" routerLinkActive="active">
+    <a routerLink="/admin/dashboard" routerLinkActive="active">
 
       <mat-icon>dashboard</mat-icon>
 
@@ -51,12 +51,12 @@
 
       </mat-expansion-panel-header>
 
-      <a routerLink="/add-user">
+      <a routerLink="/admin/add-user">
         <mat-icon>person_add</mat-icon>
     Add User
 </a>
 
-      <a routerLink="/user-details">
+      <a routerLink="/admin/user-details">
         <mat-icon>badge</mat-icon>
         User Details
       </a>
@@ -79,13 +79,13 @@
 
       </mat-expansion-panel-header>
 
-      <a routerLink="/projects">
+      <a routerLink="/admin/projects">
         <mat-icon>folder</mat-icon>
         Projects
       </a>
 
       <a
-  routerLink="/project-details"
+  routerLink="/admin/project-details"
   routerLinkActive="active">
 
   Project Details
@@ -94,13 +94,12 @@
 
     </mat-expansion-panel>
 
-    <a routerLink="/workforce-management" routerLinkActive="active">
+    <button
+    routerLink="/admin/workforce-management">
+<mat-icon>engineering</mat-icon>
+    Workforce Management
 
-      <mat-icon>engineering</mat-icon>
-
-      <span>Workforce Management</span>
-
-    </a>
+</button>
 
     <a routerLink="/contractors" routerLinkActive="active">
 
@@ -110,13 +109,13 @@
 
     </a>
 
-    <a routerLink="/site-engineers" routerLinkActive="active">
+    <a
+    routerLink="/admin/site-engineers"
+    routerLinkActive="active">
 
-      <mat-icon>badge</mat-icon>
+    Site Engineers
 
-      <span>Site Engineers</span>
-
-    </a>
+</a>
 
   </div>
 
