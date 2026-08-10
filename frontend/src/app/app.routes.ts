@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
+import { roleGuard } from './guards/role-guard';
 
 // Admin Imports
 import { Projects } from './pages/admin/project-management/projects/projects';
@@ -52,6 +54,14 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
+     canActivate: [
+    authGuard,
+    roleGuard(['Administrator'])
+  ],
+   canActivateChild: [
+    authGuard,
+    roleGuard(['Administrator'])
+  ],
     children: [
 
       {
@@ -122,10 +132,19 @@ export const routes: Routes = [
 
   {
     path: 'site-engineer',
+      canActivate: [
+    authGuard,
+    roleGuard(['Site Engineer'])
+  ],
+  canActivateChild: [
+    authGuard,
+    roleGuard(['Site Engineer'])
+  ],
 
     loadComponent: () =>
       import('./layouts/site-engineer-layout/site-engineer-layout')
         .then(m => m.SiteEngineerLayout),
+
 
     children: [
 
@@ -296,6 +315,14 @@ export const routes: Routes = [
 
   {
     path: 'project-manager',
+     canActivate: [
+    authGuard,
+    roleGuard(['Project Manager'])
+  ],
+   canActivateChild: [
+    authGuard,
+    roleGuard(['Project Manager'])
+  ],
     children: [
 
       {
