@@ -16,6 +16,7 @@ import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
 
 import { ProjectManagerLayoutComponent } from './layouts/project-manager-layout/project-manager-layout';
+import { ResourceManagementLayoutComponent }from './layouts/resource-management-layout/resource-management-layout';
 export const routes: Routes = [
 
 
@@ -237,11 +238,130 @@ export const routes: Routes = [
 
     ]
   },
+// Resource-management-system
 
-  // Wildcard Route
+  {
+    path: 'resource-management',
+
+    component: ResourceManagementLayoutComponent,
+
+    children: [
+
+      // -----------------------------
+      // DEFAULT
+      // -----------------------------
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+
+
+      // -----------------------------
+      // 1. DASHBOARD
+      // -----------------------------
+
+      {
+        path: 'dashboard',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Dashboard/rm-dashboard')
+            .then(m => m.RmDashboardComponent)
+      },
+
+
+      // -----------------------------
+      // 2. EQUIPMENT ALLOCATION
+      // -----------------------------
+
+      {
+        path: 'equipment-allocation',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Equipment Allocation/rm-equipment-allocation')
+            .then(m => m.RmEquipmentAllocationComponent)
+      },
+
+
+      // -----------------------------
+      // 3. MACHINERY TRACKING
+      // -----------------------------
+
+      {
+        path: 'machinery-tracking',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Machinery Tracking/rm-machinery-tracking')
+            .then(m => m.RmMachineryTrackingComponent)
+      },
+
+
+      // -----------------------------
+      // 4. RESOURCE UTILIZATION
+      // -----------------------------
+
+      {
+        path: 'resource-utilization',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Resource Utilization/rm-resource-utilization')
+            .then(m => m.RmResourceUtilizationComponent)
+      },
+
+
+      // -----------------------------
+      // 5. RESOURCE AVAILABILITY
+      // -----------------------------
+
+      {
+        path: 'resource-availability',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Resource Availability/rm-resource-availability')
+            .then(m => m.RmResourceAvailabilityComponent)
+      },
+
+
+      // -----------------------------
+      // 6. MAINTENANCE SCHEDULING
+      // -----------------------------
+
+      {
+        path: 'maintenance-scheduling',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Maintenance Scheduling/rm-maintenance-scheduling')
+            .then(m => m.RmMaintenanceSchedulingComponent)
+      },
+
+
+      // -----------------------------
+      // 7. RESOURCE REPORTS
+      // -----------------------------
+
+      {
+        path: 'reports',
+
+        loadComponent: () =>
+          import('./pages/resource-management/Reports/rm-reports')
+            .then(m => m.RmReportsComponent)
+      },
+      {
+  path: 'resources',
+  loadComponent: () =>
+    import('./pages/resource-management/Resources/rm-resources')
+      .then(m => m.RmResourcesComponent)
+},
+//   // Wildcard Route
   {
     path: '**',
     redirectTo: 'login'
+  }
+
+
+
+    ]
   }
 
 ];

@@ -1,0 +1,302 @@
+<div class="utilization-page">
+
+  <!-- PAGE HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Resource Utilization</h1>
+
+      <p>
+        Measure equipment operating hours, idle time and overall
+        resource utilization across construction projects.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        ◉
+      </div>
+
+      <div>
+        <span>Average Utilization</span>
+        <strong>{{ averageUtilization }}%</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon operating">
+        ▶
+      </div>
+
+      <div>
+        <span>Operating Hours</span>
+        <strong>{{ totalOperatingHours }} hrs</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon idle">
+        ◷
+      </div>
+
+      <div>
+        <span>Idle Hours</span>
+        <strong>{{ totalIdleHours }} hrs</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon high">
+        ★
+      </div>
+
+      <div>
+        <span>Highly Utilized</span>
+        <strong>{{ highlyUtilizedCount }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FILTERS -->
+
+  <section class="filter-card">
+
+    <div class="filter-title">
+
+      <h2>Utilization Analysis</h2>
+
+      <p>
+        Filter resource utilization by project and equipment category.
+      </p>
+
+    </div>
+
+
+    <div class="filters">
+
+      <div class="filter-group">
+
+        <label>Project</label>
+
+        <select [(ngModel)]="selectedProject">
+
+          @for (project of projects; track project) {
+
+            <option [value]="project">
+              {{ project }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label>Equipment Category</label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          @for (category of categories; track category) {
+
+            <option [value]="category">
+              {{ category }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESOURCE TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Resource Utilization Details</h2>
+
+        <p>
+          Operating and idle hours recorded for each equipment resource.
+        </p>
+
+      </div>
+
+      <span class="resource-count">
+        {{ filteredResources.length }} Resources
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Equipment</th>
+            <th>Equipment ID</th>
+            <th>Category</th>
+            <th>Project</th>
+            <th>Available Hours</th>
+            <th>Operating Hours</th>
+            <th>Idle Hours</th>
+            <th>Utilization</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (resource of filteredResources; track resource.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ resource.name }}</strong>
+              </td>
+
+              <td>
+                {{ resource.id }}
+              </td>
+
+              <td>
+                {{ resource.category }}
+              </td>
+
+              <td>
+                {{ resource.project }}
+              </td>
+
+              <td>
+                {{ resource.availableHours }} hrs
+              </td>
+
+              <td class="operating-hours">
+                {{ resource.operatingHours }} hrs
+              </td>
+
+              <td class="idle-hours">
+                {{ resource.idleHours }} hrs
+              </td>
+
+              <td>
+
+                <div class="utilization-cell">
+
+                  <div class="utilization-bar">
+
+                    <div
+                      class="utilization-fill"
+                      [class.high]="getUtilizationClass(resource.utilization) === 'high'"
+                      [class.medium]="getUtilizationClass(resource.utilization) === 'medium'"
+                      [class.low]="getUtilizationClass(resource.utilization) === 'low'"
+                      [style.width.%]="resource.utilization">
+                    </div>
+
+                  </div>
+
+                  <span
+                    class="utilization-value"
+                    [class.high]="getUtilizationClass(resource.utilization) === 'high'"
+                    [class.medium]="getUtilizationClass(resource.utilization) === 'medium'"
+                    [class.low]="getUtilizationClass(resource.utilization) === 'low'">
+
+                    {{ resource.utilization }}%
+
+                  </span>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (filteredResources.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="8"
+                class="empty-state">
+
+                No utilization records found.
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- INFORMATION -->
+
+  <section class="info-card">
+
+    <div class="info-icon">
+      i
+    </div>
+
+    <div>
+
+      <h3>Utilization Insight</h3>
+
+      <p>
+        Resources with low utilization may indicate idle machinery
+        that can be reassigned to other projects. Resources with
+        consistently high utilization should be monitored to avoid
+        overuse and unexpected equipment failure.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
