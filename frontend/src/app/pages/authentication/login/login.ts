@@ -93,6 +93,9 @@ export class Login {
         else if (response.role === 'Project Manager') {
           this.router.navigate(['/project-manager/dashboard']);
         }
+        else if (response.role === 'Site Engineer') {
+          this.router.navigate(['/site-engineer/dashboard']);
+        }
         else {
           this.router.navigate(['/']);
         }
