@@ -1,0 +1,304 @@
+<div class="availability-page">
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Resource Availability</h1>
+
+      <p>
+        Check the current availability of construction equipment
+        before allocating resources to projects.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon available-icon">
+        ✓
+      </div>
+
+      <div>
+        <span>Available</span>
+        <strong>{{ availableCount }}</strong>
+        <small>Ready for allocation</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon allocated-icon">
+        ●
+      </div>
+
+      <div>
+        <span>Allocated</span>
+        <strong>{{ allocatedCount }}</strong>
+        <small>Currently in use</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon maintenance-icon">
+        ⚠
+      </div>
+
+      <div>
+        <span>Under Maintenance</span>
+        <strong>{{ maintenanceCount }}</strong>
+        <small>Temporarily unavailable</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon service-icon">
+        !
+      </div>
+
+      <div>
+        <span>Out of Service</span>
+        <strong>{{ outOfServiceCount }}</strong>
+        <small>Not available</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FILTER SECTION -->
+
+  <section class="filter-card">
+
+    <div class="filter-header">
+
+      <div>
+        <h2>Check Resource Availability</h2>
+
+        <p>
+          Search and filter resources by status and equipment category.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="filters">
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search equipment, ID, project or location">
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label>Status</label>
+
+        <select [(ngModel)]="selectedStatus">
+
+          @for (status of statuses; track status) {
+
+            <option [value]="status">
+              {{ status }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label>Equipment Category</label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          @for (category of categories; track category) {
+
+            <option [value]="category">
+              {{ category }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESOURCE TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Resource Availability Overview</h2>
+
+        <p>
+          Current status, location and expected availability of resources.
+        </p>
+
+      </div>
+
+      <span class="resource-count">
+        {{ filteredResources.length }} Resources
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Equipment</th>
+            <th>Equipment ID</th>
+            <th>Category</th>
+            <th>Current Location</th>
+            <th>Current Project</th>
+            <th>Available From</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (resource of filteredResources; track resource.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ resource.name }}</strong>
+              </td>
+
+              <td>
+                {{ resource.id }}
+              </td>
+
+              <td>
+                {{ resource.category }}
+              </td>
+
+              <td>
+                <span class="location">
+                  📍 {{ resource.location }}
+                </span>
+              </td>
+
+              <td>
+                {{ resource.project }}
+              </td>
+
+              <td>
+                {{ resource.availableFrom }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.available]="getStatusClass(resource.status) === 'available'"
+                  [class.allocated]="getStatusClass(resource.status) === 'allocated'"
+                  [class.maintenance]="getStatusClass(resource.status) === 'maintenance'"
+                  [class.out-of-service]="getStatusClass(resource.status) === 'out-of-service'">
+
+                  <span class="status-dot"></span>
+
+                  {{ resource.status }}
+
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (filteredResources.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="empty-state">
+
+                No resources match the selected filters.
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- BUSINESS RULE -->
+
+  <section class="rule-card">
+
+    <div class="rule-icon">
+      ✓
+    </div>
+
+    <div>
+
+      <h3>Resource Allocation Rule</h3>
+
+      <p>
+        Only resources marked as <strong>Available</strong> can be
+        allocated to another project. Allocated, maintenance and
+        out-of-service resources cannot be assigned until their
+        availability status changes.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

@@ -318,26 +318,22 @@ body{
 /* ==========================================
    WORKFORCE TABLE
 ========================================== */
-
-.table-wrapper{
-
-  width:100%;
-
-  overflow-x:auto;
-
-  border-radius:10px;
-
+.table-wrapper {
+  width: 100%;
+  overflow: hidden;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
 
-table{
-
-  width:100%;
-
-  min-width:1400px;
-
-  border-collapse:collapse;
-
+th, td {
+  padding: 12px;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 

@@ -1,0 +1,490 @@
+<div class="dashboard-page">
+
+
+  <!-- PAGE HEADER -->
+
+  <section class="dashboard-header">
+
+    <div>
+      <span class="section-label">
+        RESOURCE MANAGEMENT
+      </span>
+
+      <h1>Resource Management Dashboard</h1>
+
+      <p>
+        Monitor equipment allocation, availability, utilization,
+        machinery status and maintenance across all projects.
+      </p>
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        class="secondary-btn"
+        routerLink="/resource-management/resource-availability">
+
+        Check Availability
+
+      </button>
+
+      <button
+        class="primary-btn"
+        routerLink="/resource-management/equipment-allocation">
+
+        + Allocate Equipment
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <section class="stats-grid">
+
+    @for (stat of resourceStats; track stat.title) {
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          ⚙
+        </div>
+
+        <h2>{{ stat.value }}</h2>
+
+        <h3>{{ stat.title }}</h3>
+
+        <p>{{ stat.description }}</p>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- EQUIPMENT STATUS -->
+
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Equipment Status</h2>
+
+        <p>
+          Current status of construction equipment
+        </p>
+      </div>
+
+      <a
+        routerLink="/resource-management/resources"
+        class="view-link">
+
+        View Resources →
+
+      </a>
+
+    </div>
+
+
+    <div class="equipment-table">
+
+      <div class="table-header">
+
+        <span>Equipment Category</span>
+        <span>Total</span>
+        <span>Available</span>
+        <span>Allocated</span>
+        <span>Maintenance</span>
+
+      </div>
+
+
+      @for (equipment of equipmentStatus; track equipment.name) {
+
+        <div class="equipment-row">
+
+          <strong>
+            {{ equipment.name }}
+          </strong>
+
+          <span>{{ equipment.total }}</span>
+
+          <span class="available">
+            {{ equipment.available }}
+          </span>
+
+          <span class="allocated">
+            {{ equipment.allocated }}
+          </span>
+
+          <span class="maintenance">
+            {{ equipment.maintenance }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- UTILIZATION + AVAILABILITY -->
+
+  <section class="two-column">
+
+
+    <!-- UTILIZATION -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Resource Utilization</h2>
+
+          <p>
+            Overall equipment usage
+          </p>
+        </div>
+
+        <a
+          routerLink="/resource-management/resource-utilization"
+          class="view-link">
+
+          Details →
+
+        </a>
+
+      </div>
+
+
+      <div class="utilization">
+
+        <div class="utilization-circle">
+
+          <div>
+            <strong>72%</strong>
+            <span>Utilized</span>
+          </div>
+
+        </div>
+
+
+        <div class="utilization-info">
+
+          <div class="util-row">
+            <span>Operating Hours</span>
+            <strong>1,248 hrs</strong>
+          </div>
+
+          <div class="util-row">
+            <span>Idle Hours</span>
+            <strong>486 hrs</strong>
+          </div>
+
+          <div class="util-row">
+            <span>Monthly Change</span>
+            <strong class="positive">+6.4%</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- AVAILABILITY -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Resource Availability</h2>
+
+          <p>
+            Current availability overview
+          </p>
+        </div>
+
+        <a
+          routerLink="/resource-management/resource-availability"
+          class="view-link">
+
+          Check →
+
+        </a>
+
+      </div>
+
+
+      <div class="availability">
+
+        <div class="availability-item">
+
+          <span class="availability-dot available-dot"></span>
+
+          <div>
+            <strong>Available</strong>
+            <span>18 resources ready</span>
+          </div>
+
+        </div>
+
+
+        <div class="availability-item">
+
+          <span class="availability-dot allocated-dot"></span>
+
+          <div>
+            <strong>Allocated</strong>
+            <span>25 resources in use</span>
+          </div>
+
+        </div>
+
+
+        <div class="availability-item">
+
+          <span class="availability-dot maintenance-dot"></span>
+
+          <div>
+            <strong>Under Maintenance</strong>
+            <span>5 resources unavailable</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ACTIVE ALLOCATIONS -->
+
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Active Equipment Allocation</h2>
+
+        <p>
+          Equipment currently assigned to construction projects
+        </p>
+      </div>
+
+      <a
+        routerLink="/resource-management/equipment-allocation"
+        class="view-link">
+
+        View All →
+
+      </a>
+
+    </div>
+
+
+    <div class="allocation-table">
+
+      <div class="table-header">
+
+        <span>Equipment</span>
+        <span>Project</span>
+        <span>Location</span>
+        <span>Status</span>
+
+      </div>
+
+
+      @for (item of activeAllocations; track item.equipment) {
+
+        <div class="allocation-row">
+
+          <strong>{{ item.equipment }}</strong>
+
+          <span>{{ item.project }}</span>
+
+          <span>{{ item.location }}</span>
+
+          <span
+            class="status"
+            [class.operating]="item.status === 'Operating'"
+            [class.idle]="item.status === 'Idle'">
+
+            {{ item.status }}
+
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- MAINTENANCE -->
+
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Upcoming Maintenance</h2>
+
+        <p>
+          Scheduled servicing and inspections
+        </p>
+      </div>
+
+      <a
+        routerLink="/resource-management/maintenance-scheduling"
+        class="view-link">
+
+        View Schedule →
+
+      </a>
+
+    </div>
+
+
+    <div class="maintenance-list">
+
+      @for (item of maintenanceSchedule; track item.equipment) {
+
+        <div class="maintenance-row">
+
+          <div class="maintenance-date">
+            {{ item.date }}
+          </div>
+
+          <div class="maintenance-details">
+
+            <strong>
+              {{ item.equipment }}
+            </strong>
+
+            <span>
+              {{ item.type }}
+            </span>
+
+          </div>
+
+          <span
+            class="priority"
+            [class.high]="item.priority === 'High'">
+
+            {{ item.priority }}
+
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- QUICK ACTIONS -->
+
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Resource Management Operations</h2>
+
+        <p>
+          Access the major resource management functions
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+      <a
+        routerLink="/resource-management/equipment-allocation"
+        class="quick-action">
+
+        <strong>Equipment Allocation</strong>
+
+        <span>
+          Allocate equipment to projects →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/resource-management/machinery-tracking"
+        class="quick-action">
+
+        <strong>Machinery Tracking</strong>
+
+        <span>
+          Monitor equipment location and status →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/resource-management/resource-utilization"
+        class="quick-action">
+
+        <strong>Resource Utilization</strong>
+
+        <span>
+          Analyze equipment usage →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/resource-management/resource-availability"
+        class="quick-action">
+
+        <strong>Resource Availability</strong>
+
+        <span>
+          Check available equipment →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/resource-management/maintenance-scheduling"
+        class="quick-action">
+
+        <strong>Maintenance Scheduling</strong>
+
+        <span>
+          Schedule equipment servicing →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,46 @@
+/* =====================================================
+   RESOURCE MANAGEMENT LAYOUT
+===================================================== */
+
+.resource-layout {
+  display: flex;
+
+  width: 100%;
+  min-height: 100vh;
+
+  align-items: stretch;
+
+  background: #f5f7fa;
+}
+
+
+/* =====================================================
+   MAIN AREA
+===================================================== */
+
+.main-area {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =====================================================
+   PAGE CONTENT
+===================================================== */
+
+.page-content {
+  flex: 1;
+
+  width: 100%;
+
+  padding: 28px 32px;
+
+  box-sizing: border-box;
+
+  overflow-x: auto;
+}

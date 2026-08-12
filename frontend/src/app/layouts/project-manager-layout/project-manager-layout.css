@@ -1,0 +1,81 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,
+body{
+width:100%;
+overflow-x:hidden;
+}
+
+.project-manager-layout{
+display:flex;
+min-height:100vh;
+background:#F4F7FB;
+width:100%;
+overflow-x:hidden;
+}
+
+/* Right side area after sidebar */
+
+.main-section{
+flex:1;
+margin-left:270px;
+display:flex;
+flex-direction:column;
+width:calc(100% - 270px);
+min-width:0;
+}
+
+/* Top navbar + dashboard content area */
+
+.content-area{
+flex:1;
+padding:0;
+overflow-y:auto;
+overflow-x:auto;
+background:#F4F7FB;
+width:100%;
+max-width:100%;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+.table-section{
+overflow-x:auto;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.main-section{
+
+    margin-left:220px;
+    width:calc(100% - 220px);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.project-manager-layout{
+
+    flex-direction:column;
+
+}
+
+.main-section{
+
+    margin-left:0;
+    width:100%;
+
+}
+
+}

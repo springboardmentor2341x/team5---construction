@@ -1,0 +1,318 @@
+<div class="maintenance-page">
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Maintenance Scheduling</h1>
+
+      <p>
+        Schedule, monitor and maintain construction equipment
+        to prevent unexpected breakdowns.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon upcoming-icon">
+        ◷
+      </div>
+
+      <div>
+        <span>Upcoming</span>
+        <strong>{{ upcomingCount }}</strong>
+        <small>Scheduled maintenance</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon progress-icon">
+        ●
+      </div>
+
+      <div>
+        <span>In Progress</span>
+        <strong>{{ inProgressCount }}</strong>
+        <small>Currently being serviced</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon overdue-icon">
+        !
+      </div>
+
+      <div>
+        <span>Overdue</span>
+        <strong>{{ overdueCount }}</strong>
+        <small>Requires attention</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon completed-icon">
+        ✓
+      </div>
+
+      <div>
+        <span>Completed</span>
+        <strong>{{ completedCount }}</strong>
+        <small>Maintenance completed</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MAINTENANCE COST -->
+
+  <div class="cost-card">
+
+    <div>
+      <span>Total Maintenance Cost</span>
+      <strong>₹{{ totalMaintenanceCost | number }}</strong>
+    </div>
+
+    <p>
+      Recorded maintenance expenditure for the listed equipment.
+    </p>
+
+  </div>
+
+
+  <!-- FILTER -->
+
+  <section class="filter-card">
+
+    <div class="filter-header">
+
+      <div>
+        <h2>Maintenance Records</h2>
+
+        <p>
+          View maintenance history and upcoming service schedules.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="filters">
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search equipment, ID or service engineer">
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label>Status</label>
+
+        <select [(ngModel)]="selectedStatus">
+
+          @for (status of statuses; track status) {
+
+            <option [value]="status">
+              {{ status }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label>Maintenance Type</label>
+
+        <select [(ngModel)]="selectedType">
+
+          @for (type of maintenanceTypes; track type) {
+
+            <option [value]="type">
+              {{ type }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Equipment Maintenance Schedule</h2>
+
+        <p>
+          Complete maintenance details for every resource.
+        </p>
+      </div>
+
+      <span class="record-count">
+        {{ filteredRecords.length }} Records
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Equipment</th>
+            <th>Equipment ID</th>
+            <th>Last Maintenance</th>
+            <th>Next Maintenance</th>
+            <th>Maintenance Type</th>
+            <th>Service Engineer</th>
+            <th>Cost</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (record of filteredRecords; track record.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ record.equipmentName }}</strong>
+                <small>{{ record.category }}</small>
+              </td>
+
+              <td>
+                {{ record.equipmentId }}
+              </td>
+
+              <td>
+                {{ record.lastMaintenance }}
+              </td>
+
+              <td>
+                <strong>{{ record.nextMaintenance }}</strong>
+              </td>
+
+              <td>
+                {{ record.type }}
+              </td>
+
+              <td>
+                {{ record.engineer }}
+              </td>
+
+              <td>
+                ₹{{ record.cost | number }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.scheduled]="getStatusClass(record.status) === 'scheduled'"
+                  [class.upcoming]="getStatusClass(record.status) === 'upcoming'"
+                  [class.in-progress]="getStatusClass(record.status) === 'in-progress'"
+                  [class.completed]="getStatusClass(record.status) === 'completed'"
+                  [class.overdue]="getStatusClass(record.status) === 'overdue'">
+
+                  <span class="status-dot"></span>
+
+                  {{ record.status }}
+
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (filteredRecords.length === 0) {
+
+            <tr>
+
+              <td colspan="8" class="empty-state">
+                No maintenance records found.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAINTENANCE NOTICE -->
+
+  <section class="notice-card">
+
+    <div class="notice-icon">
+      ⚠
+    </div>
+
+    <div>
+
+      <h3>Maintenance Reminder</h3>
+
+      <p>
+        Equipment should be serviced before the scheduled maintenance
+        date to reduce the risk of breakdowns and construction delays.
+        Overdue maintenance requires immediate attention.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

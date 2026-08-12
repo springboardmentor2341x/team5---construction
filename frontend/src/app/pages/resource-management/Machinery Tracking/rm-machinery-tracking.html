@@ -1,0 +1,245 @@
+<div class="tracking-page">
+
+  <!-- PAGE HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Machinery Tracking</h1>
+
+      <p>
+        Monitor the location, project assignment and current status
+        of construction machinery.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon total-icon">
+        ⚙
+      </div>
+
+      <div>
+        <span>Total Machinery</span>
+        <strong>{{ machinery.length }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon operating-icon">
+        ●
+      </div>
+
+      <div>
+        <span>Operating</span>
+        <strong>{{ operatingCount }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon idle-icon">
+        ◷
+      </div>
+
+      <div>
+        <span>Idle</span>
+        <strong>{{ idleCount }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon maintenance-icon">
+        ⚠
+      </div>
+
+      <div>
+        <span>Maintenance</span>
+        <strong>{{ maintenanceCount }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TRACKING TABLE -->
+
+  <section class="tracking-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Machinery Status</h2>
+
+        <p>
+          Real-time overview of machinery currently registered
+          in the resource management system.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search equipment, ID or project">
+
+      </div>
+
+
+      <select [(ngModel)]="selectedStatus">
+
+        <option value="All">
+          All Status
+        </option>
+
+        <option value="Operating">
+          Operating
+        </option>
+
+        <option value="Idle">
+          Idle
+        </option>
+
+        <option value="Maintenance">
+          Maintenance
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Equipment</th>
+            <th>Equipment ID</th>
+            <th>Category</th>
+            <th>Project</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Operator</th>
+            <th>Last Updated</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (item of filteredMachinery; track item.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ item.name }}</strong>
+              </td>
+
+              <td>
+                {{ item.id }}
+              </td>
+
+              <td>
+                {{ item.category }}
+              </td>
+
+              <td>
+                {{ item.project }}
+              </td>
+
+              <td>
+                <span class="location">
+                  📍 {{ item.location }}
+                </span>
+              </td>
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.operating]="item.status === 'Operating'"
+                  [class.idle]="item.status === 'Idle'"
+                  [class.maintenance]="item.status === 'Maintenance'">
+
+                  <span class="status-dot"></span>
+
+                  {{ item.status }}
+
+                </span>
+
+              </td>
+
+              <td>
+                {{ item.operator }}
+              </td>
+
+              <td>
+                <span class="updated">
+                  {{ item.lastUpdated }}
+                </span>
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (filteredMachinery.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="8"
+                class="empty-state">
+
+                No machinery found.
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

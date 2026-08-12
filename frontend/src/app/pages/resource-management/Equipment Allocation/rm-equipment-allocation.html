@@ -1,0 +1,310 @@
+<div class="allocation-page">
+
+  <!-- PAGE HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Equipment Allocation</h1>
+
+      <p>
+        Allocate construction equipment to projects and prevent
+        duplicate resource assignments.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- ALLOCATION FORM -->
+
+  <section class="form-card">
+
+    <div class="card-title">
+
+      <div>
+        <h2>Allocate Equipment</h2>
+
+        <p>
+          Enter the equipment and project details for allocation.
+        </p>
+      </div>
+
+      <span class="required-text">
+        * Required fields
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- Project -->
+
+      <div class="form-group">
+
+        <label>
+          Project Name <span>*</span>
+        </label>
+
+        <select [(ngModel)]="allocation.projectName">
+
+          <option value="">
+            Select project
+          </option>
+
+          @for (project of projects; track project) {
+
+            <option [value]="project">
+              {{ project }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <!-- Equipment -->
+
+      <div class="form-group">
+
+        <label>
+          Equipment Name <span>*</span>
+        </label>
+
+        <select
+          [(ngModel)]="allocation.equipmentName"
+          (change)="selectEquipment()">
+
+          <option value="">
+            Select equipment
+          </option>
+
+          @for (item of equipment; track item.id) {
+
+            <option
+              [value]="item.name"
+              [disabled]="item.status === 'Allocated'">
+
+              {{ item.name }}
+              — {{ item.status }}
+
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      <!-- Equipment ID -->
+
+      <div class="form-group">
+
+        <label>Equipment ID</label>
+
+        <input
+          type="text"
+          [value]="allocation.equipmentId"
+          placeholder="Auto generated"
+          readonly>
+
+      </div>
+
+
+      <!-- Category -->
+
+      <div class="form-group">
+
+        <label>Equipment Category</label>
+
+        <input
+          type="text"
+          [value]="allocation.equipmentCategory"
+          placeholder="Auto populated"
+          readonly>
+
+      </div>
+
+
+      <!-- Quantity -->
+
+      <div class="form-group">
+
+        <label>
+          Quantity <span>*</span>
+        </label>
+
+        <input
+          type="number"
+          min="1"
+          [(ngModel)]="allocation.quantity">
+
+      </div>
+
+
+      <!-- Allocation Date -->
+
+      <div class="form-group">
+
+        <label>
+          Allocation Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="allocation.allocationDate">
+
+      </div>
+
+
+      <!-- Return Date -->
+
+      <div class="form-group">
+
+        <label>
+          Expected Return Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="allocation.expectedReturnDate">
+
+      </div>
+
+
+      <!-- Responsible Person -->
+
+      <div class="form-group">
+
+        <label>
+          Responsible Person <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="allocation.responsiblePerson"
+          placeholder="Enter responsible person">
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="resetForm()">
+
+        Clear
+
+      </button>
+
+      <button
+        type="button"
+        class="allocate-btn"
+        (click)="allocateEquipment()">
+
+        Allocate Equipment
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- CURRENT ALLOCATIONS -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Current Equipment Allocations</h2>
+
+        <p>
+          Equipment currently assigned to construction projects.
+        </p>
+      </div>
+
+      <div class="allocation-count">
+        {{ allocations.length }} Active
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Equipment</th>
+            <th>Equipment ID</th>
+            <th>Project</th>
+            <th>Category</th>
+            <th>Allocation Date</th>
+            <th>Return Date</th>
+            <th>Responsible</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (item of allocations; track item.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ item.equipment }}</strong>
+              </td>
+
+              <td>{{ item.id }}</td>
+
+              <td>{{ item.project }}</td>
+
+              <td>{{ item.category }}</td>
+
+              <td>{{ item.allocationDate }}</td>
+
+              <td>{{ item.returnDate }}</td>
+
+              <td>{{ item.responsible }}</td>
+
+              <td>
+
+                <span class="status-badge">
+                  <span class="status-dot"></span>
+                  {{ item.status }}
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,243 @@
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <span class="breadcrumb">Resource Management / Resources</span>
+      <h1>View Resources</h1>
+      <p>View and monitor all construction resources across project sites.</p>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon total-icon">📦</div>
+      <div class="stat-content">
+        <span>Total Resources</span>
+        <strong>{{ totalResources }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon available-icon">✓</div>
+      <div class="stat-content">
+        <span>Available</span>
+        <strong>{{ availableResources }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon allocated-icon">↗</div>
+      <div class="stat-content">
+        <span>Allocated</span>
+        <strong>{{ allocatedResources }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon maintenance-icon">⚙</div>
+      <div class="stat-content">
+        <span>Maintenance</span>
+        <strong>{{ maintenanceResources }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section">
+
+    <div class="filter-title">
+      <h2>Resource Filters</h2>
+      <span>{{ filteredResources.length }} resources found</span>
+    </div>
+
+    <div class="filter-row">
+
+      <!-- Search -->
+      <div class="filter-group search-group">
+        <label for="resourceSearch">Search Resources</label>
+
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+
+          <input
+            id="resourceSearch"
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="Search by ID, name, project..."
+          />
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="filter-group">
+        <label for="categoryFilter">Category</label>
+
+        <select
+          id="categoryFilter"
+          [(ngModel)]="selectedCategory"
+        >
+          <option
+            *ngFor="let category of categories"
+            [value]="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Status -->
+      <div class="filter-group">
+        <label for="statusFilter">Status</label>
+
+        <select
+          id="statusFilter"
+          [(ngModel)]="selectedStatus"
+        >
+          <option
+            *ngFor="let status of statuses"
+            [value]="status"
+          >
+            {{ status }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Clear -->
+      <div class="filter-action">
+        <button
+          type="button"
+          class="clear-btn"
+          (click)="clearFilters()"
+        >
+          Clear Filters
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Resources Table -->
+  <div class="table-card">
+
+    <div class="table-header">
+      <div>
+        <h2>Resource Inventory</h2>
+        <p>Currently registered construction resources</p>
+      </div>
+
+      <div class="resource-count">
+        {{ filteredResources.length }} / {{ totalResources }}
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+
+      <table class="resources-table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Resource Name</th>
+            <th>Category</th>
+            <th>Project</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Assigned To</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let resource of filteredResources">
+
+            <td>
+              <span class="resource-id">
+                {{ resource.id }}
+              </span>
+            </td>
+
+            <td>
+              <div class="resource-name">
+                {{ resource.name }}
+              </div>
+            </td>
+
+            <td>
+              <span class="category-text">
+                {{ resource.category }}
+              </span>
+            </td>
+
+            <td>
+              {{ resource.project }}
+            </td>
+
+            <td>
+              {{ resource.location }}
+            </td>
+
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(resource.status)"
+              >
+                {{ resource.status }}
+              </span>
+            </td>
+
+            <td>
+              {{ resource.assignedTo }}
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="view-btn"
+                (click)="viewResource(resource)"
+              >
+                View
+              </button>
+            </td>
+
+          </tr>
+
+          <!-- Empty State -->
+          <tr *ngIf="filteredResources.length === 0">
+
+            <td colspan="8" class="empty-state">
+
+              <div class="empty-icon">🔍</div>
+
+              <h3>No resources found</h3>
+
+              <p>
+                Try changing your search or filter criteria.
+              </p>
+
+              <button
+                type="button"
+                class="clear-btn"
+                (click)="clearFilters()"
+              >
+                Clear Filters
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

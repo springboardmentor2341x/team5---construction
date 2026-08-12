@@ -932,53 +932,6 @@ td:nth-child(8){
 
 }
 
-
-
-
-
-/* ==========================================
-   TABLE SCROLLBAR
-========================================== */
-
-
-.table-wrapper::-webkit-scrollbar{
-
-  height:8px;
-
-}
-
-
-
-.table-wrapper::-webkit-scrollbar-track{
-
-  background:#e5e7eb;
-
-  border-radius:10px;
-
-}
-
-
-
-.table-wrapper::-webkit-scrollbar-thumb{
-
-  background:#2563eb;
-
-  border-radius:10px;
-
-}
-
-
-
-.table-wrapper::-webkit-scrollbar-thumb:hover{
-
-  background:#1d4ed8;
-
-}
-
-
-
-
-
 /* ==========================================
    SMOOTH EFFECTS
 ========================================== */
