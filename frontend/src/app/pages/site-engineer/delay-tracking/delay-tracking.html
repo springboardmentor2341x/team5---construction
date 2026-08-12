@@ -1,0 +1,299 @@
+<div class="page-content">
+
+  <!-- ================= Heading ================= -->
+
+  <div class="content-heading">
+
+    <div>
+
+      <h2>Delay Tracking</h2>
+
+      <p>
+        Track project delays and monitor their impact on project execution.
+      </p>
+
+    </div>
+
+    <button class="add-btn"
+    (click)="openAddDelay()">
+      ➕ Add Delay
+    </button>
+
+  </div>
+
+  <!-- ================= Summary Cards ================= -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">⏱</div>
+
+      <h3>{{ delays.length }}</h3>
+
+      <p>Total Delays</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">✅</div>
+
+      <h3>1</h3>
+
+      <p>Resolved</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">⌛</div>
+
+      <h3>1</h3>
+
+      <p>Pending</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">⚠</div>
+
+      <h3>1</h3>
+
+      <p>High Impact</p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Delay Table ================= -->
+
+  <div class="table-card">
+
+    <table class="delay-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Date</th>
+
+          <th>Work Category</th>
+
+          <th>Delay Reason</th>
+
+          <th>Duration</th>
+
+          <th>Impact</th>
+
+          <th>Status</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(delay of delays; track delay.id){
+
+        <tr>
+
+          <td>{{ delay.date }}</td>
+
+          <td>{{ delay.workCategory }}</td>
+
+          <td>{{ delay.reason }}</td>
+
+          <td>{{ delay.duration }}</td>
+
+          <td>{{ delay.impact }}</td>
+
+          <td>
+
+            <span class="status-badge">
+
+              {{ delay.status }}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <button class="view-btn"
+            type="button"
+            routerLink="/site-engineer/delay-details"
+            >
+
+              👁 View
+
+            </button>
+
+          </td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= Delay Guidelines ================= -->
+
+  <div class="guideline-card">
+
+    <h3>Delay Recording Guidelines</h3>
+
+    <ul>
+
+      <li>🌧 Weather-related delays (Heavy Rain, Storm, Flood)</li>
+
+      <li>📦 Material delivery delays</li>
+
+      <li>👷 Labour shortage</li>
+
+      <li>🚜 Machinery breakdown</li>
+
+      <li>💰 Financial constraints</li>
+
+      <li>📐 Design changes</li>
+
+      <li>🏛 Government approval delays</li>
+
+    </ul>
+
+  </div>
+
+
+  @if(showAddDelay){
+
+    <div class="modal-overlay">
+      <div class="modal-add">
+        <!-- Modal Header -->
+
+        <div class="modal-header">
+
+          <div>
+    
+            <h2>Add delay</h2>
+
+            <p>
+              Record material consumed during construction.
+            </p>
+
+          </div>
+
+          <button
+            class="close-btn"
+            type="button"
+            (click)="closeAddDelay()">
+
+            ✕
+
+          </button>
+
+        </div>
+
+
+        <div class="form-grid">
+          <div class="form-group">
+
+            <label>
+              Date *
+            </label>
+
+            <input
+              type="date"
+              [(ngModel)]="delay.date">
+
+          </div>
+
+          <div class="form-group">
+            <label > workCategory </label>
+            <select [(ngModel)]="delay.workCategory">
+             <option>Foundation</option>
+            <option>Structural</option>
+            <option>Electrical</option>
+            <option>Plumbing</option>
+            <option>Finishing</option>
+            <option>Inspection</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">
+              Reason
+            </label>
+            <select [(ngModel)]="delay.reason">
+               <option >Rain</option>
+              <option >labour shorted</option>
+              <option >Material Delay</option>
+              <option >Machinery breakdown</option>
+              <option >financial</option>
+              <option >Design change</option>
+              <option >government approval</option>
+              <option >Other</option>
+            </select>
+          </div>
+
+            <div class="form-group">
+              <label >Duration</label>
+              <input type="text" placeholder="Enter duration for delay"
+              [(ngModel)]="delay.duration">
+            </div>
+
+            <div class="form-group">
+              <label >Impact</label>
+              <input type="text" placeholder="Enter impact" [(ngModel)]="delay.impact">
+            </div>
+
+            <div class="form-group">
+              <label >status</label>
+              <select [(ngModel)]="delay.status">
+                <option >completed</option>
+                <option >pending</option>
+                <option >Resolved</option>
+              </select>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="modal-buttons">
+
+          <button
+            class="cancel-btn"
+            type="button"
+            (click)="closeAddDelay()">
+
+            Cancel
+
+          </button>
+
+          <button
+            class="save-btn"
+            type="button"
+            (click)="saveDelayinfo()">
+
+            Save Delay
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  }
+
+ 
+
+</div>

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
+import { roleGuard } from './guards/role-guard';
 
 // Admin Imports
 import { Projects } from './pages/admin/project-management/projects/projects';
@@ -54,6 +56,14 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
+     canActivate: [
+    authGuard,
+    roleGuard(['Administrator'])
+  ],
+   canActivateChild: [
+    authGuard,
+    roleGuard(['Administrator'])
+  ],
     children: [
 
       {
@@ -115,13 +125,206 @@ export const routes: Routes = [
     ]
   },
 
+
+
+
+  // =========================
+  // SITE ENGINEER
+  // =========================
+
+  {
+    path: 'site-engineer',
+      canActivate: [
+    authGuard,
+    roleGuard(['Site Engineer'])
+  ],
+  canActivateChild: [
+    authGuard,
+    roleGuard(['Site Engineer'])
+  ],
+
+    loadComponent: () =>
+      import('./layouts/site-engineer-layout/site-engineer-layout')
+        .then(m => m.SiteEngineerLayout),
+
+
+    children: [
+
+        {
+          path: '',
+          redirectTo: 'dashboard',
+          pathMatch: 'full'
+        },
+
+        {
+          path: 'dashboard',
+          loadComponent: () =>
+            import('./pages/site-engineer/Dashboard/site-engineer-dashboard')
+              .then(m => m.SiteEngineerDashboard)
+        },
+
+        {
+          path: 'activity-logs',
+          loadComponent: () =>
+            import('./pages/site-engineer/ActivityLogs/se-activity-logs')
+              .then(m => m.SeActivityLogs)
+        },
+
+        {
+          path: 'daily-material-used',
+          loadComponent: () => 
+            import('./pages/site-engineer/daily-material-used/daily-material-used')
+              .then(m => m.DailyMaterialUsed)
+        },
+      {
+        path: 'activity-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/activity-details/activity-details')
+            .then(m => m.ActivityDetails)
+      },
+      {
+        path: 'milestones',
+        loadComponent: () =>
+          import('./pages/site-engineer/se-milestones/se-milestones')
+            .then(m => m.SeMilestones)
+      },
+      {
+        path:'milestone-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/milestone-details/milestone-details')
+          .then(m => m.MilestoneDetails)
+      },
+
+      {
+        path:'delay-tracking',
+        loadComponent: ()=>
+          import('./pages/site-engineer/delay-tracking/delay-tracking')
+          .then(m => m.DelayTracking)
+      },
+
+      {
+      path:'work-completion-status',
+      loadComponent: () =>
+        import('./pages/site-engineer/se-work-completion-status/se-work-completion-status')
+          .then(m => m.SeWorkCompletionStatus)
+      },
+
+      {
+        path: 'delay-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/delay-details/delay-details')
+            .then(m => m.DelayDetails)
+      },
+      {
+        path: 'assigned-projects',
+        loadComponent: () =>
+          import('./pages/site-engineer/AssignedProjects/se-assigned-projects')
+            .then(m => m.SeAssignedProjects)
+      },
+
+      {
+        path: 'project-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/ProjectDetails/se-project-details')
+            .then(m => m.SeProjectDetails)
+      },
+
+      {
+        path: 'daily-progress',
+        loadComponent: () =>
+          import('./pages/site-engineer/DailyProgress/se-daily-progress')
+            .then(m => m.SeDailyProgress)
+      },
+
+      {
+        path: 'daily-report-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/daily-report-details/daily-report-details')
+            .then(m => m.DailyReportDetails)
+      },
+    
+
+      {
+        path: 'equipment-status',
+        loadComponent: () =>
+          import('./pages/site-engineer/EquipmentStatus/se-equipment-status')
+            .then(m => m.SeEquipmentStatus)
+      },
+
+     {
+      path: 'add-equipment',
+      loadComponent: () =>
+        import('./pages/site-engineer/add-equipment/add-equipment')
+          .then(m => m.AddEquipmentcomponent)
+      },
+
+     {
+      path: 'equipment-details',
+      loadComponent: () =>
+          import('./pages/site-engineer/equipment-details/equipment-details')
+          .then(m => m.EquipmentDetails)
+      
+     },
+
+     {
+      path: 'notifications',
+      loadComponent: () =>
+        import('./pages/site-engineer/Notifications/se-notifications')
+          .then(m => m.SeNotifications)
+     },
+
+     {
+      path: 'profile',
+      loadComponent: () =>
+        import('./pages/site-engineer/Profile/se-profile')
+          .then(m => m.SeProfile)
+     },
+
+     {
+      path: 'resources',
+      loadComponent: () =>
+        import('./pages/site-engineer/Resources/se-resources')
+          .then(m => m.SeResources)
+     },
+
+      {
+      path: 'resource-details',
+      loadComponent: () =>
+        import('./pages/site-engineer/resource-details/resource-details')
+        .then(m => m.ResourceDetails)
+      },
+
+        {
+          path: 'weekly-reports',
+          loadComponent: () =>
+            import('./pages/site-engineer/WeeklyReports/se-weekly-reports')
+              .then(m => m.SeWeeklyReports)
+        },
+        {
+          path:'weekly-report-details',
+          loadComponent:() =>
+            import('./pages/site-engineer/weekly-report-details/weekly-report-details')
+                .then(m => m.WeeklyReportDetails)
+        }
+
+     ]
+},
+
+
   // =========================
   // PROJECT MANAGER MODULE
   // =========================
 
   {
     path: 'project-manager',
-      component: ProjectManagerLayoutComponent,
+     canActivate: [
+    authGuard,
+    roleGuard(['Project Manager'])
+  ],
+   canActivateChild: [
+    authGuard,
+    roleGuard(['Project Manager'])
+  ],
     children: [
 
       {
