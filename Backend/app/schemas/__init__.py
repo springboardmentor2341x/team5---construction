@@ -4,3 +4,11 @@ from .milestone import *
 from .project_worker import *
 from .project_site_engineer import *
 from .project_contractor import *
+from app.schemas import machine
+from app.schemas import material
+from app.schemas import attendance
+from app.schemas import milestone
+from app.schemas import daily_report
+from app.schemas import delay_record
+from app.schemas import progress_photo
+from app.schemas import site_activity_log

@@ -22,6 +22,17 @@ from app.routers import milestone
 from app.routers import worker
 from app.routers import project_schedule
 from app.routers import project_closure
+from app.routers import (
+    worker,
+    machines,
+    materials,
+    attendance,
+    milestone,
+    daily_reports,
+    delay_records,
+    progress_photos,
+    site_activity_logs,
+)
 
 app = FastAPI()
 app.include_router(project.router)
@@ -32,6 +43,15 @@ app.include_router(milestone.router)
 app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
+app.include_router(worker.router)
+app.include_router(machines.router)
+app.include_router(materials.router)
+app.include_router(attendance.router)
+app.include_router(milestone.router)
+app.include_router(daily_reports.router)
+app.include_router(delay_records.router)
+app.include_router(progress_photos.router)
+app.include_router(site_activity_logs.router)
 # Base.metadata.create_all(bind=engine)
 from sqlalchemy import text
 

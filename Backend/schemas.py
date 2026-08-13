@@ -1,6 +1,7 @@
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, EmailStr,ConfigDict, field_validator
 import re
 from typing import Literal
+from typing import Optional
 class UserCreate(BaseModel):
     full_name: str
     email: EmailStr
@@ -75,17 +76,17 @@ class UserUpdate(BaseModel):
 from typing import Optional
 
 class UserResponse(BaseModel):
-    id: int
-    full_name: str
-    email: str
-    mobile: str
-    role: str
-    employee_id: str
-    department: str
-    address: Optional[str] = None
-    profile_picture: Optional[str] = None
+     user_id: int 
+     full_name: str
+     email: str
+     mobile: str
+     role: str
+     employee_id: str
+     department: str
+     address: Optional[str] = None
+     profile_picture: Optional[str] = None
 
-    class Config:
+class Config:
         from_attributes = True  
 class VerifyEmail(BaseModel):
     token: str   
