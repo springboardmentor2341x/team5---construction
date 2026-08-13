@@ -40,13 +40,32 @@ export const routes: Routes = [
   path: 'reset-password',
   loadComponent: () =>
     import('./pages/authentication/reset-password/reset-password')
-      .then(m => m.ResetPassword)
+      .then(m => m.ResetPasswordComponent)
+},
+{
+  path: 'forgot-password',
+  loadComponent: () =>
+    import('./pages/authentication/forgot-password/forgot-password')
+      .then(m => m.ForgotPasswordComponent)
+},
+
+{
+  path: 'verify-otp',
+  loadComponent: () =>
+    import('./pages/authentication/verify-otp/verify-otp')
+      .then(m => m.VerifyOtpComponent)
+},
+{
+  path: 'landing',
+  loadComponent: () =>
+    import('./pages/landing/landing')
+      .then(m => m.Landing)
 },
 
   // Default Route
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'landing',
     pathMatch: 'full'
   },
 
