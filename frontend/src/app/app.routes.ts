@@ -344,8 +344,14 @@ export const routes: Routes = [
     authGuard,
     roleGuard(['Project Manager'])
   ],
+
+        loadComponent: () =>
+      import('./layouts/project-manager-layout/project-manager-layout')
+        .then(m => m.ProjectManagerLayoutComponent),
+
     children: [
 
+  
       {
         path: 'dashboard',
         loadComponent: () =>
