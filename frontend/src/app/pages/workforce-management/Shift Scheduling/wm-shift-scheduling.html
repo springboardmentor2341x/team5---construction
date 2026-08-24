@@ -1,0 +1,707 @@
+<div class="shift-page">
+
+  <!-- ================================
+       PAGE HEADER
+  ================================= -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Shift Scheduling</h1>
+
+      <p>
+        Schedule and manage workforce shifts across projects,
+        work areas and contractors.
+      </p>
+    </div>
+
+    <button
+      class="primary-button"
+      type="button"
+      (click)="scheduleShift()">
+
+      <span class="material-icons">add_alarm</span>
+
+      Schedule Shift
+
+    </button>
+
+  </div>
+
+
+  <!-- ================================
+       SUMMARY CARDS
+  ================================= -->
+
+  <div class="summary-grid">
+
+    <!-- Total Schedules -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+        <span class="material-icons">
+          calendar_month
+        </span>
+      </div>
+
+      <div>
+        <span>Total Schedules</span>
+        <h2>{{ totalSchedules }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Morning Shifts -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+        <span class="material-icons">
+          wb_sunny
+        </span>
+      </div>
+
+      <div>
+        <span>Morning Shifts</span>
+        <h2>{{ morningShifts }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Active Shifts -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+        <span class="material-icons">
+          groups
+        </span>
+      </div>
+
+      <div>
+        <span>Active Shifts</span>
+        <h2>{{ activeShifts }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Night Shifts -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+        <span class="material-icons">
+          nightlight
+        </span>
+      </div>
+
+      <div>
+        <span>Night Shifts</span>
+        <h2>{{ nightShifts }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================
+       NEW SHIFT SCHEDULE
+  ================================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Create New Shift Schedule</h2>
+
+        <p>
+          Assign workers and define shift timings for a project.
+        </p>
+      </div>
+
+      <span class="material-icons header-icon">
+        schedule
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- PROJECT -->
+
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option value="">
+            Select Project
+          </option>
+
+          <option
+            *ngFor="let project of projects"
+            [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORKFORCE CATEGORY -->
+
+      <div class="form-group">
+
+        <label>
+          Workforce Category <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          <option value="">
+            Select Category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CONTRACTOR -->
+
+      <div class="form-group">
+
+        <label>
+          Contractor
+        </label>
+
+        <select [(ngModel)]="selectedContractor">
+
+          <option value="">
+            Select Contractor
+          </option>
+
+          <option
+            *ngFor="let contractor of contractors"
+            [value]="contractor">
+
+            {{ contractor }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SHIFT TYPE -->
+
+      <div class="form-group">
+
+        <label>
+          Shift Type <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedShift">
+
+          <option value="">
+            Select Shift
+          </option>
+
+          <option
+            *ngFor="let shift of shifts"
+            [value]="shift">
+
+            {{ shift }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORK AREA -->
+
+      <div class="form-group">
+
+        <label>
+          Work Area
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedWorkArea"
+          placeholder="Enter work area">
+
+      </div>
+
+
+      <!-- NUMBER OF WORKERS -->
+
+      <div class="form-group">
+
+        <label>
+          Number of Workers
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="workerCount"
+          min="1"
+          placeholder="Enter worker count">
+
+      </div>
+
+
+      <!-- SHIFT DATE -->
+
+      <div class="form-group">
+
+        <label>
+          Shift Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="selectedDate">
+
+      </div>
+
+
+      <!-- SUPERVISOR -->
+
+      <div class="form-group">
+
+        <label>
+          Supervisor
+        </label>
+
+        <select [(ngModel)]="selectedSupervisor">
+
+          <option value="">
+            Select Supervisor
+          </option>
+
+          <option
+            *ngFor="let supervisor of supervisors"
+            [value]="supervisor">
+
+            {{ supervisor }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- START TIME -->
+
+      <div class="form-group">
+
+        <label>
+          Start Time <span>*</span>
+        </label>
+
+        <input
+          type="time"
+          [(ngModel)]="startTime">
+
+      </div>
+
+
+      <!-- END TIME -->
+
+      <div class="form-group">
+
+        <label>
+          End Time <span>*</span>
+        </label>
+
+        <input
+          type="time"
+          [(ngModel)]="endTime">
+
+      </div>
+
+
+      <!-- BREAK DURATION -->
+
+      <div class="form-group">
+
+        <label>
+          Break Duration
+        </label>
+
+        <select [(ngModel)]="breakDuration">
+
+          <option value="">
+            Select Break
+          </option>
+
+          <option value="30 Minutes">
+            30 Minutes
+          </option>
+
+          <option value="45 Minutes">
+            45 Minutes
+          </option>
+
+          <option value="60 Minutes">
+            60 Minutes
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="form-group">
+
+        <label>
+          Shift Status
+        </label>
+
+        <select [(ngModel)]="selectedStatus">
+
+          <option value="Scheduled">
+            Scheduled
+          </option>
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Completed">
+            Completed
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="clearForm()">
+
+        Cancel
+
+      </button>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="scheduleShift()">
+
+        <span class="material-icons">
+          check
+        </span>
+
+        Confirm Schedule
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================
+       CURRENT SHIFT SCHEDULES
+  ================================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Current Shift Schedules</h2>
+
+        <p>
+          Monitor scheduled workforce shifts across active projects.
+        </p>
+      </div>
+
+      <div class="header-actions">
+
+        <button
+          class="filter-button"
+          type="button"
+          (click)="filterSchedules()">
+
+          <span class="material-icons">
+            filter_list
+          </span>
+
+          Filter
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Schedule ID</th>
+
+            <th>Project</th>
+
+            <th>Category</th>
+
+            <th>Work Area</th>
+
+            <th>Shift</th>
+
+            <th>Date</th>
+
+            <th>Workers</th>
+
+            <th>Supervisor</th>
+
+            <th>Timing</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let schedule of schedules">
+
+            <td class="schedule-id">
+
+              {{ schedule.id }}
+
+            </td>
+
+
+            <td>
+
+              <strong>
+                {{ schedule.project }}
+              </strong>
+
+            </td>
+
+
+            <td>
+
+              {{ schedule.category }}
+
+            </td>
+
+
+            <td>
+
+              {{ schedule.workArea }}
+
+            </td>
+
+
+            <td>
+
+              <span class="shift-badge">
+
+                {{ schedule.shift }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              {{ schedule.date }}
+
+            </td>
+
+
+            <td>
+
+              <span class="worker-count">
+
+                <span class="material-icons">
+                  groups
+                </span>
+
+                {{ schedule.workers }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              {{ schedule.supervisor }}
+
+            </td>
+
+
+            <td>
+
+              <div class="timing">
+
+                <span>
+                  {{ schedule.startTime }}
+                </span>
+
+                <span class="time-arrow">
+                  →
+                </span>
+
+                <span>
+                  {{ schedule.endTime }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="
+                  getStatusClass(schedule.status)
+                ">
+
+                {{ schedule.status }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="View"
+                  (click)="viewSchedule(schedule)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="Edit"
+                  (click)="editSchedule(schedule)">
+
+                  <span class="material-icons">
+                    edit
+                  </span>
+
+                </button>
+
+
+                <button
+                  class="icon-button delete-button"
+                  type="button"
+                  title="Delete"
+                  (click)="deleteSchedule(schedule)">
+
+                  <span class="material-icons">
+                    delete
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+
+          <tr
+            *ngIf="schedules.length === 0">
+
+            <td
+              colspan="11"
+              class="empty-state">
+
+              <span class="material-icons">
+                event_busy
+              </span>
+
+              <h3>No Shift Schedules Found</h3>
+
+              <p>
+                Create a new shift schedule to get started.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

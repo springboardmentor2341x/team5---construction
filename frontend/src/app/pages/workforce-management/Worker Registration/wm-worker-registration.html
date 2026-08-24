@@ -1,0 +1,607 @@
+<div class="worker-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <div class="breadcrumb">
+        Workforce Management / Worker Registration
+      </div>
+
+      <h1>Worker Registration</h1>
+
+      <p>
+        Register and maintain workforce information for construction projects.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="btn secondary-btn"
+        (click)="openBulkRegistration()">
+
+        <span class="material-icons">upload_file</span>
+
+        Bulk Registration
+
+      </button>
+
+      <button
+        class="btn primary-btn"
+        (click)="openRegistration()">
+
+        <span class="material-icons">person_add</span>
+
+        Register Worker
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+        <span class="material-icons">groups</span>
+      </div>
+
+      <div>
+        <span>Total Workers</span>
+        <h2>{{ workers.length }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+        <span class="material-icons">person</span>
+      </div>
+
+      <div>
+        <span>Active Workers</span>
+        <h2>{{ activeWorkers }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+        <span class="material-icons">event_busy</span>
+      </div>
+
+      <div>
+        <span>On Leave</span>
+        <h2>{{ leaveWorkers }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon red">
+        <span class="material-icons">person_off</span>
+      </div>
+
+      <div>
+        <span>Inactive</span>
+        <h2>{{ inactiveWorkers }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- REGISTRATION FORM -->
+
+  <div
+    class="registration-panel"
+    *ngIf="showForm">
+
+    <div class="panel-header">
+
+      <div>
+        <h2>Register New Worker</h2>
+        <p>Enter the worker's workforce information.</p>
+      </div>
+
+      <button
+        class="close-btn"
+        (click)="closeForms()">
+
+        <span class="material-icons">close</span>
+
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- Worker ID -->
+
+      <div class="form-group">
+
+        <label>
+          Worker ID <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="worker.workerId"
+          placeholder="e.g. WRK-1006">
+
+      </div>
+
+
+      <!-- Worker Name -->
+
+      <div class="form-group">
+
+        <label>
+          Worker Name <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="worker.workerName"
+          placeholder="Enter worker name">
+
+      </div>
+
+
+      <!-- Contact -->
+
+      <div class="form-group">
+
+        <label>
+          Contact Information <span>*</span>
+        </label>
+
+        <input
+          type="tel"
+          [(ngModel)]="worker.contact"
+          placeholder="Enter contact number">
+
+      </div>
+
+
+      <!-- Category -->
+
+      <div class="form-group">
+
+        <label>
+          Workforce Category <span>*</span>
+        </label>
+
+        <select [(ngModel)]="worker.category">
+
+          <option value="">
+            Select category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Skill -->
+
+      <div class="form-group">
+
+        <label>
+          Skill / Work Type <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="worker.skill"
+          placeholder="e.g. Masonry, Electrical">
+
+      </div>
+
+
+      <!-- Contractor -->
+
+      <div class="form-group">
+
+        <label>
+          Contractor <span>*</span>
+        </label>
+
+        <select [(ngModel)]="worker.contractor">
+
+          <option value="">
+            Select contractor
+          </option>
+
+          <option
+            *ngFor="let contractor of contractors"
+            [value]="contractor">
+
+            {{ contractor }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Project -->
+
+      <div class="form-group">
+
+        <label>
+          Project Assignment <span>*</span>
+        </label>
+
+        <select [(ngModel)]="worker.project">
+
+          <option value="">
+            Select project
+          </option>
+
+          <option
+            *ngFor="let project of projects"
+            [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Joining Date -->
+
+      <div class="form-group">
+
+        <label>
+          Joining Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="worker.joiningDate">
+
+      </div>
+
+
+      <!-- Status -->
+
+      <div class="form-group">
+
+        <label>
+          Worker Status
+        </label>
+
+        <select [(ngModel)]="worker.status">
+
+          <option
+            *ngFor="let status of statuses"
+            [value]="status">
+
+            {{ status }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn cancel-btn"
+        (click)="closeForms()">
+
+        Cancel
+
+      </button>
+
+      <button
+        class="btn primary-btn"
+        (click)="registerWorker()">
+
+        <span class="material-icons">save</span>
+
+        Register Worker
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- BULK REGISTRATION -->
+
+  <div
+    class="bulk-panel"
+    *ngIf="showBulkForm">
+
+    <div class="panel-header">
+
+      <div>
+
+        <h2>Bulk Worker Registration</h2>
+
+        <p>
+          Register multiple workers using a prepared workforce file.
+        </p>
+
+      </div>
+
+      <button
+        class="close-btn"
+        (click)="closeForms()">
+
+        <span class="material-icons">close</span>
+
+      </button>
+
+    </div>
+
+
+    <div class="bulk-content">
+
+      <span class="material-icons bulk-icon">
+        cloud_upload
+      </span>
+
+      <h3>Upload Workforce File</h3>
+
+      <p>
+        Upload a CSV or Excel file containing worker registration information.
+      </p>
+
+      <input
+        type="file"
+        accept=".csv,.xlsx,.xls">
+
+      <small>
+        Required fields: Worker ID, Name, Contact, Category,
+        Skill, Contractor, Project, Joining Date and Status.
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- WORKER LIST -->
+
+  <div class="workers-panel">
+
+    <div class="panel-header list-header">
+
+      <div>
+
+        <h2>Registered Workers</h2>
+
+        <p>
+          Manage registered workforce information.
+        </p>
+
+      </div>
+
+      <span class="worker-count">
+        {{ filteredWorkers.length }} Workers
+      </span>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+      <div class="search-box">
+
+        <span class="material-icons">
+          search
+        </span>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search worker, ID, skill, contractor or project">
+
+      </div>
+
+
+      <select [(ngModel)]="categoryFilter">
+
+        <option value="All">
+          All Categories
+        </option>
+
+        <option
+          *ngFor="let category of categories"
+          [value]="category">
+
+          {{ category }}
+
+        </option>
+
+      </select>
+
+
+      <select [(ngModel)]="statusFilter">
+
+        <option value="All">
+          All Status
+        </option>
+
+        <option
+          *ngFor="let status of statuses"
+          [value]="status">
+
+          {{ status }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Worker ID</th>
+
+            <th>Worker</th>
+
+            <th>Category</th>
+
+            <th>Skill / Work Type</th>
+
+            <th>Contractor</th>
+
+            <th>Project</th>
+
+            <th>Joining Date</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let worker of filteredWorkers">
+
+            <td>
+              <strong>
+                {{ worker.workerId }}
+              </strong>
+            </td>
+
+            <td>
+
+              <div class="worker-name">
+
+                <div class="avatar">
+                  {{ worker.workerName.charAt(0) }}
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ worker.workerName }}
+                  </strong>
+
+                  <small>
+                    {{ worker.contact }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>
+              {{ worker.category }}
+            </td>
+
+            <td>
+              {{ worker.skill }}
+            </td>
+
+            <td>
+              {{ worker.contractor }}
+            </td>
+
+            <td>
+              {{ worker.project }}
+            </td>
+
+            <td>
+              {{ worker.joiningDate }}
+            </td>
+
+            <td>
+
+              <span
+                class="status"
+                [class.active]="worker.status === 'Active'"
+                [class.leave]="worker.status === 'On Leave'"
+                [class.inactive]="worker.status === 'Inactive'"
+                [class.transferred]="worker.status === 'Transferred'">
+
+                {{ worker.status }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <tr *ngIf="filteredWorkers.length === 0">
+
+            <td
+              colspan="8"
+              class="empty-state">
+
+              <span class="material-icons">
+                person_search
+              </span>
+
+              <h3>No workers found</h3>
+
+              <p>
+                Try changing your search or filter.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,198 @@
+.top-navbar {
+  height: 82px;
+  background: #ffffff;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  box-sizing: border-box;
+}
+
+
+/* PAGE HEADING */
+
+.page-heading h1 {
+  margin: 0;
+
+  color: #172554;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.page-heading p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* NAVBAR ACTIONS */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+
+/* SEARCH */
+
+.search-box {
+  width: 240px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  box-sizing: border-box;
+}
+
+.search-box .material-icons {
+  color: #64748b;
+  font-size: 19px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #334155;
+
+  font-size: 12px;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* NOTIFICATION */
+
+.notification-btn {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.notification-btn:hover {
+  background: #f8fafc;
+}
+
+.notification-btn .material-icons {
+  color: #475569;
+  font-size: 21px;
+}
+
+.notification-badge {
+  position: absolute;
+
+  top: -4px;
+  right: -4px;
+
+  min-width: 17px;
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  background: #f97316;
+
+  color: #ffffff;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* PROFILE */
+
+.profile {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e0e7ff;
+
+  color: #3730a3;
+
+  border-radius: 50%;
+}
+
+.avatar .material-icons {
+  font-size: 20px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info strong {
+  color: #1e293b;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-info span {
+  margin-top: 2px;
+
+  color: #64748b;
+
+  font-size: 10px;
+}
+
+.dropdown-icon {
+  color: #64748b;
+  font-size: 20px;
+}

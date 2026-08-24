@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 
-// Admin Imports
+// =========================
+// ADMIN IMPORTS
+// =========================
 import { Projects } from './pages/admin/project-management/projects/projects';
 import { ProjectDetails } from './pages/admin/project-management/project-details/project-details';
 import { EditProject } from './pages/admin/project-management/edit-project/edit-project';
@@ -15,45 +17,58 @@ import { AddUser } from './pages/admin/user-management/add-user/add-user';
 import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
 
+// =========================
+// LAYOUT IMPORTS
+// =========================
 import { ProjectManagerLayoutComponent } from './layouts/project-manager-layout/project-manager-layout';
-import { ResourceManagementLayoutComponent }from './layouts/resource-management-layout/resource-management-layout';
+import { ResourceManagementLayoutComponent } from './layouts/resource-management-layout/resource-management-layout';
+import { WorkforceManagementLayoutComponent } from './layouts/workforce-management-layout/workforce-management-layout';
+
 export const routes: Routes = [
 
+  // =====================================================
+  // AUTHENTICATION
+  // =====================================================
 
   {
-  path: 'login',
-  loadComponent: () =>
-    import('./pages/authentication/login/login')
-      .then(m => m.Login)
-},
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/authentication/login/login')
+        .then(m => m.Login)
+  },
 
-{
-  path: 'register',
-  loadComponent: () =>
-    import('./pages/authentication/register/register')
-      .then(m => m.Register)
-},
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/authentication/register/register')
+        .then(m => m.Register)
+  },
 
-{
-  path: 'reset-password',
-  loadComponent: () =>
-    import('./pages/authentication/reset-password/reset-password')
-      .then(m => m.ResetPassword)
-},
+  {
+    path: 'reset-password',
+    loadComponent: () =>
+      import('./pages/authentication/reset-password/reset-password')
+        .then(m => m.ResetPassword)
+  },
 
-  // Default Route
+  // =====================================================
+  // DEFAULT ROUTE
+  // =====================================================
+
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
 
-  // =========================
+  // =====================================================
   // ADMIN MODULE
-  // =========================
+  // =====================================================
+
   {
     path: 'admin',
     component: AdminLayout,
+
     children: [
 
       {
@@ -115,14 +130,21 @@ export const routes: Routes = [
     ]
   },
 
-  // =========================
+  // =====================================================
   // PROJECT MANAGER MODULE
-  // =========================
+  // =====================================================
 
   {
     path: 'project-manager',
-      component: ProjectManagerLayoutComponent,
+    component: ProjectManagerLayoutComponent,
+
     children: [
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
 
       {
         path: 'dashboard',
@@ -238,18 +260,16 @@ export const routes: Routes = [
 
     ]
   },
-// Resource-management-system
+
+  // =====================================================
+  // RESOURCE MANAGEMENT MODULE
+  // =====================================================
 
   {
     path: 'resource-management',
-
     component: ResourceManagementLayoutComponent,
 
     children: [
-
-      // -----------------------------
-      // DEFAULT
-      // -----------------------------
 
       {
         path: '',
@@ -257,111 +277,150 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
 
-
-      // -----------------------------
-      // 1. DASHBOARD
-      // -----------------------------
-
       {
         path: 'dashboard',
-
         loadComponent: () =>
           import('./pages/resource-management/Dashboard/rm-dashboard')
             .then(m => m.RmDashboardComponent)
       },
 
-
-      // -----------------------------
-      // 2. EQUIPMENT ALLOCATION
-      // -----------------------------
-
       {
         path: 'equipment-allocation',
-
         loadComponent: () =>
           import('./pages/resource-management/Equipment Allocation/rm-equipment-allocation')
             .then(m => m.RmEquipmentAllocationComponent)
       },
 
-
-      // -----------------------------
-      // 3. MACHINERY TRACKING
-      // -----------------------------
-
       {
         path: 'machinery-tracking',
-
         loadComponent: () =>
           import('./pages/resource-management/Machinery Tracking/rm-machinery-tracking')
             .then(m => m.RmMachineryTrackingComponent)
       },
 
-
-      // -----------------------------
-      // 4. RESOURCE UTILIZATION
-      // -----------------------------
-
       {
         path: 'resource-utilization',
-
         loadComponent: () =>
           import('./pages/resource-management/Resource Utilization/rm-resource-utilization')
             .then(m => m.RmResourceUtilizationComponent)
       },
 
-
-      // -----------------------------
-      // 5. RESOURCE AVAILABILITY
-      // -----------------------------
-
       {
         path: 'resource-availability',
-
         loadComponent: () =>
           import('./pages/resource-management/Resource Availability/rm-resource-availability')
             .then(m => m.RmResourceAvailabilityComponent)
       },
 
-
-      // -----------------------------
-      // 6. MAINTENANCE SCHEDULING
-      // -----------------------------
-
       {
         path: 'maintenance-scheduling',
-
         loadComponent: () =>
           import('./pages/resource-management/Maintenance Scheduling/rm-maintenance-scheduling')
             .then(m => m.RmMaintenanceSchedulingComponent)
       },
 
-
-      // -----------------------------
-      // 7. RESOURCE REPORTS
-      // -----------------------------
-
       {
         path: 'reports',
-
         loadComponent: () =>
           import('./pages/resource-management/Reports/rm-reports')
             .then(m => m.RmReportsComponent)
       },
+
       {
-  path: 'resources',
-  loadComponent: () =>
-    import('./pages/resource-management/Resources/rm-resources')
-      .then(m => m.RmResourcesComponent)
-},
-//   // Wildcard Route
+        path: 'resources',
+        loadComponent: () =>
+          import('./pages/resource-management/Resources/rm-resources')
+            .then(m => m.RmResourcesComponent)
+      }
+
+    ]
+  },
+
+  // =====================================================
+  // WORKFORCE MANAGEMENT MODULE
+  // =====================================================
+
+  {
+    path: 'workforce-management',
+    component: WorkforceManagementLayoutComponent,
+
+    children: [
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/workforce-management/Dashboard/wm-dashboard')
+            .then(m => m.WmDashboardComponent)
+      },
+
+      {
+        path: 'worker-registration',
+        loadComponent: () =>
+          import('./pages/workforce-management/Worker Registration/wm-worker-registration')
+            .then(m => m.WmWorkerRegistrationComponent)
+      },
+
+      {
+        path: 'workforce-allocation',
+        loadComponent: () =>
+          import('./pages/workforce-management/Workforce Allocation/wm-workforce-allocation')
+            .then(m => m.WmWorkforceAllocationComponent)
+      },
+
+      {
+        path: 'attendance-tracking',
+        loadComponent: () =>
+          import('./pages/workforce-management/Attendance Tracking/wm-attendance-tracking')
+            .then(m => m.WmAttendanceTrackingComponent)
+      },
+
+      {
+        path: 'shift-scheduling',
+        loadComponent: () =>
+          import('./pages/workforce-management/Shift Scheduling/wm-shift-scheduling')
+            .then(m => m.WmShiftSchedulingComponent)
+      },
+
+      {
+        path: 'payroll-monitoring',
+        loadComponent: () =>
+          import('./pages/workforce-management/Payroll Monitoring/wm-payroll-monitoring')
+            .then(m => m.WmPayrollMonitoringComponent)
+      },
+
+      {
+        path: 'workforce-categories',
+        loadComponent: () =>
+          import('./pages/workforce-management/Workforce Categories/wm-workforce-categories')
+            .then(m => m.WmWorkforceCategoriesComponent)
+      },
+
+      {
+        path: 'workforce-reports',
+        loadComponent: () =>
+          import('./pages/workforce-management/Workforce Reports/wm-workforce-reports')
+            .then(m => m.WmWorkforceReportsComponent)
+      }
+
+    ]
+  },
+
+  // =====================================================
+  // WILDCARD ROUTE
+  // =====================================================
+
   {
     path: '**',
     redirectTo: 'login'
   }
 
-
-
-    ]
-  }
-
 ];
+    
+  
+  

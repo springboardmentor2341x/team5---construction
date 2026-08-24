@@ -1,0 +1,338 @@
+<div class="dashboard">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h2>Workforce Dashboard</h2>
+      <p>
+        Monitor workers, assignments, attendance and payroll
+      </p>
+    </div>
+
+    <button class="add-worker-btn">
+      <span class="material-icons">person_add</span>
+      Register Worker
+    </button>
+
+  </div>
+
+
+  <!-- Summary Cards -->
+
+  <div class="summary-grid">
+
+    <!-- Total Workers -->
+
+    <div class="summary-card">
+
+      <div class="card-icon blue">
+        <span class="material-icons">groups</span>
+      </div>
+
+      <div class="card-content">
+        <span>Total Workers</span>
+        <h3>{{ totalWorkers | number }}</h3>
+        <small>Registered workforce</small>
+      </div>
+
+    </div>
+
+
+    <!-- Present -->
+
+    <div class="summary-card">
+
+      <div class="card-icon green">
+        <span class="material-icons">how_to_reg</span>
+      </div>
+
+      <div class="card-content">
+        <span>Present Today</span>
+        <h3>{{ presentWorkers | number }}</h3>
+        <small>Workers present</small>
+      </div>
+
+    </div>
+
+
+    <!-- Absent -->
+
+    <div class="summary-card">
+
+      <div class="card-icon red">
+        <span class="material-icons">person_off</span>
+      </div>
+
+      <div class="card-content">
+        <span>Absent Today</span>
+        <h3>{{ absentWorkers }}</h3>
+        <small>Workers absent</small>
+      </div>
+
+    </div>
+
+
+    <!-- Leave -->
+
+    <div class="summary-card">
+
+      <div class="card-icon orange">
+        <span class="material-icons">event_busy</span>
+      </div>
+
+      <div class="card-content">
+        <span>On Leave</span>
+        <h3>{{ leaveWorkers }}</h3>
+        <small>Approved leave</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Second Row -->
+
+  <div class="summary-grid second-row">
+
+    <div class="summary-card">
+
+      <div class="card-icon purple">
+        <span class="material-icons">assignment</span>
+      </div>
+
+      <div class="card-content">
+        <span>Active Assignments</span>
+        <h3>{{ activeAssignments }}</h3>
+        <small>Project assignments</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="card-icon teal">
+        <span class="material-icons">schedule</span>
+      </div>
+
+      <div class="card-content">
+        <span>Active Shifts</span>
+        <h3>{{ activeShifts }}</h3>
+        <small>Today's shifts</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="card-icon violet">
+        <span class="material-icons">payments</span>
+      </div>
+
+      <div class="card-content">
+        <span>Pending Payroll</span>
+        <h3>{{ pendingPayroll }}</h3>
+        <small>Workers pending</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="card-icon cyan">
+        <span class="material-icons">percent</span>
+      </div>
+
+      <div class="card-content">
+        <span>Attendance Rate</span>
+        <h3>{{ attendancePercentage }}%</h3>
+        <small>Today's attendance</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Main Dashboard Content -->
+
+  <div class="dashboard-grid">
+
+
+    <!-- Workforce Categories -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Workforce Categories</h3>
+          <p>Workers by category</p>
+        </div>
+
+        <span class="material-icons">
+          category
+        </span>
+
+      </div>
+
+
+      <div class="category-list">
+
+        @for (category of workforceCategories; track category.name) {
+
+          <div class="category-item">
+
+            <div class="category-left">
+
+              <div class="category-icon">
+                <span class="material-icons">
+                  {{ category.icon }}
+                </span>
+              </div>
+
+              <span>{{ category.name }}</span>
+
+            </div>
+
+            <strong>{{ category.count }}</strong>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <!-- Attendance Overview -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Attendance Overview</h3>
+          <p>Today's workforce attendance</p>
+        </div>
+
+        <span class="material-icons">
+          fact_check
+        </span>
+
+      </div>
+
+
+      <div class="attendance-circle">
+
+        <div class="circle-content">
+          <strong>{{ attendancePercentage }}%</strong>
+          <span>Attendance</span>
+        </div>
+
+      </div>
+
+
+      <div class="attendance-details">
+
+        <div>
+          <span class="dot present"></span>
+          Present
+          <strong>{{ presentWorkers }}</strong>
+        </div>
+
+        <div>
+          <span class="dot absent"></span>
+          Absent
+          <strong>{{ absentWorkers }}</strong>
+        </div>
+
+        <div>
+          <span class="dot leave"></span>
+          Leave
+          <strong>{{ leaveWorkers }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Project Workforce -->
+
+  <div class="dashboard-card project-card">
+
+    <div class="card-header">
+
+      <div>
+        <h3>Project-wise Workforce</h3>
+        <p>Workers assigned to active projects</p>
+      </div>
+
+      <span class="material-icons">
+        business
+      </span>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Project</th>
+            <th>Contractor</th>
+            <th>Workers</th>
+            <th>Workforce Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (project of projectWorkforce; track project.project) {
+
+            <tr>
+
+              <td>
+                <strong>{{ project.project }}</strong>
+              </td>
+
+              <td>
+                {{ project.contractor }}
+              </td>
+
+              <td>
+                <strong>{{ project.workers }}</strong>
+              </td>
+
+              <td>
+                <span class="status active">
+                  Active
+                </span>
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

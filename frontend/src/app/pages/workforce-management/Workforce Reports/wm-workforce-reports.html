@@ -1,0 +1,658 @@
+<div class="reports-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+  ====================================================== -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Workforce Reports</h1>
+
+      <p>
+        Generate and monitor workforce reports covering manpower,
+        attendance, shifts, allocation, payroll and contractors.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="exportReport()">
+
+        <span class="material-icons">
+          download
+        </span>
+
+        Export Report
+
+      </button>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="generateReport()">
+
+        <span class="material-icons">
+          assessment
+        </span>
+
+        Generate Report
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY CARDS
+  ====================================================== -->
+
+  <div class="summary-grid">
+
+    <!-- TOTAL WORKERS -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+
+        <span class="material-icons">
+          groups
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Total Workers</span>
+
+        <h2>
+          {{ totalWorkers }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+
+        <span class="material-icons">
+          domain
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Active Projects</span>
+
+        <h2>
+          {{ totalProjects }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRESENT -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+
+        <span class="material-icons">
+          how_to_reg
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Present Workers</span>
+
+        <h2>
+          {{ presentWorkers }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- ABSENT -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+
+        <span class="material-icons">
+          person_off
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Absent Workers</span>
+
+        <h2>
+          {{ absentWorkers }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       REPORT GENERATOR
+  ====================================================== -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+
+        <h2>Report Generator</h2>
+
+        <p>
+          Select the required workforce report and reporting period.
+        </p>
+
+      </div>
+
+      <span class="material-icons header-icon">
+        analytics
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- REPORT TYPE -->
+
+      <div class="form-group">
+
+        <label>
+          Report Type <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedReport">
+
+          <option
+            *ngFor="let report of reportTypes"
+            [value]="report">
+
+            {{ report }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PROJECT -->
+
+      <div class="form-group">
+
+        <label>
+          Project
+        </label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option value="">
+            All Projects
+          </option>
+
+          <option
+            *ngFor="let project of projects"
+            [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CATEGORY -->
+
+      <div class="form-group">
+
+        <label>
+          Workforce Category
+        </label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PERIOD -->
+
+      <div class="form-group">
+
+        <label>
+          Reporting Period <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedPeriod">
+
+          <option value="August 2026">
+            August 2026
+          </option>
+
+          <option value="July 2026">
+            July 2026
+          </option>
+
+          <option value="June 2026">
+            June 2026
+          </option>
+
+          <option value="Q2 2026">
+            Q2 2026
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="filterReport()">
+
+        <span class="material-icons">
+          filter_list
+        </span>
+
+        Apply Filters
+
+      </button>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="generateReport()">
+
+        <span class="material-icons">
+          description
+        </span>
+
+        Generate Report
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       REPORT OVERVIEW
+  ====================================================== -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+
+        <h2>Workforce Report Overview</h2>
+
+        <p>
+          Workforce performance and manpower summary across projects.
+        </p>
+
+      </div>
+
+      <button
+        class="filter-button"
+        type="button"
+        (click)="filterReport()">
+
+        <span class="material-icons">
+          filter_list
+        </span>
+
+        Filter
+
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================
+         REPORT TABLE
+    ==================================================== -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Report ID</th>
+
+            <th>Project</th>
+
+            <th>Category</th>
+
+            <th>Workers</th>
+
+            <th>Present</th>
+
+            <th>Absent</th>
+
+            <th>Shifts</th>
+
+            <th>Overtime</th>
+
+            <th>Payroll</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let record of workforceRecords">
+
+            <!-- REPORT ID -->
+
+            <td class="report-id">
+
+              {{ record.id }}
+
+            </td>
+
+
+            <!-- PROJECT -->
+
+            <td>
+
+              <strong>
+                {{ record.project }}
+              </strong>
+
+            </td>
+
+
+            <!-- CATEGORY -->
+
+            <td>
+
+              {{ record.category }}
+
+            </td>
+
+
+            <!-- WORKERS -->
+
+            <td>
+
+              <span class="worker-count">
+
+                <span class="material-icons">
+                  groups
+                </span>
+
+                {{ record.workers }}
+
+              </span>
+
+            </td>
+
+
+            <!-- PRESENT -->
+
+            <td class="present-value">
+
+              {{ record.present }}
+
+            </td>
+
+
+            <!-- ABSENT -->
+
+            <td class="absent-value">
+
+              {{ record.absent }}
+
+            </td>
+
+
+            <!-- SHIFTS -->
+
+            <td>
+
+              {{ record.shifts }}
+
+            </td>
+
+
+            <!-- OVERTIME -->
+
+            <td>
+
+              {{ record.overtime }} hrs
+
+            </td>
+
+
+            <!-- PAYROLL -->
+
+            <td class="amount">
+
+              ₹{{ record.payroll | number }}
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="getStatusClass(record.status)">
+
+                {{ record.status }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ACTION -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="View Report"
+                  (click)="viewReport(record)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+
+          <tr
+            *ngIf="workforceRecords.length === 0">
+
+            <td
+              colspan="11"
+              class="empty-state">
+
+              <span class="material-icons">
+                assessment
+              </span>
+
+              <h3>
+                No Workforce Reports Found
+              </h3>
+
+              <p>
+                Generate a workforce report to view report details.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       REPORT INSIGHTS
+  ====================================================== -->
+
+  <div class="insights-grid">
+
+    <div class="insight-card">
+
+      <div class="insight-icon blue">
+
+        <span class="material-icons">
+          trending_up
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Workforce Utilization</span>
+
+        <strong>92%</strong>
+
+        <p>
+          Overall workforce attendance performance.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="insight-card">
+
+      <div class="insight-icon orange">
+
+        <span class="material-icons">
+          schedule
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Overtime Hours</span>
+
+        <strong>492 hrs</strong>
+
+        <p>
+          Total overtime recorded for the period.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="insight-card">
+
+      <div class="insight-icon green">
+
+        <span class="material-icons">
+          payments
+        </span>
+
+      </div>
+
+      <div>
+
+        <span>Payroll Processed</span>
+
+        <strong>₹8.31 L</strong>
+
+        <p>
+          Workforce payroll processed for the period.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

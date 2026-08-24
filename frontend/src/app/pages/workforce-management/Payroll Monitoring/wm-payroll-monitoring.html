@@ -1,0 +1,708 @@
+<div class="payroll-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+  ====================================================== -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Payroll Monitoring</h1>
+
+      <p>
+        Monitor workforce payroll, salary processing, overtime,
+        deductions and payment status across projects.
+      </p>
+    </div>
+
+    <button
+      class="primary-button"
+      type="button"
+      (click)="processPayroll()">
+
+      <span class="material-icons">
+        payments
+      </span>
+
+      Process Payroll
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY CARDS
+  ====================================================== -->
+
+  <div class="summary-grid">
+
+    <!-- Total Payroll -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+        <span class="material-icons">
+          account_balance_wallet
+        </span>
+      </div>
+
+      <div>
+        <span>Total Payroll</span>
+        <h2>₹{{ totalPayroll | number }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Processed -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+        <span class="material-icons">
+          check_circle
+        </span>
+      </div>
+
+      <div>
+        <span>Processed</span>
+        <h2>{{ processedPayroll }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Pending -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+        <span class="material-icons">
+          pending_actions
+        </span>
+      </div>
+
+      <div>
+        <span>Pending Payments</span>
+        <h2>{{ pendingPayroll }}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- Workers -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+        <span class="material-icons">
+          groups
+        </span>
+      </div>
+
+      <div>
+        <span>Workers Covered</span>
+        <h2>{{ totalWorkers }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       PAYROLL PROCESSING
+  ====================================================== -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Payroll Processing</h2>
+
+        <p>
+          Select payroll details and calculate workforce payments.
+        </p>
+      </div>
+
+      <span class="material-icons header-icon">
+        calculate
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- PROJECT -->
+
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option value="">
+            Select Project
+          </option>
+
+          <option
+            *ngFor="let project of projects"
+            [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CONTRACTOR -->
+
+      <div class="form-group">
+
+        <label>
+          Contractor
+        </label>
+
+        <select [(ngModel)]="selectedContractor">
+
+          <option value="">
+            Select Contractor
+          </option>
+
+          <option
+            *ngFor="let contractor of contractors"
+            [value]="contractor">
+
+            {{ contractor }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PAY PERIOD -->
+
+      <div class="form-group">
+
+        <label>
+          Pay Period <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedPeriod">
+
+          <option value="">
+            Select Pay Period
+          </option>
+
+          <option value="01 Aug - 15 Aug 2026">
+            01 Aug - 15 Aug 2026
+          </option>
+
+          <option value="16 Aug - 31 Aug 2026">
+            16 Aug - 31 Aug 2026
+          </option>
+
+          <option value="August 2026">
+            August 2026
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORKFORCE CATEGORY -->
+
+      <div class="form-group">
+
+        <label>
+          Workforce Category
+        </label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          <option value="">
+            Select Category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORKERS -->
+
+      <div class="form-group">
+
+        <label>
+          Number of Workers
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="workerCount"
+          min="1"
+          placeholder="Enter worker count">
+
+      </div>
+
+
+      <!-- BASIC PAY -->
+
+      <div class="form-group">
+
+        <label>
+          Basic Pay
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="basicPay"
+          placeholder="Enter basic pay">
+
+      </div>
+
+
+      <!-- OVERTIME -->
+
+      <div class="form-group">
+
+        <label>
+          Overtime Hours
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="overtimeHours"
+          min="0"
+          placeholder="Enter overtime hours">
+
+      </div>
+
+
+      <!-- OVERTIME PAY -->
+
+      <div class="form-group">
+
+        <label>
+          Overtime Pay
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="overtimePay"
+          min="0"
+          placeholder="Enter overtime pay">
+
+      </div>
+
+
+      <!-- DEDUCTIONS -->
+
+      <div class="form-group">
+
+        <label>
+          Deductions
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="deductions"
+          min="0"
+          placeholder="Enter deductions">
+
+      </div>
+
+
+      <!-- PAYMENT DATE -->
+
+      <div class="form-group">
+
+        <label>
+          Payment Date
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="paymentDate">
+
+      </div>
+
+
+      <!-- PAYMENT STATUS -->
+
+      <div class="form-group">
+
+        <label>
+          Payment Status
+        </label>
+
+        <select [(ngModel)]="selectedStatus">
+
+          <option value="Pending">
+            Pending
+          </option>
+
+          <option value="Processing">
+            Processing
+          </option>
+
+          <option value="Paid">
+            Paid
+          </option>
+
+          <option value="On Hold">
+            On Hold
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- NET PAY -->
+
+      <div class="form-group">
+
+        <label>
+          Net Pay
+        </label>
+
+        <input
+          type="number"
+          [value]="netPay"
+          readonly>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="clearForm()">
+
+        Cancel
+
+      </button>
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="calculatePayroll()">
+
+        <span class="material-icons">
+          calculate
+        </span>
+
+        Calculate
+
+      </button>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="processPayroll()">
+
+        <span class="material-icons">
+          payments
+        </span>
+
+        Process Payroll
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       PAYROLL MONITORING
+  ====================================================== -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Payroll Monitoring</h2>
+
+        <p>
+          Track payroll records and payment status across active
+          construction projects.
+        </p>
+      </div>
+
+      <div class="header-actions">
+
+        <button
+          class="filter-button"
+          type="button"
+          (click)="filterPayroll()">
+
+          <span class="material-icons">
+            filter_list
+          </span>
+
+          Filter
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         PAYROLL TABLE
+    ==================================================== -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Payroll ID</th>
+
+            <th>Worker</th>
+
+            <th>Project</th>
+
+            <th>Category</th>
+
+            <th>Pay Period</th>
+
+            <th>Basic Pay</th>
+
+            <th>Overtime</th>
+
+            <th>Deductions</th>
+
+            <th>Net Pay</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let payroll of payrollRecords">
+
+            <!-- ID -->
+
+            <td class="payroll-id">
+
+              {{ payroll.id }}
+
+            </td>
+
+
+            <!-- WORKER -->
+
+            <td>
+
+              <strong>
+                {{ payroll.worker }}
+              </strong>
+
+            </td>
+
+
+            <!-- PROJECT -->
+
+            <td>
+
+              {{ payroll.project }}
+
+            </td>
+
+
+            <!-- CATEGORY -->
+
+            <td>
+
+              {{ payroll.category }}
+
+            </td>
+
+
+            <!-- PERIOD -->
+
+            <td>
+
+              {{ payroll.period }}
+
+            </td>
+
+
+            <!-- BASIC PAY -->
+
+            <td class="amount">
+
+              ₹{{ payroll.basicPay | number }}
+
+            </td>
+
+
+            <!-- OVERTIME -->
+
+            <td class="amount">
+
+              ₹{{ payroll.overtime | number }}
+
+            </td>
+
+
+            <!-- DEDUCTIONS -->
+
+            <td class="amount deduction">
+
+              ₹{{ payroll.deductions | number }}
+
+            </td>
+
+
+            <!-- NET PAY -->
+
+            <td class="amount net-pay">
+
+              ₹{{ payroll.netPay | number }}
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="getStatusClass(payroll.status)">
+
+                {{ payroll.status }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ACTION -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="View"
+                  (click)="viewPayroll(payroll)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="Edit"
+                  (click)="editPayroll(payroll)">
+
+                  <span class="material-icons">
+                    edit
+                  </span>
+
+                </button>
+
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="Process Payment"
+                  (click)="processPayment(payroll)">
+
+                  <span class="material-icons">
+                    payments
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+
+          <tr
+            *ngIf="payrollRecords.length === 0">
+
+            <td
+              colspan="11"
+              class="empty-state">
+
+              <span class="material-icons">
+                payments
+              </span>
+
+              <h3>
+                No Payroll Records Found
+              </h3>
+
+              <p>
+                Process payroll to create workforce payment records.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

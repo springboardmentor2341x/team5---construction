@@ -1,0 +1,284 @@
+<div class="attendance-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div class="header-content">
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Attendance Tracking</h1>
+
+      <p>
+        Monitor worker attendance, check-in times, check-out times,
+        shifts and daily workforce presence.
+      </p>
+    </div>
+
+    <button class="primary-button" (click)="markAttendance()">
+      <span class="material-icons">how_to_reg</span>
+      Mark Attendance
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-icon blue">
+        <span class="material-icons">groups</span>
+      </div>
+
+      <div class="summary-info">
+        <span>Total Workers</span>
+        <h2>{{ totalWorkers }}</h2>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon green">
+        <span class="material-icons">check_circle</span>
+      </div>
+
+      <div class="summary-info">
+        <span>Present</span>
+        <h2>{{ presentCount }}</h2>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon red">
+        <span class="material-icons">cancel</span>
+      </div>
+
+      <div class="summary-info">
+        <span>Absent</span>
+        <h2>{{ absentCount }}</h2>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon orange">
+        <span class="material-icons">schedule</span>
+      </div>
+
+      <div class="summary-info">
+        <span>Late</span>
+        <h2>{{ lateCount }}</h2>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ATTENDANCE CONTROL CARD -->
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Attendance Records</h2>
+
+        <p>
+          View and manage daily workforce attendance.
+        </p>
+      </div>
+
+      <div class="header-actions">
+
+        <div class="date-box">
+          <span class="material-icons">calendar_today</span>
+
+          <input
+            type="date"
+            [(ngModel)]="selectedDate">
+        </div>
+
+        <button class="filter-button" (click)="filterAttendance()">
+          <span class="material-icons">filter_list</span>
+          Filter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+      <table class="attendance-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Attendance ID</th>
+
+            <th>Worker</th>
+
+            <th>Project</th>
+
+            <th>Date</th>
+
+            <th>Shift</th>
+
+            <th>Check In</th>
+
+            <th>Check Out</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let record of attendanceRecords">
+
+            <td>
+              <span class="attendance-id">
+                {{ record.id }}
+              </span>
+            </td>
+
+
+            <td>
+
+              <div class="worker-cell">
+
+                <div class="worker-avatar">
+                  {{ record.worker.charAt(0) }}
+                </div>
+
+                <div class="worker-details">
+
+                  <strong>
+                    {{ record.worker }}
+                  </strong>
+
+                  <small>
+                    {{ record.category }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <td>
+              {{ record.project }}
+            </td>
+
+
+            <td>
+              {{ record.date }}
+            </td>
+
+
+            <td>
+              {{ record.shift }}
+            </td>
+
+
+            <td>
+              <span class="time-value">
+                {{ record.checkIn }}
+              </span>
+            </td>
+
+
+            <td>
+              <span class="time-value">
+                {{ record.checkOut }}
+              </span>
+            </td>
+
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="getStatusClass(record.status)">
+
+                <span class="status-dot"></span>
+
+                {{ record.status }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="icon-button"
+                  title="View"
+                  (click)="viewAttendance(record)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+
+                <button
+                  class="icon-button"
+                  title="Edit"
+                  (click)="editAttendance(record)">
+
+                  <span class="material-icons">
+                    edit
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <tr *ngIf="attendanceRecords.length === 0">
+
+            <td colspan="9" class="empty-state">
+
+              <span class="material-icons">
+                event_busy
+              </span>
+
+              <h3>No Attendance Records</h3>
+
+              <p>
+                There are no attendance records available.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
