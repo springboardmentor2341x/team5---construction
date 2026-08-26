@@ -1,0 +1,203 @@
+<div class="low-stock-page">
+
+  <!-- HEADER -->
+  <section class="page-header">
+
+    <div>
+      <span class="section-label">MATERIAL & INVENTORY</span>
+
+      <h1>Low Stock Alerts</h1>
+
+      <p>
+        Monitor materials that are below their minimum required stock levels.
+      </p>
+    </div>
+
+    <button
+      class="secondary-btn"
+      routerLink="/material-inventory">
+
+      ← Back to Inventory
+
+    </button>
+
+  </section>
+
+
+  <!-- SUMMARY CARDS -->
+  <section class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        ⚠️
+      </div>
+
+      <h2>{{ totalLowStock }}</h2>
+
+      <h3>Low Stock Items</h3>
+
+      <p>Materials requiring attention</p>
+
+    </div>
+
+
+    <div class="stat-card critical-card">
+
+      <div class="stat-icon">
+        🚨
+      </div>
+
+      <h2>{{ criticalItems }}</h2>
+
+      <h3>Critical Items</h3>
+
+      <p>Immediate action required</p>
+
+    </div>
+
+
+    <div class="stat-card shortage-card">
+
+      <div class="stat-icon">
+        📉
+      </div>
+
+      <h2>{{ totalShortage }}</h2>
+
+      <h3>Total Shortage</h3>
+
+      <p>Units below minimum level</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- LOW STOCK TABLE -->
+  <section class="table-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Materials Below Minimum Stock</h2>
+
+        <p>
+          Materials that need replenishment
+        </p>
+      </div>
+
+      <span class="item-count">
+        {{ totalLowStock }} items
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Material ID</th>
+            <th>Material</th>
+            <th>Category</th>
+            <th>Available</th>
+            <th>Minimum Required</th>
+            <th>Shortage</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (item of lowStockItems; track item.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ item.id }}</strong>
+              </td>
+
+              <td>
+                <strong>{{ item.material }}</strong>
+              </td>
+
+              <td>
+                {{ item.category }}
+              </td>
+
+              <td>
+                {{ item.available }} {{ item.unit }}
+              </td>
+
+              <td>
+                {{ item.minimum }} {{ item.unit }}
+              </td>
+
+              <td class="shortage">
+                {{ item.shortage }} {{ item.unit }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status"
+                  [class.critical]="item.status === 'Critical'"
+                  [class.low]="item.status === 'Low'">
+
+                  {{ item.status }}
+
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- ALERT INFORMATION -->
+  <section class="info-card">
+
+    <div class="info-icon">
+      ⚠️
+    </div>
+
+    <div>
+
+      <h3>Stock Replenishment Required</h3>
+
+      <p>
+        These materials have fallen below their minimum stock levels.
+        Consider creating purchase or material requests to replenish
+        the required quantities.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- BACK -->
+  <div class="back-section">
+
+    <a routerLink="/material-inventory">
+      ← Back to Material & Inventory
+    </a>
+
+  </div>
+
+</div>

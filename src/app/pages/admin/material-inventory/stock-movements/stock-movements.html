@@ -1,0 +1,291 @@
+<div class="movements-page">
+
+  <!-- HEADER -->
+
+  <section class="page-header">
+
+    <div>
+
+      <span class="section-label">
+        MATERIAL & INVENTORY
+      </span>
+
+      <h1>Stock Movements</h1>
+
+      <p>
+        Track material receipts, allocations and consumption
+        across all projects and warehouses.
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="back-btn"
+        routerLink="/material-inventory">
+        ← Dashboard
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <section class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📊
+      </div>
+
+      <div>
+        <h2>{{ totalMovements }}</h2>
+        <p>Total Movements</p>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card received-card">
+
+      <div class="stat-icon">
+        📥
+      </div>
+
+      <div>
+        <h2>{{ receivedCount }}</h2>
+        <p>Received</p>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card allocated-card">
+
+      <div class="stat-icon">
+        📤
+      </div>
+
+      <div>
+        <h2>{{ allocatedCount }}</h2>
+        <p>Allocated</p>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card consumed-card">
+
+      <div class="stat-icon">
+        📦
+      </div>
+
+      <div>
+        <h2>{{ consumedCount }}</h2>
+        <p>Consumed</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH + FILTER -->
+
+  <section class="toolbar">
+
+    <div class="search-box">
+
+      <span>🔍</span>
+
+      <input
+        type="text"
+        placeholder="Search material, type, location or ID..."
+        [(ngModel)]="searchTerm">
+
+    </div>
+
+
+    <button
+      class="filter-btn"
+      (click)="toggleFilters()">
+
+      🔍 Filter
+
+    </button>
+
+  </section>
+
+
+  <!-- FILTER PANEL -->
+
+  @if (showFilters) {
+
+    <div class="filter-panel">
+
+      <div class="filter-group">
+
+        <label>Movement Type</label>
+
+        <select [(ngModel)]="selectedType">
+
+          <option value="All">
+            All Movements
+          </option>
+
+          <option value="Received">
+            Received
+          </option>
+
+          <option value="Allocated">
+            Allocated
+          </option>
+
+          <option value="Consumed">
+            Consumed
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="clear-filter-btn"
+        (click)="clearFilters()">
+
+        Clear Filters
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- MOVEMENTS TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Recent Stock Movements</h2>
+
+        <p>
+          Latest material receipts, allocations and consumption
+        </p>
+
+      </div>
+
+      <span class="item-count">
+        {{ filteredMovements.length }} movements
+      </span>
+
+    </div>
+
+
+    <div class="movements-table">
+
+      <!-- HEADER -->
+
+      <div class="table-row table-head">
+
+        <span>ID</span>
+        <span>Date</span>
+        <span>Material</span>
+        <span>Type</span>
+        <span>Quantity</span>
+        <span>Location</span>
+
+      </div>
+
+
+      <!-- DATA -->
+
+      @for (movement of filteredMovements; track movement.id) {
+
+        <div class="table-row">
+
+          <span class="movement-id">
+            {{ movement.id }}
+          </span>
+
+          <span>
+            {{ movement.date }}
+          </span>
+
+          <strong>
+            {{ movement.material }}
+          </strong>
+
+          <span>
+
+            <span
+              class="movement-type"
+              [class.received]="movement.type === 'Received'"
+              [class.allocated]="movement.type === 'Allocated'"
+              [class.consumed]="movement.type === 'Consumed'">
+
+              @if (movement.type === 'Received') {
+                + Received
+              }
+
+              @if (movement.type === 'Allocated') {
+                - Allocated
+              }
+
+              @if (movement.type === 'Consumed') {
+                - Consumed
+              }
+
+            </span>
+
+          </span>
+
+          <span
+            class="quantity"
+            [class.positive]="movement.type === 'Received'"
+            [class.negative]="movement.type !== 'Received'">
+
+            {{ movement.type === 'Received' ? '+' : '-' }}
+            {{ movement.quantity | number }}
+            {{ movement.unit }}
+
+          </span>
+
+          <span>
+            {{ movement.location }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    @if (filteredMovements.length === 0) {
+
+      <div class="empty-state">
+
+        <div>📊</div>
+
+        <h3>No movements found</h3>
+
+        <p>
+          Try changing your search or filter.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+
+</div>

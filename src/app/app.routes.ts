@@ -10,14 +10,54 @@ import { AddUser } from './pages/admin/user-management/add-user/add-user';
 import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
 import { ViewProject } from './pages/admin/project-management/view-project/view-project';
+import { SiteEngineers } from './pages/admin/site-engineers/site-engineers';
+import { MaterialInventory } from './pages/admin/material-inventory/material-inventory';
+import { Inventory } from './pages/admin/material-inventory/inventory/inventory';
+import { MaterialRequests } from './pages/admin/material-inventory/material-requests/material-requests';
+import { NewMaterialRequest } from './pages/admin/material-inventory/new-material-request/new-material-request';
+import { LowStock } from './pages/admin/material-inventory/low-stock/low-stock';
+import { MaterialAllocation } from './pages/admin/material-inventory/material-allocation/material-allocation';
+import { StockMovements } from './pages/admin/material-inventory/stock-movements/stock-movements';
 export const routes: Routes = [
 
   {
     path: '',
     component: AdminLayout,
 
-    children: [
-
+    children: [{
+  path: 'material-inventory/stock-movements',
+  component: StockMovements
+},{
+  path: 'material-inventory/material-allocation',
+  component: MaterialAllocation
+},
+      {
+  path: 'material-inventory/low-stock',
+  component: LowStock
+},
+{
+  path: 'low-stock',
+  component: LowStock
+},
+      {
+  path: 'new-material-request',
+  component: NewMaterialRequest
+},{
+  path: 'material-requests',
+  component: MaterialRequests
+},
+      {
+  path: 'material-inventory/inventory',
+  component: Inventory
+},
+      {
+  path: 'material-inventory',
+  component: MaterialInventory
+},
+{
+  path: 'site-engineers',
+  component: SiteEngineers
+},
       {
         path: '',
         redirectTo: 'dashboard',
@@ -44,10 +84,7 @@ export const routes: Routes = [
   path: 'edit-user',
   component: EditUser
 },
-{
-    path: 'projects',
-    component: Projects
-},
+
 {
   path: 'projects',
   component: Projects
@@ -68,10 +105,7 @@ export const routes: Routes = [
   path: 'add-project',
   component: AddProject
 },
-{
-  path: 'project-details',
-  component: ProjectDetails
-},
+
 
     ]
 

@@ -1,0 +1,265 @@
+<div class="workforce-page">
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Workforce Management</h1>
+
+      <p>
+        Manage and monitor workers across all construction projects.
+      </p>
+    </div>
+
+    <button class="add-btn" (click)="addWorker()">
+      <mat-icon>person_add</mat-icon>
+      Add Worker
+    </button>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <div class="toolbar">
+
+    <input
+      type="text"
+      placeholder="Search workers, employee ID, contractor or project..."
+      [(ngModel)]="searchTerm"
+    />
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+    <div class="summary-card">
+      <h3>{{ totalWorkers }}</h3>
+      <span>Total Workers</span>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ activeWorkers }}</h3>
+      <span>Active Workers</span>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ onLeaveWorkers }}</h3>
+      <span>On Leave</span>
+    </div>
+
+    <div class="summary-card">
+      <h3>{{ inactiveWorkers }}</h3>
+      <span>Inactive</span>
+    </div>
+
+  </div>
+
+
+  <!-- WORKFORCE TABLE -->
+
+  <div class="table-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Worker</th>
+
+          <th>Employee ID</th>
+
+          <th>Contractor</th>
+
+          <th>Project</th>
+
+          <th>Role</th>
+
+          <th>Status</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        @for (worker of filteredWorkers; track worker.id) {
+
+          <tr>
+
+            <td>
+              <strong>{{ worker.name }}</strong>
+            </td>
+
+            <td>
+              {{ worker.employeeId }}
+            </td>
+
+            <td>
+              {{ worker.contractor }}
+            </td>
+
+            <td>
+              {{ worker.project }}
+            </td>
+
+            <td>
+              {{ worker.role }}
+            </td>
+
+            <td>
+
+              <span
+                class="status"
+                [class]="getStatusClass(worker.status)"
+              >
+                {{ worker.status }}
+              </span>
+
+            </td>
+
+            <td>
+
+              <button
+                class="icon-btn"
+                title="View Worker"
+                (click)="viewWorker(worker)"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+              <button
+                class="icon-btn"
+                title="Edit Worker"
+                (click)="editWorker(worker)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                class="icon-btn delete"
+                title="Delete Worker"
+                (click)="openDeletePopup(worker)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+        @if (filteredWorkers.length === 0) {
+
+          <tr>
+
+            <td colspan="7" style="text-align:center; padding:30px;">
+              No workers found.
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+
+    Showing {{ filteredWorkers.length }} of {{ totalWorkers }} workers
+
+  </div>
+
+
+</div>
+
+
+<!-- DELETE CONFIRMATION POPUP -->
+
+@if (showDeletePopup) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <h2>Delete Worker?</h2>
+
+      <p>
+        Are you sure you want to delete
+        <strong>{{ selectedWorker?.name }}</strong>?
+      </p>
+
+      <p class="warning">
+        This action cannot be undone.
+      </p>
+
+      <div class="popup-buttons">
+
+        <button
+          class="cancel-btn"
+          (click)="cancelDelete()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="delete-btn"
+          (click)="confirmDelete()"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+
+
+<!-- SUCCESS POPUP -->
+
+@if (showSuccessPopup) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h2>Worker Deleted</h2>
+
+      <p>
+        The worker has been removed successfully.
+      </p>
+
+      <button
+        class="ok-btn"
+        (click)="closeSuccessPopup()"
+      >
+        OK
+      </button>
+
+    </div>
+
+  </div>
+
+}

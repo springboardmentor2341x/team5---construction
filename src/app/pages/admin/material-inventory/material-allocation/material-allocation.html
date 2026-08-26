@@ -1,0 +1,291 @@
+<div class="allocation-page">
+
+  <!-- HEADER -->
+
+  <section class="page-header">
+
+    <div>
+
+      <span class="section-label">
+        MATERIAL & INVENTORY
+      </span>
+
+      <h1>Material Allocations</h1>
+
+      <p>
+        View and manage materials currently assigned
+        to construction projects.
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="back-btn"
+        routerLink="/material-inventory">
+        ← Dashboard
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY -->
+
+  <section class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        🏗️
+      </div>
+
+      <div>
+
+        <h2>{{ totalAllocations }}</h2>
+
+        <p>Total Allocations</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📦
+      </div>
+
+      <div>
+
+        <h2>{{ totalAllocatedQuantity | number }}</h2>
+
+        <p>Total Quantity Allocated</p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH & FILTER -->
+
+  <section class="toolbar">
+
+    <div class="search-box">
+
+      <span>🔍</span>
+
+      <input
+        type="text"
+        placeholder="Search material, project or activity..."
+        [(ngModel)]="searchTerm">
+
+    </div>
+
+
+    <select
+      class="project-filter"
+      [(ngModel)]="selectedProject">
+
+      <option value="All">
+        All Projects
+      </option>
+
+      <option value="Hyderabad Commercial Complex">
+        Hyderabad Commercial Complex
+      </option>
+
+      <option value="Government Hospital">
+        Government Hospital
+      </option>
+
+      <option value="Residential Apartments">
+        Residential Apartments
+      </option>
+
+      <option value="Office Building">
+        Office Building
+      </option>
+
+    </select>
+
+  </section>
+
+
+  <!-- ALLOCATION TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Material Allocations</h2>
+
+        <p>
+          Materials currently assigned to construction projects
+        </p>
+
+      </div>
+
+      <span class="item-count">
+        {{ filteredAllocations.length }} allocations
+      </span>
+
+    </div>
+
+
+    <div class="allocation-table">
+
+      <!-- TABLE HEADER -->
+
+      <div class="table-row table-head">
+
+        <span>ID</span>
+        <span>Material</span>
+        <span>Project</span>
+        <span>Activity</span>
+        <span>Quantity</span>
+        <span>Date</span>
+        <span>Action</span>
+
+      </div>
+
+
+      <!-- TABLE DATA -->
+
+      @for (allocation of filteredAllocations; track allocation.id) {
+
+        <div class="table-row">
+
+          <span class="allocation-id">
+            {{ allocation.id }}
+          </span>
+
+          <strong>
+            {{ allocation.material }}
+          </strong>
+
+          <span>
+            {{ allocation.project }}
+          </span>
+
+          <span>
+            {{ allocation.activity }}
+          </span>
+
+          <span class="quantity">
+            {{ allocation.quantity | number }}
+            {{ allocation.unit }}
+          </span>
+
+          <span>
+            {{ allocation.date }}
+          </span>
+
+          <div class="actions">
+
+            <button
+              class="action-btn"
+              (click)="viewAllocation(allocation)"
+              title="View">
+              👁
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    @if (filteredAllocations.length === 0) {
+
+      <div class="empty-state">
+
+        <div>🏗️</div>
+
+        <h3>No allocations found</h3>
+
+        <p>
+          Try searching with a different material,
+          project or activity.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- VIEW POPUP -->
+
+  @if (showViewPopup && selectedAllocation) {
+
+    <div class="popup-overlay">
+
+      <div class="popup">
+
+        <h2>Allocation Details</h2>
+
+        <div class="details">
+
+          <p>
+            <strong>Allocation ID:</strong>
+            {{ selectedAllocation.id }}
+          </p>
+
+          <p>
+            <strong>Material:</strong>
+            {{ selectedAllocation.material }}
+          </p>
+
+          <p>
+            <strong>Project:</strong>
+            {{ selectedAllocation.project }}
+          </p>
+
+          <p>
+            <strong>Activity:</strong>
+            {{ selectedAllocation.activity }}
+          </p>
+
+          <p>
+            <strong>Quantity:</strong>
+            {{ selectedAllocation.quantity | number }}
+            {{ selectedAllocation.unit }}
+          </p>
+
+          <p>
+            <strong>Allocated By:</strong>
+            {{ selectedAllocation.allocatedBy }}
+          </p>
+
+          <p>
+            <strong>Date:</strong>
+            {{ selectedAllocation.date }}
+          </p>
+
+        </div>
+
+        <button
+          class="ok-btn"
+          (click)="closeViewPopup()">
+          OK
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
