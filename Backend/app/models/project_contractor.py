@@ -7,6 +7,7 @@ from database import Base
 
 class ProjectContractor(Base):
     __tablename__ = "project_contractors"
+   
 
     project_contractor_id = Column(Integer, primary_key=True, index=True)
 

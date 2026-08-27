@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-project-manager-dashboard',
   standalone: true,
-  imports: [RouterLink,CommonModule],
+  imports: [CommonModule],
   templateUrl: './project-manager-dashboard.html',
   styleUrls: ['./project-manager-dashboard.css']
 })

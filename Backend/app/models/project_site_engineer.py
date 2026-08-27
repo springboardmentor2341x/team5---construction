@@ -6,24 +6,25 @@ from database import Base
 
 
 class ProjectSiteEngineer(Base):
-    __tablename__ = "project_site_engineers"
+    # __tablename__ = "project_site_engineers"
+    __tablename__ = "projectsiteengineers"
 
     project_site_engineer_id = Column(Integer, primary_key=True, index=True)
 
-    project_id = Column(Integer, ForeignKey("projects.project_id"))
-    site_engineer_id = Column(Integer, ForeignKey("users.user_id"))
+    project_id = Column(Integer, ForeignKey("projects.project_id"),nullable=False)
+    site_engineer_id = Column(Integer, ForeignKey("users.user_id"),nullable=False)
 
-    specialization = Column(String(100))
+    #specialization = Column(String(100))
 
-    assigned_date = Column(Date)
+    assigned_date = Column(Date,nullable=False)
     end_date = Column(Date)
 
-    assignment_status = Column(String(50))
+    assignment_status = Column(String(20), default="Assigned")
 
-    created_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now()
-    )
+    # created_at = Column(
+    #     DateTime(timezone=True),
+    #     server_default=func.now()
+    # )
 
     project = relationship(
         "Project",
