@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
 
-interface Project {
+export interface Project {
   id: string;
   name: string;
   location: string;
@@ -14,6 +15,12 @@ interface Project {
   status: 'In Progress' | 'Completed' | 'Delayed';
   priority: 'High' | 'Medium' | 'Low';
 }
+
+
+
+
+
+
 
 @Component({
   selector: 'app-se-assigned-projects',
@@ -142,5 +149,12 @@ export class SeAssignedProjects {
       p => p.status === 'Delayed'
     ).length;
   }
+
+
+
+
+
+  
+  
 
 }
