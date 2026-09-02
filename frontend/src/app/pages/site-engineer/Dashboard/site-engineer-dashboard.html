@@ -262,8 +262,9 @@
 
       <tbody>
 
-        @for(item of milestones; track item.name){
+        @for(item of milestones(); track item.name){
 
+          
         <tr>
 
           <td>{{item.name}}</td>

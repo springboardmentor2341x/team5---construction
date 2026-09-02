@@ -15,34 +15,36 @@
 
     </div>
 
+   
+  
   </div>
 
   <!-- ================= Project Information ================= -->
 
-  <div class="details-card">
+  <div class="details-card" >
 
     <h3>Project Information</h3>
 
-    <div class="details-grid">
+    <div class="details-grid" >
 
       <div class="detail-box">
         <label>Project Name</label>
-        <span>{{ milestone.projectName }}</span>
+        <span>{{ milestones()[0]?.description }}</span>
       </div>
 
       <div class="detail-box">
         <label>Milestone</label>
-        <span>{{ milestone.milestoneName }}</span>
+        <span>{{ milestones()[0]?.milestone_name}}</span>
       </div>
 
       <div class="detail-box">
         <label>Site Engineer</label>
-        <span>{{ milestone.siteEngineer }}</span>
+        <span>{{ milestonedumy.siteEngineer }}</span>
       </div>
 
       <div class="detail-box">
         <label>Project Manager</label>
-        <span>{{ milestone.projectManager }}</span>
+        <span>{{ milestonedumy.projectManager }}</span>
       </div>
 
     </div>
@@ -59,17 +61,17 @@
 
       <div class="detail-box">
         <label>Planned Date</label>
-        <span>{{ milestone.plannedDate }}</span>
+        <span>{{ milestones()[0]?.planned_start_date }}</span>
       </div>
 
       <div class="detail-box">
         <label>Actual Date</label>
-        <span>{{ milestone.actualDate }}</span>
+        <span>{{ milestones()[0]?.actual_start_date }}</span>
       </div>
 
       <div class="detail-box">
         <label>Progress</label>
-        <span>{{ milestone.progress }}</span>
+        <span>{{ milestones()[0]?.progress_percentage }}</span>
       </div>
 
       <div class="detail-box">
@@ -77,7 +79,7 @@
 
         <span class="status-badge success">
 
-          {{ milestone.status }}
+          {{ milestones()[0]?.status }}
 
         </span>
 
@@ -95,7 +97,7 @@
 
     <ul class="activity-list">
 
-      @for(activity of milestone.activities; track activity){
+      @for(activity of milestonedumy.activities; track activity){
 
       <li>
 
@@ -119,17 +121,17 @@
 
       <div class="detail-box">
         <label>Verified By</label>
-        <span>{{ milestone.verifiedBy }}</span>
+        <span>{{ milestonedumy.verifiedBy }}</span>
       </div>
 
       <div class="detail-box">
         <label>Quality Status</label>
-        <span>{{ milestone.qualityStatus }}</span>
+        <span>{{ milestonedumy.qualityStatus }}</span>
       </div>
 
       <div class="detail-box">
         <label>Safety Status</label>
-        <span>{{ milestone.safetyStatus }}</span>
+        <span>{{ milestonedumy.safetyStatus }}</span>
       </div>
 
     </div>
@@ -144,7 +146,7 @@
 
     <div class="remarks-box">
 
-      {{ milestone.remarks }}
+      {{ milestonedumy.remarks }}
 
     </div>
 

@@ -208,7 +208,7 @@ export const routes: Routes = [
             .then(m => m.SeMilestones)
       },
       {
-        path:'milestone-details',
+        path:'milestone-details/:id',
         loadComponent: () =>
           import('./pages/site-engineer/milestone-details/milestone-details')
           .then(m => m.MilestoneDetails)

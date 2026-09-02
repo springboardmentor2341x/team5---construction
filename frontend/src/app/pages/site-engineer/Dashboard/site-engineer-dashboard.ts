@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal,computed } from '@angular/core';
 //import { RouterLink} from '@angular/router';
+import {Milestone,ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
+
 
 interface WorkProgress {
   category: string;
@@ -106,34 +108,41 @@ export class SiteEngineerDashboard {
   // MILESTONES
   // =========================
 
-  milestones = [
+  // milestones = [
 
-    {
-      name: 'Foundation',
-      status: 'Completed'
-    },
+  //   {
+  //     name: 'Foundation',
+     
+  //     status: 'Completed'
+  //   },
 
-    {
-      name: 'Structural',
-      status: 'In Progress'
-    },
+  //   {
+  //     name: 'Structural',
+  //     status: 'In Progress'
+  //   },
 
-    {
-      name: 'Electrical',
-      status: 'Pending'
-    },
+  //   {
+  //     name: 'Electrical',
+  //     status: 'Pending'
+  //   },
 
-    {
-      name: 'Plumbing',
-      status: 'Pending'
-    },
+  //   {
+  //     name: 'Plumbing',
+  //     status: 'Pending'
+  //   },
 
-    {
-      name: 'Finishing',
-      status: 'Pending'
-    }
+  //   {
+  //     name: 'Finishing',
+  //     status: 'Pending'
+  //   }
 
-  ];
+  // ];
+  milestones = computed(() =>
+  this.milestonedata().map((item: Milestone) => ({
+    name: item.milestone_name,
+    status: item.status
+  }))
+);
 
   // =========================
   // ACTIVITY LOGS
@@ -200,5 +209,30 @@ export class SiteEngineerDashboard {
     }
 
   ];
+
+  constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService){}
+  
+    ngOnInit(): any {
+      this.getmilestonedetail();
+    }
+  // milestonedata= signal<Milestone[]>([])| undefined>(undefined)
+  milestonedata= signal<Milestone[]|any |null>(null)
+    getmilestonedetail(): any {
+      this.ProjectSiteEngineerService.getmilestonedetail().subscribe({
+        next:(data)=>{
+          
+          this.milestonedata.set(data)
+         
+                console.log(this.milestonedata()[0].milestone_name ?? '');
+                console.log(this.milestonedata()[0].description ?? '');
+             
+        },
+        error: (error)=>{
+          console.error('somthing is wrong', error)
+        }
+        
+      })
+       
+    }
 
 }

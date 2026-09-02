@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {  signal,computed } from '@angular/core';
+import {Milestone,ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
+
 
 @Component({
   selector: 'app-milestone-details',
@@ -9,44 +12,76 @@ import { RouterLink } from '@angular/router';
   styleUrl: './milestone-details.css',
 })
 export class MilestoneDetails {
-   milestone = {
+    milestonedumy = {
 
-    milestoneName: 'Foundation Completed',
+  //   milestoneName: 'Foundation Completed',
 
-    projectName: 'City Mall Construction',
+  //   projectName: 'City Mall Construction',
 
-    siteEngineer: 'Saurabh Pandey',
+     siteEngineer: 'Saurabh Pandey',
 
-    projectManager: 'Asma',
+     projectManager: 'Asma',
 
-    plannedDate: '15 Aug 2026',
+  //   plannedDate: '15 Aug 2026',
 
-    actualDate: '14 Aug 2026',
+  //   actualDate: '14 Aug 2026',
 
-    progress: '100%',
+  //   progress: '100%',
 
-    status: 'Completed',
+  //   status: 'Completed',
 
-    verifiedBy: 'Project Manager',
+     verifiedBy: 'Project Manager',
 
-    activities: [
+     activities: [
 
       'Excavation Completed',
 
-      'Steel Reinforcement Installed',
+       'Steel Reinforcement Installed',
 
-      'Concrete Pouring Completed',
+       'Concrete Pouring Completed',
 
-      'Foundation Inspection Passed'
+       'Foundation Inspection Passed'
 
-    ],
+     ],
 
-    qualityStatus: 'Approved',
+     qualityStatus: 'Approved',
 
-    safetyStatus: 'No Safety Issues',
+     safetyStatus: 'No Safety Issues',
 
-    remarks:
-      'Foundation work completed successfully before the planned schedule.'
+     remarks:
+       'Foundation work completed successfully before the planned schedule.'
 
-  };
+   };
+
+
+
+  milestones =signal<Milestone[]>([]);
+
+  constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService,
+    private route:ActivatedRoute
+  ){}
+    
+      ngOnInit(): any {
+        const id = Number(this.route.snapshot.paramMap.get('id'))
+
+        console.log('selected milestone id ', id)
+        this.getmilestonedetail(id);
+      }
+  
+      getmilestonedetail(id:number): void {
+        this.ProjectSiteEngineerService.getmilestonedetailbyId(id).subscribe({
+          next:(data)=>{
+            this.milestones.set([data]);
+             console.log('Milestones signal:', this.milestones());
+          },
+          error: (error)=>{
+            console.error('somthing is wrong', error)
+          }
+          
+        })
+         
+      }
+  
+
+
 }

@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
+import {Projectty, ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
 
 export interface Project {
   id: string;
@@ -15,10 +15,6 @@ export interface Project {
   status: 'In Progress' | 'Completed' | 'Delayed';
   priority: 'High' | 'Medium' | 'Low';
 }
-
-
-
-
 
 
 
@@ -152,9 +148,24 @@ export class SeAssignedProjects {
 
 
 
+constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService){}
 
+  ngOnInit(): any {
+    this.getmilestonedetail();
+  }
 
-  
+  getmilestonedetail(): any {
+    this.ProjectSiteEngineerService.getmilestonedetail().subscribe({
+      next:(data)=>{
+        console.log(data);
+      },
+      error: (error)=>{
+        console.error('somthing is wrong', error)
+      }
+      
+    })
+     
+  }
   
 
 }

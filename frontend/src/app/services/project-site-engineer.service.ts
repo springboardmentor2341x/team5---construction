@@ -32,16 +32,37 @@ export interface Projectty {
   updated_at: string;
 }
 
+export interface Milestone {
+  milestone_name: string|null;
+  description: string;
+  status: 'Planning' | 'In Progress' | 'Completed' | 'On Hold';
+  progress_percentage: string;
+  planned_start_date: string;
+  planned_end_date: string;
+  actual_start_date: string | null;
+  actual_end_date: string | null;
+  milestone_id: number;
+  project_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectSiteEngineerService {
     constructor(private http: HttpClient) {}
 
-      private prjtapiUrl = 'http://127.0.0.1:8000/projects/'
+      private milestoneapiUrl = 'http://127.0.0.1:8000/milestones'
+      projectId = 1
 
-    getprojectdetail():Observable<Projectty[] > {
-      return this.http.get<Projectty[]>(this.prjtapiUrl);
+    getmilestonedetail():Observable<Milestone[] > {
+      return this.http.get<Milestone[]>(this.milestoneapiUrl);
+
+    }
+
+    getmilestonedetailbyId(id:number):Observable<Milestone > {
+      return this.http.get<Milestone>(`${this.milestoneapiUrl}/${id}`);
 
     }
       private apiUrl = 'http://127.0.0.1:8000/project-site-engineers';

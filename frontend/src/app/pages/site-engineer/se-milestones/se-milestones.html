@@ -90,15 +90,15 @@
 
       <tbody>
 
-        @for(milestone of milestones; track milestone.id){
+        @for(milestone of milestones(); track milestone.milestone_id){
 
         <tr>
 
-          <td>{{ milestone.name }}</td>
+          <td>{{ milestone.milestone_name }}</td>
 
-          <td>{{ milestone.plannedDate }}</td>
+          <td>{{ milestone.planned_start_date }}</td>
 
-          <td>{{ milestone.actualDate }}</td>
+          <td>{{ milestone.actual_start_date }}</td>
 
           <td>
 
@@ -106,13 +106,13 @@
 
               <div
                 class="progress-bar"
-                [style.width.%]="milestone.progress">
+                [style.width.%]="milestone.progress_percentage">
 
               </div>
 
             </div>
 
-            <small>{{ milestone.progress }}%</small>
+            <small>{{ milestone.progress_percentage }}%</small>
 
           </td>
 
@@ -123,7 +123,7 @@
               [ngClass]="{
                 'completed': milestone.status==='Completed',
                 'progress': milestone.status==='In Progress',
-                'pending': milestone.status==='Pending'
+                'pending': milestone.status==='Planning'
               }">
 
               {{ milestone.status }}
@@ -135,7 +135,7 @@
           <td>
 
             <button class="view-btn"
-            routerLink="/site-engineer/milestone-details"
+            [routerLink]="['/site-engineer/milestone-details',milestone.milestone_id]"
             type="button"
             >
 
