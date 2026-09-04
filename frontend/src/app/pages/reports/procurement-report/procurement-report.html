@@ -1,0 +1,275 @@
+<div class="procurement-report-page">
+
+  <section class="page-header">
+    <div class="page-title">
+           <h1>Procurement Report</h1>
+      <p>View procurement requests, purchase orders, vendors and invoice status.</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-back" type="button" (click)="goBack()">
+        ← Back
+      </button>
+
+      <button class="btn btn-pdf" type="button" (click)="downloadPdf()">
+        ↓ Download PDF
+      </button>
+
+      <button class="btn btn-excel" type="button" (click)="exportExcel()">
+        ↓ Export Excel
+      </button>
+    </div>
+  </section>
+
+
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+      <div class="filter-icon">▣</div>
+
+      <div>
+        <h3>Report Filters</h3>
+        <span>Select project, reporting period and procurement status</span>
+      </div>
+    </div>
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+        <label for="project">Project</label>
+
+        <select id="project" [(ngModel)]="selectedProject">
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+          <option>All Projects</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="period">Reporting Period</label>
+
+        <select id="period" [(ngModel)]="selectedPeriod">
+          <option>Current Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+          <option>Current Year</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="status">Procurement Status</label>
+
+        <select id="status" [(ngModel)]="selectedStatus">
+          <option>All Status</option>
+          <option>Approved</option>
+          <option>Pending</option>
+          <option>Under Review</option>
+        </select>
+      </div>
+
+
+      <button class="btn btn-apply" type="button" (click)="applyFilters()">
+        Apply Filters
+      </button>
+
+    </div>
+  </section>
+
+
+  <section class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Total Requests</span>
+        <div class="summary-icon">▣</div>
+      </div>
+
+      <strong>{{ totalRequests }}</strong>
+      <p>Procurement requests raised</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Approved Requests</span>
+        <div class="summary-icon">✓</div>
+      </div>
+
+      <strong>{{ approvedRequests }}</strong>
+      <p>Approved procurement requests</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Pending Requests</span>
+        <div class="summary-icon">!</div>
+      </div>
+
+      <strong>{{ pendingRequests }}</strong>
+      <p>Requests awaiting action</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Procurement Value</span>
+        <div class="summary-icon">₹</div>
+      </div>
+
+      <strong>₹{{ totalProcurementValue | number }}</strong>
+      <p>Total procurement value</p>
+    </div>
+
+  </section>
+
+
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-label">PROCUREMENT ANALYSIS</span>
+
+        <h2>Procurement Details</h2>
+
+        <p>
+          Procurement requests, vendors, purchase orders and invoice status.
+        </p>
+      </div>
+
+      <button
+        class="view-report-btn"
+        type="button"
+        (click)="viewReport()">
+        View Full Report →
+      </button>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Vendor</th>
+            <th>Amount</th>
+            <th>Request Status</th>
+            <th>Purchase Order</th>
+            <th>Invoice</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let record of procurementRecords">
+
+            <td>
+              <strong>{{ record.id }}</strong>
+            </td>
+
+            <td>
+              <div class="item-name">
+                <span class="item-icon">▣</span>
+                <span>{{ record.item }}</span>
+              </div>
+            </td>
+
+            <td>
+              {{ record.category }}
+            </td>
+
+            <td>
+              {{ record.quantity }}
+            </td>
+
+            <td>
+              {{ record.vendor }}
+            </td>
+
+            <td>
+              ₹{{ record.amount | number }}
+            </td>
+
+            <td>
+              <span
+                class="status-badge"
+                [class.approved]="record.requestStatus === 'Approved'"
+                [class.pending]="record.requestStatus === 'Pending'"
+                [class.review]="record.requestStatus === 'Under Review'">
+
+                {{ record.requestStatus }}
+
+              </span>
+            </td>
+
+            <td>
+              {{ record.purchaseOrder }}
+            </td>
+
+            <td>
+              <span
+                class="invoice-badge"
+                [class.paid]="record.invoiceStatus === 'Paid'"
+                [class.pending]="record.invoiceStatus === 'Pending'"
+                [class.not-generated]="record.invoiceStatus === 'Not Generated'">
+
+                {{ record.invoiceStatus }}
+
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <section class="insight-card">
+
+    <div class="insight-icon">i</div>
+
+    <div>
+      <h3>Procurement Insight</h3>
+
+      <p>
+        {{ pendingRequests }} procurement requests are currently pending.
+        Procurement status, vendor activity and invoice processing should be
+        monitored regularly to avoid project delays.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section class="access-notice">
+
+    <div class="access-icon">✓</div>
+
+    <div>
+      <strong>Role-based report access</strong>
+
+      <p>
+        Administrators can access system-level procurement reports.
+        Project Managers can access procurement reports for their assigned projects.
+      </p>
+    </div>
+
+  </section>
+
+</div>

@@ -1,1 +1,461 @@
-<p>audit-logs works!</p>
+<div class="activity-page">
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+  <div class="page-header">
+
+    <div>
+      
+      <h1>Activity Monitoring</h1>
+
+      <p>
+        Monitor important user activities and system actions across BuildTrack.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button class="filter-btn">
+        All Activities ▾
+      </button>
+
+      <button class="refresh-btn">
+        ↻ Refresh
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SUMMARY CARDS
+  ========================== -->
+  <div class="activity-cards">
+
+    <!-- Total Activities -->
+    <div class="activity-card">
+
+      <div class="card-icon">
+        ◉
+      </div>
+
+      <div class="card-content">
+        <span>Total Activities</span>
+        <strong>1,284</strong>
+        <small>Recorded activities</small>
+      </div>
+
+    </div>
+
+
+    <!-- Today's Activities -->
+    <div class="activity-card">
+
+      <div class="card-icon">
+        ◷
+      </div>
+
+      <div class="card-content">
+        <span>Today's Activities</span>
+        <strong>186</strong>
+        <small>Activities today</small>
+      </div>
+
+    </div>
+
+
+    <!-- Successful -->
+    <div class="activity-card">
+
+      <div class="card-icon">
+        ✓
+      </div>
+
+      <div class="card-content">
+        <span>Successful Actions</span>
+        <strong>1,245</strong>
+        <small>Completed successfully</small>
+      </div>
+
+    </div>
+
+
+    <!-- Failed -->
+    <div class="activity-card">
+
+      <div class="card-icon warning">
+        !
+      </div>
+
+      <div class="card-content">
+        <span>Failed Actions</span>
+        <strong>39</strong>
+        <small>Require attention</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ACTIVITY MONITORING PANEL
+  ========================== -->
+  <div class="activity-panel">
+
+    <!-- Panel Header -->
+    <div class="panel-header">
+
+      <div>
+        <h2>Recent System Activities</h2>
+
+        <p>
+          Important actions performed by users across the system.
+        </p>
+      </div>
+
+      <div class="activity-filters">
+
+        <button class="filter-small active">
+          All
+        </button>
+
+        <button class="filter-small">
+          Success
+        </button>
+
+        <button class="filter-small">
+          Failed
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ACTIVITY TABLE
+    ========================== -->
+    <div class="table-wrapper">
+
+      <table class="activity-table">
+
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Activity</th>
+            <th>Module</th>
+            <th>Date &amp; Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <!-- Activity 1 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  AK
+                </div>
+
+                <div>
+                  <strong>Admin User</strong>
+                  <span>Administrator</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Added a new user
+              </div>
+
+              <span class="activity-description">
+                Created a new system account
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                User Management
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Today, 10:30 AM
+              </span>
+            </td>
+
+            <td>
+              <span class="status success">
+                Success
+              </span>
+            </td>
+
+          </tr>
+
+
+          <!-- Activity 2 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  PM
+                </div>
+
+                <div>
+                  <strong>Project Manager</strong>
+                  <span>Project Manager</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Updated project details
+              </div>
+
+              <span class="activity-description">
+                Modified project information
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                Project Management
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Today, 10:15 AM
+              </span>
+            </td>
+
+            <td>
+              <span class="status success">
+                Success
+              </span>
+            </td>
+
+          </tr>
+
+
+          <!-- Activity 3 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  SE
+                </div>
+
+                <div>
+                  <strong>Site Engineer</strong>
+                  <span>Site Engineer</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Submitted daily report
+              </div>
+
+              <span class="activity-description">
+                Uploaded today's site progress report
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                Reports
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Today, 09:45 AM
+              </span>
+            </td>
+
+            <td>
+              <span class="status success">
+                Success
+              </span>
+            </td>
+
+          </tr>
+
+
+          <!-- Activity 4 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  AD
+                </div>
+
+                <div>
+                  <strong>Admin User</strong>
+                  <span>Administrator</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Changed user role
+              </div>
+
+              <span class="activity-description">
+                Updated permissions for a user
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                User Management
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Yesterday, 04:20 PM
+              </span>
+            </td>
+
+            <td>
+              <span class="status success">
+                Success
+              </span>
+            </td>
+
+          </tr>
+
+
+          <!-- Activity 5 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  PM
+                </div>
+
+                <div>
+                  <strong>Project Manager</strong>
+                  <span>Project Manager</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Exported project report
+              </div>
+
+              <span class="activity-description">
+                Downloaded project performance report
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                Reports
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Yesterday, 03:10 PM
+              </span>
+            </td>
+
+            <td>
+              <span class="status success">
+                Success
+              </span>
+            </td>
+
+          </tr>
+
+
+          <!-- Activity 6 -->
+          <tr>
+
+            <td>
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  US
+                </div>
+
+                <div>
+                  <strong>System User</strong>
+                  <span>User</span>
+                </div>
+
+              </div>
+            </td>
+
+            <td>
+              <div class="activity-name">
+                Failed login attempt
+              </div>
+
+              <span class="activity-description">
+                Authentication attempt was unsuccessful
+              </span>
+            </td>
+
+            <td>
+              <span class="module-badge">
+                Authentication
+              </span>
+            </td>
+
+            <td>
+              <span class="date-time">
+                Yesterday, 02:40 PM
+              </span>
+            </td>
+
+            <td>
+              <span class="status failed">
+                Failed
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    </div>
+
+  </div>
+

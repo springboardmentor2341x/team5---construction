@@ -1,0 +1,445 @@
+/* =========================================
+   MODULE 9 - DASHBOARD & ANALYTICS SIDEBAR
+   PROFESSIONAL SAGE THEME
+========================================= */
+
+.dashboard-sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #292524;
+  color: #ffffff;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  z-index: 1000;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 22px 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #7b8f76;
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.brand-details h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.brand-details span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #b8b5ae;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   ROLE SECTION
+========================================= */
+
+.role-section {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin: 18px 14px;
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #35312e;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.role-avatar {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e5e1d8;
+  color: #514d48;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.role-info {
+  min-width: 0;
+}
+
+.role-label {
+  display: block;
+
+  color: #aaa59d;
+
+  font-size: 10px;
+
+  margin-bottom: 3px;
+}
+
+.role-info strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-navigation {
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 4px 12px;
+}
+
+.navigation-title {
+  padding: 12px 10px 8px;
+
+  color: #918c84;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.secondary-title {
+  margin-top: 12px;
+}
+
+
+/* =========================================
+   NAV ITEMS
+========================================= */
+
+.nav-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 44px;
+
+  margin: 3px 0;
+  padding: 0 12px;
+
+  border-radius: 8px;
+
+  color: #d6d2cb;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.nav-item:hover {
+  background: #35312e;
+
+  color: #ffffff;
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================
+   ACTIVE MENU
+   SAGE GREEN
+========================================= */
+
+.nav-item.active {
+  background: #7b8f76;
+
+  color: #ffffff;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item.active:hover {
+  background: #7b8f76;
+
+  transform: none;
+}
+
+
+/* =========================================
+   NAV ICON
+========================================= */
+
+.nav-icon {
+  width: 20px;
+
+  text-align: center;
+
+  color: #aaa59d;
+
+  font-size: 16px;
+
+  flex-shrink: 0;
+
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover .nav-icon {
+  color: #ffffff;
+}
+
+.nav-item.active .nav-icon {
+  color: #ffffff;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+
+/* =========================================
+   NOTIFICATION BADGE
+========================================= */
+
+.notification-badge {
+  min-width: 19px;
+  height: 19px;
+
+  padding: 0 5px;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #b56b5d;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.sidebar-footer {
+  padding: 16px 14px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.security-status {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #91a58a;
+
+  box-shadow:
+    0 0 0 4px rgba(145, 165, 138, 0.12);
+
+  flex-shrink: 0;
+}
+
+.security-status strong {
+  display: block;
+
+  color: #d6d2cb;
+
+  font-size: 11px;
+}
+
+.security-status small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #918c84;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.dashboard-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background: #4a4540;
+
+  border-radius: 5px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #625c55;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .dashboard-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .dashboard-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .brand-details,
+  .role-info,
+  .navigation-title,
+  .nav-label,
+  .notification-badge,
+  .sidebar-footer {
+    display: none;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+
+    padding: 18px 10px;
+  }
+
+  .role-section {
+    justify-content: center;
+
+    margin: 15px 8px;
+    padding: 10px 5px;
+  }
+
+  .nav-item {
+    justify-content: center;
+
+    padding: 0;
+  }
+
+  .nav-icon {
+    width: auto;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .dashboard-sidebar {
+    width: 64px;
+    min-width: 64px;
+  }
+}

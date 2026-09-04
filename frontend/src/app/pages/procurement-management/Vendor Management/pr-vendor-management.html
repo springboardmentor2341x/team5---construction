@@ -1,0 +1,591 @@
+<div class="vendor-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Vendor Management</h1>
+      <p>
+        Manage vendors, supplier details, categories and vendor status
+        for construction procurement activities.
+      </p>
+    </div>
+
+    <button class="add-btn" type="button" (click)="openAddVendor()">
+      <span>+</span>
+      Add Vendor
+    </button>
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-icon">🏢</div>
+      <div>
+        <span>Total Vendors</span>
+        <strong>{{ totalVendors }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon active">✓</div>
+      <div>
+        <span>Active Vendors</span>
+        <strong>{{ activeVendors }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon pending">⏳</div>
+      <div>
+        <span>Pending Vendors</span>
+        <strong>{{ pendingVendors }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon category">▦</div>
+      <div>
+        <span>Vendor Categories</span>
+        <strong>{{ vendorCategories }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- FILTER SECTION -->
+  <div class="filter-card">
+
+    <div class="search-box">
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        (input)="filterVendors()"
+        placeholder="Search vendor name, ID, contact or email..."
+      />
+    </div>
+
+    <select
+      [(ngModel)]="selectedCategory"
+      (change)="filterVendors()"
+    >
+      <option value="All">All Categories</option>
+      <option value="Raw Materials">Raw Materials</option>
+      <option value="Equipment">Equipment</option>
+      <option value="Machinery">Machinery</option>
+      <option value="Safety Equipment">Safety Equipment</option>
+      <option value="Office Supplies">Office Supplies</option>
+    </select>
+
+    <select
+      [(ngModel)]="selectedStatus"
+      (change)="filterVendors()"
+    >
+      <option value="All">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+      <option value="Pending">Pending</option>
+    </select>
+
+  </div>
+
+
+  <!-- VENDOR TABLE -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Registered Vendors</h2>
+        <p>View and manage all procurement vendors</p>
+      </div>
+
+      <div class="record-count">
+        {{ filteredVendors.length }} Vendors
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Vendor ID</th>
+            <th>Vendor Name</th>
+            <th>Contact Person</th>
+            <th>Contact Number</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Products / Services</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let vendor of filteredVendors">
+
+            <!-- Vendor ID -->
+            <td>
+              <span class="vendor-id">
+                {{ vendor.id }}
+              </span>
+            </td>
+
+
+            <!-- Vendor Name -->
+            <td>
+              <div class="vendor-name">
+                <strong>{{ vendor.name }}</strong>
+              </div>
+            </td>
+
+
+            <!-- Contact Person -->
+            <td>
+              {{ vendor.contactPerson }}
+            </td>
+
+
+            <!-- Contact Number -->
+            <td>
+              {{ vendor.contactNumber }}
+            </td>
+
+
+            <!-- Email -->
+            <td>
+              {{ vendor.email }}
+            </td>
+
+
+            <!-- Category -->
+            <td>
+              <span class="category-badge">
+                {{ vendor.category }}
+              </span>
+            </td>
+
+
+            <!-- Products -->
+            <td>
+              {{ vendor.products }}
+            </td>
+
+
+            <!-- Status -->
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(vendor.status)"
+              >
+                {{ vendor.status }}
+              </span>
+            </td>
+
+
+            <!-- Actions -->
+            <td>
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewVendor(vendor)"
+                >
+                  👁 View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="editVendor(vendor)"
+                >
+                  ✎ Edit
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+          <tr *ngIf="filteredVendors.length === 0">
+
+            <td
+              colspan="9"
+              class="empty-row"
+            >
+              No vendors found matching your search or filters.
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW VENDOR MODAL
+     ===================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewVendor"
+  (click)="closeViewVendor()"
+>
+
+  <div
+    class="vendor-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+        <h2>Vendor Details</h2>
+        <p>Complete information about the selected vendor</p>
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewVendor()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="vendor-details"
+      *ngIf="selectedVendor"
+    >
+
+      <!-- Vendor Profile -->
+      <div class="detail-profile">
+
+        <div>
+          <h3>{{ selectedVendor.name }}</h3>
+
+          <span class="vendor-id">
+            {{ selectedVendor.id }}
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- Vendor Information -->
+      <div class="details-grid">
+
+        <div class="detail-item">
+          <span>Contact Person</span>
+          <strong>
+            {{ selectedVendor.contactPerson }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Contact Number</span>
+          <strong>
+            {{ selectedVendor.contactNumber }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Email</span>
+          <strong>
+            {{ selectedVendor.email }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Category</span>
+          <strong>
+            {{ selectedVendor.category }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Products / Services</span>
+          <strong>
+            {{ selectedVendor.products }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Status</span>
+
+          <span
+            class="status-badge"
+            [ngClass]="getStatusClass(selectedVendor.status)"
+          >
+            {{ selectedVendor.status }}
+          </span>
+        </div>
+
+        <div class="detail-item full-width">
+          <span>Address</span>
+          <strong>
+            {{ selectedVendor.address }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewVendor()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD / EDIT VENDOR MODAL
+     ===================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddVendor"
+  (click)="closeAddVendor()"
+>
+
+  <div
+    class="vendor-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+        <h2>
+          {{ editingVendor ? 'Edit Vendor' : 'Add New Vendor' }}
+        </h2>
+
+        <p>
+          {{
+            editingVendor
+              ? 'Update vendor information'
+              : 'Enter the vendor details below'
+          }}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddVendor()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- Vendor Name -->
+      <div class="form-group">
+
+        <label>Vendor Name</label>
+
+        <input
+          type="text"
+          [(ngModel)]="vendorForm.name"
+          placeholder="Enter vendor name"
+        />
+
+      </div>
+
+
+      <!-- Contact Person -->
+      <div class="form-group">
+
+        <label>Contact Person</label>
+
+        <input
+          type="text"
+          [(ngModel)]="vendorForm.contactPerson"
+          placeholder="Enter contact person"
+        />
+
+      </div>
+
+
+      <!-- Contact Number -->
+      <div class="form-group">
+
+        <label>Contact Number</label>
+
+        <input
+          type="text"
+          [(ngModel)]="vendorForm.contactNumber"
+          placeholder="Enter contact number"
+        />
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          [(ngModel)]="vendorForm.email"
+          placeholder="Enter email address"
+        />
+
+      </div>
+
+
+      <!-- Category -->
+      <div class="form-group">
+
+        <label>Category</label>
+
+        <select
+          [(ngModel)]="vendorForm.category"
+        >
+
+          <option value="">
+            Select Category
+          </option>
+
+          <option value="Raw Materials">
+            Raw Materials
+          </option>
+
+          <option value="Equipment">
+            Equipment
+          </option>
+
+          <option value="Machinery">
+            Machinery
+          </option>
+
+          <option value="Safety Equipment">
+            Safety Equipment
+          </option>
+
+          <option value="Office Supplies">
+            Office Supplies
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Status -->
+      <div class="form-group">
+
+        <label>Status</label>
+
+        <select
+          [(ngModel)]="vendorForm.status"
+        >
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Inactive">
+            Inactive
+          </option>
+
+          <option value="Pending">
+            Pending
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Products -->
+      <div class="form-group full-width">
+
+        <label>Products / Services</label>
+
+        <input
+          type="text"
+          [(ngModel)]="vendorForm.products"
+          placeholder="Example: Cement, Steel, Sand"
+        />
+
+      </div>
+
+
+      <!-- Address -->
+      <div class="form-group full-width">
+
+        <label>Address</label>
+
+        <textarea
+          [(ngModel)]="vendorForm.address"
+          placeholder="Enter vendor address"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- MODAL FOOTER -->
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddVendor()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveVendor()"
+      >
+        {{ editingVendor ? 'Update Vendor' : 'Save Vendor' }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

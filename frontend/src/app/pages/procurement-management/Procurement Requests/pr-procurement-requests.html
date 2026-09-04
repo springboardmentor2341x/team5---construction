@@ -1,0 +1,789 @@
+<div class="procurement-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+
+      <h1>Procurement Requests</h1>
+
+      <p>
+        Raise and manage procurement requirements for project materials,
+        equipment, machinery, safety equipment and office supplies.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="add-btn"
+      (click)="openAddRequest()"
+    >
+      <span>+</span>
+      New Procurement Request
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-icon total">PR</div>
+
+      <div>
+        <span>Total Requests</span>
+        <strong>{{ totalRequests }}</strong>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon pending">!</div>
+
+      <div>
+        <span>Pending</span>
+        <strong>{{ pendingRequests }}</strong>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon approved">✓</div>
+
+      <div>
+        <span>Approved</span>
+        <strong>{{ approvedRequests }}</strong>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon processing">↻</div>
+
+      <div>
+        <span>Processing</span>
+        <strong>{{ processingRequests }}</strong>
+      </div>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-icon completed">✓</div>
+
+      <div>
+        <span>Completed</span>
+        <strong>{{ completedRequests }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- WORKFLOW -->
+  <div class="workflow-card">
+
+    <div class="workflow-title">
+      <h2>Procurement Workflow</h2>
+      <p>
+        Requirement → Procurement Request → Approval → Vendor Selection →
+        Purchase Order → Invoice Tracking
+      </p>
+    </div>
+
+    <div class="workflow">
+
+      <div class="workflow-step active">
+        <span>1</span>
+        <strong>Requirement</strong>
+      </div>
+
+      <div class="workflow-line"></div>
+
+      <div class="workflow-step active">
+        <span>2</span>
+        <strong>Request</strong>
+      </div>
+
+      <div class="workflow-line"></div>
+
+      <div class="workflow-step">
+        <span>3</span>
+        <strong>Approval</strong>
+      </div>
+
+      <div class="workflow-line"></div>
+
+      <div class="workflow-step">
+        <span>4</span>
+        <strong>Vendor Selection</strong>
+      </div>
+
+      <div class="workflow-line"></div>
+
+      <div class="workflow-step">
+        <span>5</span>
+        <strong>Purchase Order</strong>
+      </div>
+
+      <div class="workflow-line"></div>
+
+      <div class="workflow-step">
+        <span>6</span>
+        <strong>Invoice</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FILTERS -->
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        (input)="filterRequests()"
+        placeholder="Search request ID, project, item or requester..."
+      />
+
+    </div>
+
+
+    <select
+      [(ngModel)]="selectedCategory"
+      (change)="filterRequests()"
+    >
+      <option value="All">All Categories</option>
+      <option value="Raw Materials">Raw Materials</option>
+      <option value="Equipment">Equipment</option>
+      <option value="Machinery">Machinery</option>
+      <option value="Safety Equipment">Safety Equipment</option>
+      <option value="Office Supplies">Office Supplies</option>
+    </select>
+
+
+    <select
+      [(ngModel)]="selectedStatus"
+      (change)="filterRequests()"
+    >
+      <option value="All">All Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Rejected">Rejected</option>
+      <option value="Processing">Processing</option>
+      <option value="Completed">Completed</option>
+    </select>
+
+
+    <select
+      [(ngModel)]="selectedPriority"
+      (change)="filterRequests()"
+    >
+      <option value="All">All Priorities</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+
+  </div>
+
+
+  <!-- TABLE -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Procurement Requests</h2>
+
+        <p>
+          Track project requirements and their approval status.
+        </p>
+      </div>
+
+      <div class="record-count">
+        {{ filteredRequests.length }} Requests
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Request ID</th>
+            <th>Project</th>
+            <th>Requested By</th>
+            <th>Item / Material</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Required Date</th>
+            <th>Priority</th>
+            <th>Request Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let request of filteredRequests">
+
+            <td>
+              <span class="request-id">
+                {{ request.id }}
+              </span>
+            </td>
+
+
+            <td>
+              <div class="project-name">
+                <div class="project-avatar">
+                  {{ request.project.charAt(0) }}
+                </div>
+
+                <strong>
+                  {{ request.project }}
+                </strong>
+              </div>
+            </td>
+
+
+            <td>
+              {{ request.requestedBy }}
+            </td>
+
+
+            <td>
+              <strong>{{ request.item }}</strong>
+            </td>
+
+
+            <td>
+              <span class="category-badge">
+                {{ request.category }}
+              </span>
+            </td>
+
+
+            <td>
+              {{ request.quantity }}
+            </td>
+
+
+            <td>
+              {{ request.requiredDate }}
+            </td>
+
+
+            <td>
+              <span
+                class="priority-badge"
+                [ngClass]="getPriorityClass(request.priority)"
+              >
+                {{ request.priority }}
+              </span>
+            </td>
+
+
+            <td>
+              {{ request.requestDate }}
+            </td>
+
+
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(request.status)"
+              >
+                {{ request.status }}
+              </span>
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewRequest(request)"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  *ngIf="request.status === 'Pending'"
+                  (click)="editRequest(request)"
+                >
+                  Edit
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <tr *ngIf="filteredRequests.length === 0">
+
+            <td
+              colspan="11"
+              class="empty-row"
+            >
+              <div class="empty-state">
+                <div class="empty-icon">PR</div>
+
+                <h3>No procurement requests found</h3>
+
+                <p>
+                  Try changing your search or filter options.
+                </p>
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     VIEW REQUEST MODAL
+     ========================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewRequest"
+  (click)="closeViewRequest()"
+>
+
+  <div
+    class="request-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+        <span class="modal-label">PROCUREMENT REQUEST</span>
+
+        <h2>Request Details</h2>
+
+        <p>
+          Complete information about the procurement requirement.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewRequest()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="request-details"
+      *ngIf="selectedRequest"
+    >
+
+      <div class="detail-profile">
+
+        <div class="large-avatar">
+          {{ selectedRequest.item.charAt(0) }}
+        </div>
+
+        <div>
+
+          <h3>
+            {{ selectedRequest.item }}
+          </h3>
+
+          <span class="request-id">
+            {{ selectedRequest.id }}
+          </span>
+
+        </div>
+
+        <span
+          class="status-badge profile-status"
+          [ngClass]="getStatusClass(selectedRequest.status)"
+        >
+          {{ selectedRequest.status }}
+        </span>
+
+      </div>
+
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+          <span>Project</span>
+          <strong>{{ selectedRequest.project }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Requested By</span>
+          <strong>{{ selectedRequest.requestedBy }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Item / Material</span>
+          <strong>{{ selectedRequest.item }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Category</span>
+          <strong>{{ selectedRequest.category }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Required Quantity</span>
+          <strong>{{ selectedRequest.quantity }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Required Date</span>
+          <strong>{{ selectedRequest.requiredDate }}</strong>
+        </div>
+
+
+        <div class="detail-item">
+          <span>Priority</span>
+
+          <span
+            class="priority-badge"
+            [ngClass]="getPriorityClass(selectedRequest.priority)"
+          >
+            {{ selectedRequest.priority }}
+          </span>
+
+        </div>
+
+
+        <div class="detail-item">
+          <span>Request Date</span>
+          <strong>{{ selectedRequest.requestDate }}</strong>
+        </div>
+
+
+        <div class="detail-item full-width">
+
+          <span>Purpose / Requirement</span>
+
+          <strong>
+            {{ selectedRequest.purpose }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item full-width">
+
+          <span>Remarks</span>
+
+          <strong>
+            {{ selectedRequest.remarks || 'No remarks provided' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewRequest()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ADD / EDIT MODAL
+     ========================= -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddRequest"
+  (click)="closeAddRequest()"
+>
+
+  <div
+    class="request-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">PROCUREMENT MANAGEMENT</span>
+
+        <h2>
+          {{
+            editingRequest
+              ? 'Edit Procurement Request'
+              : 'New Procurement Request'
+          }}
+        </h2>
+
+        <p>
+          {{
+            editingRequest
+              ? 'Update the procurement requirement details.'
+              : 'Enter the procurement requirement details.'
+          }}
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddRequest()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Request ID</label>
+
+        <input
+          type="text"
+          [(ngModel)]="requestForm.id"
+          readonly
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Project <span>*</span></label>
+
+        <input
+          type="text"
+          [(ngModel)]="requestForm.project"
+          placeholder="Enter project name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Requested By <span>*</span></label>
+
+        <input
+          type="text"
+          [(ngModel)]="requestForm.requestedBy"
+          placeholder="Enter requester name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Item / Material <span>*</span></label>
+
+        <input
+          type="text"
+          [(ngModel)]="requestForm.item"
+          placeholder="Enter required item or material"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Category <span>*</span></label>
+
+        <select [(ngModel)]="requestForm.category">
+
+          <option value="Raw Materials">Raw Materials</option>
+          <option value="Equipment">Equipment</option>
+          <option value="Machinery">Machinery</option>
+          <option value="Safety Equipment">Safety Equipment</option>
+          <option value="Office Supplies">Office Supplies</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Required Quantity <span>*</span></label>
+
+        <input
+          type="number"
+          min="1"
+          [(ngModel)]="requestForm.quantity"
+          placeholder="Enter quantity"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Required Date <span>*</span></label>
+
+        <input
+          type="date"
+          [(ngModel)]="requestForm.requiredDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Priority <span>*</span></label>
+
+        <select [(ngModel)]="requestForm.priority">
+
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Request Date <span>*</span></label>
+
+        <input
+          type="date"
+          [(ngModel)]="requestForm.requestDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Request Status</label>
+
+        <select [(ngModel)]="requestForm.status">
+
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Processing">Processing</option>
+          <option value="Completed">Completed</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>Purpose / Requirement <span>*</span></label>
+
+        <textarea
+          [(ngModel)]="requestForm.purpose"
+          placeholder="Explain why this item is required..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>Remarks</label>
+
+        <textarea
+          [(ngModel)]="requestForm.remarks"
+          placeholder="Enter additional remarks..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddRequest()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveRequest()"
+      >
+        {{
+          editingRequest
+            ? 'Update Request'
+            : 'Submit Request'
+        }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

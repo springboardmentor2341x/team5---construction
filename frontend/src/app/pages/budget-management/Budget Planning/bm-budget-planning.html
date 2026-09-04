@@ -1,0 +1,300 @@
+<div class="budget-planning">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="eyebrow">BUDGET MANAGEMENT</span>
+
+      <h2>Budget Planning</h2>
+
+      <p>
+        Define the project budget and allocate funds across cost categories.
+      </p>
+    </div>
+
+    <button class="save-btn" (click)="saveBudget()">
+      Save Budget Plan
+    </button>
+
+  </div>
+
+
+  <!-- PROJECT SELECTION -->
+  <div class="panel project-selection">
+
+    <div class="panel-title">
+      <div>
+        <h3>Project Selection</h3>
+        <p>Select the construction project for budget planning.</p>
+      </div>
+    </div>
+
+    <div class="project-form">
+
+      <div class="form-group">
+
+        <label>PROJECT</label>
+
+        <select [(ngModel)]="selectedProject">
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>TOTAL PROJECT BUDGET</label>
+
+        <div class="input-with-symbol">
+          <span>₹</span>
+
+          <input
+            type="number"
+            [(ngModel)]="totalBudget"
+            min="0">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BUDGET SUMMARY -->
+  <div class="summary-grid">
+
+    <div class="summary-card blue">
+
+      <span class="card-label">TOTAL BUDGET</span>
+
+      <strong>
+        {{ formatCurrency(totalBudget) }}
+      </strong>
+
+      <small>
+        Authorized project budget
+      </small>
+
+    </div>
+
+
+    <div class="summary-card purple">
+
+      <span class="card-label">TOTAL ALLOCATED</span>
+
+      <strong>
+        {{ formatCurrency(totalAllocated) }}
+      </strong>
+
+      <small>
+        Category-wise allocation
+      </small>
+
+    </div>
+
+
+    <div class="summary-card green">
+
+      <span class="card-label">REMAINING</span>
+
+      <strong>
+        {{ formatCurrency(remainingBudget) }}
+      </strong>
+
+      <small>
+        Amount available for allocation
+      </small>
+
+    </div>
+
+
+    <div class="summary-card orange">
+
+      <span class="card-label">ALLOCATED</span>
+
+      <strong>
+        {{ allocationPercentage }}%
+      </strong>
+
+      <small>
+        Budget allocation progress
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- ALLOCATION PROGRESS -->
+  <div class="panel progress-panel">
+
+    <div class="progress-header">
+
+      <div>
+        <h3>Budget Allocation</h3>
+
+        <p>
+          Track how much of the project budget has been assigned.
+        </p>
+      </div>
+
+      <strong>
+        {{ allocationPercentage }}%
+      </strong>
+
+    </div>
+
+    <div class="progress-bar">
+      <span
+        [style.width.%]="allocationPercentage">
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- CATEGORY ALLOCATION -->
+  <div class="panel category-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Category-wise Budget Allocation</h3>
+
+        <p>
+          Allocate the project budget across required cost categories.
+        </p>
+      </div>
+
+      <button
+        class="secondary-btn"
+        (click)="addCategory()">
+        + Add Category
+      </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>COST CATEGORY</th>
+            <th>DESCRIPTION</th>
+            <th>ALLOCATED AMOUNT</th>
+            <th>ALLOCATION %</th>
+            <th>ACTION</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let category of categories; let i = index">
+
+            <td>
+              <strong>
+                {{ category.name }}
+              </strong>
+            </td>
+
+
+            <td>
+              <span class="description">
+                {{ category.description }}
+              </span>
+            </td>
+
+
+            <td>
+
+              <div class="amount-input">
+
+                <span>₹</span>
+
+                <input
+                  type="number"
+                  [(ngModel)]="category.allocated"
+                  min="0">
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <span class="percentage-badge">
+
+                {{
+                  totalBudget > 0
+                    ? ((category.allocated / totalBudget) * 100).toFixed(1)
+                    : 0
+                }}%
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <button
+                class="delete-btn"
+                (click)="removeCategory(i)">
+                Remove
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- BUDGET STATUS -->
+  <div
+    class="allocation-status"
+    [class.warning]="remainingBudget < 0"
+    [class.success]="remainingBudget >= 0">
+
+    <div class="status-icon">
+      {{ remainingBudget >= 0 ? '✓' : '!' }}
+    </div>
+
+    <div>
+
+      <strong>
+        {{ remainingBudget >= 0
+          ? 'Budget allocation is within the approved limit'
+          : 'Allocated amount exceeds the project budget'
+        }}
+      </strong>
+
+      <p>
+        {{
+          remainingBudget >= 0
+            ? formatCurrency(remainingBudget) + ' is still available for allocation.'
+            : 'Please reduce category allocations before saving.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

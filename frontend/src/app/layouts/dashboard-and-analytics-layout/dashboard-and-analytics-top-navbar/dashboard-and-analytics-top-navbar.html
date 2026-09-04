@@ -1,0 +1,68 @@
+<header class="top-navbar">
+
+  <!-- Left Section -->
+  <div class="navbar-left">
+
+    <div class="breadcrumb">
+      <span>BuildTrack</span>
+      <span class="breadcrumb-separator">/</span>
+      <strong>Dashboard & Analytics</strong>
+    </div>
+
+  </div>
+
+  <!-- Right Section -->
+  <div class="navbar-right">
+
+    <!-- Search -->
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input
+        type="text"
+        placeholder="Search..."
+        aria-label="Search">
+    </div>
+
+    <!-- Refresh -->
+    <button
+      class="navbar-action"
+      type="button"
+      title="Refresh Dashboard">
+      ↻
+    </button>
+
+    <!-- Notifications -->
+    <button
+      class="navbar-action notification-button"
+      type="button"
+      title="Notifications">
+
+      <span class="notification-icon">♢</span>
+      <span class="notification-dot"></span>
+
+    </button>
+
+    <!-- Profile -->
+    <div class="profile-section">
+
+      <div class="profile-avatar">
+        {{ userInitial }}
+      </div>
+
+      <div class="profile-info">
+        <strong>{{ userName }}</strong>
+        <span>{{ userRole }}</span>
+      </div>
+
+      <button
+        class="profile-dropdown"
+        type="button"
+        title="Profile Menu">
+        ▾
+      </button>
+
+    </div>
+
+  </div>
+
+</header>

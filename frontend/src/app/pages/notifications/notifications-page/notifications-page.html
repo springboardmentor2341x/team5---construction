@@ -1,0 +1,337 @@
+<div class="notifications-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <div class="page-heading-row">
+        <h1>Notifications</h1>
+
+        <span class="live-status">
+          <span class="status-dot"></span>
+          Notification Center
+        </span>
+      </div>
+
+      <p>
+        Stay updated with important project activities, assignments,
+        alerts and system updates.
+      </p>
+    </div>
+
+    <button
+      class="mark-all-btn"
+      type="button"
+      (click)="markAllAsRead()">
+
+      <span>✓</span>
+      Mark All as Read
+
+    </button>
+
+  </div>
+
+
+  <!-- Summary Cards -->
+  <section class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon total">
+        🔔
+      </div>
+
+      <div class="summary-content">
+        <span>Total Notifications</span>
+        <strong>{{ totalNotifications }}</strong>
+        <small>All notifications</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon unread">
+        ●
+      </div>
+
+      <div class="summary-content">
+        <span>Unread Notifications</span>
+        <strong>{{ unreadNotifications }}</strong>
+        <small>Requires attention</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon read">
+        ✓
+      </div>
+
+      <div class="summary-content">
+        <span>Read Notifications</span>
+        <strong>{{ readNotifications }}</strong>
+        <small>Already reviewed</small>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon alerts">
+        ⚠
+      </div>
+
+      <div class="summary-content">
+        <span>Priority Alerts</span>
+        <strong>8</strong>
+        <small>Need attention</small>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Filters -->
+  <section class="filter-section">
+
+    <div class="filter-heading">
+
+      <div>
+        <h2>Notification Activity</h2>
+        <span>
+          {{ filteredNotifications.length }} notifications displayed
+        </span>
+      </div>
+
+      <div class="filter-label">
+        Filter by type
+      </div>
+
+    </div>
+
+
+    <div class="filter-buttons">
+
+      @for (filter of filters; track filter) {
+
+        <button
+          type="button"
+          class="filter-btn"
+          [class.active]="selectedFilter === filter"
+          (click)="selectFilter(filter)">
+
+          @if (filter === 'All') {
+            <span>All</span>
+          }
+
+          @if (filter === 'Unread') {
+            <span>●</span>
+          }
+
+          @if (filter === 'Project Updates') {
+            <span>📊</span>
+          }
+
+          @if (filter === 'Task Assignments') {
+            <span>✓</span>
+          }
+
+          @if (filter === 'Procurement Alerts') {
+            <span>🛒</span>
+          }
+
+          @if (filter === 'Attendance Alerts') {
+            <span>👷</span>
+          }
+
+          @if (filter === 'Deadline Notifications') {
+            <span>⏰</span>
+          }
+
+          @if (filter === 'System Notifications') {
+            <span>⚙</span>
+          }
+
+          {{ filter }}
+
+        </button>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- Notification List -->
+  <section class="notification-section">
+
+    @if (filteredNotifications.length > 0) {
+
+      @for (
+        notification of filteredNotifications;
+        track notification.id
+      ) {
+
+        <article
+          class="notification-card"
+          [class.unread]="!notification.read">
+
+          <!-- Icon -->
+          <div
+            class="notification-icon"
+            [ngClass]="getTypeClass(notification.type)">
+
+            {{ notification.icon }}
+
+          </div>
+
+
+          <!-- Main Content -->
+          <div class="notification-main">
+
+            <div class="notification-top">
+
+              <div class="notification-title-area">
+
+                @if (!notification.read) {
+                  <span class="unread-indicator"></span>
+                }
+
+                <h3>
+                  {{ notification.title }}
+                </h3>
+
+                <span
+                  class="type-badge"
+                  [ngClass]="getTypeClass(notification.type)">
+
+                  {{ notification.type }}
+
+                </span>
+
+              </div>
+
+
+              <span
+                class="priority-badge"
+                [ngClass]="getPriorityClass(notification.priority)">
+
+                {{ notification.priority }}
+
+              </span>
+
+            </div>
+
+
+            <p class="notification-message">
+              {{ notification.message }}
+            </p>
+
+
+            <div class="notification-meta">
+
+              <span>
+                📅 {{ notification.date }}
+              </span>
+
+              <span>
+                🕐 {{ notification.time }}
+              </span>
+
+              <span>
+                🔗 {{ notification.related }}
+              </span>
+
+              <span
+                class="read-status"
+                [class.unread-status]="!notification.read">
+
+                @if (notification.read) {
+                  ✓ Read
+                } @else {
+                  ● Unread
+                }
+
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- Action -->
+          <div class="notification-action">
+
+            <a
+              [routerLink]="['/notifications/details', notification.id]"
+              class="view-btn"
+              (click)="markAsRead(notification.id)">
+
+              View Details
+              <span>→</span>
+
+            </a>
+
+          </div>
+
+        </article>
+
+      }
+
+    } @else {
+
+      <!-- Empty State -->
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          🔔
+        </div>
+
+        <h3>No Notifications Found</h3>
+
+        <p>
+          There are no notifications matching your selected filter.
+        </p>
+
+        <button
+          type="button"
+          (click)="selectFilter('All')">
+
+          View All Notifications
+
+        </button>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- Information Banner -->
+  <section class="notification-info">
+
+    <div class="info-icon">
+      i
+    </div>
+
+    <div>
+      <strong>Notification Information</strong>
+
+      <p>
+        Notifications are generated based on project activities,
+        task assignments, procurement events, attendance updates,
+        approaching deadlines and system events.
+      </p>
+    </div>
+
+  </section>
+
+</div>

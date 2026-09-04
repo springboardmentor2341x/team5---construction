@@ -1,0 +1,70 @@
+<header class="top-navbar">
+
+  <!-- Left Section -->
+  <div class="navbar-title">
+
+    <h1>Procurement Management</h1>
+
+    <p>
+      Manage procurement, vendors, purchase orders and invoices
+    </p>
+
+  </div>
+
+
+  <!-- Right Section -->
+  <div class="navbar-actions">
+
+    <!-- Search -->
+    <div class="search-box">
+
+      <span class="search-icon">⌕</span>
+
+      <input
+        type="text"
+        placeholder="Search procurement..."
+        aria-label="Search procurement"
+      />
+
+    </div>
+
+
+    <!-- Notification -->
+    <button
+      class="notification-button"
+      type="button"
+      aria-label="Notifications">
+
+      <span class="notification-icon">🔔</span>
+
+      @if (notificationCount > 0) {
+        <span class="notification-badge">
+          {{ notificationCount }}
+        </span>
+      }
+
+    </button>
+
+
+    <!-- User Profile -->
+    <div class="user-profile">
+
+      <div class="avatar">
+        PM
+      </div>
+
+      <div class="user-info">
+
+        <strong>{{ userName }}</strong>
+
+        <span>{{ userRole }}</span>
+
+      </div>
+
+      <span class="dropdown-icon">⌄</span>
+
+    </div>
+
+  </div>
+
+</header>

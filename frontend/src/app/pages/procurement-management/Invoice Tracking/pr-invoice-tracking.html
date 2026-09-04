@@ -1,0 +1,1070 @@
+<div class="invoice-page">
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+
+      <h1>Invoice Tracking</h1>
+
+      <p>
+        Track supplier invoices, purchase orders, payment status and invoice processing.
+      </p>
+    </div>
+
+    <button class="add-btn" type="button" (click)="openAddModal()">
+      <span>+</span>
+      Add Invoice
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       SUMMARY CARDS
+  ========================== -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon total">
+        #
+      </div>
+
+      <div>
+        <span>Total Invoices</span>
+        <strong>{{ totalInvoices }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon pending">
+        P
+      </div>
+
+      <div>
+        <span>Pending</span>
+        <strong>{{ pendingInvoices }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon partial">
+        %
+      </div>
+
+      <div>
+        <span>Partially Paid</span>
+        <strong>{{ partiallyPaidInvoices }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon paid">
+        ✓
+      </div>
+
+      <div>
+        <span>Paid</span>
+        <strong>{{ paidInvoices }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon overdue">
+        !
+      </div>
+
+      <div>
+        <span>Overdue</span>
+        <strong>{{ overdueInvoices }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       AMOUNT SUMMARY
+  ========================== -->
+
+  <div class="amount-summary">
+
+    <div>
+      <span>Total Invoice Amount</span>
+      <strong>{{ formatAmount(totalInvoiceAmount) }}</strong>
+    </div>
+
+    <div>
+      <span>Pending / Overdue Amount</span>
+      <strong>{{ formatAmount(pendingAmount) }}</strong>
+    </div>
+
+    <div>
+      <span>Paid Amount</span>
+      <strong>{{ formatAmount(paidAmount) }}</strong>
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FILTER CARD
+  ========================== -->
+
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search invoice, vendor, PO or project..."
+      />
+
+    </div>
+
+
+    <select [(ngModel)]="selectedPaymentStatus">
+
+      <option value="All">All Payment Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Partially Paid">Partially Paid</option>
+      <option value="Paid">Paid</option>
+      <option value="Overdue">Overdue</option>
+
+    </select>
+
+
+    <select [(ngModel)]="selectedInvoiceStatus">
+
+      <option value="All">All Invoice Status</option>
+      <option value="Received">Received</option>
+      <option value="Verified">Verified</option>
+      <option value="Processing">Processing</option>
+      <option value="Completed">Completed</option>
+      <option value="Cancelled">Cancelled</option>
+
+    </select>
+
+
+    <button
+      class="clear-btn"
+      type="button"
+      (click)="clearFilters()"
+    >
+      Clear Filters
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       TABLE CARD
+  ========================== -->
+
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Invoice Records</h2>
+
+        <p>
+          Supplier invoices linked with purchase orders and projects
+        </p>
+      </div>
+
+      <span class="record-count">
+        {{ filteredInvoices.length }} Records
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Invoice ID</th>
+
+            <th>Invoice Number</th>
+
+            <th>Vendor / Supplier</th>
+
+            <th>Purchase Order</th>
+
+            <th>Project</th>
+
+            <th>Invoice Date</th>
+
+            <th>Due Date</th>
+
+            <th>Amount</th>
+
+            <th>Payment Status</th>
+
+            <th>Invoice Status</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let invoice of filteredInvoices"
+          >
+
+            <!-- Invoice ID -->
+            <td>
+
+              <span class="invoice-id">
+                {{ invoice.id }}
+              </span>
+
+            </td>
+
+
+            <!-- Invoice Number -->
+            <td>
+
+              <strong class="invoice-number">
+                {{ invoice.invoiceNumber }}
+              </strong>
+
+            </td>
+
+
+            <!-- Vendor -->
+            <td>
+
+              <div class="vendor-info">
+
+                <div class="vendor-avatar">
+                  {{ invoice.vendor.charAt(0) }}
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ invoice.vendor }}
+                  </strong>
+
+                  <small>
+                    Supplier
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Purchase Order -->
+            <td>
+
+              <span class="po-badge">
+                {{ invoice.purchaseOrder }}
+              </span>
+
+            </td>
+
+
+            <!-- Project -->
+            <td>
+
+              <span class="project-text">
+                {{ invoice.project }}
+              </span>
+
+            </td>
+
+
+            <!-- Invoice Date -->
+            <td>
+
+              <span class="date-text">
+                {{ invoice.invoiceDate }}
+              </span>
+
+            </td>
+
+
+            <!-- Due Date -->
+            <td>
+
+              <span
+                class="date-text"
+                [class.overdue-date]="isOverdue(invoice)"
+              >
+                {{ invoice.dueDate }}
+              </span>
+
+            </td>
+
+
+            <!-- Amount -->
+            <td>
+
+              <strong class="amount-text">
+                {{ formatAmount(invoice.invoiceAmount) }}
+              </strong>
+
+            </td>
+
+
+            <!-- Payment Status -->
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getPaymentStatusClass(invoice.paymentStatus)"
+              >
+                {{ invoice.paymentStatus }}
+              </span>
+
+            </td>
+
+
+            <!-- Invoice Status -->
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getInvoiceStatusClass(invoice.invoiceStatus)"
+              >
+                {{ invoice.invoiceStatus }}
+              </span>
+
+            </td>
+
+
+            <!-- Actions -->
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewInvoice(invoice)"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="editInvoice(invoice)"
+                >
+                  Edit
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteInvoice(invoice)"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- =========================
+               EMPTY STATE
+          ========================== -->
+
+          <tr
+            *ngIf="filteredInvoices.length === 0"
+            class="empty-row"
+          >
+
+            <td colspan="11">
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  $
+                </div>
+
+                <h3>No invoices found</h3>
+
+                <p>
+                  Try changing your search or filter options.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD INVOICE MODAL
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddModal"
+>
+
+  <div class="invoice-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT
+        </span>
+
+        <h2>Add Invoice</h2>
+
+        <p>
+          Enter supplier invoice details
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Invoice Number <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newInvoice.invoiceNumber"
+          placeholder="Enter invoice number"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Vendor / Supplier <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newInvoice.vendor"
+          placeholder="Enter vendor name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Purchase Order <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newInvoice.purchaseOrder"
+          placeholder="PO-001"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newInvoice.project"
+          placeholder="Enter project name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="newInvoice.invoiceDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Due Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="newInvoice.dueDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Amount <span>*</span>
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="newInvoice.invoiceAmount"
+          placeholder="Enter amount"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Payment Status
+        </label>
+
+        <select [(ngModel)]="newInvoice.paymentStatus">
+
+          <option value="Pending">Pending</option>
+          <option value="Partially Paid">Partially Paid</option>
+          <option value="Paid">Paid</option>
+          <option value="Overdue">Overdue</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Status
+        </label>
+
+        <select [(ngModel)]="newInvoice.invoiceStatus">
+
+          <option value="Received">Received</option>
+          <option value="Verified">Verified</option>
+          <option value="Processing">Processing</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Remarks
+        </label>
+
+        <textarea
+          [(ngModel)]="newInvoice.remarks"
+          placeholder="Enter invoice remarks..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="addInvoice()"
+      >
+        Add Invoice
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW INVOICE MODAL
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewModal && selectedInvoice"
+>
+
+  <div class="invoice-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          INVOICE DETAILS
+        </span>
+
+        <h2>
+          {{ selectedInvoice.invoiceNumber }}
+        </h2>
+
+        <p>
+          Complete invoice and payment information
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+
+        <span>Invoice ID</span>
+
+        <strong>
+          {{ selectedInvoice.id }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Invoice Number</span>
+
+        <strong>
+          {{ selectedInvoice.invoiceNumber }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Vendor / Supplier</span>
+
+        <strong>
+          {{ selectedInvoice.vendor }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Purchase Order</span>
+
+        <strong>
+          {{ selectedInvoice.purchaseOrder }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Project</span>
+
+        <strong>
+          {{ selectedInvoice.project }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Invoice Date</span>
+
+        <strong>
+          {{ selectedInvoice.invoiceDate }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Due Date</span>
+
+        <strong>
+          {{ selectedInvoice.dueDate }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Invoice Amount</span>
+
+        <strong>
+          {{ formatAmount(selectedInvoice.invoiceAmount) }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Payment Status</span>
+
+        <strong
+          class="status-badge"
+          [ngClass]="getPaymentStatusClass(selectedInvoice.paymentStatus)"
+        >
+          {{ selectedInvoice.paymentStatus }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>Invoice Status</span>
+
+        <strong
+          class="status-badge"
+          [ngClass]="getInvoiceStatusClass(selectedInvoice.invoiceStatus)"
+        >
+          {{ selectedInvoice.invoiceStatus }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item full-width">
+
+        <span>Remarks</span>
+
+        <strong>
+          {{ selectedInvoice.remarks || 'No remarks available' }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewModal()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     EDIT INVOICE MODAL
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showEditModal && selectedInvoice"
+>
+
+  <div class="invoice-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT
+        </span>
+
+        <h2>Edit Invoice</h2>
+
+        <p>
+          Update invoice information
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeEditModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Invoice Number <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedInvoice.invoiceNumber"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Vendor / Supplier <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedInvoice.vendor"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Purchase Order <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedInvoice.purchaseOrder"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedInvoice.project"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="selectedInvoice.invoiceDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Due Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="selectedInvoice.dueDate"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Amount <span>*</span>
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="selectedInvoice.invoiceAmount"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Payment Status
+        </label>
+
+        <select [(ngModel)]="selectedInvoice.paymentStatus">
+
+          <option value="Pending">Pending</option>
+          <option value="Partially Paid">Partially Paid</option>
+          <option value="Paid">Paid</option>
+          <option value="Overdue">Overdue</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Invoice Status
+        </label>
+
+        <select [(ngModel)]="selectedInvoice.invoiceStatus">
+
+          <option value="Received">Received</option>
+          <option value="Verified">Verified</option>
+          <option value="Processing">Processing</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Remarks
+        </label>
+
+        <textarea
+          [(ngModel)]="selectedInvoice.remarks"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeEditModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="updateInvoice()"
+      >
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

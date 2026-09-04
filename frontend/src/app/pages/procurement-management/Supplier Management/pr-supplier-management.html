@@ -1,0 +1,545 @@
+<div class="supplier-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+      <h1>Supplier Management</h1>
+      <p>Manage suppliers, vendors, contacts, materials, and supplier performance.</p>
+    </div>
+
+    <button class="add-btn" (click)="openAddSupplier()">
+      <span>＋</span>
+      Add Supplier
+    </button>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-icon total">🏢</div>
+      <div>
+        <span>Total Suppliers</span>
+        <strong>{{ totalSuppliers }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon active">✓</div>
+      <div>
+        <span>Active Suppliers</span>
+        <strong>{{ activeSuppliers }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon pending">⏳</div>
+      <div>
+        <span>Pending Approval</span>
+        <strong>{{ pendingSuppliers }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon materials">📦</div>
+      <div>
+        <span>Material Suppliers</span>
+        <strong>{{ materialSuppliers }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon rating">★</div>
+      <div>
+        <span>Average Rating</span>
+        <strong>{{ averageRating }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FILTER SECTION -->
+  <div class="filter-card">
+
+    <div class="search-box">
+      <span>⌕</span>
+      <input
+        type="text"
+        placeholder="Search supplier, contact, material..."
+        [(ngModel)]="searchText"
+        (input)="filterSuppliers()"
+      />
+    </div>
+
+    <select [(ngModel)]="selectedCategory" (change)="filterSuppliers()">
+      <option value="">All Categories</option>
+      <option value="Material Supplier">Material Supplier</option>
+      <option value="Equipment Supplier">Equipment Supplier</option>
+      <option value="Service Provider">Service Provider</option>
+      <option value="Subcontractor">Subcontractor</option>
+    </select>
+
+    <select [(ngModel)]="selectedStatus" (change)="filterSuppliers()">
+      <option value="">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Pending">Pending</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+
+    <select [(ngModel)]="selectedRating" (change)="filterSuppliers()">
+      <option value="">All Ratings</option>
+      <option value="5">5 Stars</option>
+      <option value="4">4+ Stars</option>
+      <option value="3">3+ Stars</option>
+    </select>
+
+  </div>
+
+  <!-- SUPPLIER TABLE -->
+  <div class="table-card">
+
+    <div class="table-header">
+      <div>
+        <h2>Supplier Directory</h2>
+        <p>Registered suppliers and vendor information</p>
+      </div>
+
+      <span class="record-count">
+        {{ filteredSuppliers.length }} Suppliers
+      </span>
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>SUPPLIER ID</th>
+            <th>SUPPLIER</th>
+            <th>CONTACT</th>
+            <th>CATEGORY</th>
+            <th>MATERIAL / SERVICE</th>
+            <th>PROJECTS</th>
+            <th>RATING</th>
+            <th>STATUS</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let supplier of filteredSuppliers">
+
+            <td>
+              <span class="supplier-id">
+                {{ supplier.id }}
+              </span>
+            </td>
+
+            <td>
+              <div class="supplier-name">
+                <div class="supplier-avatar">
+                  {{ getInitials(supplier.name) }}
+                </div>
+
+                <div>
+                  <strong>{{ supplier.name }}</strong>
+                  <small>{{ supplier.company }}</small>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="contact-info">
+                <strong>{{ supplier.contactPerson }}</strong>
+                <small>{{ supplier.phone }}</small>
+                <small>{{ supplier.email }}</small>
+              </div>
+            </td>
+
+            <td>
+              <span class="category-badge">
+                {{ supplier.category }}
+              </span>
+            </td>
+
+            <td>
+              <span class="material-text">
+                {{ supplier.material }}
+              </span>
+            </td>
+
+            <td>
+              <span class="project-count">
+                {{ supplier.projects }}
+              </span>
+            </td>
+
+            <td>
+              <div class="rating">
+                <span>★</span>
+                <strong>{{ supplier.rating }}</strong>
+              </div>
+            </td>
+
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(supplier.status)"
+              >
+                {{ supplier.status }}
+              </span>
+            </td>
+
+            <!-- ACTIONS -->
+            <td>
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  title="View Supplier"
+                  (click)="viewSupplier(supplier)"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  title="Edit Supplier"
+                  (click)="editSupplier(supplier)"
+                >
+                  Edit
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  title="Delete Supplier"
+                  (click)="deleteSupplier(supplier)"
+                >
+                  Delete
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+          <!-- EMPTY STATE -->
+          <tr *ngIf="filteredSuppliers.length === 0">
+            <td colspan="9" class="empty-row">
+
+              <div class="empty-state">
+                <div class="empty-icon">🏢</div>
+                <h3>No suppliers found</h3>
+                <p>Try changing your search or filter criteria.</p>
+              </div>
+
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+  <!-- ADD / EDIT MODAL -->
+  <div
+    class="modal-overlay"
+    *ngIf="showSupplierModal"
+    (click)="closeSupplierModal()"
+  >
+
+    <div
+      class="supplier-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+          <span class="modal-label">
+            SUPPLIER INFORMATION
+          </span>
+
+          <h2>
+            {{ isEditMode ? 'Edit Supplier' : 'Add New Supplier' }}
+          </h2>
+
+          <p>
+            Enter supplier and business details.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          (click)="closeSupplierModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Supplier Name <span>*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="supplierForm.name"
+            placeholder="Enter supplier name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Company Name <span>*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="supplierForm.company"
+            placeholder="Enter company name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Contact Person <span>*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="supplierForm.contactPerson"
+            placeholder="Enter contact person"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number <span>*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="supplierForm.phone"
+            placeholder="Enter phone number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Email Address <span>*</span></label>
+          <input
+            type="email"
+            [(ngModel)]="supplierForm.email"
+            placeholder="Enter email address"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select [(ngModel)]="supplierForm.category">
+            <option value="Material Supplier">Material Supplier</option>
+            <option value="Equipment Supplier">Equipment Supplier</option>
+            <option value="Service Provider">Service Provider</option>
+            <option value="Subcontractor">Subcontractor</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Material / Service</label>
+          <input
+            type="text"
+            [(ngModel)]="supplierForm.material"
+            placeholder="e.g. Cement, Steel, Equipment"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select [(ngModel)]="supplierForm.status">
+            <option value="Active">Active</option>
+            <option value="Pending">Pending</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Rating</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            step="0.1"
+            [(ngModel)]="supplierForm.rating"
+            placeholder="1 - 5"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Projects Supplied</label>
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="supplierForm.projects"
+            placeholder="Number of projects"
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label>Address</label>
+          <textarea
+            [(ngModel)]="supplierForm.address"
+            placeholder="Enter supplier address"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Notes</label>
+          <textarea
+            [(ngModel)]="supplierForm.notes"
+            placeholder="Additional supplier information"
+          ></textarea>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeSupplierModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="save-btn"
+          (click)="saveSupplier()"
+        >
+          {{ isEditMode ? 'Update Supplier' : 'Save Supplier' }}
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VIEW SUPPLIER MODAL -->
+  <div
+    class="modal-overlay"
+    *ngIf="showViewModal"
+    (click)="closeViewModal()"
+  >
+
+    <div
+      class="supplier-modal view-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+          <span class="modal-label">SUPPLIER DETAILS</span>
+          <h2>{{ selectedSupplier?.name }}</h2>
+          <p>{{ selectedSupplier?.company }}</p>
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          (click)="closeViewModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div class="details-grid" *ngIf="selectedSupplier">
+
+        <div class="detail-item">
+          <span>Supplier ID</span>
+          <strong>{{ selectedSupplier.id }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Company</span>
+          <strong>{{ selectedSupplier.company }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Contact Person</span>
+          <strong>{{ selectedSupplier.contactPerson }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Phone</span>
+          <strong>{{ selectedSupplier.phone }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Email</span>
+          <strong>{{ selectedSupplier.email }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Category</span>
+          <strong>{{ selectedSupplier.category }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Material / Service</span>
+          <strong>{{ selectedSupplier.material }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Projects</span>
+          <strong>{{ selectedSupplier.projects }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Rating</span>
+          <strong>★ {{ selectedSupplier.rating }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Status</span>
+          <strong>{{ selectedSupplier.status }}</strong>
+        </div>
+
+        <div class="detail-item full-width">
+          <span>Address</span>
+          <strong>{{ selectedSupplier.address || 'Not provided' }}</strong>
+        </div>
+
+        <div class="detail-item full-width">
+          <span>Notes</span>
+          <strong>{{ selectedSupplier.notes || 'No additional notes' }}</strong>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeViewModal()"
+        >
+          Close
+        </button>
+
+        <button
+          type="button"
+          class="save-btn"
+          (click)="editSupplier(selectedSupplier!)"
+        >
+          Edit Supplier
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

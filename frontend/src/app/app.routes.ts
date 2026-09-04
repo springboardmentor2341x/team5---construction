@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-
+import { authGuard } from './guards/auth-guard';
+import { roleGuard } from './guards/role-guard';
 // =========================
 // ADMIN IMPORTS
 // =========================
@@ -16,14 +17,21 @@ import { EditUser } from './pages/admin/user-management/edit-user/edit-user';
 import { AddUser } from './pages/admin/user-management/add-user/add-user';
 import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
-
+import { Analytics } from './pages/admin/analytics/analytics';
+import { AuditLogs } from './pages/admin/audit-logs/audit-logs';
 // =========================
 // LAYOUT IMPORTS
 // =========================
 import { ProjectManagerLayoutComponent } from './layouts/project-manager-layout/project-manager-layout';
+
 import { ResourceManagementLayoutComponent } from './layouts/resource-management-layout/resource-management-layout';
 import { WorkforceManagementLayoutComponent } from './layouts/workforce-management-layout/workforce-management-layout';
-
+import { BudgetManagementLayoutComponent } from './layouts/budget-management-layout/budget-management-layout';
+import { NotificationsLayout } from './layouts/notifications-layout/notifications-layout';
+import { DashboardAndAnalyticsLayoutComponent } from './layouts/dashboard-and-analytics-layout/dashboard-and-analytics-layout';
+import { ProjectManagerDashboardComponent } from './pages/dashboard-and-analytics/project-manager-dashboard/project-manager-dashboard';
+import { AdminDashboardComponent } from './pages/dashboard-and-analytics/admin-dashboard/admin-dashboard';
+import { ReportsLayoutComponent } from './layouts/reports-layout/reports-layout';
 export const routes: Routes = [
 
   // =====================================================
@@ -125,10 +133,201 @@ export const routes: Routes = [
       {
         path: 'add-project',
         component: AddProject
-      }
+      },
+      {
+  path: 'analytics',
+  component: Analytics
+},
+{
+  path: 'audit-logs',
+  component: AuditLogs
+}
 
     ]
   },
+   // =========================
+  // SITE ENGINEER
+  // =========================
+
+  {
+    path: 'site-engineer',
+      canActivate: [
+    authGuard,
+    roleGuard,
+  ],
+  canActivateChild: [
+    authGuard,
+    roleGuard,
+  ],
+
+    loadComponent: () =>
+      import('./layouts/site-engineer-layout/site-engineer-layout')
+        .then(m => m.SiteEngineerLayout),
+
+
+    children: [
+
+        {
+          path: '',
+          redirectTo: 'dashboard',
+          pathMatch: 'full'
+        },
+
+        {
+          path: 'dashboard',
+          loadComponent: () =>
+            import('./pages/site-engineer/Dashboard/site-engineer-dashboard')
+              .then(m => m.SiteEngineerDashboard)
+        },
+
+        {
+          path: 'activity-logs',
+          loadComponent: () =>
+            import('./pages/site-engineer/ActivityLogs/se-activity-logs')
+              .then(m => m.SeActivityLogs)
+        },
+
+        {
+          path: 'daily-material-used',
+          loadComponent: () => 
+            import('./pages/site-engineer/daily-material-used/daily-material-used')
+              .then(m => m.DailyMaterialUsed)
+        },
+      {
+        path: 'activity-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/activity-details/activity-details')
+            .then(m => m.ActivityDetails)
+      },
+      {
+        path: 'milestones',
+        loadComponent: () =>
+          import('./pages/site-engineer/se-milestones/se-milestones')
+            .then(m => m.SeMilestones)
+      },
+      {
+        path:'milestone-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/milestone-details/milestone-details')
+          .then(m => m.MilestoneDetails)
+      },
+
+      {
+        path:'delay-tracking',
+        loadComponent: ()=>
+          import('./pages/site-engineer/delay-tracking/delay-tracking')
+          .then(m => m.DelayTracking)
+      },
+
+      {
+      path:'work-completion-status',
+      loadComponent: () =>
+        import('./pages/site-engineer/se-work-completion-status/se-work-completion-status')
+          .then(m => m.SeWorkCompletionStatus)
+      },
+
+      {
+        path: 'delay-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/delay-details/delay-details')
+            .then(m => m.DelayDetails)
+      },
+      {
+        path: 'assigned-projects',
+        loadComponent: () =>
+          import('./pages/site-engineer/AssignedProjects/se-assigned-projects')
+            .then(m => m.SeAssignedProjects)
+      },
+
+      {
+        path: 'project-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/ProjectDetails/se-project-details')
+            .then(m => m.SeProjectDetails)
+      },
+
+      {
+        path: 'daily-progress',
+        loadComponent: () =>
+          import('./pages/site-engineer/DailyProgress/se-daily-progress')
+            .then(m => m.SeDailyProgress)
+      },
+
+      {
+        path: 'daily-report-details',
+        loadComponent: () =>
+          import('./pages/site-engineer/daily-report-details/daily-report-details')
+            .then(m => m.DailyReportDetails)
+      },
+    
+
+      {
+        path: 'equipment-status',
+        loadComponent: () =>
+          import('./pages/site-engineer/EquipmentStatus/se-equipment-status')
+            .then(m => m.SeEquipmentStatus)
+      },
+
+     {
+      path: 'add-equipment',
+      loadComponent: () =>
+        import('./pages/site-engineer/add-equipment/add-equipment')
+          .then(m => m.AddEquipmentcomponent)
+      },
+
+     {
+      path: 'equipment-details',
+      loadComponent: () =>
+          import('./pages/site-engineer/equipment-details/equipment-details')
+          .then(m => m.EquipmentDetails)
+      
+     },
+
+     {
+      path: 'notifications',
+      loadComponent: () =>
+        import('./pages/site-engineer/Notifications/se-notifications')
+          .then(m => m.SeNotifications)
+     },
+
+     {
+      path: 'profile',
+      loadComponent: () =>
+        import('./pages/site-engineer/Profile/se-profile')
+          .then(m => m.SeProfile)
+     },
+
+     {
+      path: 'resources',
+      loadComponent: () =>
+        import('./pages/site-engineer/Resources/se-resources')
+          .then(m => m.SeResources)
+     },
+
+      {
+      path: 'resource-details',
+      loadComponent: () =>
+        import('./pages/site-engineer/resource-details/resource-details')
+        .then(m => m.ResourceDetails)
+      },
+
+        {
+          path: 'weekly-reports',
+          loadComponent: () =>
+            import('./pages/site-engineer/WeeklyReports/se-weekly-reports')
+              .then(m => m.SeWeeklyReports)
+        },
+        {
+          path:'weekly-report-details',
+          loadComponent:() =>
+            import('./pages/site-engineer/weekly-report-details/weekly-report-details')
+                .then(m => m.WeeklyReportDetails)
+        }
+
+     ]
+},
+
+
 
   // =====================================================
   // PROJECT MANAGER MODULE
@@ -260,6 +459,7 @@ export const routes: Routes = [
 
     ]
   },
+  
 
   // =====================================================
   // RESOURCE MANAGEMENT MODULE
@@ -410,6 +610,400 @@ export const routes: Routes = [
 
     ]
   },
+  // =====================================================
+  // PROCUREMENT MANAGEMENT MODULE
+  // =====================================================
+
+  {
+    path: 'procurement-management',
+
+    loadComponent: () =>
+      import('./layouts/procurement-management-layout/procurement-management-layout')
+        .then(m => m.ProcurementManagementLayoutComponent),
+
+    children: [
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+
+      // =========================
+      // PROCUREMENT DASHBOARD
+      // =========================
+
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/procurement-management/Dashboard/pr-dashboard')
+            .then(m => m.PrDashboardComponent)
+      },
+
+      // =========================
+      // PROCUREMENT REQUESTS
+      // =========================
+
+      {
+        path: 'procurement-requests',
+        loadComponent: () =>
+          import('./pages/procurement-management/Procurement Requests/pr-procurement-requests')
+            .then(m => m.PrProcurementRequestsComponent)
+      },
+
+      // // =========================
+      // // VENDOR MANAGEMENT
+      // // =========================
+
+      {
+        path: 'vendor-management',
+        loadComponent: () =>
+          import('./pages/procurement-management/Vendor Management/pr-vendor-management')
+            .then(m => m.PrVendorManagementComponent)
+      },
+
+      // // =========================
+      // // PURCHASE ORDERS
+      // // =========================
+
+      {
+        path: 'purchase-orders',
+        loadComponent: () =>
+          import('./pages/procurement-management/Purchase Orders/pr-purchase-orders')
+            .then(m => m.PrPurchaseOrdersComponent)
+      },
+
+      // // =========================
+      // // SUPPLIER MANAGEMENT
+      // // =========================
+
+      {
+        path: 'supplier-management',
+        loadComponent: () =>
+          import('./pages/procurement-management/Supplier Management/pr-supplier-management')
+            .then(m => m.PrSupplierManagementComponent)
+      },
+
+      // // =========================
+      // // INVOICE TRACKING
+      // // =========================
+
+      {
+        path: 'invoice-tracking',
+        loadComponent: () =>
+          import('./pages/procurement-management/Invoice Tracking/pr-invoice-tracking')
+            .then(m => m.PrInvoiceTrackingComponent)
+      },
+      {
+  path: 'procurement-categories',
+  loadComponent: () =>
+    import('./pages/procurement-management/Procurement Categories/pr-procurement-categories')
+      .then(m => m.PrProcurementCategoriesComponent)
+},
+{
+  path: 'procurement-reports',
+  loadComponent: () =>
+    import('./pages/procurement-management/Procurement Reports/pr-procurement-reports')
+      .then(m => m.PrProcurementReportsComponent)
+},
+
+    ]
+  },
+    // =====================================================
+  // BUDGET & COST MANAGEMENT MODULE - MODULE 11
+  // =====================================================
+  
+  {
+    path:'budget-management',
+    component: BudgetManagementLayoutComponent,
+
+    children: [
+
+      // =========================
+      // DEFAULT
+      // =========================
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+
+      // // =========================
+      // // BUDGET DASHBOARD
+      // // =========================
+
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/budget-management/Dashboard/bm-dashboard')
+            .then(m => m.BmDashboardComponent)
+      },
+
+      // // =========================
+      // // BUDGET PLANNING
+      // // =========================
+
+      {
+        path: 'budget-planning',
+        loadComponent: () =>
+          import('./pages/budget-management/Budget Planning/bm-budget-planning')
+            .then(m => m.BmBudgetPlanningComponent)
+      },
+
+      // // =========================
+      // // COST ESTIMATION
+      // // =========================
+
+      {
+        path: 'cost-estimation',
+        loadComponent: () =>
+          import('./pages/budget-management/Cost Estimation/bm-cost-estimation')
+            .then(m => m.BmCostEstimationComponent)
+      },
+
+      // // =========================
+      // // EXPENSE MANAGEMENT
+      // // =========================
+
+      {
+        path: 'expense-management',
+        loadComponent: () =>
+          import('./pages/budget-management/Expense Management/bm-expense-management')
+            .then(m => m.BmExpenseManagementComponent)
+      },
+
+      // // =========================
+      // // BUDGET MONITORING
+      // // =========================
+
+      {
+        path: 'budget-monitoring',
+        loadComponent: () =>
+          import('./pages/budget-management/Budget Monitoring/bm-budget-monitoring')
+            .then(m => m.BmBudgetMonitoringComponent)
+      },
+
+      // // =========================
+      // // FINANCIAL SUMMARY / REPORT
+      // // =========================
+
+      {
+        path: 'financial-summary',
+        loadComponent: () =>
+          import('./pages/budget-management/Financial Summary/bm-financial-summary')
+            .then(m => m.BmFinancialSummaryComponent)
+      },
+    
+
+    ]
+  },
+// =====================================================
+// NOTIFICATION SYSTEM MODULE - MODULE 8
+// =====================================================
+
+
+//   path: 'notifications',
+//   component: NotificationsLayout,
+{
+  path: 'notifications',
+  component: NotificationsLayout,
+  canActivate: [authGuard, roleGuard],
+  canActivateChild: [authGuard, roleGuard],
+  data: { role: 'admin' },   
+  
+
+  children: [
+
+    // =========================
+    // DEFAULT
+    // =========================
+
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full'
+    },
+
+    // =========================
+    // NOTIFICATION DASHBOARD
+    // =========================
+
+    {
+      path: 'dashboard',
+      loadComponent: () =>
+        import('./pages/notifications/notifications-page/notifications-page')
+          .then(m => m.NotificationsPage)
+    },
+
+    // =========================
+    // NOTIFICATION DETAILS
+    // =========================
+
+    {
+      path: 'details/:id',
+      loadComponent: () =>
+        import('./pages/notifications/notifications-details/notifications-details')
+          .then(m => m.NotificationsDetails)
+    },
+
+//     // =========================
+//     // NOTIFICATION MANAGEMENT
+//     // =========================
+
+    {
+      path: 'management',
+      loadComponent: () =>
+        import('./pages/notifications/notifications-management/notifications-management')
+          .then(m => m.NotificationsManagement)
+    }
+
+  ]
+},
+  // =====================================================
+  // DASHBOARD & ANALYTICS MODULE - MODULE 9
+  // =====================================================
+
+  {
+    path: 'dashboard-and-analytics',
+    component: DashboardAndAnalyticsLayoutComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
+
+    children: [
+
+      // =========================
+      // DEFAULT DASHBOARD
+      // =========================
+
+      {
+        path: '',
+        redirectTo: 'project-manager',
+        pathMatch: 'full'
+      },
+
+      // =========================
+      // PROJECT MANAGER DASHBOARD
+      // =========================
+
+      {
+        path: 'project-manager',
+        component: ProjectManagerDashboardComponent
+      },
+
+      // =========================
+      // ADMIN DASHBOARD
+      // =========================
+
+      {
+        path: 'admin',
+        component: AdminDashboardComponent
+      }
+
+    ]
+  },
+  // =====================================================
+// REPORTS & DOCUMENTATION MODULE - MODULE 10
+// =====================================================
+
+{
+  path: 'reports',
+  component: ReportsLayoutComponent,
+  canActivate: [authGuard],
+  canActivateChild: [authGuard],
+
+  children: [
+
+    // =========================
+    // DEFAULT REPORTS PAGE
+    // =========================
+
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full'
+    },
+
+    // =========================
+    // REPORTS DASHBOARD
+    // =========================
+
+    {
+      path: 'dashboard',
+      loadComponent: () =>
+        import('./pages/reports/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
+
+    // // =========================
+    // // PROJECT PROGRESS REPORT
+    // // =========================
+
+    {
+      path: 'project-progress',
+      loadComponent: () =>
+        import('./pages/reports/project-progress-report/project-progress-report')
+          .then(m => m.ProjectProgressReportComponent)
+    },
+
+    // // =========================
+    // // RESOURCE UTILIZATION REPORT
+    // // =========================
+
+    {
+      path: 'resources',
+      loadComponent: () =>
+        import('./pages/reports/resource-utilization-report/resource-utilization-report')
+          .then(m => m.ResourceUtilizationReportComponent)
+    },
+
+    // // =========================
+    // // WORKFORCE REPORT
+    // // =========================
+
+    {
+      path: 'workforce',
+      loadComponent: () =>
+        import('./pages/reports/workforce-report/workforce-report')
+          .then(m => m.WorkforceReportComponent)
+    },
+
+    // // =========================
+    // // PROCUREMENT REPORT
+    // // =========================
+
+    {
+      path: 'procurement',
+      loadComponent: () =>
+        import('./pages/reports/procurement-report/procurement-report')
+          .then(m => m.ProcurementReportComponent)
+    },
+
+    // // =========================
+    // // BUDGET REPORT
+    // // =========================
+
+    {
+      path: 'budget',
+      loadComponent: () =>
+        import('./pages/reports/budget-report/budget-report')
+          .then(m => m.BudgetReportComponent)
+    },
+
+    // // =========================
+    // // REPORT PREVIEW
+    // // =========================
+
+    {
+      path: 'preview',
+      loadComponent: () =>
+        import('./pages/reports/report-preview/report-preview')
+          .then(m => m.ReportPreviewComponent)
+    }
+
+  ]
+},
+
 
   // =====================================================
   // WILDCARD ROUTE

@@ -1,0 +1,63 @@
+<aside class="sidebar">
+
+  <!-- Logo -->
+  <div class="sidebar-header">
+
+    <div class="logo">
+      <div class="logo-icon">BT</div>
+
+      <div class="logo-text">
+        <h2>BuildTrack</h2>
+        <span>Construction Management</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Module Title -->
+  <div class="module-title">
+    PROCUREMENT MANAGEMENT
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+
+    @for (item of menuItems; track item.route) {
+
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+
+        <span class="nav-icon">
+          {{ item.icon }}
+        </span>
+
+        <span class="nav-text">
+          {{ item.name }}
+        </span>
+
+      </a>
+
+    }
+
+  </nav>
+
+  <!-- Help -->
+  <div class="sidebar-footer">
+
+    <div class="help-box">
+
+      <div class="help-icon">?</div>
+
+      <div class="help-content">
+        <strong>Need Help?</strong>
+        <span>Contact support</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</aside>

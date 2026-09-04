@@ -1,0 +1,304 @@
+<div class="budget-report-page">
+
+  <section class="page-header">
+    <div class="page-title">
+            <h1>Budget Report</h1>
+      <p>View planned budget, estimated cost, actual expenses and budget utilization.</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-back" type="button" (click)="goBack()">
+        ← Back
+      </button>
+
+      <button class="btn btn-pdf" type="button" (click)="downloadPdf()">
+        ↓ Download PDF
+      </button>
+
+      <button class="btn btn-excel" type="button" (click)="exportExcel()">
+        ↓ Export Excel
+      </button>
+    </div>
+  </section>
+
+
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+      <div class="filter-icon">₹</div>
+
+      <div>
+        <h3>Report Filters</h3>
+        <span>Select project, reporting period and budget status</span>
+      </div>
+    </div>
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+        <label for="project">Project</label>
+
+        <select id="project" [(ngModel)]="selectedProject">
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+          <option>All Projects</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="period">Reporting Period</label>
+
+        <select id="period" [(ngModel)]="selectedPeriod">
+          <option>Current Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+          <option>Current Year</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="status">Budget Status</label>
+
+        <select id="status" [(ngModel)]="selectedStatus">
+          <option>All Status</option>
+          <option>On Track</option>
+          <option>Within Budget</option>
+          <option>Over Budget</option>
+        </select>
+      </div>
+
+
+      <button class="btn btn-apply" type="button" (click)="applyFilters()">
+        Apply Filters
+      </button>
+
+    </div>
+  </section>
+
+
+  <section class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Planned Budget</span>
+        <div class="summary-icon">₹</div>
+      </div>
+
+      <strong>₹{{ plannedBudget | number }}</strong>
+      <p>Approved project budget</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Estimated Cost</span>
+        <div class="summary-icon">≈</div>
+      </div>
+
+      <strong>₹{{ estimatedCost | number }}</strong>
+      <p>Current estimated project cost</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Actual Expenses</span>
+        <div class="summary-icon">↗</div>
+      </div>
+
+      <strong>₹{{ actualExpenses | number }}</strong>
+      <p>Total expenses recorded</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Remaining Budget</span>
+        <div class="summary-icon">✓</div>
+      </div>
+
+      <strong>₹{{ remainingBudget | number }}</strong>
+      <p>{{ utilizationPercentage }}% of budget utilized</p>
+    </div>
+
+  </section>
+
+
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-label">BUDGET ANALYSIS</span>
+
+        <h2>Budget Details</h2>
+
+        <p>
+          Planned budget, estimated cost, actual expenses and remaining amount.
+        </p>
+      </div>
+
+      <button
+        class="view-report-btn"
+        type="button"
+        (click)="viewReport()">
+        View Full Report →
+      </button>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Budget ID</th>
+            <th>Category</th>
+            <th>Planned Budget</th>
+            <th>Estimated Cost</th>
+            <th>Actual Expenses</th>
+            <th>Utilized</th>
+            <th>Remaining</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let record of budgetRecords">
+
+            <td>
+              <strong>{{ record.id }}</strong>
+            </td>
+
+            <td>
+              <div class="category-name">
+                <span class="category-icon">₹</span>
+                <span>{{ record.category }}</span>
+              </div>
+            </td>
+
+            <td>
+              ₹{{ record.planned | number }}
+            </td>
+
+            <td>
+              ₹{{ record.estimated | number }}
+            </td>
+
+            <td>
+              ₹{{ record.actual | number }}
+            </td>
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="progress-track">
+                  <div
+                    class="progress-bar"
+                    [style.width.%]="(record.utilized / record.planned) * 100">
+                  </div>
+                </div>
+
+                <span>
+                  ₹{{ record.utilized | number }}
+                </span>
+
+              </div>
+
+            </td>
+
+            <td>
+              ₹{{ record.remaining | number }}
+            </td>
+
+            <td>
+
+              <span
+                class="status-badge"
+                [class.track]="record.status === 'On Track'"
+                [class.within]="record.status === 'Within Budget'"
+                [class.over]="record.status === 'Over Budget'">
+
+                {{ record.status }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <section class="budget-overview">
+
+    <div class="overview-item">
+      <span>Planned Budget</span>
+      <strong>₹{{ plannedBudget | number }}</strong>
+    </div>
+
+    <div class="overview-item">
+      <span>Utilized Amount</span>
+      <strong>₹{{ utilizedAmount | number }}</strong>
+    </div>
+
+    <div class="overview-item">
+      <span>Remaining Budget</span>
+      <strong>₹{{ remainingBudget | number }}</strong>
+    </div>
+
+    <div class="overview-item">
+      <span>Utilization</span>
+      <strong>{{ utilizationPercentage }}%</strong>
+    </div>
+
+  </section>
+
+
+  <section class="insight-card">
+
+    <div class="insight-icon">i</div>
+
+    <div>
+      <h3>Budget Insight</h3>
+
+      <p>
+        The project has utilized {{ utilizationPercentage }}% of the planned
+        budget. Remaining funds should be monitored against the estimated
+        project cost to control budget variance.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section class="access-notice">
+
+    <div class="access-icon">✓</div>
+
+    <div>
+      <strong>Role-based report access</strong>
+
+      <p>
+        Administrators can access system-level budget reports.
+        Project Managers can access budget reports for their assigned projects.
+      </p>
+    </div>
+
+  </section>
+
+</div>

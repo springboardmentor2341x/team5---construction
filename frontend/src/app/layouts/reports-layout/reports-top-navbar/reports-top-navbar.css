@@ -1,0 +1,370 @@
+/* =========================================
+   MODULE 10
+   REPORTS TOP NAVBAR
+   DEEP NAVY + TEAL THEME
+========================================= */
+
+.reports-top-navbar {
+  width: 100%;
+  height: 74px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+
+  position: relative;
+  z-index: 20;
+}
+
+
+/* =========================================
+   LEFT SECTION
+========================================= */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.heading-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #e6fffb;
+
+  color: #0f766e;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.heading-text h1 {
+  margin: 0;
+
+  color: #172a3a;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.heading-text span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   RIGHT SECTION
+========================================= */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-box {
+  width: 235px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 10px;
+
+  box-sizing: border-box;
+
+  background: #f8fafc;
+
+  border: 1px solid #dbe3ea;
+
+  border-radius: 7px;
+
+  transition: all 0.2s ease;
+}
+
+.search-box:focus-within {
+  background: #ffffff;
+
+  border-color: #0f766e;
+
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.08);
+}
+
+.search-icon {
+  color: #64748b;
+
+  font-size: 20px;
+
+  line-height: 1;
+}
+
+.search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #334155;
+
+  font-size: 12px;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.search-key {
+  width: 19px;
+  height: 19px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dbe3ea;
+
+  border-radius: 4px;
+
+  background: #ffffff;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.notification-btn {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #475569;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.notification-btn:hover {
+  background: #e6fffb;
+
+  border-color: #99f6e4;
+
+  color: #0f766e;
+}
+
+.notification-icon {
+  font-size: 17px;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #14b8a6;
+
+  border: 1px solid #ffffff;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.navbar-divider {
+  width: 1px;
+  height: 30px;
+
+  background: #e2e8f0;
+}
+
+
+/* =========================================
+   USER PROFILE
+========================================= */
+
+.user-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 4px 2px;
+
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #172a3a;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.user-info strong {
+  display: block;
+
+  color: #172a3a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.user-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #64748b;
+
+  font-size: 10px;
+}
+
+.dropdown-icon {
+  margin-left: 2px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 950px) {
+
+  .reports-top-navbar {
+    padding: 0 20px;
+  }
+
+  .search-box {
+    width: 190px;
+  }
+
+}
+
+
+@media (max-width: 750px) {
+
+  .reports-top-navbar {
+    height: 68px;
+
+    padding: 0 15px;
+  }
+
+  .heading-text span {
+    display: none;
+  }
+
+  .heading-text h1 {
+    font-size: 14px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .user-info,
+  .dropdown-icon {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .heading-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .heading-text h1 {
+    font-size: 13px;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .navbar-divider {
+    display: none;
+  }
+
+}

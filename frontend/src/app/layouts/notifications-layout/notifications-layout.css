@@ -1,0 +1,45 @@
+/* =========================================
+   MODULE 8 - NOTIFICATIONS LAYOUT
+========================================= */
+
+.notifications-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f7fb;
+}
+
+/* =========================================
+   MAIN CONTENT AREA
+========================================= */
+
+.notifications-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* =========================================
+   PAGE CONTENT
+========================================= */
+
+.notifications-content {
+  flex: 1;
+  padding: 24px;
+  overflow-x: auto;
+  background: #f5f7fb;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .notifications-content {
+    padding: 16px;
+  }
+
+}

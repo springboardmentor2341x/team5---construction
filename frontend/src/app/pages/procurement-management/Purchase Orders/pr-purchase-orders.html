@@ -1,0 +1,1154 @@
+<div class="purchase-order-page">
+
+  <!-- =========================
+       PAGE HEADER
+       ========================= -->
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+
+      <h1>Purchase Orders</h1>
+
+      <p>
+        Create, manage and track purchase orders linked to procurement
+        requests, vendors and construction projects.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="add-btn"
+      (click)="openAddOrder()"
+    >
+      <span>+</span>
+      Create Purchase Order
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       SUMMARY CARDS
+       ========================= -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        PO
+      </div>
+
+      <div>
+        <span>Total Purchase Orders</span>
+        <strong>{{ totalOrders }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon pending">
+        !
+      </div>
+
+      <div>
+        <span>Pending Orders</span>
+        <strong>{{ pendingOrders }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon processing">
+        ↻
+      </div>
+
+      <div>
+        <span>Processing</span>
+        <strong>{{ processingOrders }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon completed">
+        ✓
+      </div>
+
+      <div>
+        <span>Completed</span>
+        <strong>{{ completedOrders }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon amount">
+        ₹
+      </div>
+
+      <div>
+        <span>Total Order Value</span>
+        <strong>
+          ₹{{ totalOrderAmount | number:'1.0-0' }}
+        </strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FILTER SECTION
+       ========================= -->
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        (input)="filterOrders()"
+        placeholder="Search PO, vendor, project, request or item..."
+      />
+
+    </div>
+
+
+    <select
+      [(ngModel)]="selectedStatus"
+      (change)="filterOrders()"
+    >
+
+      <option value="All">
+        All Status
+      </option>
+
+      <option value="Pending">
+        Pending
+      </option>
+
+      <option value="Approved">
+        Approved
+      </option>
+
+      <option value="Processing">
+        Processing
+      </option>
+
+      <option value="Completed">
+        Completed
+      </option>
+
+      <option value="Cancelled">
+        Cancelled
+      </option>
+
+    </select>
+
+
+    <select
+      [(ngModel)]="selectedVendor"
+      (change)="filterOrders()"
+    >
+
+      <option value="All">
+        All Vendors
+      </option>
+
+      <option value="ABC Building Supplies">
+        ABC Building Supplies
+      </option>
+
+      <option value="BuildTech Equipment">
+        BuildTech Equipment
+      </option>
+
+      <option value="Prime Machinery Ltd">
+        Prime Machinery Ltd
+      </option>
+
+      <option value="SafeGuard Industries">
+        SafeGuard Industries
+      </option>
+
+      <option value="OfficeMart Supplies">
+        OfficeMart Supplies
+      </option>
+
+      <option value="Metro Construction Materials">
+        Metro Construction Materials
+      </option>
+
+      <option value="Industrial Machinery Works">
+        Industrial Machinery Works
+      </option>
+
+      <option value="SafeBuild Solutions">
+        SafeBuild Solutions
+      </option>
+
+    </select>
+
+
+    <select
+      [(ngModel)]="selectedProject"
+      (change)="filterOrders()"
+    >
+
+      <option value="All">
+        All Projects
+      </option>
+
+      <option value="Green Valley Apartment">
+        Green Valley Apartment
+      </option>
+
+      <option value="Metro Commercial Complex">
+        Metro Commercial Complex
+      </option>
+
+      <option value="Sunrise Villa Project">
+        Sunrise Villa Project
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <!-- =========================
+       PURCHASE ORDER TABLE
+       ========================= -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Purchase Orders</h2>
+
+        <p>
+          View and manage purchase orders created from approved procurement requests
+        </p>
+      </div>
+
+      <div class="record-count">
+        {{ filteredOrders.length }} Orders
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>PO ID</th>
+
+            <th>Vendor</th>
+
+            <th>Project</th>
+
+            <th>Request ID</th>
+
+            <th>Item</th>
+
+            <th>Category</th>
+
+            <th>Order Date</th>
+
+            <th>Delivery Date</th>
+
+            <th>Quantity</th>
+
+            <th>Total Amount</th>
+
+            <th>Status</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let order of filteredOrders"
+          >
+
+            <!-- PO ID -->
+            <td>
+
+              <span class="po-id">
+                {{ order.id }}
+              </span>
+
+            </td>
+
+
+            <!-- Vendor -->
+            <td>
+
+              <div class="vendor-name">
+
+                <div class="vendor-avatar">
+                  {{ order.vendor.charAt(0) }}
+                </div>
+
+                <strong>
+                  {{ order.vendor }}
+                </strong>
+
+              </div>
+
+            </td>
+
+
+            <!-- Project -->
+            <td>
+
+              <div class="project-name">
+
+                <div class="project-avatar">
+                  {{ order.project.charAt(0) }}
+                </div>
+
+                <strong>
+                  {{ order.project }}
+                </strong>
+
+              </div>
+
+            </td>
+
+
+            <!-- Procurement Request -->
+            <td>
+
+              <span class="request-id">
+                {{ order.procurementRequest }}
+              </span>
+
+            </td>
+
+
+            <!-- Item -->
+            <td>
+              <strong class="item-name">
+                {{ order.item }}
+              </strong>
+            </td>
+
+
+            <!-- Category -->
+            <td>
+
+              <span class="category-badge">
+                {{ order.category }}
+              </span>
+
+            </td>
+
+
+            <!-- Order Date -->
+            <td>
+              {{ order.orderDate | date:'dd MMM yyyy' }}
+            </td>
+
+
+            <!-- Delivery Date -->
+            <td>
+              {{ order.expectedDeliveryDate | date:'dd MMM yyyy' }}
+            </td>
+
+
+            <!-- Quantity -->
+            <td>
+              {{ order.quantity }}
+            </td>
+
+
+            <!-- Total -->
+            <td>
+
+              <strong class="amount-text">
+                ₹{{ order.totalAmount | number:'1.0-0' }}
+              </strong>
+
+            </td>
+
+
+            <!-- Status -->
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(order.status)"
+              >
+                {{ order.status }}
+              </span>
+
+            </td>
+
+
+            <!-- Actions -->
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewOrder(order)"
+                >
+                  👁 View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="editOrder(order)"
+                >
+                  ✎ Edit
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteOrder(order)"
+                >
+                  🗑
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- Empty State -->
+          <tr *ngIf="filteredOrders.length === 0">
+
+            <td
+              colspan="12"
+              class="empty-row"
+            >
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  PO
+                </div>
+
+                <h3>
+                  No purchase orders found
+                </h3>
+
+                <p>
+                  Try changing your search or filters.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW PURCHASE ORDER MODAL
+     ===================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewOrder"
+  (click)="closeViewOrder()"
+>
+
+  <div
+    class="request-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PURCHASE ORDER
+        </span>
+
+        <h2>
+          Purchase Order Details
+        </h2>
+
+        <p>
+          Complete information about the selected purchase order
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewOrder()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="request-details"
+      *ngIf="selectedOrder"
+    >
+
+      <!-- Profile -->
+      <div class="detail-profile">
+
+        <div class="large-avatar">
+          {{ selectedOrder.vendor.charAt(0) }}
+        </div>
+
+        <div>
+
+          <h3>
+            {{ selectedOrder.vendor }}
+          </h3>
+
+          <span class="po-id">
+            {{ selectedOrder.id }}
+          </span>
+
+        </div>
+
+        <span
+          class="status-badge profile-status"
+          [ngClass]="getStatusClass(selectedOrder.status)"
+        >
+          {{ selectedOrder.status }}
+        </span>
+
+      </div>
+
+
+      <!-- Details -->
+      <div class="details-grid">
+
+        <div class="detail-item">
+
+          <span>Purchase Order ID</span>
+
+          <strong>
+            {{ selectedOrder.id }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Procurement Request</span>
+
+          <strong>
+            {{ selectedOrder.procurementRequest }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Vendor / Supplier</span>
+
+          <strong>
+            {{ selectedOrder.vendor }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Project</span>
+
+          <strong>
+            {{ selectedOrder.project }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Item / Material</span>
+
+          <strong>
+            {{ selectedOrder.item }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Category</span>
+
+          <strong>
+            {{ selectedOrder.category }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Order Date</span>
+
+          <strong>
+            {{ selectedOrder.orderDate | date:'dd MMM yyyy' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Expected Delivery</span>
+
+          <strong>
+            {{ selectedOrder.expectedDeliveryDate | date:'dd MMM yyyy' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Quantity</span>
+
+          <strong>
+            {{ selectedOrder.quantity }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Unit Price</span>
+
+          <strong>
+            ₹{{ selectedOrder.unitPrice | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Tax / Charges</span>
+
+          <strong>
+            ₹{{ selectedOrder.tax | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>Additional Charges</span>
+
+          <strong>
+            ₹{{ selectedOrder.additionalCharges | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item total-item">
+
+          <span>Overall Order Amount</span>
+
+          <strong>
+            ₹{{ selectedOrder.totalAmount | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item full-width">
+
+          <span>Remarks</span>
+
+          <strong>
+            {{ selectedOrder.remarks || 'No remarks available' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewOrder()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD / EDIT PURCHASE ORDER MODAL
+     ===================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddOrder"
+  (click)="closeAddOrder()"
+>
+
+  <div
+    class="request-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT
+        </span>
+
+        <h2>
+          {{ editingOrder ? 'Edit Purchase Order' : 'Create Purchase Order' }}
+        </h2>
+
+        <p>
+          {{
+            editingOrder
+              ? 'Update purchase order information'
+              : 'Enter purchase order details below'
+          }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddOrder()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- PO ID -->
+      <div class="form-group">
+
+        <label>
+          Purchase Order ID
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="orderForm.id"
+          readonly
+        />
+
+      </div>
+
+
+      <!-- Procurement Request -->
+      <div class="form-group">
+
+        <label>
+          Procurement Request <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="orderForm.procurementRequest"
+          placeholder="Example: PR-001"
+        />
+
+      </div>
+
+
+      <!-- Vendor -->
+      <div class="form-group">
+
+        <label>
+          Vendor / Supplier <span>*</span>
+        </label>
+
+        <select
+          [(ngModel)]="orderForm.vendor"
+        >
+
+          <option value="">
+            Select Vendor
+          </option>
+
+          <option value="ABC Building Supplies">
+            ABC Building Supplies
+          </option>
+
+          <option value="BuildTech Equipment">
+            BuildTech Equipment
+          </option>
+
+          <option value="Prime Machinery Ltd">
+            Prime Machinery Ltd
+          </option>
+
+          <option value="SafeGuard Industries">
+            SafeGuard Industries
+          </option>
+
+          <option value="OfficeMart Supplies">
+            OfficeMart Supplies
+          </option>
+
+          <option value="Metro Construction Materials">
+            Metro Construction Materials
+          </option>
+
+          <option value="Industrial Machinery Works">
+            Industrial Machinery Works
+          </option>
+
+          <option value="SafeBuild Solutions">
+            SafeBuild Solutions
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Project -->
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <select
+          [(ngModel)]="orderForm.project"
+        >
+
+          <option value="">
+            Select Project
+          </option>
+
+          <option value="Green Valley Apartment">
+            Green Valley Apartment
+          </option>
+
+          <option value="Metro Commercial Complex">
+            Metro Commercial Complex
+          </option>
+
+          <option value="Sunrise Villa Project">
+            Sunrise Villa Project
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Order Date -->
+      <div class="form-group">
+
+        <label>
+          Order Date <span>*</span>
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="orderForm.orderDate"
+        />
+
+      </div>
+
+
+      <!-- Delivery Date -->
+      <div class="form-group">
+
+        <label>
+          Expected Delivery Date
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="orderForm.expectedDeliveryDate"
+        />
+
+      </div>
+
+
+      <!-- Item -->
+      <div class="form-group">
+
+        <label>
+          Item / Material <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="orderForm.item"
+          placeholder="Example: Cement"
+        />
+
+      </div>
+
+
+      <!-- Category -->
+      <div class="form-group">
+
+        <label>
+          Category
+        </label>
+
+        <select
+          [(ngModel)]="orderForm.category"
+        >
+
+          <option value="Raw Materials">
+            Raw Materials
+          </option>
+
+          <option value="Equipment">
+            Equipment
+          </option>
+
+          <option value="Machinery">
+            Machinery
+          </option>
+
+          <option value="Safety Equipment">
+            Safety Equipment
+          </option>
+
+          <option value="Office Supplies">
+            Office Supplies
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Quantity -->
+      <div class="form-group">
+
+        <label>
+          Quantity
+        </label>
+
+        <input
+          type="number"
+          min="1"
+          [(ngModel)]="orderForm.quantity"
+          (input)="calculateTotal()"
+        />
+
+      </div>
+
+
+      <!-- Unit Price -->
+      <div class="form-group">
+
+        <label>
+          Unit Price
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="orderForm.unitPrice"
+          (input)="calculateTotal()"
+          placeholder="0"
+        />
+
+      </div>
+
+
+      <!-- Tax -->
+      <div class="form-group">
+
+        <label>
+          Taxes / Charges
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="orderForm.tax"
+          (input)="calculateTotal()"
+          placeholder="0"
+        />
+
+      </div>
+
+
+      <!-- Additional Charges -->
+      <div class="form-group">
+
+        <label>
+          Additional Charges
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="orderForm.additionalCharges"
+          (input)="calculateTotal()"
+          placeholder="0"
+        />
+
+      </div>
+
+
+      <!-- Total -->
+      <div class="form-group">
+
+        <label>
+          Overall Order Amount
+        </label>
+
+        <input
+          type="text"
+          [value]="'₹' + (orderForm.totalAmount | number:'1.0-0')"
+          readonly
+        />
+
+      </div>
+
+
+      <!-- Status -->
+      <div class="form-group">
+
+        <label>
+          Purchase Order Status
+        </label>
+
+        <select
+          [(ngModel)]="orderForm.status"
+        >
+
+          <option value="Pending">
+            Pending
+          </option>
+
+          <option value="Approved">
+            Approved
+          </option>
+
+          <option value="Processing">
+            Processing
+          </option>
+
+          <option value="Completed">
+            Completed
+          </option>
+
+          <option value="Cancelled">
+            Cancelled
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Remarks -->
+      <div class="form-group full-width">
+
+        <label>
+          Remarks
+        </label>
+
+        <textarea
+          [(ngModel)]="orderForm.remarks"
+          placeholder="Enter additional purchase order remarks..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddOrder()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveOrder()"
+      >
+        {{ editingOrder ? 'Update Purchase Order' : 'Create Purchase Order' }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

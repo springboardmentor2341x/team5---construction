@@ -1,0 +1,19 @@
+<div class="dashboard-layout">
+
+  <!-- SAME SIDEBAR FOR BOTH DASHBOARDS -->
+  <app-dashboard-and-analytics-sidebar></app-dashboard-and-analytics-sidebar>
+
+  <!-- RIGHT SIDE -->
+  <div class="dashboard-main">
+
+    <!-- SAME TOP NAVBAR FOR BOTH DASHBOARDS -->
+    <app-dashboard-and-analytics-top-navbar></app-dashboard-and-analytics-top-navbar>
+
+    <!-- ONLY THIS AREA SCROLLS -->
+    <main class="dashboard-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

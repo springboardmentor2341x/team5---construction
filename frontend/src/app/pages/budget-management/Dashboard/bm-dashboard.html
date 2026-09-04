@@ -1,0 +1,273 @@
+<div class="dashboard">
+
+  <!-- Page Header -->
+  <div class="dashboard-header">
+
+    <div>
+      <span class="eyebrow">FINANCIAL OVERVIEW</span>
+      <h2>Budget Dashboard</h2>
+      <p>
+        Monitor the financial performance of your selected construction project.
+      </p>
+    </div>
+
+    <button class="primary-btn">
+      + Add Expense
+    </button>
+
+  </div>
+
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+
+    <div class="summary-card blue">
+      <div class="card-top">
+        <span class="card-label">TOTAL BUDGET</span>
+        <span class="card-icon">₹</span>
+      </div>
+
+      <h3>{{ formatCurrency(totalBudget) }}</h3>
+
+      <span class="card-footer">
+        Planned project budget
+      </span>
+    </div>
+
+
+    <div class="summary-card purple">
+      <div class="card-top">
+        <span class="card-label">ESTIMATED COST</span>
+        <span class="card-icon">◫</span>
+      </div>
+
+      <h3>{{ formatCurrency(estimatedCost) }}</h3>
+
+      <span class="card-footer">
+        Expected project cost
+      </span>
+    </div>
+
+
+    <div class="summary-card orange">
+      <div class="card-top">
+        <span class="card-label">AMOUNT SPENT</span>
+        <span class="card-icon">₹</span>
+      </div>
+
+      <h3>{{ formatCurrency(amountSpent) }}</h3>
+
+      <span class="card-footer">
+        Actual recorded expenses
+      </span>
+    </div>
+
+
+    <div class="summary-card green">
+      <div class="card-top">
+        <span class="card-label">REMAINING BUDGET</span>
+        <span class="card-icon">✓</span>
+      </div>
+
+      <h3>{{ formatCurrency(remainingBudget) }}</h3>
+
+      <span class="card-footer">
+        Available project balance
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- Utilization + Project Information -->
+  <div class="middle-grid">
+
+    <div class="panel utilization-panel">
+
+      <div class="panel-header">
+        <div>
+          <h3>Budget Utilization</h3>
+          <p>Actual spending against total planned budget</p>
+        </div>
+
+        <span class="status-badge">Within Budget</span>
+      </div>
+
+      <div class="utilization-content">
+
+        <div class="progress-circle">
+          <div class="circle-inner">
+            <strong>{{ utilization | number:'1.0-0' }}%</strong>
+            <span>Utilized</span>
+          </div>
+        </div>
+
+        <div class="utilization-details">
+
+          <div class="detail-row">
+            <span>
+              <i class="dot blue-dot"></i>
+              Total Budget
+            </span>
+
+            <strong>{{ formatCurrency(totalBudget) }}</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>
+              <i class="dot orange-dot"></i>
+              Amount Spent
+            </span>
+
+            <strong>{{ formatCurrency(amountSpent) }}</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>
+              <i class="dot green-dot"></i>
+              Remaining
+            </span>
+
+            <strong>{{ formatCurrency(remainingBudget) }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel project-panel">
+
+      <div class="panel-header">
+        <div>
+          <h3>Project Financial Status</h3>
+          <p>Current project overview</p>
+        </div>
+      </div>
+
+      <div class="project-status">
+
+        <div class="status-item">
+          <span>Budget Health</span>
+          <strong class="healthy">Healthy</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Budget Utilization</span>
+          <strong>{{ utilization | number:'1.0-0' }}%</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Estimated Variance</span>
+          <strong>
+            {{ formatCurrency(totalBudget - estimatedCost) }}
+          </strong>
+        </div>
+
+        <div class="status-item">
+          <span>Available Balance</span>
+          <strong class="green-text">
+            {{ formatCurrency(remainingBudget) }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Category Table -->
+  <div class="panel category-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Category-wise Cost Analysis</h3>
+        <p>Budget, estimated and actual costs by category</p>
+      </div>
+
+      <button class="secondary-btn">
+        View Details →
+      </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>COST CATEGORY</th>
+            <th>BUDGET</th>
+            <th>ESTIMATED</th>
+            <th>ACTUAL SPENT</th>
+            <th>REMAINING</th>
+            <th>UTILIZATION</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let category of categories">
+
+            <td>
+              <strong>{{ category.name }}</strong>
+            </td>
+
+            <td>
+              {{ formatCurrency(category.budget) }}
+            </td>
+
+            <td>
+              {{ formatCurrency(category.estimated) }}
+            </td>
+
+            <td>
+              <strong>
+                {{ formatCurrency(category.actual) }}
+              </strong>
+            </td>
+
+            <td class="remaining">
+              {{ formatCurrency(
+                getRemaining(category.budget, category.actual)
+              ) }}
+            </td>
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="mini-progress">
+                  <span
+                    [style.width.%]="
+                      getPercentage(category.actual, category.budget)
+                    ">
+                  </span>
+                </div>
+
+                <small>
+                  {{ getPercentage(category.actual, category.budget) }}%
+                </small>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

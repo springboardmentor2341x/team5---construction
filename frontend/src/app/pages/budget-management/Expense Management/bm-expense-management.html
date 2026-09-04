@@ -1,0 +1,359 @@
+<div class="expense-management">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="eyebrow">COST MANAGEMENT</span>
+
+      <h2>Expense Management</h2>
+
+      <p>
+        Record and track actual expenses against the selected project and cost category.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- PROJECT SELECTION -->
+  <div class="panel project-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Project Selection</h3>
+
+        <p>
+          Select the project for expense tracking.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="project-form">
+
+      <div class="form-group">
+
+        <label>PROJECT</label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+
+    <div class="summary-card blue">
+
+      <span class="card-label">TOTAL EXPENSES</span>
+
+      <strong>
+        {{ formatCurrency(totalExpenses) }}
+      </strong>
+
+      <small>
+        Actual project spending
+      </small>
+
+    </div>
+
+
+    <div class="summary-card purple">
+
+      <span class="card-label">EXPENSE RECORDS</span>
+
+      <strong>
+        {{ expenseCount }}
+      </strong>
+
+      <small>
+        Recorded transactions
+      </small>
+
+    </div>
+
+
+    <div class="summary-card orange">
+
+      <span class="card-label">LABOR & MATERIAL</span>
+
+      <strong>
+        {{ formatCurrency(
+          expenses[0].amount + expenses[1].amount
+        ) }}
+      </strong>
+
+      <small>
+        Major project expenses
+      </small>
+
+    </div>
+
+
+    <div class="summary-card green">
+
+      <span class="card-label">PROJECT</span>
+
+      <strong class="project-name">
+        {{ selectedProject }}
+      </strong>
+
+      <small>
+        Current expense scope
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD EXPENSE -->
+  <div class="panel add-expense-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Record Actual Expense</h3>
+
+        <p>
+          Add an actual expense against a project cost category.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="expense-form">
+
+      <div class="form-group">
+
+        <label>EXPENSE DATE</label>
+
+        <input
+          type="date"
+          [(ngModel)]="newExpense.date">
+
+      </div>
+
+
+      <div class="form-group description-group">
+
+        <label>DESCRIPTION</label>
+
+        <input
+          type="text"
+          placeholder="Enter expense description"
+          [(ngModel)]="newExpense.description">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>COST CATEGORY</label>
+
+        <select [(ngModel)]="newExpense.category">
+
+          <option>Labor Cost</option>
+          <option>Material Cost</option>
+          <option>Equipment Cost</option>
+          <option>Transportation Cost</option>
+          <option>Maintenance Cost</option>
+          <option>Administrative Cost</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>AMOUNT</label>
+
+        <div class="amount-input">
+
+          <span>₹</span>
+
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="newExpense.amount">
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>SOURCE MODULE</label>
+
+        <select [(ngModel)]="newExpense.sourceModule">
+
+          <option>Manual Entry</option>
+          <option>Workforce Management</option>
+          <option>Material & Inventory</option>
+          <option>Resource Management</option>
+          <option>Procurement</option>
+          <option>Project Management</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-action">
+
+        <button
+          class="add-btn"
+          (click)="addExpense()">
+
+          + Add Expense
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- EXPENSE TABLE -->
+  <div class="panel table-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Actual Expense Records</h3>
+
+        <p>
+          Expenses recorded for the selected project.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>EXPENSE ID</th>
+            <th>DATE</th>
+            <th>DESCRIPTION</th>
+            <th>COST CATEGORY</th>
+            <th>AMOUNT</th>
+            <th>SOURCE MODULE</th>
+            <th>ACTION</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let expense of expenses; let i = index">
+
+            <td>
+              <strong class="expense-id">
+                {{ expense.expenseId }}
+              </strong>
+            </td>
+
+
+            <td>
+              {{ expense.date }}
+            </td>
+
+
+            <td>
+              <span class="description">
+                {{ expense.description }}
+              </span>
+            </td>
+
+
+            <td>
+              <span class="category-badge">
+                {{ expense.category }}
+              </span>
+            </td>
+
+
+            <td>
+              <strong class="amount">
+                {{ formatCurrency(expense.amount) }}
+              </strong>
+            </td>
+
+
+            <td>
+              <span class="source">
+                {{ expense.sourceModule }}
+              </span>
+            </td>
+
+
+            <td>
+
+              <button
+                class="delete-btn"
+                (click)="removeExpense(i)">
+
+                Remove
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- EXPENSE STATUS -->
+  <div class="status-box">
+
+    <div class="status-icon">
+      ✓
+    </div>
+
+    <div>
+
+      <strong>
+        Actual expenses are linked to the selected project
+      </strong>
+
+      <p>
+        Each expense is recorded under a cost category and can originate
+        from workforce, material, resource, procurement or manual entries.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,6 +1,7 @@
 import logging
 logging.basicConfig(level=logging.DEBUG)
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from jose import jwt, JWTError
 from database import SessionLocal, engine, Base
@@ -23,6 +24,8 @@ from app.routers import worker
 from app.routers import project_schedule
 from app.routers import project_closure
 
+
+
 app = FastAPI()
 app.include_router(project.router)
 app.include_router(project_worker.router)
@@ -32,6 +35,17 @@ app.include_router(milestone.router)
 app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:4200",
+        "http://127.0.0.1:4200"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Base.metadata.create_all(bind=engine)
 from sqlalchemy import text
 

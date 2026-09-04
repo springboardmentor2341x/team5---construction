@@ -1,0 +1,360 @@
+<div class="cost-estimation">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="eyebrow">COST MANAGEMENT</span>
+
+      <h2>Cost Estimation</h2>
+
+      <p>
+        Record estimated costs by activity and compare them with actual spending.
+      </p>
+    </div>
+
+    <button class="save-btn" (click)="saveEstimation()">
+      Save Estimation
+    </button>
+
+  </div>
+
+
+  <!-- PROJECT SELECTION -->
+  <div class="panel project-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Project Selection</h3>
+
+        <p>
+          Select the project for cost estimation.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="project-form">
+
+      <div class="form-group">
+
+        <label>PROJECT</label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+
+    <div class="summary-card blue">
+
+      <span class="card-label">TOTAL ESTIMATED</span>
+
+      <strong>
+        {{ formatCurrency(totalEstimated) }}
+      </strong>
+
+      <small>
+        Expected project cost
+      </small>
+
+    </div>
+
+
+    <div class="summary-card orange">
+
+      <span class="card-label">ACTUAL COST</span>
+
+      <strong>
+        {{ formatCurrency(totalActual) }}
+      </strong>
+
+      <small>
+        Recorded actual spending
+      </small>
+
+    </div>
+
+
+    <div class="summary-card green">
+
+      <span class="card-label">VARIANCE</span>
+
+      <strong>
+        {{ formatCurrency(totalVariance) }}
+      </strong>
+
+      <small>
+        Estimated minus actual
+      </small>
+
+    </div>
+
+
+    <div class="summary-card purple">
+
+      <span class="card-label">COST UTILIZATION</span>
+
+      <strong>
+        {{ estimationUtilization }}%
+      </strong>
+
+      <small>
+        Actual vs estimated cost
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- ESTIMATION STATUS -->
+  <div class="panel comparison-panel">
+
+    <div class="comparison-header">
+
+      <div>
+        <h3>Estimated vs Actual Cost</h3>
+
+        <p>
+          Overall comparison of planned cost and recorded expenses.
+        </p>
+      </div>
+
+      <span
+        class="status-badge"
+        [class.warning]="totalVariance < 0">
+
+        {{ totalVariance >= 0 ? 'Within Estimate' : 'Over Estimate' }}
+
+      </span>
+
+    </div>
+
+
+    <div class="comparison-bar">
+
+      <div
+        class="actual-bar"
+        [style.width.%]="estimationUtilization">
+      </div>
+
+    </div>
+
+
+    <div class="comparison-values">
+
+      <span>
+        Estimated:
+        <strong>{{ formatCurrency(totalEstimated) }}</strong>
+      </span>
+
+      <span>
+        Actual:
+        <strong>{{ formatCurrency(totalActual) }}</strong>
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ACTIVITY TABLE -->
+  <div class="panel table-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Activity-wise Cost Estimation</h3>
+
+        <p>
+          Estimate and compare costs for project activities.
+        </p>
+      </div>
+
+      <button
+        class="secondary-btn"
+        (click)="addActivity()">
+
+        + Add Activity
+
+      </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>ACTIVITY</th>
+            <th>COST CATEGORY</th>
+            <th>ESTIMATED COST</th>
+            <th>ACTUAL COST</th>
+            <th>VARIANCE</th>
+            <th>UTILIZATION</th>
+            <th>ACTION</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let item of activities; let i = index">
+
+            <td>
+              <input
+                class="text-input"
+                type="text"
+                [(ngModel)]="item.activity">
+            </td>
+
+
+            <td>
+
+              <select
+                class="category-select"
+                [(ngModel)]="item.category">
+
+                <option>Labor Cost</option>
+                <option>Material Cost</option>
+                <option>Equipment Cost</option>
+                <option>Transportation Cost</option>
+                <option>Maintenance Cost</option>
+                <option>Administrative Cost</option>
+
+              </select>
+
+            </td>
+
+
+            <td>
+
+              <div class="amount-input">
+
+                <span>₹</span>
+
+                <input
+                  type="number"
+                  [(ngModel)]="item.estimated"
+                  min="0">
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <div class="amount-input">
+
+                <span>₹</span>
+
+                <input
+                  type="number"
+                  [(ngModel)]="item.actual"
+                  min="0">
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <strong
+                [class.negative]="getVariance(item.estimated, item.actual) < 0"
+                [class.positive]="getVariance(item.estimated, item.actual) >= 0">
+
+                {{ formatCurrency(
+                  getVariance(item.estimated, item.actual)
+                ) }}
+
+              </strong>
+
+            </td>
+
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="mini-progress">
+
+                  <span
+                    [style.width.%]="
+                      getPercentage(item.estimated, item.actual)
+                    ">
+                  </span>
+
+                </div>
+
+                <small>
+                  {{ getPercentage(item.estimated, item.actual) }}%
+                </small>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <button
+                class="delete-btn"
+                (click)="removeActivity(i)">
+
+                Remove
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- INFORMATION -->
+  <div class="info-box">
+
+    <div class="info-icon">i</div>
+
+    <div>
+
+      <strong>Cost Estimation Workflow</strong>
+
+      <p>
+        Estimated costs can be compared with actual expenses to identify
+        cost variance and monitor project financial performance.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

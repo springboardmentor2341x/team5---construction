@@ -1,0 +1,372 @@
+<div class="management-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <div class="breadcrumb">
+        BuildTrack / Notifications / Management
+      </div>
+
+      <h1>Notification Management</h1>
+
+      <p>
+        Manage notification settings and monitor notification activity.
+      </p>
+    </div>
+
+    <div class="admin-badge">
+      <span>🔐</span>
+      Admin Only
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <!-- Total Notifications -->
+    <div class="summary-card">
+      <div class="summary-icon blue">🔔</div>
+
+      <div>
+        <span class="summary-label">
+          Total Notifications
+        </span>
+
+        <strong>
+          {{ totalNotifications }}
+        </strong>
+      </div>
+    </div>
+
+
+    <!-- Unread Notifications -->
+    <div class="summary-card">
+      <div class="summary-icon red">●</div>
+
+      <div>
+        <span class="summary-label">
+          Unread Notifications
+        </span>
+
+        <strong>
+          {{ unreadNotifications }}
+        </strong>
+      </div>
+    </div>
+
+
+    <!-- Read Notifications -->
+    <div class="summary-card">
+      <div class="summary-icon green">✓</div>
+
+      <div>
+        <span class="summary-label">
+          Read Notifications
+        </span>
+
+        <strong>
+          {{ readNotifications }}
+        </strong>
+      </div>
+    </div>
+
+
+    <!-- Notification Types -->
+    <div class="summary-card">
+      <div class="summary-icon purple">⚙</div>
+
+      <div>
+        <span class="summary-label">
+          Notification Types
+        </span>
+
+        <strong>
+          {{ notificationSettings.length }}
+        </strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICATION SETTINGS -->
+  <div class="management-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Notification Settings</h2>
+
+        <p>
+          Control which notification categories are enabled across the system.
+        </p>
+      </div>
+
+      <div class="setting-actions">
+
+        <button
+          type="button"
+          class="enable-all"
+          (click)="enableAll()"
+        >
+          Enable All
+        </button>
+
+        <button
+          type="button"
+          class="disable-all"
+          (click)="disableAll()"
+        >
+          Disable All
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- SETTINGS LIST -->
+    <div class="settings-list">
+
+      <div
+        class="setting-row"
+        *ngFor="let setting of notificationSettings; let i = index"
+      >
+
+        <div class="setting-info">
+
+          <div class="setting-icon">
+            🔔
+          </div>
+
+          <div>
+            <h3>
+              {{ setting.name }}
+            </h3>
+
+            <p>
+              {{ setting.description }}
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="setting-control">
+
+          <span
+            class="setting-status"
+            [ngClass]="setting.enabled ? 'enabled' : 'disabled'"
+          >
+            {{ setting.enabled ? 'Enabled' : 'Disabled' }}
+          </span>
+
+
+          <button
+            type="button"
+            class="toggle-button"
+            [ngClass]="setting.enabled ? 'active' : ''"
+            (click)="toggleSetting(i)"
+            [attr.aria-label]="'Toggle ' + setting.name"
+          >
+            <span class="toggle-circle"></span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICATION ACTIVITY -->
+  <div class="management-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Notification Activity</h2>
+
+        <p>
+          Monitor notifications generated and delivered to users.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+
+      <span class="filter-label">
+        Status
+      </span>
+
+      <button
+        type="button"
+        *ngFor="let filter of filters"
+        class="filter-button"
+        [ngClass]="selectedFilter === filter ? 'active' : ''"
+        (click)="selectFilter(filter)"
+      >
+        {{ filter }}
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Notification ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Recipient</th>
+            <th>Date &amp; Time</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <!-- Notification Rows -->
+          <tr
+            *ngFor="let notification of filteredNotifications"
+          >
+
+            <td>
+              <span class="notification-id">
+                {{ notification.id }}
+              </span>
+            </td>
+
+
+            <td>
+              <div class="notification-title">
+                {{ notification.title }}
+              </div>
+            </td>
+
+
+            <td>
+              <span
+                class="type-badge"
+                [ngClass]="getTypeClass(notification.type)"
+              >
+                {{ notification.type }}
+              </span>
+            </td>
+
+
+            <td>
+              <span class="recipient">
+                {{ notification.recipient }}
+              </span>
+            </td>
+
+
+            <td>
+              <div class="date-time">
+                <span>
+                  {{ notification.date }}
+                </span>
+
+                <small>
+                  {{ notification.time }}
+                </small>
+              </div>
+            </td>
+
+
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(notification.status)"
+              >
+                <span class="status-dot"></span>
+                {{ notification.status }}
+              </span>
+            </td>
+
+
+            <td>
+              <button
+                type="button"
+                class="view-button"
+                (click)="viewNotification(notification.id)"
+              >
+                View
+              </button>
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+          <tr *ngIf="filteredNotifications.length === 0">
+
+            <td colspan="7">
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  🔔
+                </div>
+
+                <h3>
+                  No notifications found
+                </h3>
+
+                <p>
+                  There are no notifications matching the selected filter.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- INFORMATION BANNER -->
+  <div class="information-banner">
+
+    <div class="information-icon">
+      ℹ
+    </div>
+
+    <div>
+      <h3>
+        Notification Management
+      </h3>
+
+      <p>
+        Notification settings determine which notification categories are
+        active. Administrators can enable or disable categories based on
+        project requirements. Actual notifications are generated by system
+        events and delivered only to authorized users.
+      </p>
+    </div>
+
+  </div>
+
+</div>

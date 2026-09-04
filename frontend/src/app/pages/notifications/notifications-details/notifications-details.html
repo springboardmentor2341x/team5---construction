@@ -1,0 +1,250 @@
+<div class="details-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <div class="breadcrumb">
+        BuildTrack / Notifications / Details
+      </div>
+
+      <h1>Notification Details</h1>
+
+      <p>
+        View complete information about this notification.
+      </p>
+    </div>
+
+    <a
+      routerLink="/notifications/dashboard"
+      class="back-button"
+    >
+      ← Back to Notifications
+    </a>
+
+  </div>
+
+
+  <!-- Notification Card -->
+  <div class="notification-details-card">
+
+    <!-- Notification Header -->
+    <div class="notification-header">
+
+      <div class="notification-icon">
+        {{ notification.icon }}
+      </div>
+
+      <div class="notification-title-section">
+
+        <div class="title-row">
+
+          <h2>{{ notification.title }}</h2>
+
+          <span
+            class="type-badge"
+            [ngClass]="getTypeClass(notification.type)"
+          >
+            {{ notification.type }}
+          </span>
+
+        </div>
+
+        <div class="notification-meta">
+
+          <span>
+            📅 {{ notification.date }}
+          </span>
+
+          <span>
+            🕒 {{ notification.time }}
+          </span>
+
+          <span
+            class="priority-badge"
+            [ngClass]="getPriorityClass(notification.priority)"
+          >
+            {{ notification.priority }} Priority
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Status -->
+    <div
+      class="status-banner"
+      [class.unread]="!notification.read"
+      [class.read]="notification.read"
+    >
+
+      <span class="status-icon">
+        {{ notification.read ? '✓' : '●' }}
+      </span>
+
+      <span>
+        {{
+          notification.read
+            ? 'This notification has been read.'
+            : 'This notification is currently unread.'
+        }}
+      </span>
+
+      <button
+        *ngIf="!notification.read"
+        class="mark-read-button"
+        (click)="markAsRead()"
+      >
+        Mark as Read
+      </button>
+
+    </div>
+
+
+    <!-- Message -->
+    <div class="section">
+
+      <h3>Notification Message</h3>
+
+      <div class="message-box">
+        {{ notification.message }}
+      </div>
+
+    </div>
+
+
+    <!-- Description -->
+    <div class="section">
+
+      <h3>Description</h3>
+
+      <p class="description">
+        {{ notification.description }}
+      </p>
+
+    </div>
+
+
+    <!-- Information Grid -->
+    <div class="section">
+
+      <h3>Notification Information</h3>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <span class="label">Notification ID</span>
+          <span class="value">
+            NOT-{{ notification.id | number:'3.0-0' }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Notification Type</span>
+          <span class="value">
+            {{ notification.type }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Priority</span>
+          <span class="value">
+            {{ notification.priority }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Date</span>
+          <span class="value">
+            {{ notification.date }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Time</span>
+          <span class="value">
+            {{ notification.time }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Sender</span>
+          <span class="value">
+            {{ notification.sender }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Recipient</span>
+          <span class="value">
+            {{ notification.recipient }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Related Record</span>
+          <span class="value">
+            {{ notification.related }}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Related Information -->
+    <div class="section">
+
+      <h3>Related Information</h3>
+
+      <div class="related-card">
+
+        <div>
+          <span class="related-label">Related Project</span>
+          <strong>{{ notification.related }}</strong>
+        </div>
+
+        <div>
+          <span class="related-label">Reference ID</span>
+          <strong>{{ notification.relatedId }}</strong>
+        </div>
+
+        <a
+          routerLink="/notifications/dashboard"
+          class="view-related-button"
+        >
+          View Related
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- Actions -->
+    <div class="actions">
+
+      <a
+        routerLink="/notifications/dashboard"
+        class="secondary-button"
+      >
+        ← Back
+      </a>
+
+      <button
+        *ngIf="!notification.read"
+        class="primary-button"
+        (click)="markAsRead()"
+      >
+        ✓ Mark as Read
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,404 @@
+.report-preview-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 28px 34px;
+  background: #faf7f5;
+  color: #3b1f2b;
+  box-sizing: border-box;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: #8a707a;
+  margin-bottom: 8px;
+}
+
+.preview-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.preview-header p {
+  margin: 7px 0 0;
+  color: #7d6871;
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-back {
+  background: #eee5e9;
+  color: #3b1f2b;
+}
+
+.btn-print {
+  background: #453541;
+  color: #fff;
+}
+
+.btn-pdf {
+  background: #9f1239;
+  color: #fff;
+}
+
+.btn-excel {
+  background: #d97706;
+  color: #fff;
+}
+
+/* ================================
+   DOCUMENT
+================================ */
+
+.report-document {
+  max-width: 1180px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #eadfe3;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 8px 25px rgba(59, 31, 43, 0.07);
+}
+
+/* ================================
+   DOCUMENT HEADER
+================================ */
+
+.document-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eadfe3;
+}
+
+.company-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #9f1239;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.company-mark h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.company-mark span {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #8a707a;
+}
+
+.document-info {
+  text-align: right;
+}
+
+.document-info span {
+  display: block;
+  font-size: 12px;
+  color: #8a707a;
+}
+
+.document-info strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* ================================
+   PROJECT INFORMATION
+================================ */
+
+.project-information {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid #eadfe3;
+}
+
+.project-information div {
+  padding: 15px;
+  background: #faf7f5;
+  border-radius: 8px;
+}
+
+.project-information span {
+  display: block;
+  font-size: 12px;
+  color: #8a707a;
+  margin-bottom: 6px;
+}
+
+.project-information strong {
+  font-size: 14px;
+}
+
+/* ================================
+   SECTIONS
+================================ */
+
+.report-section {
+  padding: 26px 0;
+  border-bottom: 1px solid #eadfe3;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-heading h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.section-heading span {
+  font-size: 12px;
+  color: #8a707a;
+}
+
+/* ================================
+   SUMMARY
+================================ */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.summary-card {
+  border: 1px solid #eadfe3;
+  border-radius: 9px;
+  padding: 18px;
+}
+
+.summary-label {
+  display: block;
+  font-size: 12px;
+  color: #8a707a;
+}
+
+.summary-value {
+  display: block;
+  margin: 8px 0;
+  font-size: 25px;
+  color: #9f1239;
+}
+
+.summary-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #fff7ed;
+  color: #b45309;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ================================
+   TABLE
+================================ */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #453541;
+  color: #fff;
+  text-align: left;
+  padding: 13px;
+  font-size: 12px;
+}
+
+td {
+  padding: 14px 13px;
+  border-bottom: 1px solid #eee5e9;
+  font-size: 13px;
+}
+
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 7px;
+  background: #eee5e9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #9f1239;
+  border-radius: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ================================
+   NOTE
+================================ */
+
+.report-note {
+  padding: 16px;
+  background: #fffaf5;
+  border-left: 4px solid #f59e0b;
+  border-radius: 7px;
+  color: #6f5962;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.document-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 22px;
+  color: #8a707a;
+  font-size: 11px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-information {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+
+  .report-preview-page {
+    padding: 18px;
+  }
+
+  .report-document {
+    padding: 20px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .document-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .document-info {
+    text-align: left;
+  }
+
+  .document-footer {
+    flex-direction: column;
+  }
+}
+
+/* ================================
+   PRINT
+================================ */
+
+@media print {
+
+  .preview-header {
+    display: none;
+  }
+
+  .report-preview-page {
+    padding: 0;
+    background: #fff;
+  }
+
+  .report-document {
+    border: none;
+    box-shadow: none;
+    max-width: none;
+  }
+}

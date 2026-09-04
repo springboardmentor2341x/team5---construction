@@ -1,0 +1,329 @@
+/* =========================================
+   MODULE 8 - NOTIFICATION DROPDOWN
+   Professional BuildTrack Theme
+========================================= */
+
+.notification-dropdown {
+  width: 430px;
+  max-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dropdown-header {
+  padding: 17px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dropdown-header h3 {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #0f172a;
+}
+
+.dropdown-header span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color: #64748b;
+}
+
+.mark-read-btn {
+  border: none;
+  background: transparent;
+
+  color: #2563eb;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.mark-read-btn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   NOTIFICATION LIST
+========================================= */
+
+.notification-list {
+  max-height: 395px;
+
+  overflow-y: auto;
+}
+
+
+/* =========================================
+   NOTIFICATION ITEM
+========================================= */
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+
+  padding: 15px 18px;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  transition: background 0.2s ease;
+
+  position: relative;
+}
+
+.notification-item:hover {
+  background: #f8fafc;
+}
+
+.notification-item.unread {
+  background: #f8fbff;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.notification-icon {
+  width: 36px;
+  height: 36px;
+
+  min-width: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  font-size: 15px;
+}
+
+.notification-icon.project {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.notification-icon.task {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.notification-icon.procurement {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.notification-icon.attendance {
+  background: #cffafe;
+  color: #0891b2;
+}
+
+.notification-icon.deadline {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.notification-icon.system {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.notification-title-row h4 {
+  margin: 0;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #0f172a;
+}
+
+.unread-dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #2563eb;
+}
+
+
+/* =========================================
+   TYPE
+========================================= */
+
+.notification-type {
+  margin-top: 3px;
+
+  font-size: 9px !important;
+
+  font-weight: 600;
+
+  color: #2563eb !important;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.notification-content p {
+  margin: 6px 0 8px;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  color: #64748b;
+}
+
+.notification-content p strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.notification-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notification-footer span {
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.notification-footer a {
+  font-size: 10px;
+  font-weight: 600;
+
+  color: #2563eb;
+
+  text-decoration: none;
+}
+
+.notification-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   DROPDOWN FOOTER
+========================================= */
+
+.dropdown-footer {
+  padding: 13px;
+
+  text-align: center;
+
+  border-top: 1px solid #e2e8f0;
+
+  background: #ffffff;
+}
+
+.dropdown-footer a {
+  font-size: 11px;
+  font-weight: 700;
+
+  color: #2563eb;
+
+  text-decoration: none;
+}
+
+.dropdown-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.notification-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .notification-dropdown {
+    width: calc(100vw - 24px);
+  }
+
+  .dropdown-header {
+    padding: 15px;
+  }
+
+  .notification-item {
+    padding: 13px 15px;
+  }
+
+}
