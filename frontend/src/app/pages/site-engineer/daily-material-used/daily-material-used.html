@@ -1,0 +1,819 @@
+<div class="page-content">
+
+  <!-- =====================================================
+       PAGE HEADER
+  ====================================================== -->
+
+  <div class="page-heading">
+
+    <div>
+      <h2>Daily Material Used</h2>
+
+      <p>
+        Track materials consumed during daily construction activities.
+      </p>
+    </div>
+
+    <button
+      class="add-btn"
+      type="button"
+      (click)="openAddMaterial()">
+
+      ➕ Add Material Usage
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY CARDS
+  ====================================================== -->
+
+  <div class="summary-grid">
+
+    <!-- Total Entries -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon total-icon">
+        📋
+      </div>
+
+      <div>
+
+        <span>Total Material Entries</span>
+
+        <h2>
+          {{ totalEntries }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- Today's Entries -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon today-icon">
+        📅
+      </div>
+
+      <div>
+
+        <span>Materials Used Today</span>
+
+        <h2>
+          {{ materialsUsedToday }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- Total Quantity -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon quantity-icon">
+        📦
+      </div>
+
+      <div>
+
+        <span>Total Quantity Consumed</span>
+
+        <h2>
+          {{ totalQuantityConsumed }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- Today's Usage -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon usage-icon">
+        🏗️
+      </div>
+
+      <div>
+
+        <span>Today's Total Usage</span>
+
+        <h2>
+          {{ todayTotalUsage }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MATERIAL USAGE TABLE CARD
+  ====================================================== -->
+
+  <div class="content-card">
+
+    <!-- Card Header -->
+
+    <div class="card-header">
+
+      <div>
+
+        <h3>Material Consumption Records</h3>
+
+        <p>
+          View materials consumed during construction activities.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILTER TOOLBAR
+    ====================================================== -->
+
+    <div class="toolbar">
+
+      <!-- Search -->
+
+      <div class="search-box">
+
+        <span>🔍</span>
+
+        <input
+          type="text"
+          placeholder="Search material, project or activity..."
+          [(ngModel)]="searchText">
+
+      </div>
+
+
+      <!-- Category -->
+
+      <select
+        [(ngModel)]="selectedCategory">
+
+        @for(category of categories; track category) {
+
+          <option [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        }
+
+      </select>
+
+
+      <!-- Project -->
+
+      <select
+        [(ngModel)]="selectedProject">
+
+        @for(project of projects; track project) {
+
+          <option [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        }
+
+      </select>
+
+
+      <!-- Date -->
+
+      <input
+        class="date-filter"
+        type="date"
+        [(ngModel)]="selectedDate">
+
+
+      <!-- Clear -->
+
+      <button
+        class="clear-btn"
+        type="button"
+        (click)="clearFilters()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         TABLE
+    ====================================================== -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Date</th>
+
+            <th>Material</th>
+
+            <th>Category</th>
+
+            <th>Project</th>
+
+            <th>Quantity Used</th>
+
+            <th>Activity</th>
+
+            <th>Used By</th>
+
+            <!-- <th>Action</th> -->
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for(material of filteredMaterials; track material.id) {
+
+            <tr>
+
+              <!-- Date -->
+
+              <td>
+
+                <span class="date-text">
+
+                  {{ material.date }}
+
+                </span>
+
+              </td>
+
+
+              <!-- Material -->
+
+              <td>
+
+                <div class="material-info">
+
+                  <div class="material-icon">
+
+                    📦
+
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      {{ material.materialName }}
+                    </strong>
+
+                    <span>
+                      MAT-{{ material.id.toString().padStart(3, '0') }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <!-- Category -->
+
+              <td>
+
+                <span class="category-badge">
+
+                  {{ material.category }}
+
+                </span>
+
+              </td>
+
+
+              <!-- Project -->
+
+              <td>
+
+                {{ material.project }}
+
+              </td>
+
+
+              <!-- Quantity -->
+
+              <td>
+
+                <strong class="quantity">
+
+                  {{ material.quantityUsed }}
+
+                </strong>
+
+                {{ material.unit }}
+
+              </td>
+
+
+              <!-- Activity -->
+
+              <td>
+
+                {{ material.activity }}
+
+              </td>
+
+
+              <!-- Used By -->
+
+              <td>
+
+                <div class="person-info">
+
+                  <div class="person-icon">
+
+                    👷
+
+                  </div>
+
+                  <span>
+
+                    {{ material.usedBy }}
+
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <!-- Action -->
+
+              <!-- <td>
+
+                <button
+                  class="view-btn"
+                  type="button"
+                  routerLink="/site-engineer/daily-material-details">
+
+                  👁 View
+
+                </button>
+
+              </td> -->
+
+            </tr>
+
+          }
+
+
+          <!-- =================================================
+               EMPTY STATE
+          ================================================== -->
+
+          @if(filteredMaterials.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="8"
+                class="empty-state">
+
+                <div class="empty-content">
+
+                  <div class="empty-icon">
+
+                    📦
+
+                  </div>
+
+                  <h3>
+
+                    No Material Records Found
+
+                  </h3>
+
+                  <p>
+
+                    Try changing your search or filter options.
+
+                  </p>
+
+                  <button
+                    class="clear-btn"
+                    type="button"
+                    (click)="clearFilters()">
+
+                    Clear Filters
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       INFORMATION CARD
+  ====================================================== -->
+
+  <div class="info-card">
+
+    <div class="info-header">
+
+      <div class="info-icon">
+        ℹ️
+      </div>
+
+      <div>
+
+        <h3>Material Consumption Tracking</h3>
+
+        <p>
+          Material usage recorded here is linked with daily
+          construction activities and can be used to update
+          inventory records.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-item">
+
+        <span>📦</span>
+
+        <div>
+
+          <strong>Material Consumption</strong>
+
+          <p>
+            Record the quantity of materials used at the site.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <span>🏗️</span>
+
+        <div>
+
+          <strong>Construction Activity</strong>
+
+          <p>
+            Connect material usage with the work being performed.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <span>📊</span>
+
+        <div>
+
+          <strong>Inventory Connection</strong>
+
+          <p>
+            Consumed quantities can reduce available inventory.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ADD MATERIAL USAGE MODAL
+  ====================================================== -->
+
+  @if(showAddMaterialModal) {
+
+    <div class="modal-overlay">
+
+      <div class="modal-add">
+
+        <!-- Modal Header -->
+
+        <div class="modal-header">
+
+          <div>
+    
+            <h2>Add Material Usage</h2>
+
+            <p>
+              Record material consumed during construction.
+            </p>
+
+          </div>
+
+          <button
+            class="close-btn"
+            type="button"
+            (click)="closeAddMaterial()">
+
+            ✕
+
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <div class="form-grid">
+
+          <!-- Date -->
+
+          <div class="form-group">
+
+            <label>
+              Date *
+            </label>
+
+            <input
+              type="date"
+              [(ngModel)]="material.date">
+
+          </div>
+
+
+          <!-- Project -->
+
+          <div class="form-group">
+
+            <label>
+              Project *
+            </label>
+
+            <input
+              type="text"
+              placeholder="Project Name"
+              [(ngModel)]="material.project">
+
+          </div>
+
+
+          <!-- Material Name -->
+
+          <div class="form-group">
+
+            <label>
+              Material Name *
+            </label>
+
+            <input
+              type="text"
+              placeholder="e.g. Cement"
+              [(ngModel)]="material.materialName">
+
+          </div>
+
+
+          <!-- Category -->
+
+          <div class="form-group">
+
+            <label>
+              Category *
+            </label>
+
+            <select
+              [(ngModel)]="material.category">
+
+              <option value="">
+                Select Category
+              </option>
+
+              <option value="Construction Material">
+                Construction Material
+              </option>
+
+              <option value="Steel">
+                Steel
+              </option>
+
+              <option value="Concrete">
+                Concrete
+              </option>
+
+              <option value="Electrical">
+                Electrical
+              </option>
+
+              <option value="Plumbing">
+                Plumbing
+              </option>
+
+              <option value="Safety">
+                Safety
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- Quantity -->
+
+          <div class="form-group">
+
+            <label>
+              Quantity Used *
+            </label>
+
+            <input
+              type="number"
+              min="0"
+              placeholder="Enter quantity"
+              [(ngModel)]="material.quantityUsed">
+
+          </div>
+
+
+          <!-- Unit -->
+
+          <div class="form-group">
+
+            <label>
+              Unit *
+            </label>
+
+            <select
+              [(ngModel)]="material.unit">
+
+              <option value="">
+                Select Unit
+              </option>
+
+              <option value="Bags">
+                Bags
+              </option>
+
+              <option value="Tons">
+                Tons
+              </option>
+
+              <option value="Kg">
+                Kg
+              </option>
+
+              <option value="Pieces">
+                Pieces
+              </option>
+
+              <option value="Cubic Meter">
+                Cubic Meter
+              </option>
+
+              <option value="Liters">
+                Liters
+              </option>
+
+              <option value="Units">
+                Units
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- Activity -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Construction Activity *
+            </label>
+
+            <input
+              type="text"
+              placeholder="e.g. Foundation Work"
+              [(ngModel)]="material.activity">
+
+          </div>
+
+
+          <!-- Used By -->
+
+          <div class="form-group">
+
+            <label>
+              Used By
+            </label>
+
+            <input
+              type="text"
+              placeholder="Responsible person"
+              [(ngModel)]="material.usedBy">
+
+          </div>
+
+
+          <!-- Remarks -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Remarks
+            </label>
+
+            <textarea
+              rows="4"
+              placeholder="Additional remarks..."
+              [(ngModel)]="material.remarks">
+            </textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MODAL BUTTONS
+        ================================================== -->
+
+        <div class="modal-buttons">
+
+          <button
+            class="cancel-btn"
+            type="button"
+            (click)="closeAddMaterial()">
+
+            Cancel
+
+          </button>
+
+          <button
+            class="save-btn"
+            type="button"
+            (click)="saveMaterial()">
+
+            Save Material Usage
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

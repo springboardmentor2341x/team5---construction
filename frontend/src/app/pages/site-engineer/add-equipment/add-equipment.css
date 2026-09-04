@@ -1,0 +1,150 @@
+/* ===========================
+   Page
+=========================== */
+
+.page-container{
+    padding:30px;
+}
+
+.page-header{
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    font-size:32px;
+    color:#1e293b;
+    margin-bottom:8px;
+}
+
+.page-header p{
+    color:#64748b;
+    font-size:15px;
+}
+
+/* ===========================
+   Form Card
+=========================== */
+
+.form-card{
+    background:#ffffff;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   Grid
+=========================== */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+/* ===========================
+   Form Group
+=========================== */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    font-weight:600;
+    color:#334155;
+}
+
+.form-group input,
+.form-group select{
+    padding:12px 14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+    background:#fff;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.button-group{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:35px;
+}
+
+.cancel-btn{
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#e2e8f0;
+    color:#334155;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.cancel-btn:hover{
+    background:#cbd5e1;
+}
+
+.save-btn{
+    padding:12px 26px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+    .page-container{
+        padding:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .button-group{
+        flex-direction:column;
+    }
+
+    .cancel-btn,
+    .save-btn{
+        width:100%;
+    }
+
+    .back-btn{
+        background-color: #17206d;
+        border-radius: 4px;
+        width: 90px;
+        height: 40px;
+        margin-bottom: 20px;
+        
+    }
+
+}

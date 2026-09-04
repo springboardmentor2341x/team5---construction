@@ -1,0 +1,153 @@
+<div class="page-content">
+
+  <!-- ================= Header ================= -->
+<button class="back-btn" routerLink="/site-engineer/milestones">
+        ← Back to Milestone-Tracking
+      </button>
+  <div class="page-header">
+  <div class="page-header">
+
+    <div>
+
+      <h2>Milestone Details</h2>
+
+      <p>Detailed information about the selected project milestone.</p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Project Information ================= -->
+
+  <div class="details-card">
+
+    <h3>Project Information</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Project Name</label>
+        <span>{{ milestone.projectName }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Milestone</label>
+        <span>{{ milestone.milestoneName }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Site Engineer</label>
+        <span>{{ milestone.siteEngineer }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Project Manager</label>
+        <span>{{ milestone.projectManager }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Timeline ================= -->
+
+  <div class="details-card">
+
+    <h3>Timeline</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Planned Date</label>
+        <span>{{ milestone.plannedDate }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Actual Date</label>
+        <span>{{ milestone.actualDate }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Progress</label>
+        <span>{{ milestone.progress }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Status</label>
+
+        <span class="status-badge success">
+
+          {{ milestone.status }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Activities ================= -->
+
+  <div class="details-card">
+
+    <h3>Activities Completed</h3>
+
+    <ul class="activity-list">
+
+      @for(activity of milestone.activities; track activity){
+
+      <li>
+
+        ✅ {{ activity }}
+
+      </li>
+
+      }
+
+    </ul>
+
+  </div>
+
+  <!-- ================= Verification ================= -->
+
+  <div class="details-card">
+
+    <h3>Verification</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Verified By</label>
+        <span>{{ milestone.verifiedBy }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Quality Status</label>
+        <span>{{ milestone.qualityStatus }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Safety Status</label>
+        <span>{{ milestone.safetyStatus }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Remarks ================= -->
+
+  <div class="details-card">
+
+    <h3>Remarks</h3>
+
+    <div class="remarks-box">
+
+      {{ milestone.remarks }}
+
+    </div>
+
+  </div>
+
+</div>

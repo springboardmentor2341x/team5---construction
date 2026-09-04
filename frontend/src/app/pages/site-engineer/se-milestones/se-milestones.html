@@ -1,0 +1,184 @@
+<div class="page-content">
+
+  <!-- ================= Heading ================= -->
+
+  <div class="content-heading">
+
+    <div>
+
+      <h2>Milestone Tracking</h2>
+
+      <p>
+        Track project milestones and monitor overall construction progress.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Summary Cards ================= -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">📋</div>
+
+      <h3>{{ totalMilestones }}</h3>
+
+      <p>Total Milestones</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">✅</div>
+
+      <h3>{{ completedMilestones }}</h3>
+
+      <p>Completed</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">🟡</div>
+
+      <h3>{{ inProgressMilestones }}</h3>
+
+      <p>In Progress</p>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon">⏳</div>
+
+      <h3>{{ pendingMilestones }}</h3>
+
+      <p>Pending</p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Table ================= -->
+
+  <div class="table-card">
+
+    <table class="milestone-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Milestone</th>
+
+          <th>Planned Date</th>
+
+          <th>Actual Date</th>
+
+          <th>Progress</th>
+
+          <th>Status</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(milestone of milestones; track milestone.id){
+
+        <tr>
+
+          <td>{{ milestone.name }}</td>
+
+          <td>{{ milestone.plannedDate }}</td>
+
+          <td>{{ milestone.actualDate }}</td>
+
+          <td>
+
+            <div class="progress-container">
+
+              <div
+                class="progress-bar"
+                [style.width.%]="milestone.progress">
+
+              </div>
+
+            </div>
+
+            <small>{{ milestone.progress }}%</small>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="{
+                'completed': milestone.status==='Completed',
+                'progress': milestone.status==='In Progress',
+                'pending': milestone.status==='Pending'
+              }">
+
+              {{ milestone.status }}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <button class="view-btn"
+            routerLink="/site-engineer/milestone-details"
+            type="button"
+            >
+
+              👁 View
+
+            </button>
+
+          </td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= Details ================= -->
+
+  <div class="details-card">
+
+    <h3>Milestone Workflow</h3>
+
+    <ul>
+
+      <li>✔ Foundation Completed</li>
+
+      <li>✔ Structural Work</li>
+
+      <li>✔ Electrical Work</li>
+
+      <li>✔ Plumbing</li>
+
+      <li>✔ Finishing Work</li>
+
+      <li>✔ Inspection</li>
+
+      <li>✔ Project Handover</li>
+
+    </ul>
+
+  </div>
+
+</div>

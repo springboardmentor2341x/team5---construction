@@ -1,1 +1,397 @@
-<p>site-engineer-dashboard works!</p>
+<section class="page-content">
+
+  <!-- ================= PAGE HEADING ================= -->
+
+  <div class="page-heading">
+
+    <div>
+
+      <h2>Site Engineer Dashboard</h2>
+
+      <p>
+        Monitor project progress, activities, delays and site performance.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= SUMMARY CARDS ================= -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon progress-icon">📊</div>
+
+      <div>
+
+        <span>Overall Progress</span>
+
+        <h2>{{overallProgress}}%</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon today-icon">🚀</div>
+
+      <div>
+
+        <span>Today's Progress</span>
+
+        <h2>+{{todayProgress}}%</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon milestone-icon">🎯</div>
+
+      <div>
+
+        <span>Completed Milestones</span>
+
+        <h2>{{completedMilestones}}</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon delay-icon">⚠️</div>
+
+      <div>
+
+        <span>Active Delays</span>
+
+        <h2>{{activeDelays}}</h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= WORKFORCE ================= -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon worker-icon">👷</div>
+
+      <div>
+
+        <span>Workers Present</span>
+
+        <h2>{{workersPresent}}</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon absent-icon">🚷</div>
+
+      <div>
+
+        <span>Workers Absent</span>
+
+        <h2>{{workersAbsent}}</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon material-icon">📦</div>
+
+      <div>
+
+        <span>Material Used</span>
+
+        <h2>{{materialUsed}}</h2>
+
+      </div>
+
+    </div>
+
+    <div class="summary-card">
+
+      <div class="summary-icon machine-icon">🚜</div>
+
+      <div>
+
+        <span>Equipment In Use</span>
+
+        <h2>{{equipmentInUse}}</h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= OVERALL PROGRESS ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Overall Project Completion</h3>
+
+    </div>
+
+    <h1 class="progress-value">
+
+      {{overallProgress}}%
+
+    </h1>
+
+    <div class="progress-bar">
+
+      <div
+
+        class="progress-fill"
+
+        [style.width.%]="overallProgress">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= WORK CATEGORY ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Work Category Progress</h3>
+
+    </div>
+
+    @for(item of workProgress; track item.category){
+
+      <div class="progress-item">
+
+        <div class="progress-header">
+
+          <span>{{item.category}}</span>
+
+          <strong>{{item.progress}}%</strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+
+            class="progress-fill"
+
+            [style.width.%]="item.progress">
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  <!-- ================= TODAY WORK ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Today's Site Summary</h3>
+
+    </div>
+
+    <ul class="simple-list">
+
+      @for(work of todaysWork; track work){
+
+      <li>
+
+        ✅ {{work}}
+
+      </li>
+
+      }
+
+    </ul>
+
+  </div>
+
+  <!-- ================= MILESTONES ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Milestone Tracking</h3>
+
+    </div>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Milestone</th>
+
+          <th>Status</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(item of milestones; track item.name){
+
+        <tr>
+
+          <td>{{item.name}}</td>
+
+          <td>{{item.status}}</td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= ACTIVITY LOGS ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Recent Activity Logs</h3>
+
+    </div>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Time</th>
+
+          <th>Activity</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(log of activityLogs; track log.time){
+
+        <tr>
+
+          <td>{{log.time}}</td>
+
+          <td>{{log.activity}}</td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= DELAY ALERTS ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Delay Alerts</h3>
+
+    </div>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Reason</th>
+
+          <th>Duration</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for(delay of delays; track delay.reason){
+
+        <tr>
+
+          <td>{{delay.reason}}</td>
+
+          <td>{{delay.duration}}</td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ================= NOTIFICATIONS ================= -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <h3>Latest Notifications</h3>
+
+    </div>
+
+    <ul class="simple-list">
+
+      @for(notification of notifications; track notification.message){
+
+      <li>
+
+        🔔 {{notification.message}}
+
+      </li>
+
+      }
+
+    </ul>
+
+  </div>
+
+</section>

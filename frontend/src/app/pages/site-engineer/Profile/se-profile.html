@@ -1,1 +1,116 @@
-<p>se-profile works!</p>
+<div class="page-content">
+
+  <!-- Heading -->
+
+  <div class="content-heading">
+
+    <div>
+      <h2>My Profile</h2>
+      <p>View your personal and professional information.</p>
+    </div>
+
+    <button class="edit-btn">
+      ✏ Edit Profile
+    </button>
+
+  </div>
+
+  <!-- Profile Card -->
+
+  <div class="profile-card">
+
+    <div class="profile-header">
+
+      <div class="avatar">
+        👷
+      </div>
+
+      <div class="profile-info">
+
+        <h2>{{ profile.name }}</h2>
+
+        <p>{{ profile.role }}</p>
+
+        <span class="status">
+          {{ profile.status }}
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="details-grid">
+
+      <div class="detail-card">
+        <span>Employee ID  => </span>
+        <strong>{{      profile.employeeId }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Email => </span>
+        <strong>{{ profile.email }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Phone => </span>
+        <strong>{{ profile.phone }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Department => </span>
+        <strong>{{ profile.department }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Experience => </span>
+        <strong>{{ profile.experience }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Joining Date => </span>
+        <strong>{{ profile.joiningDate }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Reporting Manager => </span>
+        <strong>{{ profile.reportingManager }}</strong>
+      </div>
+
+      <div class="detail-card">
+        <span>Current Site => </span>
+        <strong>{{ profile.currentSite }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Performance -->
+
+  <div class="performance-section">
+
+    <h2>Performance Overview</h2>
+
+    <div class="stats-grid">
+
+      @for(stat of stats; track stat.title){
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          {{ stat.icon }}
+        </div>
+
+        <h3>{{ stat.value }}</h3>
+
+        <p>{{ stat.title }}</p>
+
+      </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

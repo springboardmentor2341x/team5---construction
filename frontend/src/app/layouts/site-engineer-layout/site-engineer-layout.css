@@ -1,0 +1,707 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+}
+
+/* ===========================
+   APP LAYOUT
+=========================== */
+
+.app-layout{
+  display:flex;
+  min-height:100vh;
+  background:#f5f7fb;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+  width:260px;
+  background:#ffffff;
+  border-right:1px solid #e5e7eb;
+  display:flex;
+  flex-direction:column;
+  transition:.3s;
+}
+
+.sidebar-header{
+  height:72px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  border-bottom:1px solid #eef2f7;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:20px;
+}
+
+.logo-text{
+  font-size:20px;
+  font-weight:700;
+  color:#1e293b;
+}
+
+.close-sidebar{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:22px;
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+.sidebar-nav{
+  padding:18px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex:1;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:#475569;
+  padding:12px 16px;
+  border-radius:10px;
+  transition:.25s;
+  font-size:15px;
+  font-weight:500;
+}
+
+.nav-item:hover{
+  background:#eff6ff;
+  color:#2563eb;
+}
+
+.nav-item.active{
+  background:#2563eb;
+  color:#ffffff;
+}
+
+.sidebar-bottom{
+  padding:15px;
+  border-top:1px solid #eef2f7;
+}
+
+.logout-btn{
+  width:100%;
+  border:none;
+  background:#ef4444;
+  color:white;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.logout-btn:hover{
+  background:#dc2626;
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.main-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===========================
+   TOP NAVBAR
+=========================== */
+
+.top-navbar{
+  height:72px;
+  background:white;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.page-title h1{
+  font-size:24px;
+  color:#1e293b;
+}
+
+.page-title p{
+  color:#64748b;
+  font-size:14px;
+  margin-top:4px;
+}
+
+.navbar-actions{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.notification-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  background:#eff6ff;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+}
+
+.user-details strong{
+  display:block;
+  color:#1e293b;
+}
+
+.user-details span{
+  color:#64748b;
+  font-size:13px;
+}
+
+/* ===========================
+   PAGE CONTENT
+=========================== */
+
+.layout-content{
+  flex:1;
+  padding:25px;
+}
+
+
+
+
+
+
+/* ==========================================
+   SIDEBAR SCROLLBAR
+========================================== */
+
+.sidebar-nav {
+  overflow-y: auto;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ==========================================
+   ACTIVE NAVIGATION EFFECT
+========================================== */
+
+.nav-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #2563eb;
+  transform: scaleY(0);
+  transition: .25s;
+}
+
+.nav-item:hover::before {
+  transform: scaleY(1);
+}
+
+.nav-item.active::before {
+  background: #ffffff;
+  transform: scaleY(1);
+}
+
+.nav-item span:first-child {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+/* ==========================================
+   TOP NAVBAR EFFECTS
+========================================== */
+
+.top-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,.03);
+}
+
+.notification-btn {
+  transition: .3s;
+}
+
+.notification-btn:hover {
+  background: #2563eb;
+  color: white;
+  transform: scale(1.05);
+}
+
+.user-avatar {
+  transition: .3s;
+}
+
+.user-avatar:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+/* ==========================================
+   PAGE CONTENT
+========================================== */
+
+.layout-content {
+  min-height: calc(100vh - 72px);
+}
+
+.page-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.04);
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.primary-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #334155;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.secondary-btn:hover {
+  background: #f8fafc;
+}
+
+/* ==========================================
+   COMMON CARDS
+========================================== */
+
+.card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 22px;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 1024px) {
+
+  .sidebar {
+    width: 230px;
+  }
+
+  .top-navbar {
+    padding: 0 20px;
+  }
+
+  .layout-content {
+    padding: 20px;
+  }
+
+  .page-title h1 {
+    font-size: 22px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE SIDEBAR
+========================================== */
+
+@media (max-width:768px){
+
+  .sidebar{
+    position:fixed;
+    left:-270px;
+    top:0;
+    width:260px;
+    height:100vh;
+    z-index:1000;
+    transition:left .3s ease;
+    box-shadow:0 0 25px rgba(0,0,0,.15);
+  }
+
+  .sidebar.sidebar-open{
+    left:0;
+  }
+
+  .sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:999;
+  }
+
+  .close-sidebar{
+    display:block;
+  }
+
+  .main-content{
+    width:100%;
+  }
+
+  .menu-btn{
+    display:block;
+    margin-right:15px;
+  }
+
+  .top-navbar{
+    padding:0 16px;
+  }
+
+  .page-title h1{
+    font-size:20px;
+  }
+
+  .page-title p{
+    display:none;
+  }
+
+  .user-details{
+    display:none;
+  }
+
+  .layout-content{
+    padding:18px;
+  }
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width:480px){
+
+  .layout-content{
+    padding:14px;
+  }
+
+  .logo-text{
+    font-size:18px;
+  }
+
+  .user-avatar{
+    width:38px;
+    height:38px;
+    font-size:14px;
+  }
+
+  .notification-btn{
+    width:38px;
+    height:38px;
+  }
+
+  .sidebar{
+    width:240px;
+  }
+
+  .nav-item{
+    font-size:14px;
+    padding:11px 14px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   GLOBAL ANIMATIONS
+========================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(-25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.layout-content {
+  animation: fadeIn .35s ease;
+}
+
+.sidebar {
+  animation: slideLeft .3s ease;
+}
+
+/* ==========================================
+   FOCUS STYLES
+========================================== */
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   SMOOTH TRANSITIONS
+========================================== */
+
+button,
+a,
+.card,
+.nav-item,
+.notification-btn,
+.user-avatar,
+.logout-btn {
+  transition: all .25s ease;
+}
+
+/* ==========================================
+   COMMON PAGE TITLE
+========================================== */
+
+.page-heading {
+  margin-bottom: 24px;
+}
+
+.page-heading h2 {
+  font-size: 28px;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.page-heading p {
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* ==========================================
+   COMMON GRID
+========================================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ==========================================
+   COMMON TABLE
+========================================== */
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #f8fafc;
+  color: #334155;
+  text-align: left;
+  padding: 16px;
+  font-size: 14px;
+}
+
+td {
+  padding: 16px;
+  border-top: 1px solid #eef2f7;
+  color: #475569;
+  font-size: 14px;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge-info {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.badge-success,
+.badge-warning,
+.badge-danger,
+.badge-info {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   FOOTER SPACE
+========================================== */
+
+.layout-content {
+  padding-bottom: 40px;
+}

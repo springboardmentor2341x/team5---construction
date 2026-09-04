@@ -1,0 +1,144 @@
+<div class="page-content">
+
+  <!-- Header -->
+
+  <div class="content-heading">
+
+    <div>
+
+      <h2>Daily Report Details</h2>
+
+      <p>
+        View complete information about the submitted daily progress report.
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button class="back-btn"
+              routerLink="/site-engineer/daily-progress">
+        ← Back
+      </button>
+
+      <button class="print-btn">
+        🖨 Print
+      </button>
+
+      <button class="download-btn">
+        ⬇ Download PDF
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Project Information -->
+
+  <div class="details-card">
+
+    <h3>Project Information</h3>
+
+    <div class="details-grid">
+
+      <div><strong>Project Name</strong><span>{{ report.projectName }}</span></div>
+
+      <div><strong>Report Date</strong><span>{{ report.reportDate }}</span></div>
+
+      <div><strong>Work Category</strong><span>{{ report.workCategory }}</span></div>
+
+      <div><strong>Completion</strong><span>{{ report.completion }}%</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Work Details -->
+
+  <div class="details-card">
+
+    <h3>Work Details</h3>
+
+    <p>{{ report.activity }}</p>
+
+  </div>
+
+  <!-- Contractor & Workforce -->
+
+  <div class="details-card">
+
+    <h3>Contractor & Workforce</h3>
+
+    <div class="details-grid">
+
+      <div><strong>Contractor</strong><span>{{ report.contractor }}</span></div>
+
+      <div><strong>Workers Present</strong><span>{{ report.workersPresent }}</span></div>
+
+      <div><strong>Workers Absent</strong><span>{{ report.workersAbsent }}</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Equipment -->
+
+  <div class="details-card">
+
+    <h3>Equipment & Materials</h3>
+
+    <div class="details-grid">
+
+      <div><strong>Equipment Used</strong><span>{{ report.equipment }}</span></div>
+
+      <div><strong>Materials Used</strong><span>{{ report.materials }}</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Site Information -->
+
+  <div class="details-card">
+
+    <h3>Site Information</h3>
+
+    <div class="details-grid">
+
+      <div><strong>Weather</strong><span>{{ report.weather }}</span></div>
+
+      <div><strong>Safety Observation</strong><span>{{ report.safetyObservation }}</span></div>
+
+      <div><strong>Quality Inspection</strong><span>{{ report.qualityRemarks }}</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Delay -->
+
+  <div class="details-card">
+
+    <h3>Delay Details</h3>
+
+    <div class="details-grid">
+
+      <div><strong>Delay</strong><span>{{ report.delay }}</span></div>
+
+      <div><strong>Reason</strong><span>{{ report.delayReason }}</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Comments -->
+
+  <div class="details-card">
+
+    <h3>Additional Comments</h3>
+
+    <p>{{ report.comments }}</p>
+
+  </div>
+
+</div>

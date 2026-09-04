@@ -1,0 +1,140 @@
+<div class="app-layout">
+
+  <main class="main-content">
+
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+
+      <div class="page-title">
+        <h1>Equipment Details</h1>
+        <p>View complete equipment information</p>
+      </div>
+
+    </header>
+
+    <section class="page-content">
+
+      <!-- Back Button -->
+      <button class="back-btn" routerLink="/site-engineer/equipment-status">
+        ← Back to Equipment Status
+      </button>
+
+      <!-- Equipment Header -->
+      <div class="equipment-header-card">
+
+        <div class="equipment-icon">
+          🚜
+        </div>
+
+        <div class="equipment-header-info">
+
+          <h2>{{ equipment.name }}</h2>
+
+          <p>{{ equipment.category }}</p>
+
+          <span
+            class="status-badge"
+            [class.available]="equipment.status === 'Available'"
+            [class.inuse]="equipment.status === 'In Use'"
+            [class.maintenance]="equipment.status === 'Maintenance'">
+
+            {{ equipment.status }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- Information Card -->
+
+      <div class="details-card-info">
+
+        <h3>Equipment Information</h3>
+
+        <div class="details-grid">
+
+          <div class="detail-item">
+            <label>Equipment ID =  </label>
+            <span>{{ equipment.id }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Equipment Name =  </label>
+            <span>{{ equipment.name }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Category =  </label>
+            <span>{{ equipment.category }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Project =  </label>
+            <span>{{ equipment.project }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Quantity =  </label>
+            <span>{{ equipment.quantity }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Condition =  </label>
+            <span>{{ equipment.condition }}</span>
+          </div>
+                    <div class="detail-item">
+            <label>Purchase Date =  </label>
+            <span>{{ equipment.purchaseDate }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Last Maintenance =  </label>
+            <span>{{ equipment.lastMaintenance }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label>Location =  </label>
+            <span>{{ equipment.location }}</span>
+          </div>
+
+          <div class="detail-item">
+            <label> Assigned Operator =>       </label>
+            <span>{{ equipment.operator }}</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Description Card -->
+
+      <div class="details-card">
+
+        <h3>Description</h3>
+
+        <p class="description">
+          {{ equipment.description }}
+        </p>
+
+      </div>
+
+      <!-- Action Buttons -->
+
+      <div class="action-buttons">
+
+        <button class="edit-btn">
+          ✏️ Edit Equipment
+        </button>
+
+        <button class="delete-btn">
+          🗑 Delete Equipment
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

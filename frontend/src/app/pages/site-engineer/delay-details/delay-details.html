@@ -1,0 +1,125 @@
+<div class="page-content">
+
+  <!-- Header -->
+  <button class="back-btn"
+    type="button"
+    routerLink="/site-engineer/delay-tracking">
+    <-Back to Delay Tracking
+   </button>
+
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>Delay Details</h2>
+
+      <p>Complete information about the reported project delay.</p>
+
+    </div>
+
+  </div>
+
+  <!-- Project Information -->
+
+  <div class="details-card">
+
+    <h3>Project Information</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Project Name</label>
+        <span>{{ delay.projectName }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Work Category</label>
+        <span>{{ delay.workCategory }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Reported By</label>
+        <span>{{ delay.reportedBy }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Delay Date</label>
+        <span>{{ delay.delayDate }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Delay Information -->
+
+  <div class="details-card">
+
+    <h3>Delay Information</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Delay Reason</label>
+        <span>{{ delay.delayReason }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Delay Duration</label>
+        <span>{{ delay.delayDuration }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Impact Level</label>
+        <span>{{ delay.impactLevel }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Affected Milestone</label>
+        <span>{{ delay.affectedMilestone }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Resolution -->
+
+  <div class="details-card">
+
+    <h3>Resolution</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+
+        <label>Status</label>
+
+        <span class="status-badge success">
+
+          {{ delay.resolutionStatus }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Remarks -->
+
+  <div class="details-card">
+
+    <h3>Resolution Remarks</h3>
+
+    <div class="remarks-box">
+
+      {{ delay.resolutionRemarks }}
+
+    </div>
+
+  </div>
+
+</div>

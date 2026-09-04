@@ -1,0 +1,277 @@
+/* ==========================
+   Main Content
+========================== */
+
+.main-content{
+  flex:1;
+  margin-left:0px;
+  padding:25px;
+  background:#f5f7fb;
+  min-height:100vh;
+}
+
+/* ==========================
+   Navbar
+========================== */
+
+.top-navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.page-title h1{
+  font-size:30px;
+  color:#1e293b;
+}
+
+.page-title p{
+  margin-top:5px;
+  color:#64748b;
+}
+
+/* ==========================
+   Back Button
+========================== */
+
+.back-btn{
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  padding:12px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  margin-bottom:25px;
+  transition:.3s;
+}
+
+.back-btn:hover{
+  background:#1d4ed8;
+}
+
+/* ==========================
+   Equipment Header Card
+========================== */
+
+.equipment-header-card{
+  background:#fff;
+  border-radius:18px;
+  padding:30px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.equipment-icon{
+  width:90px;
+  height:90px;
+  border-radius:18px;
+  background:#dbeafe;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:45px;
+}
+
+.equipment-header-info h2{
+  font-size:30px;
+  color:#0f172a;
+}
+
+.equipment-header-info p{
+  margin-top:6px;
+  color:#64748b;
+  font-size:16px;
+}
+
+/* ==========================
+   Main Content
+========================== */
+
+/* .main-content{
+  flex:1;
+  margin-left:260px;
+  padding:25px;
+  background:#f5f7fb;
+  min-height:100vh;
+} */
+
+/* ==========================
+   Navbar
+========================== */
+
+.top-navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.page-title h1{
+  font-size:30px;
+  color:#1e293b;
+}
+
+.page-title p{
+  margin-top:5px;
+  color:#64748b;
+}
+
+
+.page-title{
+    text-align:left;
+}
+/* ==========================
+   Back Button
+========================== */
+
+.back-btn{
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  padding:12px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  margin-bottom:25px;
+  transition:.3s;
+
+   display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin:20px 0;
+}
+.back-btn:hover{
+  background:#1d4ed8;
+}
+
+/* ==========================
+   Equipment Header Card
+========================== */
+
+.equipment-header-card{
+  background:#fff;
+  border-radius:18px;
+  padding:30px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+   width:100%;
+    
+    justify-content:flex-start;
+}
+.details-card-info{
+  background-color: rgb(207, 207, 180);
+  border-radius: 20px;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  border: 2px solid rgb(236, 108, 108);
+}
+.details-card-info h3{
+  background-color: #e7880b;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  
+}
+.detail-item{
+  font-size: 19px;
+  padding-bottom: 8px;
+  
+  
+
+}
+.details-grid{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.details-card{
+    background-color: rgb(207, 207, 180);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  margin-top: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  border: 2px solid rgb(236, 108, 108);
+  
+}
+.details-card h3{
+  background-color: #e7800b;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  
+
+}
+
+.edit-btn{
+  border-radius: 8px;
+  margin-right: 20px;
+  height: 40px;
+  border-color: #0f172a;
+}
+
+.delete-btn{
+  border-radius: 8px;
+  margin-right: 10px;
+  height: 40px;
+  border-color: #0f172a;
+}
+.delete-btn:hover{
+  border-radius: 2px solid orange ;
+  background-color: #f5150d;
+ 
+}
+
+.edit-btn:hover{
+  border-radius: 2px solid orange ;
+  background-color: #1823b9;
+ 
+}
+
+.equipment-icon{
+  width:90px;
+  height:90px;
+  border-radius:18px;
+  background:#dbeafe;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:45px;
+}
+
+.equipment-header-info h2{
+  font-size:30px;
+  color:#0f172a;
+}
+
+.equipment-header-info p{
+  margin-top:6px;
+  color:#64748b;
+  font-size:16px;
+}
+
+
+
+
+.page-content{
+    width:100%;
+     margin:0;
+}

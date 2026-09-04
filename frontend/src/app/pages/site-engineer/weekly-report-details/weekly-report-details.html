@@ -1,0 +1,165 @@
+<div class="page-content">
+
+  <!-- ================= Header ================= -->
+   <button class="back-btn" routerLink="/site-engineer/weekly-reports">
+        ← Back to weekly-reports
+      </button>
+  <div class="page-header">
+
+    <div>
+
+      <h2>Weekly Report Details</h2>
+
+      <p>Complete weekly progress report submitted by Site Engineer.</p>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Project Information ================= -->
+
+  <div class="details-card">
+
+    <h3>Project Information</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Project Name</label>
+        <span>{{ report.projectName }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Site Engineer</label>
+        <span>{{ report.siteEngineer }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Week Start</label>
+        <span>{{ report.weekStart }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Week End</label>
+        <span>{{ report.weekEnd }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Progress ================= -->
+
+  <div class="details-card">
+
+    <h3>Weekly Progress</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Project Progress</label>
+        <span>{{ report.progress }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Worker Hours</label>
+        <span>{{ report.workerHours }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Workers Present</label>
+        <span>{{ report.workersPresent }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Workers Absent</label>
+        <span>{{ report.workersAbsent }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Major Activities ================= -->
+
+  <div class="details-card">
+
+    <h3>Major Activities Completed</h3>
+
+    <ul class="activity-list">
+
+      @for(activity of report.majorActivities; track activity){
+
+      <li>✅ {{ activity }}</li>
+
+      }
+
+    </ul>
+
+  </div>
+
+  <!-- ================= Delay Details ================= -->
+
+  <div class="details-card">
+
+    <h3>Delay Details</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Delay Reason</label>
+        <span>{{ report.delayReason }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Delay Duration</label>
+        <span>{{ report.delayDuration }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Safety & Quality ================= -->
+
+  <div class="details-card">
+
+    <h3>Safety & Quality</h3>
+
+    <div class="details-grid">
+
+      <div class="detail-box">
+        <label>Safety</label>
+        <span>{{ report.safety }}</span>
+      </div>
+
+      <div class="detail-box">
+        <label>Quality</label>
+        <span>{{ report.quality }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= Overall Status ================= -->
+
+  <div class="details-card">
+
+    <h3>Overall Status</h3>
+
+    <div class="status-box">
+
+      <span class="status-badge success">
+
+        🟢 {{ report.status }}
+
+      </span>
+
+      <p>{{ report.remarks }}</p>
+
+    </div>
+
+  </div>
+
+</div>
