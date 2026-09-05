@@ -62,7 +62,7 @@ export class MilestoneDetails {
   ){}
     
       ngOnInit(): any {
-        const id = Number(this.route.snapshot.paramMap.get('id'))
+        const id = Number(this.route.snapshot.paramMap.get('id'))  
 
         console.log('selected milestone id ', id)
         this.getmilestonedetail(id);

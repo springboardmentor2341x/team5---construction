@@ -8,7 +8,7 @@ from sqlalchemy import (
     DateTime,
 )
 
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import func
 
 from database import Base
@@ -41,15 +41,15 @@ class Project(Base):
     # Compatible with your authentication model
     project_manager_id = Column(Integer, ForeignKey("users.user_id"))
     client_id = Column(Integer, ForeignKey("users.user_id"))
-    created_by = Column(
-    Integer,
-    ForeignKey("users.user_id")
-)
+#     created_at = mapped_column(
+#     Integer,
+#     ForeignKey("users.user_id")
+# )
 
-    updated_by = Column(
-    Integer,
-    ForeignKey("users.user_id")
-    )
+    # updated_at = mapped_column(
+    # Integer,
+    # ForeignKey("users.user_id")
+    # )
 
     created_at = Column(
         DateTime(timezone=True),
@@ -71,15 +71,15 @@ class Project(Base):
         "User",
         foreign_keys=[client_id]
     )
-    created_user = relationship(
-    "User",
-    foreign_keys=[created_by]
-    )
+    # created_user = relationship(
+    # "User",
+    # foreign_keys=[created_at]
+    # )
 
-    updated_user = relationship(
-    "User",
-    foreign_keys=[updated_by]
-    )
+    # updated_user = relationship(
+    # "User",
+    # foreign_keys=[updated_at]
+    # )
 
     milestones = relationship(
         "Milestone",

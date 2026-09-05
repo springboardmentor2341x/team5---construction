@@ -54,7 +54,7 @@ export class ProjectSiteEngineerService {
     constructor(private http: HttpClient) {}
 
       private milestoneapiUrl = 'http://127.0.0.1:8000/milestones'
-      projectId = 1
+     
 
     getmilestonedetail():Observable<Milestone[] > {
       return this.http.get<Milestone[]>(this.milestoneapiUrl);

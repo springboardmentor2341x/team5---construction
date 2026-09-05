@@ -1,13 +1,20 @@
 from pydantic import BaseModel
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Optional
+from typing import Optional,Literal
 
+
+MilestoneStatus = Literal[
+    "Not Started",
+    "In Progress",
+    "Completed",
+    "Delayed"
+]
 
 class MilestoneBase(BaseModel):
     milestone_name: str
     description: Optional[str] = None
-    status: str
+    status: MilestoneStatus
     progress_percentage: Decimal
     planned_start_date: date
     planned_end_date: date
@@ -22,7 +29,7 @@ class MilestoneCreate(MilestoneBase):
 class MilestoneUpdate(BaseModel):
     milestone_name: Optional[str] = None
     description: Optional[str] = None
-    status: Optional[str] = None
+    status: Optional[MilestoneStatus] = None
     progress_percentage: Optional[Decimal] = None
     planned_start_date: Optional[date] = None
     planned_end_date: Optional[date] = None

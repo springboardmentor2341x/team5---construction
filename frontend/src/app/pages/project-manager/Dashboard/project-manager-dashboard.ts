@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import {Milestone, MilestoneService } from '../../../services/milestone.service';
 
 @Component({
   selector: 'app-project-manager-dashboard',
@@ -277,4 +278,23 @@ export class ProjectManagerDashboardComponent {
 
   ];
 
+
+  milestone: Milestone[] = [];
+
+  constructor(private milestoneService:MilestoneService){}
+
+ngOnInit():void{
+  this.getMilestones()
+}
+
+getMilestones(): void{
+    this.milestoneService.getAllMilestones().subscribe({
+      next: (data)=>{
+        this.milestone = data;
+      },
+      error: (error)=>{
+        console.log('error in pm dashboad getmilestone data line no 296', error)
+      }
+    })
+}
 }
