@@ -56,6 +56,7 @@ export class MilestoneService {
     );
   }
 
+  
   // GET milestones of a particular project
   getMilestonesByProject(projectId: number): Observable<Milestone[]> {
     return this.http.get<Milestone[]>(

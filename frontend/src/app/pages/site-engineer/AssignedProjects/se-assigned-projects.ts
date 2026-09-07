@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {Projectty, ProjectSiteEngineerService,ProjectSiteEngineer } from '../../../services/project-site-engineer.service';
+import {ProjectSiteEngineerService,ProjectSiteEngineer } from '../../../services/project-site-engineer.service';
 import { Project, ProjectService } from '../../../services/project.service';
 export interface Projectt {
   id: string;
@@ -29,7 +29,13 @@ export interface Projectt {
   templateUrl: './se-assigned-projects.html',
   styleUrl: './se-assigned-projects.css'
 })
-export class SeAssignedProjects {
+export class SeAssignedProjects implements OnInit{
+
+  ngOnInit(): any {
+    this.getAssignedProjects();
+  }
+
+  
 
   // Search
   searchTerm = '';
@@ -38,65 +44,7 @@ export class SeAssignedProjects {
   selectedStatus = 'All';
   selectedPriority = 'All';
 
-  // Project Data
-  // projects: Project[] = [
-  //   {
-  //     id: 'PRJ-001',
-  //     name: 'City Mall Construction',
-  //     location: 'Lucknow',
-  //     manager: 'Asma Khan',
-  //     startDate: '10 Jun 2026',
-  //     deadline: '30 Sep 2026',
-  //     progress: 72,
-  //     status: 'In Progress',
-  //     priority: 'High'
-  //   },
-  //   {
-  //     id: 'PRJ-002',
-  //     name: 'Residential Tower',
-  //     location: 'Ayodhya',
-  //     manager: 'Rahul Sharma',
-  //     startDate: '15 May 2026',
-  //     deadline: '15 Aug 2026',
-  //     progress: 86,
-  //     status: 'In Progress',
-  //     priority: 'High'
-  //   },
-  //   {
-  //     id: 'PRJ-003',
-  //     name: 'Highway Development',
-  //     location: 'Sultanpur',
-  //     manager: 'Amit Verma',
-  //     startDate: '01 Apr 2026',
-  //     deadline: '30 Jul 2026',
-  //     progress: 95,
-  //     status: 'Completed',
-  //     priority: 'Medium'
-  //   },
-  //   {
-  //     id: 'PRJ-004',
-  //     name: 'Office Complex',
-  //     location: 'Prayagraj',
-  //     manager: 'Neha Singh',
-  //     startDate: '20 Jun 2026',
-  //     deadline: '20 Nov 2026',
-  //     progress: 42,
-  //     status: 'Delayed',
-  //     priority: 'High'
-  //   },
-  //   {
-  //     id: 'PRJ-005',
-  //     name: 'Community Center',
-  //     location: 'Varanasi',
-  //     manager: 'Vikas Yadav',
-  //     startDate: '05 Jul 2026',
-  //     deadline: '10 Dec 2026',
-  //     progress: 28,
-  //     status: 'In Progress',
-  //     priority: 'Low'
-  //   }
-  // ];
-
+  
 
   getDummyProgress(projectId: number): number {
 
@@ -121,6 +69,7 @@ export class SeAssignedProjects {
 
       const matchesSearch =
         project.name?.toLowerCase().includes(search) ||
+        project.project_id.toString().includes(search) ||
         project.project_code.toLowerCase().includes(search) ||
         (project.location?.toLowerCase().includes(search) ?? false);
 
@@ -171,11 +120,9 @@ constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService,
   private projectService:ProjectService
 ){}
 
-  ngOnInit(): any {
-    this.getAssignedProjects();
-  }
+  
 
-  getAssignedProjects(): any {
+  getAssignedProjects(): void {
     this.ProjectSiteEngineerService.getAllAssignments().subscribe({
       next:(assignments)=>{
      console.log('Assignments:', assignments);
@@ -186,6 +133,8 @@ constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService,
         const projectIds = assignments.map(assignment => assignment.project_id);
          console.log('Assigned Project IDs:', projectIds);
 
+
+         
         //  second API call
         this.projectService.getAllProjects().subscribe({
           next: (projects) =>{
@@ -197,6 +146,8 @@ constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService,
             this.assignedProjectDetails = projects.filter(
               project  => projectIds.includes(project.project_id)
             );
+
+            // this.assignedProjectDetails = projects;
 
                console.log('Assigned Project Details:',this.assignedProjectDetails );
                console.log('Assigned Project idddd:',this.assignedProjectDetails );

@@ -5,3 +5,11 @@ from .milestone import Milestone
 from .project_worker import ProjectWorker
 from .project_site_engineer import ProjectSiteEngineer
 from .project_contractor import ProjectContractor
+
+from .daily_progress import (
+    DailyProgressReport,
+    DailyReportMaterial,
+    DailyReportMachinery,
+    ProgressPhoto,
+    DelayRecord
+)

@@ -256,7 +256,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'daily-report-details',
+        path: 'daily-report-details/:id',
         loadComponent: () =>
           import('./pages/site-engineer/daily-report-details/daily-report-details')
             .then(m => m.DailyReportDetails)

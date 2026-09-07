@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Project {
+  project_id: number;
   project_code: string;
   name: string;
   description?: string | null;
@@ -15,9 +16,8 @@ export interface Project {
   expected_completion_date?: string | null;
   project_manager_id?: number | null;
   client_id?: number | null;
-  project_id: number;
-  created_at?: string;
-  updated_at?: string;
+  created_at: string;
+  updated_at: string;
 
    // Dummy frontend field
    progress?: number;

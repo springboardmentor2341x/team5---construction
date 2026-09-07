@@ -6,7 +6,7 @@ from database import Base
 
 
 class ProjectContractor(Base):
-    __tablename__ = "project_contractors"
+    __tablename__ = "projectcontractors"
    
 
     project_contractor_id = Column(Integer, primary_key=True, index=True)
@@ -30,5 +30,16 @@ class ProjectContractor(Base):
         "Project",
         back_populates="project_contractors"
     )
+
+
+    project_workers = relationship(
+    "ProjectWorker",
+    back_populates="project_contractor"
+)
+
+    daily_progress_reports = relationship(
+    "DailyProgressReport",
+    back_populates="project_contractor"
+)
 
     contractor = relationship("User")

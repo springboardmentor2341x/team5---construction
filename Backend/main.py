@@ -23,7 +23,7 @@ from app.routers import milestone
 from app.routers import worker
 from app.routers import project_schedule
 from app.routers import project_closure
-
+from app.routers.daily_progress import router as daily_progress_router
 
 
 app = FastAPI()
@@ -35,6 +35,7 @@ app.include_router(milestone.router)
 app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
+app.include_router(daily_progress_router)
 
 app.add_middleware(
     CORSMiddleware,

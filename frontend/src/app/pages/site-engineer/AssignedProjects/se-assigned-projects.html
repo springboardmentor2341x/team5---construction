@@ -194,9 +194,20 @@
     <!-- ===========================
          PROJECT LIST
     ============================ -->
+          <pre>
+          assignedProjectDetails:
+          {{ assignedProjectDetails | json }}
+          </pre>
+
+          <pre>
+          filteredProjects:
+          {{ filteredProjects | json }}
+          </pre>
 
     <div class="projects-list">
 
+
+      
       @for (project of filteredProjects; track project.project_id) {
 
         <article class="project-card">
@@ -272,16 +283,16 @@
 
               <span>Project Progress</span>
 
-              <strong>{{ project.progress??0 }}%</strong>
+              <!-- <strong>{{ project.progress??0 }}%</strong> -->
 
             </div>
 
             <div class="progress-bar">
 
-              <div
+              <!-- <div
                 class="progress-fill"
                 [style.width.%]="project.progress ?? 0">
-              </div>
+              </div> -->
 
             </div>
 
@@ -342,7 +353,7 @@
       }
 
     </div>
-
+      
   </div>
 
 </section>

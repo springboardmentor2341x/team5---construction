@@ -61,6 +61,7 @@ export class MilestoneDetails {
     private route:ActivatedRoute
   ){}
     
+  
       ngOnInit(): any {
         const id = Number(this.route.snapshot.paramMap.get('id'))  
 

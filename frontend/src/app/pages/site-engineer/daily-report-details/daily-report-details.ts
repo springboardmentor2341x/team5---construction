@@ -1,60 +1,105 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
+
+import {
+  DailyProgressService,
+  DailyProgressResponse
+} from '../../../services/daily-progress.service';
 
 @Component({
   selector: 'app-daily-report-details',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterLink],
+  imports: [
+    CommonModule,
+    RouterLink
+  ],
   templateUrl: './daily-report-details.html',
   styleUrl: './daily-report-details.css'
 })
-export class DailyReportDetails {
+export class DailyReportDetails implements OnInit {
 
+  report: DailyProgressResponse | null = null;
 
+  reportId!: number;
 
-    
+  isLoading = true;
 
-  report = {
+  errorMessage = '';
 
-    projectName: 'City Mall Construction',
+  constructor(
+    private route: ActivatedRoute,
+    private dailyProgressService: DailyProgressService
+  ) {}
 
-    reportDate: '04 Aug 2026',
+  ngOnInit(): void {
 
-    workCategory: 'Foundation',
+    const id = this.route.snapshot.paramMap.get('id');
 
-    activity:
-      'Foundation excavation completed successfully for Block A.',
+    console.log('Route ID:', id);
 
-    completion: 80,
+    if (!id) {
 
-    contractor: 'ABC Construction',
+      this.errorMessage = 'Invalid report ID.';
+      this.isLoading = false;
 
-    workersPresent: 42,
+      return;
+    }
 
-    workersAbsent: 3,
+    this.reportId = Number(id);
 
-    equipment: 'Excavator, Concrete Mixer',
+    console.log('Report ID:', this.reportId);
 
-    materials: '300 Cement Bags, 5 Tons Steel',
+    this.loadReport();
+  }
 
-    weather: 'Sunny',
+  loadReport(): void {
 
-    safetyObservation:
-      'All workers were wearing PPE kits.',
+    this.isLoading = true;
+    this.errorMessage = '';
 
-    qualityRemarks:
-      'Concrete quality passed inspection.',
+    console.log('Loading report:', this.reportId);
 
-    delay: 'No',
+    this.dailyProgressService
+      .getReportById(this.reportId)
+      .subscribe({
 
-    delayReason: '-',
+        next: (data: DailyProgressResponse) => {
 
-    comments:
-      'Work completed according to schedule.'
+          console.log('API SUCCESS:', data);
 
-  };
+          this.report = data;
 
+          this.isLoading = false;
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error loading daily report:',
+            error
+          );
+
+          this.errorMessage =
+            'Unable to load daily report details.';
+
+          this.isLoading = false;
+        },
+
+        complete: () => {
+
+          console.log(
+            'API request completed'
+          );
+
+        }
+
+      });
+  }
+
+  printReport(): void {
+
+    window.print();
+
+  }
 }
