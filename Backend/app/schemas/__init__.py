@@ -4,7 +4,6 @@ from .milestone import *
 from .project_worker import *
 from .project_site_engineer import *
 from .project_contractor import *
-from app.schemas import machine
 from app.schemas import material
 from app.schemas import attendance
 from app.schemas import milestone

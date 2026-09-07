@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import ENUM as PGEnum
-
 from database import Base
 from app.models.enums import MaterialUnitEnum, MaterialStatusEnum
 
@@ -16,5 +16,8 @@ class Material(Base):
     material_name = Column(String, nullable=False)
     unit = Column(material_unit_enum, nullable=False)
     status = Column(material_status_enum, nullable=False, default=MaterialStatusEnum.ACTIVE)
+    category_id = Column(Integer, ForeignKey("materialcategories.category_id"), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    category = relationship("MaterialCategory", back_populates="materials")

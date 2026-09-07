@@ -1,5 +1,4 @@
-import logging
-logging.basicConfig(level=logging.DEBUG)
+
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from jose import jwt, JWTError
@@ -24,7 +23,6 @@ from app.routers import project_schedule
 from app.routers import project_closure
 from app.routers import (
     worker,
-    machines,
     materials,
     attendance,
     milestone,
@@ -33,7 +31,14 @@ from app.routers import (
     progress_photos,
     site_activity_logs,
 )
-
+from app.routers import (
+    resource_categories,
+    resources,
+    resource_allocations,
+    resource_utilization,
+    maintenance_records,
+)
+from app.routers import material_inventory
 app = FastAPI()
 app.include_router(project.router)
 app.include_router(project_worker.router)
@@ -44,7 +49,7 @@ app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
 app.include_router(worker.router)
-app.include_router(machines.router)
+app.include_router(material_inventory.router)
 app.include_router(materials.router)
 app.include_router(attendance.router)
 app.include_router(milestone.router)
@@ -52,6 +57,12 @@ app.include_router(daily_reports.router)
 app.include_router(delay_records.router)
 app.include_router(progress_photos.router)
 app.include_router(site_activity_logs.router)
+app.include_router(resource_categories.router)
+app.include_router(resources.router)
+app.include_router(resource_allocations.router)
+app.include_router(resource_utilization.router)
+app.include_router(maintenance_records.router)
+
 # Base.metadata.create_all(bind=engine)
 from sqlalchemy import text
 

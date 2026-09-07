@@ -51,12 +51,12 @@ class DailyReportMachinery(Base):
 
     report_machine_id = Column(Integer, primary_key=True, index=True)
     report_id = Column(Integer, ForeignKey("dailyprogressreports.report_id"), nullable=False)
-    machine_id = Column(Integer, ForeignKey("machines.machine_id"), nullable=False)
+    resource_id = Column(Integer, ForeignKey("resources.resource_id"), nullable=False)
     operating_hours = Column(Numeric, nullable=False)
     remarks = Column(Text)
 
     report = relationship("DailyProgressReport", back_populates="machinery_entries")
-    machine = relationship("Machine")
+    resource = relationship("Resource")
 
 class DailyReportMaterial(Base):
     __tablename__ = "dailyreportmaterials"

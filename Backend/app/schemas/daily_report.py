@@ -47,7 +47,7 @@ class DailyProgressReportResponse(DailyProgressReportBase):
 
 class DailyReportMachineryBase(BaseModel):
     report_id: int
-    machine_id: int
+    resource_id: int
     operating_hours: Decimal
     remarks: Optional[str] = None
 

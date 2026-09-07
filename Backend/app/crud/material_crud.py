@@ -1,7 +1,19 @@
 from sqlalchemy.orm import Session
 from app.models.material import Material
 from app.schemas.material import MaterialCreate, MaterialUpdate
-
+from decimal import Decimal
+from typing import List, Optional
+from app.models.material_inventory import (
+    MaterialCategory,
+    Inventory,
+    MaterialRequest,
+    MaterialAllocation,
+    StockMovement,
+    MaterialRequestStatus,
+    MaterialAllocationStatus,
+    StockMovementType,
+)
+from app.schemas import material_inventory as schemas
 
 def create_material(db: Session, material: MaterialCreate):
     db_material = Material(**material.model_dump())

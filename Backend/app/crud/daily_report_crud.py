@@ -74,7 +74,7 @@ def add_machinery_entry(db: Session, entry: DailyReportMachineryCreate):
         db.rollback()
         raise HTTPException(
             status_code=409,
-            detail=f"Machine {entry.machine_id} is already logged on report {entry.report_id}"
+            detail=f"Resource {entry.resource_id} is already logged on report {entry.report_id}"
         )
     db.refresh(db_entry)
     return db_entry
