@@ -5,15 +5,10 @@
 .reports-page {
   width: 100%;
   box-sizing: border-box;
-
   padding: 28px;
-
   background: #f5f7fb;
-
   min-height: 100vh;
-
   color: #1f2937;
-
   overflow-x: hidden;
 }
 
@@ -24,45 +19,31 @@
 
 .page-header {
   display: flex;
-
   justify-content: space-between;
-
   align-items: flex-start;
-
   margin-bottom: 26px;
 }
 
 .page-label {
   display: block;
-
   font-size: 12px;
-
   font-weight: 700;
-
   letter-spacing: 1.4px;
-
   color: #64748b;
-
   margin-bottom: 6px;
 }
 
 .page-header h1 {
   margin: 0;
-
   font-size: 28px;
-
   font-weight: 700;
-
   color: #111827;
 }
 
 .page-header p {
   margin: 8px 0 0;
-
   font-size: 14px;
-
   line-height: 1.5;
-
   color: #64748b;
 }
 
@@ -79,10 +60,14 @@
   gap: 16px;
 
   margin-bottom: 24px;
+
+  width: 100%;
 }
 
 .summary-card {
   min-height: 105px;
+
+  min-width: 0;
 
   padding: 18px;
 
@@ -98,11 +83,22 @@
 
   align-items: center;
 
-  gap: 14px;
+  gap: 12px;
 
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  overflow: hidden;
 }
 
+
+/* Card content */
+.summary-card > div:last-child {
+  min-width: 0;
+  flex: 1;
+}
+
+
+/* Summary icon */
 .summary-icon {
   width: 44px;
 
@@ -121,6 +117,8 @@
   font-size: 19px;
 
   font-weight: 700;
+
+  flex-shrink: 0;
 }
 
 .summary-icon.total {
@@ -153,6 +151,8 @@
   color: #dc2626;
 }
 
+
+/* Summary text */
 .summary-card span {
   display: block;
 
@@ -161,6 +161,8 @@
   color: #64748b;
 
   margin-bottom: 5px;
+
+  white-space: nowrap;
 }
 
 .summary-card strong {
@@ -171,6 +173,21 @@
   font-weight: 700;
 
   color: #111827;
+
+  white-space: nowrap;
+
+  overflow: visible;
+
+  text-overflow: clip;
+}
+
+
+/* Currency cards */
+.summary-card:has(.summary-icon.amount) strong,
+.summary-card:has(.summary-icon.pending) strong {
+  font-size: 17px;
+
+  letter-spacing: -0.4px;
 }
 
 
@@ -230,10 +247,14 @@
   font-size: 20px;
 
   color: #64748b;
+
+  flex-shrink: 0;
 }
 
 .search-box input {
   width: 100%;
+
+  min-width: 0;
 
   border: none;
 
@@ -297,6 +318,8 @@
   cursor: pointer;
 
   transition: 0.2s ease;
+
+  white-space: nowrap;
 }
 
 .clear-btn:hover {
@@ -378,6 +401,8 @@
   font-weight: 600;
 
   white-space: nowrap;
+
+  flex-shrink: 0;
 }
 
 
@@ -395,7 +420,7 @@
   box-sizing: border-box;
 }
 
-table {
+.table-wrapper table {
   width: 100%;
 
   max-width: 100%;
@@ -412,75 +437,75 @@ table {
    COLUMN WIDTHS
 ===================================================== */
 
-/* ID */
-th:nth-child(1),
-td:nth-child(1) {
+/* Report ID */
+.table-wrapper th:nth-child(1),
+.table-wrapper td:nth-child(1) {
   width: 7%;
 }
 
 /* Report */
-th:nth-child(2),
-td:nth-child(2) {
+.table-wrapper th:nth-child(2),
+.table-wrapper td:nth-child(2) {
   width: 13%;
 }
 
 /* Report Type */
-th:nth-child(3),
-td:nth-child(3) {
+.table-wrapper th:nth-child(3),
+.table-wrapper td:nth-child(3) {
   width: 10%;
 }
 
 /* Project */
-th:nth-child(4),
-td:nth-child(4) {
+.table-wrapper th:nth-child(4),
+.table-wrapper td:nth-child(4) {
   width: 9%;
 }
 
 /* Period */
-th:nth-child(5),
-td:nth-child(5) {
+.table-wrapper th:nth-child(5),
+.table-wrapper td:nth-child(5) {
   width: 8%;
 }
 
 /* Requests */
-th:nth-child(6),
-td:nth-child(6) {
+.table-wrapper th:nth-child(6),
+.table-wrapper td:nth-child(6) {
   width: 10%;
 }
 
 /* Purchase Orders */
-th:nth-child(7),
-td:nth-child(7) {
+.table-wrapper th:nth-child(7),
+.table-wrapper td:nth-child(7) {
   width: 8%;
 }
 
-/* Invoice */
-th:nth-child(8),
-td:nth-child(8) {
+/* Invoice Amount */
+.table-wrapper th:nth-child(8),
+.table-wrapper td:nth-child(8) {
   width: 8%;
 }
 
-/* Pending */
-th:nth-child(9),
-td:nth-child(9) {
+/* Pending Amount */
+.table-wrapper th:nth-child(9),
+.table-wrapper td:nth-child(9) {
   width: 8%;
 }
 
 /* Status */
-th:nth-child(10),
-td:nth-child(10) {
+.table-wrapper th:nth-child(10),
+.table-wrapper td:nth-child(10) {
   width: 8%;
 }
 
 /* Generated Date */
-th:nth-child(11),
-td:nth-child(11) {
+.table-wrapper th:nth-child(11),
+.table-wrapper td:nth-child(11) {
   width: 6%;
 }
 
 /* Actions */
-th:nth-child(12),
-td:nth-child(12) {
+.table-wrapper th:nth-child(12),
+.table-wrapper td:nth-child(12) {
   width: 5%;
 }
 
@@ -493,16 +518,16 @@ thead {
   background: #f8fafc;
 }
 
-th {
-  padding: 14px 6px;
+.table-wrapper th {
+  padding: 12px 5px;
 
   text-align: left;
 
   vertical-align: middle;
 
-  font-size: 11px;
+  font-size: 10px;
 
-  line-height: 1.35;
+  line-height: 1.3;
 
   font-weight: 700;
 
@@ -510,7 +535,7 @@ th {
 
   text-transform: uppercase;
 
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
 
   border-bottom: 1px solid #e5e7eb;
 
@@ -528,14 +553,14 @@ th {
    TABLE BODY
 ===================================================== */
 
-td {
-  padding: 15px 6px;
+.table-wrapper td {
+  padding: 13px 5px;
 
   vertical-align: middle;
 
-  font-size: 13px;
+  font-size: 11px;
 
-  line-height: 1.4;
+  line-height: 1.35;
 
   color: #374151;
 
@@ -566,7 +591,7 @@ tbody tr:last-child td {
 .report-id {
   display: inline-block;
 
-  padding: 5px 7px;
+  padding: 4px 5px;
 
   border-radius: 6px;
 
@@ -574,7 +599,7 @@ tbody tr:last-child td {
 
   color: #475569;
 
-  font-size: 12px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -591,19 +616,21 @@ tbody tr:last-child td {
 
   align-items: center;
 
-  gap: 7px;
+  gap: 6px;
 
   min-width: 0;
+
+  width: 100%;
 }
 
 .report-icon {
-  width: 32px;
+  width: 28px;
 
-  height: 32px;
+  height: 28px;
 
-  min-width: 32px;
+  min-width: 28px;
 
-  border-radius: 8px;
+  border-radius: 7px;
 
   background: #eef2ff;
 
@@ -615,9 +642,17 @@ tbody tr:last-child td {
 
   justify-content: center;
 
-  font-size: 13px;
+  font-size: 12px;
 
   font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.report-info > div:last-child {
+  min-width: 0;
+
+  width: 100%;
 }
 
 .report-info strong {
@@ -625,25 +660,29 @@ tbody tr:last-child td {
 
   color: #1f2937;
 
-  font-size: 13px;
+  font-size: 11px;
 
-  line-height: 1.35;
+  line-height: 1.3;
 
   white-space: normal;
 
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+
+  word-break: normal;
 }
 
 .report-info small {
   display: block;
 
-  margin-top: 3px;
+  margin-top: 2px;
 
   color: #94a3b8;
 
-  font-size: 10px;
+  font-size: 8px;
 
   line-height: 1.3;
+
+  white-space: nowrap;
 }
 
 
@@ -660,11 +699,11 @@ tbody tr:last-child td {
 
   max-width: 100%;
 
-  padding: 5px 7px;
+  padding: 4px 5px;
 
   border-radius: 6px;
 
-  font-size: 10px;
+  font-size: 8px;
 
   line-height: 1.25;
 
@@ -675,6 +714,8 @@ tbody tr:last-child td {
   overflow-wrap: break-word;
 
   text-align: center;
+
+  box-sizing: border-box;
 }
 
 .type-summary {
@@ -722,13 +763,13 @@ tbody tr:last-child td {
 
   color: #374151;
 
-  font-size: 12px;
+  font-size: 10px;
 
-  line-height: 1.4;
+  line-height: 1.3;
 
   white-space: normal;
 
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 
@@ -741,13 +782,13 @@ tbody tr:last-child td {
 
   color: #64748b;
 
-  font-size: 12px;
+  font-size: 10px;
 
-  line-height: 1.4;
+  line-height: 1.3;
 
   white-space: normal;
 
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 
@@ -755,26 +796,34 @@ tbody tr:last-child td {
    REQUEST INFORMATION
 ===================================================== */
 
+.request-info {
+  min-width: 0;
+
+  width: 100%;
+}
+
 .request-info strong {
   display: block;
 
-  font-size: 14px;
+  font-size: 12px;
 
   line-height: 1.3;
 
   color: #111827;
+
+  white-space: nowrap;
 }
 
 .request-info small {
   display: block;
 
-  margin-top: 4px;
+  margin-top: 3px;
 
   color: #94a3b8;
 
-  font-size: 10px;
+  font-size: 8px;
 
-  line-height: 1.35;
+  line-height: 1.3;
 
   white-space: normal;
 
@@ -787,7 +836,7 @@ tbody tr:last-child td {
 ===================================================== */
 
 .number-text {
-  font-size: 14px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -802,23 +851,43 @@ tbody tr:last-child td {
 ===================================================== */
 
 .amount-text {
+  display: block;
+
   color: #047857;
 
-  font-size: 12px;
+  font-size: 10px;
 
   font-weight: 700;
 
-  white-space: nowrap;
+  white-space: normal;
+
+  overflow: visible;
+
+  text-overflow: clip;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
 }
 
 .pending-amount {
+  display: block;
+
   color: #dc2626;
 
-  font-size: 12px;
+  font-size: 10px;
 
   font-weight: 700;
 
-  white-space: nowrap;
+  white-space: normal;
+
+  overflow: visible;
+
+  text-overflow: clip;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
 }
 
 
@@ -826,8 +895,8 @@ tbody tr:last-child td {
    STATUS
 ===================================================== */
 
-th:nth-child(10),
-td:nth-child(10) {
+.table-wrapper th:nth-child(10),
+.table-wrapper td:nth-child(10) {
   text-align: center;
 }
 
@@ -838,17 +907,17 @@ td:nth-child(10) {
 
   justify-content: center;
 
-  min-width: 70px;
+  min-width: 60px;
 
-  height: 30px;
+  height: 26px;
 
-  padding: 0 8px;
+  padding: 0 5px;
 
   box-sizing: border-box;
 
   border-radius: 20px;
 
-  font-size: 10px;
+  font-size: 8px;
 
   line-height: 1;
 
@@ -882,18 +951,27 @@ td:nth-child(10) {
    GENERATED DATE
 ===================================================== */
 
+.table-wrapper th:nth-child(11),
+.table-wrapper td:nth-child(11) {
+  text-align: center;
+}
+
 .date-text {
   display: block;
 
   color: #64748b;
 
-  font-size: 11px;
+  font-size: 9px;
 
-  line-height: 1.4;
+  line-height: 1.3;
 
-  white-space: normal;
-
-  overflow-wrap: break-word;
+  /*
+    Keep date together.
+    It will never become:
+    2026-08-
+    28
+  */
+  white-space: nowrap;
 }
 
 
@@ -901,8 +979,8 @@ td:nth-child(10) {
    ACTION BUTTON
 ===================================================== */
 
-th:nth-child(12),
-td:nth-child(12) {
+.table-wrapper th:nth-child(12),
+.table-wrapper td:nth-child(12) {
   text-align: center;
 }
 
@@ -925,17 +1003,17 @@ td:nth-child(12) {
 
   justify-content: center;
 
-  width: 50px;
+  width: 42px;
 
-  min-width: 50px;
+  min-width: 42px;
 
-  height: 32px;
+  height: 28px;
 
   padding: 0;
 
   border-radius: 6px;
 
-  font-size: 11px;
+  font-size: 9px;
 
   line-height: 1;
 
@@ -1150,6 +1228,8 @@ td:nth-child(12) {
   border-radius: 9px;
 
   background: #f8fafc;
+
+  min-width: 0;
 }
 
 .detail-item span {
@@ -1170,6 +1250,8 @@ td:nth-child(12) {
   color: #1f2937;
 
   font-size: 13px;
+
+  word-break: break-word;
 }
 
 
@@ -1215,7 +1297,7 @@ td:nth-child(12) {
 
 
 /* =====================================================
-   RESPONSIVE
+   RESPONSIVE - 1400px
 ===================================================== */
 
 @media (max-width: 1400px) {
@@ -1227,36 +1309,52 @@ td:nth-child(12) {
 }
 
 
+/* =====================================================
+   RESPONSIVE - 1100px
+===================================================== */
+
 @media (max-width: 1100px) {
 
-  th {
-    font-size: 10px;
+  .summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-    padding: 11px 5px;
+  th {
+    font-size: 9px;
+
+    padding: 10px 4px;
   }
 
   td {
-    font-size: 12px;
+    font-size: 10px;
 
-    padding: 13px 5px;
+    padding: 11px 4px;
   }
 
   .report-info strong {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .project-text,
   .period-text {
-    font-size: 11px;
+    font-size: 9px;
   }
 
   .amount-text,
   .pending-amount {
-    font-size: 11px;
+    font-size: 9px;
+  }
+
+  .date-text {
+    font-size: 8px;
   }
 
 }
 
+
+/* =====================================================
+   RESPONSIVE - 900px
+===================================================== */
 
 @media (max-width: 900px) {
 
@@ -1280,16 +1378,28 @@ td:nth-child(12) {
     flex: 1;
   }
 
-  th {
-    font-size: 9px;
+  /*
+    NO TABLE SCROLLBAR
+  */
+  .table-wrapper {
+    overflow: hidden;
+  }
 
-    padding: 9px 4px;
+  .table-wrapper table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  th {
+    font-size: 8px;
+
+    padding: 8px 3px;
   }
 
   td {
-    font-size: 10px;
+    font-size: 9px;
 
-    padding: 10px 4px;
+    padding: 9px 3px;
   }
 
   .report-icon {
@@ -1297,41 +1407,53 @@ td:nth-child(12) {
   }
 
   .report-info strong {
-    font-size: 10px;
-  }
-
-  .report-info small {
-    font-size: 8px;
-  }
-
-  .type-badge {
-    font-size: 8px;
-
-    padding: 4px 5px;
-  }
-
-  .status-badge {
-    min-width: 58px;
-
-    height: 27px;
-
-    padding: 0 5px;
-
-    font-size: 8px;
-  }
-
-  .action-buttons button {
-    width: 44px;
-
-    min-width: 44px;
-
-    height: 29px;
-
     font-size: 9px;
   }
 
+  .report-info small {
+    font-size: 7px;
+  }
+
+  .type-badge {
+    font-size: 7px;
+
+    padding: 3px 4px;
+  }
+
+  .status-badge {
+    min-width: 52px;
+
+    height: 25px;
+
+    padding: 0 4px;
+
+    font-size: 7px;
+  }
+
+  .action-buttons button {
+    width: 38px;
+
+    min-width: 38px;
+
+    height: 26px;
+
+    font-size: 8px;
+  }
+
+  .date-text {
+    font-size: 7px;
+  }
+
+  .amount-text,
+  .pending-amount {
+    font-size: 8px;
+  }
 }
 
+
+/* =====================================================
+   RESPONSIVE - 600px
+===================================================== */
 
 @media (max-width: 600px) {
 
@@ -1351,6 +1473,19 @@ td:nth-child(12) {
     grid-template-columns: 1fr;
   }
 
+  .summary-card {
+    min-height: 90px;
+  }
+
+  .summary-card strong {
+    font-size: 20px;
+  }
+
+  .summary-card:has(.summary-icon.amount) strong,
+  .summary-card:has(.summary-icon.pending) strong {
+    font-size: 17px;
+  }
+
   .filter-card {
     flex-direction: column;
   }
@@ -1360,24 +1495,37 @@ td:nth-child(12) {
     width: 100%;
   }
 
+  /*
+    NO HORIZONTAL OR VERTICAL TABLE SCROLLBAR
+  */
   .table-wrapper {
+    width: 100%;
+
     overflow: hidden;
   }
 
+  .table-wrapper table {
+    width: 100%;
+
+    min-width: 0;
+
+    table-layout: fixed;
+  }
+
   th {
+    font-size: 7px;
+
+    padding: 6px 2px;
+  }
+
+  td {
     font-size: 8px;
 
     padding: 7px 2px;
   }
 
-  td {
-    font-size: 9px;
-
-    padding: 8px 2px;
-  }
-
   .report-info strong {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .report-info small {
@@ -1386,30 +1534,36 @@ td:nth-child(12) {
 
   .project-text,
   .period-text {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .amount-text,
   .pending-amount {
-    font-size: 9px;
+    font-size: 7px;
+  }
+
+  .date-text {
+    font-size: 6.5px;
+
+    white-space: nowrap;
   }
 
   .status-badge {
-    min-width: 50px;
+    min-width: 45px;
+
+    height: 23px;
+
+    font-size: 6.5px;
+  }
+
+  .action-buttons button {
+    width: 35px;
+
+    min-width: 35px;
 
     height: 25px;
 
     font-size: 7px;
-  }
-
-  .action-buttons button {
-    width: 40px;
-
-    min-width: 40px;
-
-    height: 27px;
-
-    font-size: 8px;
   }
 
   .details-grid {
@@ -1425,7 +1579,6 @@ td:nth-child(12) {
   .modal-footer {
     padding: 14px 18px;
   }
-
 }
 
 

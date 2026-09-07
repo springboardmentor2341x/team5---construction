@@ -19,6 +19,7 @@ import { ViewUser } from './pages/admin/user-management/view-user/view-user';
 import { UserDetails } from './pages/admin/user-management/user-details/user-details';
 import { Analytics } from './pages/admin/analytics/analytics';
 import { AuditLogs } from './pages/admin/audit-logs/audit-logs';
+import { Report } from './pages/admin/report/report';
 // =========================
 // LAYOUT IMPORTS
 // =========================
@@ -141,6 +142,10 @@ export const routes: Routes = [
 {
   path: 'audit-logs',
   component: AuditLogs
+},
+{
+  path: 'report',
+  component: Report
 }
 
     ]

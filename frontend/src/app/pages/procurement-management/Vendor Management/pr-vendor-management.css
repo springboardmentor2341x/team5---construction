@@ -13,7 +13,6 @@
 * {
   box-sizing: border-box;
 }
-
 .vendor-page {
   width: 100%;
   max-width: 100%;
@@ -37,13 +36,21 @@
   gap: 25px;
   margin-bottom: 28px;
 }
+.page-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #64748b;
+}
 
 .page-header h1 {
   margin: 0;
   font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
-  color: #173f46;
+  color: #111827;
 }
 
 .page-header p {
@@ -51,7 +58,7 @@
   max-width: 750px;
   font-size: 14px;
   line-height: 1.5;
-  color: #718287;
+  color:#64748b;;
 }
 
 

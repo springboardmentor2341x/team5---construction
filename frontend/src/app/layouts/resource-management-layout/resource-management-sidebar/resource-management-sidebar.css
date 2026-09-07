@@ -1,31 +1,30 @@
 /* =====================================================
    RESOURCE MANAGEMENT SIDEBAR
-   INDIGO + LAVENDER PROFESSIONAL THEME
 ===================================================== */
 
 :host {
   display: block;
 
+  position: fixed;
+  top: 0;
+  left: 0;
+
   width: 255px;
-  min-width: 255px;
+  height: 100vh;
 
-  align-self: stretch;
+  z-index: 1000;
 
-  flex-shrink: 0;
-
-  background: #29234a;
+  box-sizing: border-box;
 }
 
 
 /* =====================================================
-   MAIN SIDEBAR
+   SIDEBAR
 ===================================================== */
 
 .resource-sidebar {
   width: 255px;
-  min-width: 255px;
-
-  min-height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -36,8 +35,6 @@
   color: #ffffff;
 
   border-right: 1px solid #3b3461;
-
-  box-shadow: 4px 0 20px rgba(35, 28, 70, 0.15);
 
   overflow: hidden;
 }
@@ -83,8 +80,6 @@
 
   font-size: 17px;
   font-weight: 800;
-
-  box-sizing: border-box;
 }
 
 .brand-content {
@@ -98,8 +93,6 @@
 
   font-size: 20px;
   font-weight: 700;
-
-  line-height: 1.2;
 }
 
 .brand-content span {
@@ -110,8 +103,6 @@
   color: #aaa4c8;
 
   font-size: 10px;
-
-  line-height: 1.2;
 
   white-space: nowrap;
 }
@@ -165,6 +156,7 @@
   align-items: center;
 
   padding: 0 14px;
+
   margin-bottom: 5px;
 
   box-sizing: border-box;
@@ -178,11 +170,11 @@
   font-size: 14px;
   font-weight: 500;
 
+  flex-shrink: 0;
+
   transition:
     background 0.2s ease,
     color 0.2s ease;
-
-  flex-shrink: 0;
 }
 
 .nav-icon {
@@ -201,7 +193,7 @@
 
   font-size: 17px;
 
-  transition: color 0.2s ease;
+  flex-shrink: 0;
 }
 
 .nav-text {
@@ -219,7 +211,6 @@
 
 .nav-item:hover {
   background: #39325d;
-
   color: #ffffff;
 }
 
@@ -239,8 +230,7 @@
 
   font-weight: 650;
 
-  box-shadow:
-    0 4px 12px rgba(139, 125, 232, 0.20);
+  box-shadow: 0 4px 12px rgba(139, 125, 232, 0.2);
 }
 
 .nav-item.active .nav-icon {
@@ -268,7 +258,6 @@
 
 .resource-status {
   display: flex;
-
   align-items: center;
 
   gap: 10px;
@@ -289,14 +278,11 @@
   height: 8px;
   min-width: 8px;
 
-  flex-shrink: 0;
-
   border-radius: 50%;
 
   background: #6fd09a;
 
-  box-shadow:
-    0 0 0 4px rgba(111, 208, 154, 0.10);
+  box-shadow: 0 0 0 4px rgba(111, 208, 154, 0.1);
 }
 
 .resource-status strong {
@@ -305,8 +291,6 @@
   color: #f1eff8;
 
   font-size: 11px;
-
-  line-height: 1.2;
 }
 
 .resource-status small {
@@ -317,8 +301,6 @@
   color: #9791b1;
 
   font-size: 10px;
-
-  line-height: 1.2;
 }
 
 
@@ -353,14 +335,11 @@
 
   :host {
     width: 235px;
-    min-width: 235px;
   }
 
   .resource-sidebar {
     width: 235px;
-    min-width: 235px;
   }
-
 }
 
 
@@ -368,24 +347,17 @@
 
   :host {
     width: 220px;
-    min-width: 220px;
   }
 
   .resource-sidebar {
     width: 220px;
-    min-width: 220px;
   }
 
   .brand-content h2 {
     font-size: 18px;
   }
 
-  .brand-content span {
-    font-size: 9px;
-  }
-
   .nav-item {
     font-size: 13px;
   }
-
 }

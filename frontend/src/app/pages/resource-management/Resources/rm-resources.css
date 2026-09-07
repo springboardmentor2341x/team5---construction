@@ -5,7 +5,12 @@
   overflow-x: hidden;
   box-sizing: border-box;
 }
-
+.section-label {
+  color: #e4572e;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 /* ================================
    MAIN PAGE
 ================================ */
