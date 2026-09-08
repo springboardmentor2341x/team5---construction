@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {Milestone, MilestoneService } from '../../../services/milestone.service';
+import {ProjectManagerService} from '../../../services/pm-dashboard.service';
 
 @Component({
   selector: 'app-project-manager-dashboard',
@@ -281,10 +282,11 @@ export class ProjectManagerDashboardComponent {
 
   milestone: Milestone[] = [];
 
-  constructor(private milestoneService:MilestoneService){}
+  constructor(private milestoneService:MilestoneService,private pmService: ProjectManagerService){}
 
 ngOnInit():void{
   this.getMilestones()
+  this.getDashboardData()
 }
 
 getMilestones(): void{
@@ -297,4 +299,20 @@ getMilestones(): void{
       }
     })
 }
+
+ dashboardData: any;
+
+  // constructor(private pmService: ProjectManagerService) {}
+
+  getDashboardData(): void{
+    this.pmService.getDashboard().subscribe({
+      next: (response) => {
+        console.log('Dashboard Data:', response);
+        this.dashboardData = response;
+      },
+      error: (error) => {
+        console.error('API Error:', error);
+      }
+    });
+  }
 }

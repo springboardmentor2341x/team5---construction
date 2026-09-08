@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export interface LoginRequest {
   email: string;
@@ -30,6 +30,39 @@ export class AuthService {
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
       data
+    ).pipe(
+      tap((response) => {
+
+        // JWT token save
+        localStorage.setItem(
+          'access_token',
+          response.access_token
+        );
+
+        // User role save
+        localStorage.setItem(
+          'role',
+          response.role
+        );
+
+        // User name save
+        localStorage.setItem(
+          'full_name',
+          response.full_name
+        );
+
+        console.log('Token saved:', response.access_token);
+      })
     );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('full_name');
   }
 }
