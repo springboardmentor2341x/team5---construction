@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from app.models.project import Project
 from app.models.milestone import Milestone
 from app.crud import project_crud
 from app.schemas.project import ProjectCreate, ProjectUpdate
@@ -107,3 +108,9 @@ def assign_project_manager(db: Session, project_id: int, project_manager_id: int
     db.commit()
 
     return existing_project
+def get_projects_by_manager(db: Session, manager_id: int):
+    return (
+        db.query(Project)
+        .filter(Project.project_manager_id == manager_id)
+        .all()
+    )

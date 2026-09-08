@@ -163,10 +163,7 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
         print("EMAIL SENT")
     except Exception as e:
         print("EMAIL ERROR:", e)
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to send verification email"
-        )
+        
 
     return {"message": "User registered successfully"}      
 
