@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {ProjectSiteEngineerService,ProjectSiteEngineer } from '../../../services/project-site-engineer.service';
-import { Project, ProjectService } from '../../../services/project.service';
+import { Project, ProjectService } from '../../../services/project';
 export interface Projectt {
   id: string;
   name: string;
