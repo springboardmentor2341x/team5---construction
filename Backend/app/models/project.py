@@ -41,15 +41,26 @@ class Project(Base):
     # Compatible with your authentication model
     project_manager_id = Column(Integer, ForeignKey("users.user_id"))
     client_id = Column(Integer, ForeignKey("users.user_id"))
+<<<<<<< HEAD
 #     created_at = mapped_column(
+=======
+#     created_by = Column(
+>>>>>>> sonali-team5
 #     Integer,
 #     ForeignKey("users.user_id")
 # )
 
+<<<<<<< HEAD
     # updated_at = mapped_column(
     # Integer,
     # ForeignKey("users.user_id")
     # )
+=======
+#     updated_by = Column(
+#     Integer,
+#     ForeignKey("users.user_id")
+    
+>>>>>>> sonali-team5
 
     created_at = Column(
         DateTime(timezone=True),
@@ -73,12 +84,20 @@ class Project(Base):
     )
     # created_user = relationship(
     # "User",
+<<<<<<< HEAD
     # foreign_keys=[created_at]
+=======
+    # foreign_keys=[created_by]
+>>>>>>> sonali-team5
     # )
 
     # updated_user = relationship(
     # "User",
+<<<<<<< HEAD
     # foreign_keys=[updated_at]
+=======
+    # foreign_keys=[updated_by]
+>>>>>>> sonali-team5
     # )
 
     milestones = relationship(

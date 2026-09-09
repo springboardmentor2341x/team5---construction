@@ -76,6 +76,7 @@ class ProjectWorker(Base):
         "Worker",
         back_populates="projects"
     )
+<<<<<<< HEAD
 
     # =====================================================
     # Project Contractor Relationship
@@ -85,3 +86,6 @@ class ProjectWorker(Base):
         "ProjectContractor",
         back_populates="project_workers"
     )
+=======
+    project_contractor = relationship("ProjectContractor")
+>>>>>>> sonali-team5

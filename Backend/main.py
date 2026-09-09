@@ -1,5 +1,4 @@
-import logging
-logging.basicConfig(level=logging.DEBUG)
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -15,6 +14,11 @@ from app.models.user import User
 from app.models.project import Project
 from app.models.project_site_engineer import ProjectSiteEngineer
 from app.models.project_contractor import ProjectContractor
+from app.models.milestone import Milestone
+from app.models.daily_report import DailyProgressReport
+from app.models.resource_allocation import ResourceAllocation
+from app.models.resource_utilization import ResourceUtilization
+from app.models.delay_record import DelayRecord
 from app.routers import project
 from app.routers import project_worker
 from app.routers import project_contractor
@@ -23,9 +27,30 @@ from app.routers import milestone
 from app.routers import worker
 from app.routers import project_schedule
 from app.routers import project_closure
+<<<<<<< HEAD
 from app.routers.daily_progress import router as daily_progress_router
 
 
+=======
+from app.routers import (
+    worker,
+    materials,
+    attendance,
+    milestone,
+    daily_reports,
+    delay_records,
+    progress_photos,
+    site_activity_logs,
+)
+from app.routers import (
+    resource_categories,
+    resources,
+    resource_allocations,
+    resource_utilization,
+    maintenance_records,
+)
+from app.routers import material_inventory
+>>>>>>> sonali-team5
 app = FastAPI()
 app.include_router(project.router)
 app.include_router(project_worker.router)
@@ -35,6 +60,7 @@ app.include_router(milestone.router)
 app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
+<<<<<<< HEAD
 app.include_router(daily_progress_router)
 
 app.add_middleware(
@@ -47,6 +73,23 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+=======
+app.include_router(worker.router)
+app.include_router(material_inventory.router)
+app.include_router(materials.router)
+app.include_router(attendance.router)
+app.include_router(milestone.router)
+app.include_router(daily_reports.router)
+app.include_router(delay_records.router)
+app.include_router(progress_photos.router)
+app.include_router(site_activity_logs.router)
+app.include_router(resource_categories.router)
+app.include_router(resources.router)
+app.include_router(resource_allocations.router)
+app.include_router(resource_utilization.router)
+app.include_router(maintenance_records.router)
+
+>>>>>>> sonali-team5
 # Base.metadata.create_all(bind=engine)
 from sqlalchemy import text
 
@@ -147,10 +190,7 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
         print("EMAIL SENT")
     except Exception as e:
         print("EMAIL ERROR:", e)
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to send verification email"
-        )
+        
 
     return {"message": "User registered successfully"}      
 
@@ -285,11 +325,137 @@ def admin_dashboard(
     }
 @app.get("/project-manager/dashboard")
 def project_manager_dashboard(
-    current_user=Depends(allow_roles("Project Manager"))
+    current_user=Depends(allow_roles("Project Manager")),
+    db: Session = Depends(get_db)
 ):
+    # Get projects assigned to the logged-in Project Manager
+    projects = (
+        db.query(Project)
+        .filter(Project.project_manager_id == current_user.user_id)
+        .all()
+    )
+
+    dashboard_projects = []
+    total_milestones = 0
+    completed_milestones = 0
+    total_progress = 0
+    progress_count = 0
+
+    for project in projects:
+
+        # Milestones for this project
+        milestones = (
+            db.query(Milestone)
+            .filter(Milestone.project_id == project.project_id)
+            .all()
+        )
+
+        total_milestones += len(milestones)
+
+        project_milestones = []
+
+        for milestone in milestones:
+
+            if milestone.status == "Completed":
+                completed_milestones += 1
+
+            if milestone.progress_percentage is not None:
+                total_progress += float(milestone.progress_percentage)
+                progress_count += 1
+
+            project_milestones.append({
+                "milestone_id": milestone.milestone_id,
+                "milestone_name": milestone.milestone_name,
+                "status": milestone.status,
+                "progress_percentage": (
+                    float(milestone.progress_percentage)
+                    if milestone.progress_percentage is not None
+                    else 0
+                ),
+                "planned_start_date": (
+                    milestone.planned_start_date.isoformat()
+                    if milestone.planned_start_date else None
+                ),
+                "planned_end_date": (
+                    milestone.planned_end_date.isoformat()
+                    if milestone.planned_end_date else None
+                ),
+                "actual_start_date": (
+                    milestone.actual_start_date.isoformat()
+                    if milestone.actual_start_date else None
+                ),
+                "actual_end_date": (
+                    milestone.actual_end_date.isoformat()
+                    if milestone.actual_end_date else None
+                )
+            })
+
+        # Daily progress reports are connected through milestones
+        milestone_ids = [m.milestone_id for m in milestones]
+
+        daily_reports = []
+
+        if milestone_ids:
+            daily_reports = (
+                db.query(DailyProgressReport)
+                .filter(
+                    DailyProgressReport.milestone_id.in_(milestone_ids)
+                )
+                .order_by(DailyProgressReport.report_date.desc())
+                .all()
+            )
+
+        latest_progress = None
+
+        if daily_reports:
+            latest_progress = float(
+                daily_reports[0].progress_percentage
+            )
+
+        dashboard_projects.append({
+            "project_id": project.project_id,
+            "project_code": project.project_code,
+            "name": project.name,
+            "category": project.category,
+            "location": project.location,
+            "status": project.status,
+            "priority": project.priority,
+            "estimated_budget": (
+                float(project.estimated_budget)
+                if project.estimated_budget is not None
+                else None
+            ),
+            "planned_start_date": (
+                project.planned_start_date.isoformat()
+                if project.planned_start_date else None
+            ),
+            "expected_completion_date": (
+                project.expected_completion_date.isoformat()
+                if project.expected_completion_date else None
+            ),
+            "latest_progress": latest_progress,
+            "milestones": project_milestones,
+            "daily_reports_count": len(daily_reports)
+        })
+
+    average_milestone_progress = (
+        round(total_progress / progress_count, 2)
+        if progress_count
+        else 0
+    )
+
     return {
         "message": f"Welcome {current_user.full_name}",
-        "dashboard": "Project Manager Dashboard"
+        "dashboard": "Project Manager Dashboard",
+
+        "summary": {
+            "assigned_projects": len(projects),
+            "total_milestones": total_milestones,
+            "completed_milestones": completed_milestones,
+            "average_milestone_progress": average_milestone_progress
+        },
+
+        "projects": dashboard_projects
     }
 @app.get("/site-engineer/dashboard")
 def site_engineer_dashboard(
