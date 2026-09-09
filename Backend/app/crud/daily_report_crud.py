@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 
 from sqlalchemy.orm import Session
-from app.models.daily_report import (
+from app.models.daily_progress import (
     DailyProgressReport,
     DailyReportMachinery,
     DailyReportMaterial,

@@ -110,11 +110,7 @@ def delete_milestone(
         )
 
     return {
-<<<<<<< HEAD
+
         "message": "Milestone deleted successfully",
         "milestone_id": milestone_id
     }
-=======
-        "message": "Milestone deleted successfully"
-    }
->>>>>>> sonali-team5

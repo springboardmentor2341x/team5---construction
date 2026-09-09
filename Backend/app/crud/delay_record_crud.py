@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.delay_record import DelayRecord
+from app.models.daily_progress import DelayRecord
 from app.schemas.delay_record import DelayRecordCreate, DelayRecordUpdate
 
 

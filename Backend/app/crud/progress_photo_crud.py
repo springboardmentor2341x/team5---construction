@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.progress_photo import ProgressPhoto
+from app.models.daily_progress import ProgressPhoto
 from app.schemas.progress_photo import ProgressPhotoCreate, ProgressPhotoUpdate
 
 

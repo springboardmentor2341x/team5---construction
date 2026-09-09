@@ -15,10 +15,10 @@ from app.models.project import Project
 from app.models.project_site_engineer import ProjectSiteEngineer
 from app.models.project_contractor import ProjectContractor
 from app.models.milestone import Milestone
-from app.models.daily_report import DailyProgressReport
+from app.models.daily_progress import DailyProgressReport
 from app.models.resource_allocation import ResourceAllocation
 from app.models.resource_utilization import ResourceUtilization
-from app.models.delay_record import DelayRecord
+from app.models. daily_progress import DelayRecord
 from app.routers import project
 from app.routers import project_worker
 from app.routers import project_contractor
@@ -27,11 +27,8 @@ from app.routers import milestone
 from app.routers import worker
 from app.routers import project_schedule
 from app.routers import project_closure
-<<<<<<< HEAD
 from app.routers.daily_progress import router as daily_progress_router
 
-
-=======
 from app.routers import (
     worker,
     materials,
@@ -50,17 +47,14 @@ from app.routers import (
     maintenance_records,
 )
 from app.routers import material_inventory
->>>>>>> sonali-team5
 app = FastAPI()
 app.include_router(project.router)
 app.include_router(project_worker.router)
 app.include_router(project_contractor.router)
 app.include_router(project_site_engineer.router)
-app.include_router(milestone.router)
 app.include_router(worker.router)
 app.include_router(project_schedule.router)
 app.include_router(project_closure.router)
-<<<<<<< HEAD
 app.include_router(daily_progress_router)
 
 app.add_middleware(
@@ -73,8 +67,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-=======
-app.include_router(worker.router)
 app.include_router(material_inventory.router)
 app.include_router(materials.router)
 app.include_router(attendance.router)
@@ -89,7 +81,6 @@ app.include_router(resource_allocations.router)
 app.include_router(resource_utilization.router)
 app.include_router(maintenance_records.router)
 
->>>>>>> sonali-team5
 # Base.metadata.create_all(bind=engine)
 from sqlalchemy import text
 
