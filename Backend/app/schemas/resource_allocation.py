@@ -39,3 +39,12 @@ class ResourceAllocationOut(ResourceAllocationBase):
     actual_return_date: Optional[date] = None
     created_at: datetime
     updated_at: datetime
+    
+class PMResourceAllocationResponse(BaseModel):
+    resource_id: int
+    resource_name: Optional[str] = None
+    resource_type: Optional[str] = None
+    assigned_project: Optional[str] = None
+    assigned_to: Optional[str] = None
+    quantity: Optional[int] = None
+    status: Optional[str] = None

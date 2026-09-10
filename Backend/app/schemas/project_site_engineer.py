@@ -31,3 +31,10 @@ class ProjectSiteEngineerResponse(ProjectSiteEngineerBase):
 
     class Config:
         from_attributes = True
+class PMSiteEngineerAssignmentResponse(BaseModel):
+    name: str
+    employee_id: Optional[str] = None
+    contact: Optional[str] = None
+    assigned_area: Optional[str] = None
+    project_name: str
+    status: Optional[str] = None        

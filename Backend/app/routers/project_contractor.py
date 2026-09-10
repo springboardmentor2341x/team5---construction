@@ -8,6 +8,7 @@ from app.schemas.project_contractor import (
     ProjectContractorCreate,
     ProjectContractorUpdate,
     ProjectContractorResponse,
+    PMContractorAssignmentResponse,
 )
 
 router = APIRouter(
@@ -33,6 +34,7 @@ def get_all_project_contractors(
 ):
     return project_contractor_service.get_all_project_contractors(db)
 
+
 @router.get("/my-projects", response_model=list[ProjectContractorResponse])
 def get_my_projects(
     current_user: User = Depends(
@@ -43,6 +45,22 @@ def get_my_projects(
     return project_contractor_service.get_my_projects(
         db,
         current_user.user_id,
+    )
+
+@router.get(
+    "/pm/{project_id}",
+    response_model=list[PMContractorAssignmentResponse],
+)
+def get_pm_contractors(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(
+        allow_roles("Project Manager", "Administrator")
+    ),
+):
+    return project_contractor_service.get_pm_contractors(
+        db,
+        project_id,
     )
 
 @router.get("/{project_contractor_id}", response_model=ProjectContractorResponse)

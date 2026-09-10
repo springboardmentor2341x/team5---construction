@@ -70,12 +70,13 @@ class ProjectUpdate(BaseModel):
 class ProjectResponse(ProjectBase):
     project_id: int
 
-    # created_by: Optional[int] = None
-    # updated_by: Optional[int] = None
-
     created_at: datetime
     updated_at: datetime
 
+    progress_percentage: Optional[Decimal] = None
+    completed_milestones: int = 0
+    total_milestones: int = 0
+    
     class Config:
         from_attributes = True
         

@@ -2,9 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from database import get_db
+from dependencies import allow_roles
 from app.schemas.daily_progress import (
     DailyProgressCreate,
     DailyProgressResponse,
+    PMSiteProgressResponse,
 )
 from app.services import daily_progress_service
 
@@ -37,7 +39,21 @@ def get_daily_progress_reports(
     db: Session = Depends(get_db)
 ):
     return daily_progress_service.get_all_daily_progress(db)
-
+@router.get(
+    "/pm/{project_id}",
+    response_model=list[PMSiteProgressResponse],
+)
+def get_pm_site_progress(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(
+        allow_roles("Project Manager", "Administrator")
+    ),
+):
+    return daily_progress_service.get_pm_site_progress(
+        db,
+        project_id,
+    )
 
 @router.get("/{report_id}", response_model=DailyProgressResponse)
 def get_daily_progress(

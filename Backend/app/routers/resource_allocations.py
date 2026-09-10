@@ -1,15 +1,18 @@
 from typing import List, Optional
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
 from database import get_db
-from app.models.resource_allocation import AllocationStatus
+from app.models.resource_allocation import ResourceAllocation, AllocationStatus
+from app.models.resource import Resource
+from app.models.resource_category import ResourceCategory
+from app.models.project import Project
+from app.models.user import User
 from app.schemas.resource_allocation import (
     ResourceAllocationCreate,
     ResourceAllocationUpdate,
     ResourceAllocationReturn,
     ResourceAllocationOut,
+    PMResourceAllocationResponse,
 )
 from app.crud import resource_allocation as crud
 
@@ -32,7 +35,35 @@ def list_allocations(
     db: Session = Depends(get_db),
 ):
     return crud.get_allocations(db, project_id, resource_id, status_filter, skip, limit)
+@router.get("/pm/{project_id}", response_model=List[PMResourceAllocationResponse])
+def get_pm_resource_allocations(
+    project_id: int,
+    db: Session = Depends(get_db),
+):
+    results = (
+        db.query(ResourceAllocation, Resource, ResourceCategory, Project, User)
+        .join(Resource, Resource.resource_id == ResourceAllocation.resource_id)
+        .join(ResourceCategory, ResourceCategory.category_id == Resource.category_id)
+        .join(Project, Project.project_id == ResourceAllocation.project_id)
+        .join(User, User.user_id == ResourceAllocation.responsible_user_id)
+        .filter(ResourceAllocation.project_id == project_id)
+        .all()
+    )
 
+    response = []
+
+    for allocation, resource, category, project, user in results:
+        response.append({
+            "resource_id": resource.resource_id,
+            "resource_name": resource.resource_name,
+            "resource_type": category.category_name,
+            "assigned_project": project.name,
+            "assigned_to": user.full_name,
+            "quantity": None,
+            "status": allocation.status.value if allocation.status else None,
+        })
+
+    return response
 
 @router.get("/{allocation_id}", response_model=ResourceAllocationOut)
 def get_allocation(allocation_id: int, db: Session = Depends(get_db)):

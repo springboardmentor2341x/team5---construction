@@ -122,3 +122,33 @@ def get_contractor_dashboard(
         },
         "projects": projects,
     }
+def get_pm_contractors(db: Session, project_id: int):
+    assignments = (
+        db.query(project_contractor_crud.ProjectContractor, User, Project)
+        .join(
+            User,
+            User.user_id == project_contractor_crud.ProjectContractor.contractor_id,
+        )
+        .join(
+            Project,
+            Project.project_id == project_contractor_crud.ProjectContractor.project_id,
+        )
+        .filter(
+            project_contractor_crud.ProjectContractor.project_id == project_id
+        )
+        .all()
+    )
+
+    response = []
+
+    for assignment, contractor, project in assignments:
+        response.append({
+            "contractor_name": contractor.full_name,
+            "company": None,
+            "specialization": assignment.specialization,
+            "contact": contractor.mobile,
+            "assigned_project": project.name,
+            "status": assignment.assignment_status,
+        })
+
+    return response

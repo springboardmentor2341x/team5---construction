@@ -70,3 +70,14 @@ class DailyProgressResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class PMSiteProgressResponse(BaseModel):
+    report_id: int
+    report_date: date
+    milestone_name: Optional[str] = None
+    activity_performed: Optional[str] = None
+    progress_percentage: Decimal
+    weather_condition: Optional[str] = None
+    safety_observations: Optional[str] = None
+    site_engineer_name: Optional[str] = None
+    contractor_name: Optional[str] = None

@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
+from app.services import project_schedules_service
+from dependencies import allow_roles
 from app.schemas.project_schedules import (
     ProjectScheduleCreate,
     ProjectScheduleUpdate,
     ProjectScheduleResponse,
+    PMScheduleResponse,
 )
-from app.services import project_schedules_service
-from dependencies import allow_roles
-
 router = APIRouter(
     prefix="/project-schedules",
     tags=["Project Schedules"],
@@ -28,6 +28,19 @@ def create_schedule(
 def get_all_schedules(db: Session = Depends(get_db)):
     return project_schedules_service.get_all_schedules(db)
 
+@router.get(
+    "/pm/{project_id}",
+    response_model=list[PMScheduleResponse]
+)
+def get_pm_schedule(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(allow_roles("Project Manager", "Administrator")),
+):
+    return project_schedules_service.get_pm_schedule(
+        db,
+        project_id
+    )
 
 @router.get("/{schedule_id}", response_model=ProjectScheduleResponse)
 def get_schedule(schedule_id: int, db: Session = Depends(get_db)):

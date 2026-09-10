@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
+from dependencies import allow_roles
 from database import get_db
 from app.services import project_site_engineer_service
 from app.schemas.project_site_engineer import (
     ProjectSiteEngineerCreate,
     ProjectSiteEngineerUpdate,
     ProjectSiteEngineerResponse,
+    PMSiteEngineerAssignmentResponse,
 )
 
 router = APIRouter(
@@ -31,7 +32,21 @@ def get_all_project_site_engineers(
 ):
     return project_site_engineer_service.get_all_project_site_engineers(db)
 
-
+@router.get(
+    "/pm/{project_id}",
+    response_model=list[PMSiteEngineerAssignmentResponse],
+)
+def get_pm_site_engineers(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(
+        allow_roles("Project Manager", "Administrator")
+    ),
+):
+    return project_site_engineer_service.get_pm_site_engineers(
+        db,
+        project_id,
+    )
 @router.get("/{project_site_engineer_id}", response_model=ProjectSiteEngineerResponse)
 def get_project_site_engineer(
     project_site_engineer_id: int,

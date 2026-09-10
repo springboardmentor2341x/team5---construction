@@ -30,3 +30,11 @@ class ProjectContractorResponse(ProjectContractorBase):
 
     class Config:
         from_attributes = True
+        
+class PMContractorAssignmentResponse(BaseModel):
+    contractor_name: str
+    company: Optional[str] = None
+    specialization: Optional[str] = None
+    contact: Optional[str] = None
+    assigned_project: str
+    status: Optional[str] = None        
