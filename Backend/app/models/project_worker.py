@@ -86,5 +86,3 @@ class ProjectWorker(Base):
         "ProjectContractor",
         back_populates="project_workers"
     )
-
-    project_contractor = relationship("ProjectContractor")

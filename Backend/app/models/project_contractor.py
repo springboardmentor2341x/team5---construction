@@ -21,11 +21,6 @@ class ProjectContractor(Base):
 
     assignment_status = Column(String(50))
 
-    created_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now()
-    )
-
     project = relationship(
         "Project",
         back_populates="project_contractors"
@@ -45,4 +40,3 @@ class ProjectContractor(Base):
 
     contractor = relationship("User")
 
-    contractor = relationship("User")

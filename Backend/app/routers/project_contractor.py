@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
+from dependencies import get_current_user, allow_roles
+from app.models.user import User
 from database import get_db
 from app.services import project_contractor_service
 from app.schemas.project_contractor import (
@@ -32,6 +33,17 @@ def get_all_project_contractors(
 ):
     return project_contractor_service.get_all_project_contractors(db)
 
+@router.get("/my-projects", response_model=list[ProjectContractorResponse])
+def get_my_projects(
+    current_user: User = Depends(
+        allow_roles("Contractor")
+    ),
+    db: Session = Depends(get_db),
+):
+    return project_contractor_service.get_my_projects(
+        db,
+        current_user.user_id,
+    )
 
 @router.get("/{project_contractor_id}", response_model=ProjectContractorResponse)
 def get_project_contractor(

@@ -47,6 +47,8 @@ from app.routers import (
     maintenance_records,
 )
 from app.routers import material_inventory
+from app.services import project_contractor_service
+from app.schemas.contractor_dashboard import ContractorDashboardResponse
 app = FastAPI()
 app.include_router(project.router)
 app.include_router(project_worker.router)
@@ -456,14 +458,18 @@ def site_engineer_dashboard(
         "message": f"Welcome {current_user.full_name}",
         "dashboard": "Site Engineer Dashboard"
     }
-@app.get("/contractor/dashboard")
+@app.get(
+    "/contractor/dashboard",
+    response_model=ContractorDashboardResponse
+)
 def contractor_dashboard(
-    current_user=Depends(allow_roles("Contractor"))
+    current_user: User = Depends(allow_roles("Contractor")),
+    db: Session = Depends(get_db)
 ):
-    return {
-        "message": f"Welcome {current_user.full_name}",
-        "dashboard": "Contractor Dashboard"
-    }
+    return project_contractor_service.get_contractor_dashboard(
+        db,
+        current_user.user_id
+    )
 @app.get("/worker/dashboard")
 def worker_dashboard(
     current_user=Depends(allow_roles("Worker"))

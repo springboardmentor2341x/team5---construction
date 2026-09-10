@@ -83,11 +83,11 @@ class Project(Base):
         foreign_keys=[client_id]
     )
     # created_user = relationship(
-    # "User",
+    #"User",
 
     # foreign_keys=[created_at]
 
-    # foreign_keys=[created_by]
+    
 
     # )
 
@@ -96,7 +96,7 @@ class Project(Base):
 
     # foreign_keys=[updated_at]
 
-    # foreign_keys=[updated_by]
+    
 
     # )
 
