@@ -1,1 +1,455 @@
-<p>material-inventory works!</p>
+<div class="inventory-page">
+
+  <!-- HEADER -->
+  <section class="page-header">
+
+    <div>
+      <span class="section-label">RESOURCE MANAGEMENT</span>
+
+      <h1>Material & Inventory Management</h1>
+
+      <p>
+        Monitor construction materials, stock levels, allocations,
+        consumption and material requests across all projects.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="secondary-btn"
+        routerLink="/material-inventory/inventory">
+        View Inventory
+      </button>
+
+      <button
+  class="primary-btn"
+  routerLink="/material-requests">
+  + Material Request
+</button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY CARDS -->
+  <section class="stats-grid">
+
+    @for (stat of materialStats; track stat.title) {
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          {{ stat.icon }}
+        </div>
+
+        <h2>{{ stat.value }}</h2>
+
+        <h3>{{ stat.title }}</h3>
+
+        <p>{{ stat.description }}</p>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- INVENTORY OVERVIEW -->
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Inventory Overview</h2>
+
+        <p>
+          Current material stock across all warehouses
+        </p>
+      </div>
+
+      <a
+        routerLink="/material-inventory/inventory"
+        class="view-link">
+        View Inventory →
+      </a>
+
+    </div>
+
+
+    <div class="inventory-table">
+
+      <div class="table-header">
+
+        <span>Material</span>
+        <span>Category</span>
+        <span>Available</span>
+        <span>Allocated</span>
+        <span>Consumed</span>
+        <span>Status</span>
+
+      </div>
+
+
+      @for (item of inventoryItems; track item.name) {
+
+        <div class="inventory-row">
+
+          <strong>{{ item.name }}</strong>
+
+          <span>{{ item.category }}</span>
+
+          <span class="available">
+            {{ item.available }}
+          </span>
+
+          <span class="allocated">
+            {{ item.allocated }}
+          </span>
+
+          <span>
+            {{ item.consumed }}
+          </span>
+
+          <span
+            class="status"
+            [class.available-status]="item.status === 'Available'"
+            [class.low-status]="item.status === 'Low Stock'">
+
+            {{ item.status }}
+
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- MATERIAL REQUESTS + LOW STOCK -->
+  <section class="two-column">
+
+
+    <!-- MATERIAL REQUESTS -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Material Requests</h2>
+
+          <p>
+            Recent requests from project teams
+          </p>
+        </div>
+
+        <a
+  routerLink="/material-requests"
+  class="view-link">
+
+  View Requests →
+
+</a>
+
+      </div>
+
+
+      <div class="request-list">
+
+        @for (request of materialRequests; track request.id) {
+
+          <div class="request-row">
+
+            <div class="request-info">
+
+              <strong>{{ request.id }}</strong>
+
+              <span>{{ request.material }}</span>
+
+              <small>{{ request.project }}</small>
+
+            </div>
+
+            <div class="request-right">
+
+              <strong>{{ request.quantity }}</strong>
+
+              <span
+                class="request-status"
+                [class.pending]="request.status === 'Pending'"
+                [class.approved]="request.status === 'Approved'"
+                [class.fulfilled]="request.status === 'Fulfilled'">
+
+                {{ request.status }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <!-- LOW STOCK -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Low Stock Alerts</h2>
+
+          <p>
+            Materials requiring attention
+          </p>
+        </div>
+
+        <a
+          routerLink="/material-inventory/low-stock"
+          class="view-link">
+          View All →
+        </a>
+
+      </div>
+
+
+      <div class="low-stock-list">
+
+        @for (item of lowStockItems; track item.material) {
+
+          <div class="low-stock-row">
+
+            <div class="warning-icon">
+              ⚠️
+            </div>
+
+            <div>
+
+              <strong>{{ item.material }}</strong>
+
+              <span>
+                Available: {{ item.available }}
+              </span>
+
+              <small>
+                Minimum required: {{ item.minimum }}
+              </small>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MATERIAL ALLOCATIONS -->
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Material Allocations</h2>
+
+        <p>
+          Materials currently assigned to construction projects
+        </p>
+      </div>
+
+      <a
+        routerLink="/material-inventory/material-allocation"
+        class="view-link">
+        View Allocations →
+      </a>
+
+    </div>
+
+
+    <div class="allocation-table">
+
+      <div class="table-header">
+
+        <span>Material</span>
+        <span>Project</span>
+        <span>Activity</span>
+        <span>Quantity</span>
+        <span>Date</span>
+
+      </div>
+
+
+      @for (item of materialAllocations; track item.material) {
+
+        <div class="allocation-row">
+
+          <strong>{{ item.material }}</strong>
+
+          <span>{{ item.project }}</span>
+
+          <span>{{ item.activity }}</span>
+
+          <span>{{ item.quantity }}</span>
+
+          <span>{{ item.date }}</span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- STOCK MOVEMENTS -->
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Recent Stock Movements</h2>
+
+        <p>
+          Latest material receipts, allocations and consumption
+        </p>
+      </div>
+
+      <a
+        routerLink="/material-inventory/stock-movements"
+        class="view-link">
+        View All Movements →
+      </a>
+
+    </div>
+
+
+    <div class="movement-table">
+
+      <div class="table-header">
+
+        <span>Date</span>
+        <span>Material</span>
+        <span>Type</span>
+        <span>Quantity</span>
+        <span>Location</span>
+
+      </div>
+
+
+      @for (movement of stockMovements; track movement.date + movement.material) {
+
+        <div class="movement-row">
+
+          <span>{{ movement.date }}</span>
+
+          <strong>{{ movement.material }}</strong>
+
+          <span
+            class="movement-type"
+            [class.received]="movement.type === 'Received'"
+            [class.allocated-type]="movement.type === 'Allocated'"
+            [class.consumed]="movement.type === 'Consumed'">
+
+            {{ movement.type }}
+
+          </span>
+
+          <span>{{ movement.quantity }}</span>
+
+          <span>{{ movement.location }}</span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- QUICK ACTIONS -->
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Inventory Operations</h2>
+
+        <p>
+          Access major material and inventory functions
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+      <a
+  routerLink="/material-requests"
+  class="quick-action">
+
+  <strong>📋 Material Requests</strong>
+
+  <span>
+    Create and manage material requests →
+  </span>
+
+</a>
+      <a
+        routerLink="/material-inventory/material-allocation"
+        class="quick-action">
+
+        <strong>🏗️ Material Allocation</strong>
+
+        <span>
+          Allocate materials to projects →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/material-inventory/low-stock"
+        class="quick-action">
+
+        <strong>⚠️ Low Stock</strong>
+
+        <span>
+          Monitor materials below minimum levels →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/material-inventory/stock-movements"
+        class="quick-action">
+
+        <strong>📊 Stock Movements</strong>
+
+        <span>
+          Track material movement history →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+</div>

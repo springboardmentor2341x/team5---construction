@@ -1,0 +1,343 @@
+/* ================================
+   NEW MATERIAL REQUEST
+================================ */
+
+.request-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0 40px;
+}
+
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.section-label {
+  display: inline-block;
+  color: #f97316;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  color: #1f2937;
+}
+
+.page-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-btn {
+  padding: 11px 18px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  border-color: #f97316;
+  color: #f97316;
+  background: #fff7ed;
+}
+
+
+/* ================================
+   FORM CARD
+================================ */
+
+.form-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================================
+   FORM SECTION
+================================ */
+
+.form-section {
+  padding-bottom: 22px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.form-section h2 {
+  margin: 0 0 6px;
+  color: #1f2937;
+  font-size: 21px;
+}
+
+.form-section p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* ================================
+   FORM GRID
+================================ */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+
+/* ================================
+   FORM GROUP
+================================ */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  background: white;
+  color: #1f2937;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+
+/* ================================
+   REMARKS
+================================ */
+
+.full-width {
+  margin-top: 22px;
+}
+
+
+/* ================================
+   FORM ACTIONS
+================================ */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 9px;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
+
+.submit-btn {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 9px;
+  background: #f97316;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #ea580c;
+  transform: translateY(-1px);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .request-page {
+    padding: 10px 15px 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 22px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* ================================
+   SUCCESS POPUP
+================================ */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.success-popup {
+  width: 420px;
+  max-width: calc(100% - 40px);
+
+  background: white;
+  border-radius: 18px;
+  padding: 35px;
+
+  text-align: center;
+
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+
+  animation: popupAppear 0.2s ease-out;
+}
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dcfce7;
+  color: #16a34a;
+
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.success-popup h2 {
+  margin: 0 0 10px;
+
+  color: #1f2937;
+  font-size: 24px;
+}
+
+.success-popup p {
+  margin: 0;
+
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.ok-btn {
+  margin-top: 25px;
+
+  padding: 12px 35px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #f97316;
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.ok-btn:hover {
+  background: #ea580c;
+}
+
+@keyframes popupAppear {
+
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}

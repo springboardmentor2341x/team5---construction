@@ -1,0 +1,303 @@
+<div class="requests-page">
+
+  <!-- HEADER -->
+  <section class="page-header">
+
+    <div>
+      <span class="section-label">MATERIAL & INVENTORY</span>
+
+      <h1>Material Requests</h1>
+
+      <p>
+        Manage material requests submitted by project teams
+        across all construction projects.
+      </p>
+    </div>
+
+    <button
+  class="primary-btn"
+  routerLink="/new-material-request">
+  + New Material Request
+</button>
+
+  </section>
+
+
+  <!-- SUMMARY -->
+  <section class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <h2>{{ requests.length }}</h2>
+      <h3>Total Requests</h3>
+      <p>All material requests</p>
+    </div>
+
+    <div class="stat-card pending-card">
+      <div class="stat-icon">⏳</div>
+      <h2>{{ pendingCount }}</h2>
+      <h3>Pending</h3>
+      <p>Awaiting approval</p>
+    </div>
+
+    <div class="stat-card approved-card">
+      <div class="stat-icon">✅</div>
+      <h2>{{ approvedCount }}</h2>
+      <h3>Approved</h3>
+      <p>Requests approved</p>
+    </div>
+
+    <div class="stat-card fulfilled-card">
+      <div class="stat-icon">📦</div>
+      <h2>{{ fulfilledCount }}</h2>
+      <h3>Fulfilled</h3>
+      <p>Requests completed</p>
+    </div>
+
+  </section>
+
+
+  <!-- FILTERS -->
+  <section class="toolbar">
+
+    <input
+      type="text"
+      placeholder="Search request, material or project..."
+      [(ngModel)]="searchTerm"
+    >
+
+    <select [(ngModel)]="selectedStatus">
+
+      <option value="All">All Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Fulfilled">Fulfilled</option>
+      <option value="Rejected">Rejected</option>
+
+    </select>
+
+  </section>
+
+
+  <!-- TABLE -->
+  <section class="table-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Material Requests</h2>
+
+        <p>
+          Requests from project teams
+        </p>
+      </div>
+
+      <span class="request-count">
+        {{ filteredRequests.length }} requests
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Material</th>
+            <th>Project</th>
+            <th>Quantity</th>
+            <th>Requested By</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (request of filteredRequests; track request.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ request.id }}</strong>
+              </td>
+
+              <td>
+                {{ request.material }}
+              </td>
+
+              <td>
+                {{ request.project }}
+              </td>
+
+              <td>
+                {{ request.quantity }}
+              </td>
+
+              <td>
+                {{ request.requestedBy }}
+              </td>
+
+              <td>
+                {{ request.date }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status"
+                  [class.pending]="request.status === 'Pending'"
+                  [class.approved]="request.status === 'Approved'"
+                  [class.fulfilled]="request.status === 'Fulfilled'"
+                  [class.rejected]="request.status === 'Rejected'"
+                >
+                  {{ request.status }}
+                </span>
+
+              </td>
+
+              <td class="actions">
+
+                <button
+                  class="action-btn"
+                  (click)="viewRequest(request)"
+                  title="View"
+                >
+                  👁
+                </button>
+
+                @if (request.status === 'Pending') {
+
+                  <button
+                    class="action-btn approve"
+                    (click)="approveRequest(request)"
+                    title="Approve"
+                  >
+                    ✓
+                  </button>
+
+                  <button
+                    class="action-btn reject"
+                    (click)="rejectRequest(request)"
+                    title="Reject"
+                  >
+                    ✕
+                  </button>
+
+                }
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- BACK -->
+  <div class="back-section">
+
+    <a routerLink="/material-inventory">
+      ← Back to Material & Inventory
+    </a>
+
+  </div>
+
+</div>
+
+@if (showViewPopup && selectedRequest) {
+
+  <div class="popup-overlay">
+
+    <div class="view-popup">
+
+      <div class="popup-header">
+
+        <div>
+          <span class="popup-label">MATERIAL REQUEST</span>
+          <h2>{{ selectedRequest.id }}</h2>
+        </div>
+
+        <button
+          class="close-btn"
+          (click)="closeViewPopup()">
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="request-details">
+
+        <div class="detail-item">
+          <label>Material</label>
+          <strong>{{ selectedRequest.material }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Project</label>
+          <strong>{{ selectedRequest.project }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Quantity</label>
+          <strong>{{ selectedRequest.quantity }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Requested By</label>
+          <strong>{{ selectedRequest.requestedBy }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Date</label>
+          <strong>{{ selectedRequest.date }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Status</label>
+
+          <span
+            class="status"
+            [class.pending]="selectedRequest.status === 'Pending'"
+            [class.approved]="selectedRequest.status === 'Approved'"
+            [class.fulfilled]="selectedRequest.status === 'Fulfilled'"
+            [class.rejected]="selectedRequest.status === 'Rejected'">
+
+            {{ selectedRequest.status }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="popup-footer">
+
+        <button
+          class="ok-btn"
+          (click)="closeViewPopup()">
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

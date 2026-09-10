@@ -8,6 +8,16 @@ import { ProjectDetails } from './pages/admin/project-management/project-details
 import { EditProject } from './pages/admin/project-management/edit-project/edit-project';
 import { AddProject } from './pages/admin/project-management/add-project/add-project';
 import { ViewProject } from './pages/admin/project-management/view-project/view-project';
+import { SiteEngineers } from './pages/admin/site-engineers/site-engineers'; 
+import { MaterialInventory } from './pages/admin/material-inventory/material-inventory'; 
+import { Inventory } from './pages/admin/material-inventory/inventory/inventory'; 
+import { MaterialRequests } from './pages/admin/material-inventory/material-requests/material-requests'; 
+import { NewMaterialRequest } from './pages/admin/material-inventory/new-material-request/new-material-request'; 
+import { LowStock } from './pages/admin/material-inventory/low-stock/low-stock'; 
+import { MaterialAllocation } from './pages/admin/material-inventory/material-allocation/material-allocation'; 
+import { StockMovements } from './pages/admin/material-inventory/stock-movements/stock-movements'; 
+
+
 
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { Dashboard } from './pages/admin/dashboard/dashboard';
@@ -84,6 +94,44 @@ export const routes: Routes = [
     roleGuard(['Administrator'])
   ],
     children: [
+
+
+
+{ 
+  path: 'material-inventory/stock-movements', 
+  component: StockMovements 
+},
+{ 
+  path: 'material-inventory/material-allocation', 
+  component: MaterialAllocation 
+}, 
+      { 
+  path: 'material-inventory/low-stock', 
+  component: LowStock 
+}, 
+{ 
+  path: 'low-stock', 
+  component: LowStock 
+}, 
+      { 
+  path: 'new-material-request', 
+  component: NewMaterialRequest 
+},{ 
+  path: 'material-requests', 
+  component: MaterialRequests 
+}, 
+      { 
+  path: 'material-inventory/inventory', 
+  component: Inventory 
+}, 
+      { 
+  path: 'material-inventory', 
+  component: MaterialInventory 
+}, 
+{ 
+  path: 'site-engineers', 
+  component: SiteEngineers 
+}, 
 
       {
         path: '',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 
@@ -29,7 +29,8 @@ export class DailyReportDetails implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private dailyProgressService: DailyProgressService
+    private dailyProgressService: DailyProgressService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +72,7 @@ export class DailyReportDetails implements OnInit {
           this.report = data;
 
           this.isLoading = false;
+          this.cdr.detectChanges()
         },
 
         error: (error) => {

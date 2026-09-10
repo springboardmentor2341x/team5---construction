@@ -1,0 +1,506 @@
+<div class="inventory-page">
+
+  <!-- HEADER -->
+
+  <section class="page-header">
+
+    <div>
+
+      <span class="section-label">
+        MATERIAL & INVENTORY
+      </span>
+
+      <h1>Inventory Management</h1>
+
+      <p>
+        View and manage all construction materials,
+        stock levels and inventory information.
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="back-btn"
+        routerLink="/material-inventory">
+        ← Dashboard
+      </button>
+
+      <button class="primary-btn">
+        + Add Material
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY -->
+
+  <section class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📦
+      </div>
+
+      <div>
+
+        <h2>{{ totalMaterials }}</h2>
+
+        <p>Total Materials</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📊
+      </div>
+
+      <div>
+
+        <h2>{{ availableStock | number }}</h2>
+
+        <p>Available Stock</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card warning-card">
+
+      <div class="stat-icon">
+        ⚠️
+      </div>
+
+      <div>
+
+        <h2>{{ lowStockCount }}</h2>
+
+        <p>Low Stock Items</p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <section class="toolbar">
+
+    <div class="search-box">
+
+      <span>🔍</span>
+
+      <input
+        type="text"
+        placeholder="Search by material, category or ID..."
+        [(ngModel)]="searchTerm">
+
+    </div>
+
+    <button
+  class="filter-btn"
+  (click)="toggleFilters()">
+
+  🔍 Filter
+
+</button>
+@if (showFilters) {
+
+  <div class="filter-panel">
+
+    <div class="filter-group">
+
+      <label>Category</label>
+
+      <select [(ngModel)]="selectedCategory">
+
+        <option value="All">All Categories</option>
+        <option value="Cement">Cement</option>
+        <option value="Steel">Steel</option>
+        <option value="Masonry">Masonry</option>
+        <option value="Aggregate">Aggregate</option>
+        <option value="Electrical">Electrical</option>
+        <option value="Plumbing">Plumbing</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>Status</label>
+
+      <select [(ngModel)]="selectedStatus">
+
+        <option value="All">All Status</option>
+        <option value="Available">Available</option>
+        <option value="Low Stock">Low Stock</option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="clear-filter-btn"
+      (click)="selectedCategory = 'All'; selectedStatus = 'All'; searchTerm = ''">
+
+      Clear Filters
+
+    </button>
+
+  </div>
+
+}
+
+  </section>
+
+
+  <!-- INVENTORY TABLE -->
+
+  <section class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Material Inventory</h2>
+
+        <p>
+          Current stock information
+        </p>
+
+      </div>
+
+      <span class="item-count">
+        {{ filteredItems.length }} items
+      </span>
+
+    </div>
+
+
+    <div class="inventory-table">
+
+      <!-- TABLE HEADER -->
+
+      <div class="table-row table-head">
+
+        <span>ID</span>
+
+        <span>Material</span>
+
+        <span>Category</span>
+
+        <span>Available</span>
+
+        <span>Allocated</span>
+
+        <span>Consumed</span>
+
+        <span>Status</span>
+
+        <span>Action</span>
+
+      </div>
+
+
+      <!-- TABLE DATA -->
+
+      @for (item of filteredItems; track item.id) {
+
+        <div class="table-row">
+
+          <span class="material-id">
+            {{ item.id }}
+          </span>
+
+          <strong>
+            {{ item.name }}
+          </strong>
+
+          <span>
+            {{ item.category }}
+          </span>
+
+          <span class="available">
+            {{ item.available | number }}
+            {{ item.unit }}
+          </span>
+
+          <span class="allocated">
+            {{ item.allocated | number }}
+            {{ item.unit }}
+          </span>
+
+          <span>
+            {{ item.consumed | number }}
+            {{ item.unit }}
+          </span>
+
+          <span>
+
+            <span
+              class="status"
+              [class.available-status]="item.status === 'Available'"
+              [class.low-status]="item.status === 'Low Stock'">
+
+              {{ item.status }}
+
+            </span>
+
+          </span>
+
+          <div class="actions">
+
+            <button
+    class="action-btn"
+    (click)="viewItem(item)"
+    title="View">
+    👁
+  </button>
+
+  <button
+    class="action-btn edit"
+    (click)="editItem(item)"
+    title="Edit">
+    ✏️
+  </button>
+
+  <button
+    class="action-btn delete"
+    (click)="deleteItem(item)"
+    title="Delete">
+    🗑
+  </button>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    @if (filteredItems.length === 0) {
+
+      <div class="empty-state">
+
+        <div>📦</div>
+
+        <h3>No materials found</h3>
+
+        <p>
+          Try searching with a different material name or category.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+@if (showViewPopup && selectedItem) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <h2>Material Details</h2>
+
+      <div class="details">
+
+        <p>
+          <strong>Material ID:</strong>
+          {{ selectedItem.id }}
+        </p>
+
+        <p>
+          <strong>Material:</strong>
+          {{ selectedItem.name }}
+        </p>
+
+        <p>
+          <strong>Category:</strong>
+          {{ selectedItem.category }}
+        </p>
+
+        <p>
+          <strong>Unit:</strong>
+          {{ selectedItem.unit }}
+        </p>
+
+        <p>
+          <strong>Available:</strong>
+          {{ selectedItem.available | number }}
+          {{ selectedItem.unit }}
+        </p>
+
+        <p>
+          <strong>Allocated:</strong>
+          {{ selectedItem.allocated | number }}
+          {{ selectedItem.unit }}
+        </p>
+
+        <p>
+          <strong>Consumed:</strong>
+          {{ selectedItem.consumed | number }}
+          {{ selectedItem.unit }}
+        </p>
+
+        <p>
+          <strong>Minimum Stock:</strong>
+          {{ selectedItem.minimum | number }}
+          {{ selectedItem.unit }}
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          {{ selectedItem.status }}
+        </p>
+
+      </div>
+
+      <button
+        class="ok-btn"
+        (click)="closeViewPopup()">
+        OK
+      </button>
+
+    </div>
+
+  </div>
+
+}
+@if (showEditPopup && selectedItem) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <h2>Edit Material</h2>
+
+      <label>Material Name</label>
+      <input [(ngModel)]="selectedItem.name">
+
+      <label>Category</label>
+      <input [(ngModel)]="selectedItem.category">
+
+      <label>Available Stock</label>
+      <input
+        type="number"
+        [(ngModel)]="selectedItem.available">
+
+      <label>Allocated Stock</label>
+      <input
+        type="number"
+        [(ngModel)]="selectedItem.allocated">
+
+      <label>Consumed Stock</label>
+      <input
+        type="number"
+        [(ngModel)]="selectedItem.consumed">
+
+      <label>Minimum Stock</label>
+      <input
+        type="number"
+        [(ngModel)]="selectedItem.minimum">
+
+      <div class="popup-buttons">
+
+        <button
+          class="cancel-btn"
+          (click)="closeEditPopup()">
+          Cancel
+        </button>
+
+        <button
+          class="save-btn"
+          (click)="saveEdit()">
+          Save Changes
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+@if (showDeletePopup && selectedItem) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <div class="warning-icon">⚠️</div>
+
+      <h2>Delete Material?</h2>
+
+      <p>
+        Are you sure you want to delete
+        <strong>{{ selectedItem.name }}</strong>?
+      </p>
+
+      <p class="warning">
+        This action cannot be undone.
+      </p>
+
+      <div class="popup-buttons">
+
+        <button
+          class="cancel-btn"
+          (click)="closeDeletePopup()">
+          Cancel
+        </button>
+
+        <button
+          class="delete-btn"
+          (click)="confirmDelete()">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+@if (showSuccessPopup) {
+
+  <div class="popup-overlay">
+
+    <div class="popup">
+
+      <div class="success-icon">✅</div>
+
+      <h2>Success</h2>
+
+      <p>
+        Material inventory has been updated successfully.
+      </p>
+
+      <button
+        class="ok-btn"
+        (click)="closeSuccessPopup()">
+        OK
+      </button>
+
+    </div>
+
+  </div>
+
+}
+</div>

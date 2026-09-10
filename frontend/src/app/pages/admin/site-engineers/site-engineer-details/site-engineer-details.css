@@ -1,4 +1,4 @@
-.workforce-page{
+.project-page{
 
     max-width:1300px;
 
@@ -84,7 +84,7 @@
 
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
 
     gap:20px;
 
@@ -372,7 +372,16 @@ tbody tr:hover{
     cursor:pointer;
 
 }
-.leave{
+
+.completed{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.hold{
 
     background:#FEF3C7;
 

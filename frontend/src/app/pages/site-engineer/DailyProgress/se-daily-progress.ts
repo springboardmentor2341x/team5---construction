@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -106,7 +106,8 @@ export class SeDailyProgress implements OnInit {
   constructor(
     private http: HttpClient,
     private milestoneService: MilestoneService,
-    private dailyProgressService: DailyProgressService
+    private dailyProgressService: DailyProgressService,
+    private cdr: ChangeDetectorRef
   ) {}
 
 
@@ -142,6 +143,7 @@ export class SeDailyProgress implements OnInit {
           this.projects = data;
 
           // this.isLoadingProjects = false;
+          this.cdr.detectChanges();
 
         },
 
@@ -153,6 +155,7 @@ export class SeDailyProgress implements OnInit {
 
           // this.errorMessage =
           //   'Unable to load projects. Please check backend.';
+           this.cdr.detectChanges();
 
         }
 
@@ -197,7 +200,7 @@ export class SeDailyProgress implements OnInit {
           this.milestones = data;
 
           // this.isLoadingMilestones = false;
-
+           this.cdr.detectChanges();
         },
 
         error: (error) => {
@@ -208,7 +211,7 @@ export class SeDailyProgress implements OnInit {
 
           // this.errorMessage =
           //   'Unable to load milestones.';
-
+           this.cdr.detectChanges();
         }
 
       });
@@ -233,7 +236,7 @@ export class SeDailyProgress implements OnInit {
           this.dailyReports = data;
 
           // this.isLoadingReports = false;
-
+           this.cdr.detectChanges();
         },
 
         error: (error) => {
@@ -244,7 +247,7 @@ export class SeDailyProgress implements OnInit {
 
           // this.errorMessage =
           //   'Unable to load daily progress reports.';
-
+           this.cdr.detectChanges();
         }
 
       });
@@ -390,7 +393,7 @@ export class SeDailyProgress implements OnInit {
           // Reset form
 
           this.resetForm();
-
+           this.cdr.detectChanges();
         },
 
         error: (error) => {
@@ -414,7 +417,7 @@ export class SeDailyProgress implements OnInit {
               'Unable to save daily progress report.';
 
           }
-
+           this.cdr.detectChanges();
         }
 
       });
@@ -461,7 +464,7 @@ export class SeDailyProgress implements OnInit {
               r =>
                 r.report_id !== report.report_id
             );
-
+             this.cdr.detectChanges();
         },
 
         error: (error) => {

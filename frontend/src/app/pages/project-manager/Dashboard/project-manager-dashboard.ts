@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {Milestone, MilestoneService } from '../../../services/milestone.service';
@@ -282,7 +282,9 @@ export class ProjectManagerDashboardComponent {
 
   milestone: Milestone[] = [];
 
-  constructor(private milestoneService:MilestoneService,private pmService: ProjectManagerService){}
+  constructor(private milestoneService:MilestoneService,private pmService: ProjectManagerService,
+    private cdr: ChangeDetectorRef
+  ){}
 
 ngOnInit():void{
   this.getMilestones()
@@ -293,6 +295,7 @@ getMilestones(): void{
     this.milestoneService.getAllMilestones().subscribe({
       next: (data)=>{
         this.milestone = data;
+        this.cdr.detectChanges()
       },
       error: (error)=>{
         console.log('error in pm dashboad getmilestone data line no 296', error)
@@ -309,6 +312,7 @@ getMilestones(): void{
       next: (response) => {
         console.log('Dashboard Data:', response);
         this.dashboardData = response;
+        this.cdr.detectChanges()
       },
       error: (error) => {
         console.error('API Error:', error);
