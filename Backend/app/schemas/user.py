@@ -10,6 +10,7 @@ class UserCreate(BaseModel):
     #phone: Optional[str] = None
     mobile: Optional[str] = None
     role: Optional[str] = None
+    status: str
     employee_id: Optional[str] = None
     department: Optional[str] = None
     address: Optional[str] = None

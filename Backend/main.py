@@ -1,4 +1,4 @@
-
+from sqlalchemy import text
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -187,6 +187,100 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
     return {"message": "User registered successfully"}      
 
+@app.post("/admin/users", response_model=schemas.UserResponse)
+def add_admin_user(
+    user: schemas.UserCreate,
+    current_user=Depends(allow_roles("Administrator")),
+    db: Session = Depends(get_db)
+):
+    existing_user = db.query(User).filter(
+        User.email == user.email
+    ).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
+
+    existing_employee = db.query(User).filter(
+        User.employee_id == user.employee_id
+    ).first()
+
+    if existing_employee:
+        raise HTTPException(
+            status_code=400,
+            detail="Employee ID already exists"
+        )
+
+    hashed_password = auth.hash_password(user.password)
+
+    new_user = User(
+        full_name=user.full_name,
+        email=user.email,
+        mobile=user.mobile,
+        password=hashed_password,
+        role=user.role,
+        employee_id=user.employee_id,
+        department=user.department,
+        status="Active",
+        address=user.address,
+        profile_picture=user.profile_picture
+    )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return new_user
+@app.delete("/admin/users/{user_id}")
+def delete_admin_user(
+    user_id: int,
+    current_user=Depends(allow_roles("Administrator")),
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.user_id == user_id).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    references = [
+        ("projects", "client_id"),
+        ("projects", "project_manager_id"),
+        ("workers", "user_id"),
+        ("projectcontractors", "contractor_id"),
+        ("projectsiteengineers", "site_engineer_id"),
+        ("dailyprogressreports", "site_engineer_id"),
+        ("siteactivitylogs", "responsible_user_id"),
+        ("resourceallocations", "responsible_user_id"),
+        ("maintenancerecords", "service_engineer_id"),
+    ]
+
+    for table_name, column_name in references:
+        result = db.execute(
+            text(
+                f'SELECT 1 FROM "{table_name}" '
+                f'WHERE "{column_name}" = :user_id LIMIT 1'
+            ),
+            {"user_id": user_id}
+        ).first()
+
+        if result:
+            raise HTTPException(
+                status_code=409,
+                detail=f"User is already used in {table_name}. Cannot delete this user."
+            )
+
+    db.delete(user)
+    db.commit()
+
+    return {
+        "message": "User deleted successfully",
+        "user_id": user_id
+    }
 @app.post("/login")
 def login(
     
@@ -316,6 +410,26 @@ def admin_dashboard(
     return {
         "message": "Welcome Administrator"
     }
+@app.get("/admin/users")
+def get_all_users(
+    current_user=Depends(allow_roles("Administrator")),
+    db: Session = Depends(get_db)
+):
+    users = db.query(User).all()
+
+    return [
+        {
+            "user_id": user.user_id,
+            "full_name": user.full_name,
+            "email": user.email,
+            "mobile": user.mobile,
+            "role": user.role,
+            "department": user.department,
+            "employee_id": user.employee_id,
+            "status": user.status,
+        }
+        for user in users
+    ]
 @app.get("/project-manager/dashboard")
 def project_manager_dashboard(
     current_user=Depends(allow_roles("Project Manager")),

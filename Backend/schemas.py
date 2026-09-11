@@ -76,16 +76,18 @@ class UserUpdate(BaseModel):
 from typing import Optional
 
 class UserResponse(BaseModel):
-     user_id: int 
-     full_name: str
-     email: str
-     mobile: str
-     role: str
-     employee_id: str
-     department: str
-     address: Optional[str] = None
-     profile_picture: Optional[str] = None
+    user_id: int
+    full_name: str
+    email: str
+    mobile: str
+    role: str
+    department: str | None = None
+    employee_id: str | None = None
+    status: str
+    address: str | None = None
+    profile_picture: str | None = None
 
+    model_config = ConfigDict(from_attributes=True)
 class Config:
         from_attributes = True  
 class VerifyEmail(BaseModel):
