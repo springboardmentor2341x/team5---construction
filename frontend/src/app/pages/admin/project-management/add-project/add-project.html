@@ -22,23 +22,54 @@
 
                     <label>Project Name</label>
 
-                    <input type="text">
+                    <input type="text"
+                    [(ngModel)]="projectData.name"
+                     name="name">
+
+                </div>
+
+Residential
+Commercial
+Industrial
+Infrastructure
+Government
+                
+                 <div class="form-group">
+
+                    <label>category</label>
+
+                  <select
+                    [(ngModel)]="projectData.category"
+                    name="category">
+
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Government">Government</option>
+
+                    </select>
 
                 </div>
 
                 <div class="form-group">
 
-                    <label>Project ID</label>
+                    <label>project code</label>
 
-                    <input type="text">
+                    <input
+                        type="text"
+                        [(ngModel)]="projectData.project_code"
+                        name="project_code">
 
                 </div>
 
                 <div class="form-group">
 
-                    <label>Client Name</label>
+                    <label>Client Id</label>
 
-                    <input type="text">
+                    <input
+                        type="number"
+                        [(ngModel)]="projectData.client_id"
+                        name="client_id">
 
                 </div>
 
@@ -46,7 +77,10 @@
 
                     <label>Location</label>
 
-                    <input type="text">
+                    <input
+                    type="text"
+                    [(ngModel)]="projectData.location"
+                    name="location">
 
                 </div>
 
@@ -62,40 +96,66 @@
 
                 <div class="form-group">
 
-                    <label>Project Manager</label>
+                    <label> Project Manager Id</label>
 
-                    <input type="text">
+                  <input
+  type="number"
+  [(ngModel)]="projectData.project_manager_id"
+  name="project_manager_id">
 
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
 
                     <label>Site Engineer</label>
 
                     <input type="text">
 
-                </div>
+                </div> -->
 
                 <div class="form-group">
 
                     <label>Status</label>
 
-                    <select>
+                  <select
+                    [(ngModel)]="projectData.status"
+                    name="status">
 
-                        <option>Active</option>
-                        <option>Completed</option>
-                        <option>On Hold</option>
-                        <option>Delayed</option>
+                    <option value="Planning">Planning</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                    <option value="On Hold">On Hold</option>
+                    <option value="Delayed">Delayed</option>
 
                     </select>
 
                 </div>
 
+                 <div class="form-group">
+
+                    <label>priority</label>
+
+                  <select
+                    [(ngModel)]="projectData.priority"
+                    name="priority">
+
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                    <option value="Midiam">Midiam</option>
+                    
+
+                    </select>
+
+                </div>               
+
                 <div class="form-group">
 
                     <label>Budget</label>
 
-                    <input type="number">
+                  <input
+  type="number"
+  [(ngModel)]="projectData.estimated_budget"
+  name="estimated_budget">
 
                 </div>
 
@@ -113,7 +173,10 @@
 
                     <label>Start Date</label>
 
-                    <input type="date">
+                  <input
+  type="date"
+  [(ngModel)]="projectData.planned_start_date"
+  name="planned_start_date">
 
                 </div>
 
@@ -121,7 +184,10 @@
 
                     <label>Expected End Date</label>
 
-                    <input type="date">
+                  <input
+  type="date"
+  [(ngModel)]="projectData.expected_completion_date"
+  name="expected_completion_date">
 
                 </div>
 
@@ -133,7 +199,11 @@
 
             <h2>Description</h2>
 
-            <textarea rows="5"></textarea>
+          <textarea
+  rows="5"
+  [(ngModel)]="projectData.description"
+  name="description">
+</textarea>
 
         </div>
 

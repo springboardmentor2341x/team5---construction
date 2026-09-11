@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {Milestone, MilestoneService } from '../../../services/milestone.service';
 import {ProjectManagerService} from '../../../services/pm-dashboard.service';
+import { ProjectService, Project } from '../../../services/project';
 
 @Component({
   selector: 'app-project-manager-dashboard',
@@ -279,16 +280,17 @@ export class ProjectManagerDashboardComponent {
 
   ];
 
-
+  project: Project[] = [];
   milestone: Milestone[] = [];
 
   constructor(private milestoneService:MilestoneService,private pmService: ProjectManagerService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef, private ProjectService:ProjectService
   ){}
 
 ngOnInit():void{
   this.getMilestones()
   this.getDashboardData()
+    this.loadProjects();
 }
 
 getMilestones(): void{
@@ -301,6 +303,20 @@ getMilestones(): void{
         console.log('error in pm dashboad getmilestone data line no 296', error)
       }
     })
+}
+
+loadProjects(): void {
+  this.ProjectService.getMyProjects().subscribe({
+    next: (data) => {
+      console.log('My Projects:', data);
+      this.project = data;
+        this.cdr.detectChanges()
+
+    },
+    error: (error) => {
+      console.error('Failed to load projects:', error);
+    }
+  });
 }
 
  dashboardData: any;

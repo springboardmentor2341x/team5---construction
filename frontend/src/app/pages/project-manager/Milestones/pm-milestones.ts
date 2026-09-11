@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {Milestone,MilestoneCreate, MilestoneService } from '../../../services/milestone.service';
@@ -106,7 +106,10 @@ export class MilestonesComponent {
 milestone: Milestone[] = [];
   
 
-        constructor(private milestoneService: MilestoneService) {}
+        constructor(private milestoneService: MilestoneService,
+          private cdr: ChangeDetectorRef
+
+        ) {}
 
 
 ngOnInit(): void{
@@ -118,6 +121,7 @@ getMilestones(): void{
     next: (data) =>{
       console.log(data)
       this.milestone = data;
+      this.cdr.detectChanges()
     },
     error:(error) =>{
       console.log('error fetching milestones get()', error)

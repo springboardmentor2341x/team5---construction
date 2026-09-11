@@ -16,82 +16,51 @@
 
         <div class="stat-card">
 
-            <h2>22</h2>
+            <h3>Total project</h3>
 
-            <span>Total Projects</span>
-
-        </div>
-
-        <div class="stat-card">
-
-            <h2>12</h2>
-
-            <span>Active Projects</span>
+            <span> {{project.length}} </span>
 
         </div>
 
         <div class="stat-card">
 
-            <h2>8</h2>
+            <h3>Active</h3>
 
-            <span>Completed</span>
-
-        </div>
-
-        <div class="stat-card">
-
-            <h2>2</h2>
-
-            <span>On Hold</span>
+            <span>{{getActiveProjects()}}</span>
 
         </div>
 
         <div class="stat-card">
 
-            <h2>3</h2>
+            <h3>Completed</h3>
 
-            <span>Delayed</span>
+            <span>{{getCompletedProjects()}}</span>
 
         </div>
 
         <div class="stat-card">
 
-            <h2>5</h2>
+            <h3>On Hold</h3>
 
-            <span>Upcoming</span>
+            <span>{{getOnHoldProjects()}}</span>
 
         </div>
+
+        <div class="stat-card">
+
+            <h3>Delay</h3>
+             
+
+            <span>{{getDelayedProjects()}}</span>
+
+        </div>
+
+       
 
     </div>
 
-    <div class="recent-card">
-
-        <h2>
-
-            Recent Projects
-
-        </h2>
-
-        <ul>
-
-            <li>Metro Rail Phase-1</li>
-
-            <li>Smart City Mall</li>
-
-            <li>Hospital Building</li>
-
-        </ul>
-
-        <button
-
-            class="view-btn"
-
-            routerLink="/project-details">
-
-            View All Projects →
-
-        </button>
-
-    </div>
+   
 
 </div>
+
+<app-live-project-table></app-live-project-table>

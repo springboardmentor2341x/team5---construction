@@ -170,7 +170,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'project-details',
+        path: 'project-details/:id',
         component: ProjectDetails
       },
 
@@ -178,6 +178,11 @@ export const routes: Routes = [
         path: 'edit-project',
         component: EditProject
       },
+      {
+        path: 'edit-project/:id',
+        component: EditProject
+      },
+
 
       {
         path: 'view-project',

@@ -19,7 +19,7 @@
 
     <h4>GENERAL</h4>
 
-    <a routerLink="/dashboard" routerLinkActive="active">
+    <a routerLink="/admin/dashboard" routerLinkActive="active">
 
       <mat-icon>dashboard</mat-icon>
 
@@ -79,18 +79,25 @@
 
       </mat-expansion-panel-header>
 
+      <a routerLink="/admin/add-project">
+        <mat-icon>folder</mat-icon>
+        Add project
+      </a>
+      <a routerLink="/admin/edit-project">
+        <mat-icon>folder</mat-icon>
+        Edit project
+      </a>
       <a routerLink="/admin/projects">
         <mat-icon>folder</mat-icon>
         Projects
       </a>
+      <!-- <a
+      routerLink="/admin/project-details"
+      routerLinkActive="active">
 
-      <a
-  routerLink="/admin/project-details"
-  routerLinkActive="active">
+      Project Details
 
-  Project Details
-
-</a>
+    </a> -->
 
     </mat-expansion-panel>
 

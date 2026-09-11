@@ -147,7 +147,7 @@ constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService,
               project  => projectIds.includes(project.project_id)
             );
 
-            // this.assignedProjectDetails = projects;
+            //  this.assignedProjectDetails = projects;
 
                console.log('Assigned Project Details:',this.assignedProjectDetails );
                console.log('Assigned Project idddd:',this.assignedProjectDetails );

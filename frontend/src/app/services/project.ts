@@ -23,6 +23,21 @@ export interface Project {
    progress?: number;
 }
 
+export interface ProjectCreate {
+  project_code: string;
+  name: string;
+  description: string;
+  category: string;
+  location: string;
+  estimated_budget: number;
+  priority: string;
+  status: string;
+  planned_start_date: string;
+  expected_completion_date: string;
+  project_manager_id: number;
+  client_id: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,4 +54,22 @@ export class ProjectService {
   getProject(id: number):Observable<Project>{
     return this.http.get<Project>(`${this.apiUrl}/${id}`)
   }
+   getMyProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(
+      `${this.apiUrl}/my-projects`
+    );
+  }
+   getProjectById(id: number):Observable<Project>{
+    return this.http.get<Project>(`${this.apiUrl}/${id}`)
+  }
+    createProject(projectData: ProjectCreate) {
+    return this.http.post<Project>(`${this.apiUrl}/`,projectData);
+  }
+
+  updateProject(projectId: number, projectData: ProjectCreate) {
+  return this.http.put<Project>(
+    `${this.apiUrl}/${projectId}`,
+    projectData
+  );
+}
 }

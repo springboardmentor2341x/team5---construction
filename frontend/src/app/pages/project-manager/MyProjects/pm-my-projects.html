@@ -34,7 +34,7 @@
       </div>
 
       <div>
-        <h3>{{projects.length}}</h3>
+        <h3>{{project.length}}</h3>
         <p>Total Projects</p>
       </div>
 
@@ -145,7 +145,7 @@
 
       </thead>
       <tbody>
-        <tr *ngFor="let project of filteredProjects">
+        <tr *ngFor="let project of project">
           <td>
 
             <div class="project-name">
@@ -163,11 +163,11 @@
 
           </td>
           <td>
-            {{project.code}}
+            {{project.project_code}}
           </td>
 
           <td>
-            {{project.client}}
+            {{project.client_id}}
           </td>
 
           <td>
@@ -176,7 +176,7 @@
           <td>
 
             <span class="status"
-            [ngClass]="project.status.toLowerCase()">
+           >
 
               {{project.status}}
 
@@ -186,7 +186,7 @@
           <td>
 
             <span class="priority"
-            [ngClass]="project.priority.toLowerCase()">
+         >
 
               {{project.priority}}
 
@@ -195,12 +195,12 @@
 
           </td>
           <td>
-            {{project.budget}}
+            {{project.estimated_budget}}
           </td>
           <td>
 
 
-            <div class="progress-area">
+            <!-- <div class="progress-area">
 
 
               <div class="progress-bar">
@@ -213,13 +213,13 @@
               <span>
                 {{project.completion}}%
               </span>
-            </div>
+            </div> -->
           </td>
           <td>
-            {{project.startDate}}
+            {{project.planned_start_date}}
           </td>
           <td>
-            {{project.endDate}}
+            {{project.expected_completion_date}}
           </td>
         <td>
             <button class="view-btn">

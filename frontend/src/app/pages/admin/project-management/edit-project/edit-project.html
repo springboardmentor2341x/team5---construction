@@ -5,9 +5,7 @@
         <h1>Edit Project</h1>
 
         <p>
-
             Update project information and management details.
-
         </p>
 
     </div>
@@ -26,9 +24,24 @@
 
                     <input
                         type="text"
-                        value="Metro Rail Phase-1">
+                        name="name"
+                        [(ngModel)]="projectData.name">
 
                 </div>
+
+            
+     <div class="form-group">
+            <select
+                    [(ngModel)]="projectData.category"
+                    name="category">
+
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Government">Government</option>
+
+        </select>
+</div>
 
                 <div class="form-group">
 
@@ -36,33 +49,52 @@
 
                     <input
                         type="text"
-                        value="PR001">
+                        name="project_code"
+                        [(ngModel)]="projectData.project_code">
 
                 </div>
+
 
                 <div class="form-group">
 
-                    <label>Client Name</label>
+                    <label>Client ID</label>
 
                     <input
-                        type="text"
-                        value="Government of Telangana">
+                        type="number"
+                        name="client_id"
+                        [(ngModel)]="projectData.client_id">
 
                 </div>
+                <div class="form-group">
 
+
+                  <select
+                    [(ngModel)]="projectData.priority"
+                    name="priority">
+
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                    <option value="Midiam">Midiam</option>
+                    
+
+                    </select>                
+
+                 </div>
                 <div class="form-group">
 
                     <label>Location</label>
 
                     <input
                         type="text"
-                        value="Hyderabad">
+                        name="location"
+                        [(ngModel)]="projectData.location">
 
                 </div>
 
             </div>
 
         </div>
+
 
         <div class="section">
 
@@ -72,13 +104,15 @@
 
                 <div class="form-group">
 
-                    <label>Project Manager</label>
+                    <label>Project Manager ID</label>
 
                     <input
-                        type="text"
-                        value="Rahul Sharma">
+                        type="number"
+                        name="project_manager_id"
+                        [(ngModel)]="projectData.project_manager_id">
 
                 </div>
+
 
                 <div class="form-group">
 
@@ -86,24 +120,44 @@
 
                     <input
                         type="text"
-                        value="Ajay Kumar">
+                        name="site_engineer"
+                        placeholder="Site Engineer">
 
                 </div>
+
 
                 <div class="form-group">
 
                     <label>Status</label>
 
-                    <select>
+                    <select
+                        name="status"
+                        [(ngModel)]="projectData.status">
 
-                        <option selected>Active</option>
-                        <option>Completed</option>
-                        <option>On Hold</option>
-                        <option>Delayed</option>
+                        <option value="Planning">
+                            Planning
+                        </option>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                        <option value="On Hold">
+                            On Hold
+                        </option>
+
+                        <option value="Delayed">
+                            Delayed
+                        </option>
 
                     </select>
 
                 </div>
+
 
                 <div class="form-group">
 
@@ -111,13 +165,15 @@
 
                     <input
                         type="number"
-                        value="25000000">
+                        name="estimated_budget"
+                        [(ngModel)]="projectData.estimated_budget">
 
                 </div>
 
             </div>
 
         </div>
+
 
         <div class="section">
 
@@ -131,9 +187,11 @@
 
                     <input
                         type="date"
-                        value="2026-01-01">
+                        name="planned_start_date"
+                        [(ngModel)]="projectData.planned_start_date">
 
                 </div>
+
 
                 <div class="form-group">
 
@@ -141,7 +199,8 @@
 
                     <input
                         type="date"
-                        value="2026-12-31">
+                        name="expected_completion_date"
+                        [(ngModel)]="projectData.expected_completion_date">
 
                 </div>
 
@@ -149,13 +208,19 @@
 
         </div>
 
+
         <div class="section">
 
             <h2>Description</h2>
 
-            <textarea rows="5">Metro Rail Phase-1 is a large-scale urban transportation project connecting major commercial and residential areas.</textarea>
+            <textarea
+                rows="5"
+                name="description"
+                [(ngModel)]="projectData.description">
+            </textarea>
 
         </div>
+
 
         <div class="buttons">
 
@@ -167,6 +232,7 @@
                 Cancel
 
             </button>
+
 
             <button
                 type="button"
@@ -183,34 +249,32 @@
 
 </div>
 
+
 @if(showSuccessPopup){
 
-<div class="popup-overlay">
+    <div class="popup-overlay">
 
-    <div class="popup">
+        <div class="popup">
 
-        <div class="success-icon">
+            <div class="success-icon">
+                ✅
+            </div>
 
-            ✅
+            <h2>
+                Project Updated Successfully!
+            </h2>
+
+            <button
+                type="button"
+                class="ok-btn"
+                (click)="closePopup()">
+
+                OK
+
+            </button>
 
         </div>
 
-        <h2>
-
-            Project Updated Successfully!
-
-        </h2>
-
-        <button
-            class="ok-btn"
-            (click)="closePopup()">
-
-            OK
-
-        </button>
-
     </div>
-
-</div>
 
 }

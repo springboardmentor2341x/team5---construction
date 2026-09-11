@@ -29,14 +29,15 @@
             <thead>
 
                 <tr>
+                    <th>project code</th>
 
                     <th>Project</th>
 
-                    <th>Client</th>
+                    <th>Client ID</th>
 
                     <th>Status</th>
 
-                    <th>Completion</th>
+                    <th>priority</th>
 
                 </tr>
 
@@ -45,15 +46,17 @@
 
             <tbody>
 
-                <tr *ngFor="let project of projects">
+                <tr *ngFor="let project of project">
+                    
 
+                    <td>{{project.project_code}}</td>
                     <td>{{project.name}}</td>
 
-                    <td>{{project.client}}</td>
+                    <td>{{project.client_id}}</td>
 
                     <td>{{project.status}}</td>
 
-                    <td>{{project.progress}}</td>
+                    <td>{{project.priority}}</td>
 
                 </tr>
 
