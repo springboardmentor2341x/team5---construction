@@ -8,6 +8,7 @@ from app.schemas.project_site_engineer import (
     ProjectSiteEngineerUpdate,
     ProjectSiteEngineerResponse,
     PMSiteEngineerAssignmentResponse,
+    SiteEngineerProjectResponse,
 )
 
 router = APIRouter(
@@ -46,6 +47,18 @@ def get_pm_site_engineers(
     return project_site_engineer_service.get_pm_site_engineers(
         db,
         project_id,
+    )
+@router.get(
+    "/my-projects",
+    response_model=list[SiteEngineerProjectResponse],
+)
+def get_my_projects(
+    db: Session = Depends(get_db),
+    current_user=Depends(allow_roles("Site Engineer")),
+):
+    return project_site_engineer_service.get_my_projects(
+        db,
+        current_user.user_id,
     )
 @router.get("/{project_site_engineer_id}", response_model=ProjectSiteEngineerResponse)
 def get_project_site_engineer(

@@ -1,15 +1,18 @@
 
 from decimal import Decimal
 from typing import List, Optional
-
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
 from database import get_db
 from dependencies import get_current_user  # adjust import to your Module 1 auth setup
 from app.crud import material_inventory as crud
 from app.schemas import material_inventory as schemas
-
+from datetime import date
+from app.models.material_inventory import MaterialAllocation, MaterialCategory, MaterialAllocationStatus
+from app.models.material import Material
+from app.models.project import Project
+from app.models.user import User
+from app.models.project_site_engineer import ProjectSiteEngineer
 router = APIRouter(prefix="/materials", tags=["Material & Inventory Management"])
 
 
@@ -208,7 +211,86 @@ def return_allocation(
         raise HTTPException(status_code=404, detail="Allocation not found.")
     return db_allocation
 
+@router.get(
+    "/site-engineer/daily-used",
+    response_model=List[schemas.SiteEngineerDailyMaterialResponse]
+)
+def get_site_engineer_daily_material_used(
+    allocation_date: Optional[date] = None,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
+):
+    query = (
+        db.query(
+            MaterialAllocation,
+            Material,
+            MaterialCategory,
+            Project,
+            User
+        )
+        .join(
+            Material,
+            Material.material_id == MaterialAllocation.material_id
+        )
+        .outerjoin(
+            MaterialCategory,
+            MaterialCategory.category_id == Material.category_id
+        )
+        .join(
+            Project,
+            Project.project_id == MaterialAllocation.project_id
+        )
+        .join(
+            User,
+            User.user_id == MaterialAllocation.responsible_user_id
+        )
+        .join(
+            ProjectSiteEngineer,
+            ProjectSiteEngineer.project_id == MaterialAllocation.project_id
+        )
+        .filter(
+            ProjectSiteEngineer.site_engineer_id == current_user.user_id
+        )
+        .filter(
+            MaterialAllocation.status == MaterialAllocationStatus.CONSUMED
+        )
+    )
 
+    if allocation_date:
+        query = query.filter(
+            MaterialAllocation.allocation_date == allocation_date
+        )
+
+    results = query.order_by(
+        MaterialAllocation.allocation_date.desc()
+    ).all()
+
+    response = []
+
+    for allocation, material, category, project, user in results:
+        response.append({
+            "allocation_id": allocation.allocation_id,
+            "project_id": project.project_id,
+            "project_name": project.name,
+
+            "material_id": material.material_id,
+            "material_name": material.material_name,
+            "unit": material.unit,
+            "category_name": category.category_name if category else None,
+            "material_status": material.status,
+
+            "quantity_allocated": allocation.quantity_allocated,
+            "allocation_date": allocation.allocation_date,
+            "work_activity": allocation.work_activity,
+
+            "responsible_user_id": allocation.responsible_user_id,
+            "responsible_user_name": user.full_name,
+
+            "allocation_status": allocation.status,
+            "remarks": allocation.remarks
+        })
+
+    return response
 # ============================================================
 # STOCK MOVEMENTS (audit trail)
 # ============================================================
@@ -234,4 +316,4 @@ def create_adjustment(
     current_user=Depends(get_current_user),
 ):
     """Manual stock correction, e.g. after a physical count discrepancy."""
-    return crud.create_adjustment_movement(db, material_id, quantity, performed_by_user_id, movement_date, remarks)
+    return crud.create_adjustment_movement(db, material_id, quantity, performed_by_user_id, movement_date, remarks) 

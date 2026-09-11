@@ -13,7 +13,11 @@ from app.schemas.resource_allocation import (
     ResourceAllocationReturn,
     ResourceAllocationOut,
     PMResourceAllocationResponse,
+    SiteEngineerEquipmentResponse,
 )
+
+from app.models.maintenance_record import MaintenanceRecord
+from app.models.project_site_engineer import ProjectSiteEngineer
 from app.crud import resource_allocation as crud
 
 router = APIRouter(prefix="/resource-allocations", tags=["Resource Allocations"])
@@ -64,7 +68,101 @@ def get_pm_resource_allocations(
         })
 
     return response
+@router.get(
+    "/site-engineer/equipment",
+    response_model=List[SiteEngineerEquipmentResponse]
+)
+def get_site_engineer_equipment(
+    db: Session = Depends(get_db),
+):
+    results = (
+        db.query(
+            ResourceAllocation,
+            Resource,
+            ResourceCategory,
+            Project,
+            User,
+            MaintenanceRecord,
+        )
+        .join(
+            Resource,
+            Resource.resource_id == ResourceAllocation.resource_id
+        )
+        .join(
+            ResourceCategory,
+            ResourceCategory.category_id == Resource.category_id
+        )
+        .join(
+            Project,
+            Project.project_id == ResourceAllocation.project_id
+        )
+        .join(
+            User,
+            User.user_id == ResourceAllocation.responsible_user_id
+        )
+        .outerjoin(
+            MaintenanceRecord,
+            MaintenanceRecord.resource_id == Resource.resource_id
+        )
+        .all()
+    )
 
+    response = []
+
+    for allocation, resource, category, project, user, maintenance in results:
+        response.append({
+            "resource_id": resource.resource_id,
+            "resource_code": resource.resource_code,
+            "equipment_name": resource.resource_name,
+            "category": category.category_name,
+            "equipment_status": (
+                resource.status.value
+                if resource.status else None
+            ),
+            "location": resource.location,
+
+            "project_name": project.name,
+            "allocation_date": allocation.allocation_date,
+            "expected_return_date": allocation.expected_return_date,
+            "actual_return_date": allocation.actual_return_date,
+
+            "responsible_user": user.full_name,
+            "allocation_status": (
+                allocation.status.value
+                if allocation.status else None
+            ),
+            "remarks": allocation.remarks,
+
+            "last_maintenance_date": (
+                maintenance.last_maintenance_date
+                if maintenance else None
+            ),
+            "next_maintenance_date": (
+                maintenance.next_maintenance_date
+                if maintenance else None
+            ),
+            "maintenance_type": (
+                maintenance.maintenance_type.value
+                if maintenance and maintenance.maintenance_type
+                else None
+            ),
+            "maintenance_status": (
+                maintenance.maintenance_status.value
+                if maintenance and maintenance.maintenance_status
+                else None
+            ),
+            "maintenance_cost": (
+                float(maintenance.maintenance_cost)
+                if maintenance and maintenance.maintenance_cost is not None
+                else None
+            ),
+            "maintenance_description": (
+                maintenance.description
+                if maintenance else None
+            ),
+        })
+
+    return response
 @router.get("/{allocation_id}", response_model=ResourceAllocationOut)
 def get_allocation(allocation_id: int, db: Session = Depends(get_db)):
     return crud.get_allocation(db, allocation_id)

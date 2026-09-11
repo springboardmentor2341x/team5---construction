@@ -49,6 +49,18 @@ def get_project_milestones(
         project_id
     )
 
+@router.get(
+    "/site-engineer/work-progress/{project_id}",
+    response_model=list[MilestoneResponse]
+)
+def get_site_engineer_work_progress(
+    project_id: int,
+    db: Session = Depends(get_db)
+):
+    return milestone_service.get_project_milestones(
+        db,
+        project_id
+    )
 
 @router.get("/{milestone_id}", response_model=MilestoneResponse)
 def get_milestone(

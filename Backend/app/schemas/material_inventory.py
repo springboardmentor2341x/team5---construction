@@ -6,7 +6,7 @@ from enum import Enum
 from typing import Optional, List
 
 from pydantic import BaseModel, Field, ConfigDict
-
+from app.models.enums import MaterialUnitEnum, MaterialStatusEnum
 
 # ============================================================
 # ENUMS (mirror the SQLAlchemy/Postgres enums)
@@ -228,3 +228,23 @@ class LowStockAlert(BaseModel):
     current_stock: Decimal
     minimum_stock_level: Decimal
     shortage_below_minimum: Decimal
+class SiteEngineerDailyMaterialResponse(BaseModel):
+    allocation_id: int
+    project_id: int
+    project_name: Optional[str] = None
+
+    material_id: int
+    material_name: str
+    unit: MaterialUnitEnum
+    category_name: Optional[str] = None
+    material_status: Optional[MaterialStatusEnum] = None
+
+    quantity_allocated: Decimal
+    allocation_date: date
+    work_activity: Optional[str] = None
+
+    responsible_user_id: int
+    responsible_user_name: Optional[str] = None
+
+    allocation_status: MaterialAllocationStatus
+    remarks: Optional[str] = None
