@@ -7,11 +7,13 @@
   <div class="page-heading">
 
     <div>
+
       <h2>Daily Material Used</h2>
 
       <p>
         Track materials consumed during daily construction activities.
       </p>
+
     </div>
 
     <button
@@ -124,8 +126,6 @@
 
   <div class="content-card">
 
-    <!-- Card Header -->
-
     <div class="card-header">
 
       <div>
@@ -169,9 +169,7 @@
         @for(category of categories; track category) {
 
           <option [value]="category">
-
             {{ category }}
-
           </option>
 
         }
@@ -187,9 +185,7 @@
         @for(project of projects; track project) {
 
           <option [value]="project">
-
             {{ project }}
-
           </option>
 
         }
@@ -245,7 +241,7 @@
 
             <th>Used By</th>
 
-            <!-- <th>Action</th> -->
+            <th>Action</th>
 
           </tr>
 
@@ -263,9 +259,7 @@
               <td>
 
                 <span class="date-text">
-
                   {{ material.date }}
-
                 </span>
 
               </td>
@@ -278,9 +272,7 @@
                 <div class="material-info">
 
                   <div class="material-icon">
-
                     📦
-
                   </div>
 
                   <div>
@@ -290,7 +282,7 @@
                     </strong>
 
                     <span>
-                      MAT-{{ material.id.toString().padStart(3, '0') }}
+                      MAT-{{ material.materialId.toString().padStart(3, '0') }}
                     </span>
 
                   </div>
@@ -305,9 +297,7 @@
               <td>
 
                 <span class="category-badge">
-
                   {{ material.category }}
-
                 </span>
 
               </td>
@@ -316,9 +306,7 @@
               <!-- Project -->
 
               <td>
-
                 {{ material.project }}
-
               </td>
 
 
@@ -327,9 +315,7 @@
               <td>
 
                 <strong class="quantity">
-
                   {{ material.quantityUsed }}
-
                 </strong>
 
                 {{ material.unit }}
@@ -340,9 +326,7 @@
               <!-- Activity -->
 
               <td>
-
                 {{ material.activity }}
-
               </td>
 
 
@@ -353,15 +337,11 @@
                 <div class="person-info">
 
                   <div class="person-icon">
-
                     👷
-
                   </div>
 
                   <span>
-
                     {{ material.usedBy }}
-
                   </span>
 
                 </div>
@@ -369,20 +349,21 @@
               </td>
 
 
-              <!-- Action -->
+              <!-- DELETE -->
 
-              <!-- <td>
+              <td>
 
                 <button
                   class="view-btn"
                   type="button"
-                  routerLink="/site-engineer/daily-material-details">
+                  [disabled]="isDeleting"
+                  (click)="deleteMaterial(material)">
 
-                  👁 View
+                  🗑️ Delete
 
                 </button>
 
-              </td> -->
+              </td>
 
             </tr>
 
@@ -393,7 +374,7 @@
                EMPTY STATE
           ================================================== -->
 
-          @if(filteredMaterials.length === 0) {
+          @if(filteredMaterials.length === 0 && !isLoading) {
 
             <tr>
 
@@ -404,21 +385,15 @@
                 <div class="empty-content">
 
                   <div class="empty-icon">
-
                     📦
-
                   </div>
 
                   <h3>
-
                     No Material Records Found
-
                   </h3>
 
                   <p>
-
                     Try changing your search or filter options.
-
                   </p>
 
                   <button
@@ -429,6 +404,39 @@
                     Clear Filters
 
                   </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          <!-- LOADING -->
+
+          @if(isLoading) {
+
+            <tr>
+
+              <td
+                colspan="8"
+                class="empty-state">
+
+                <div class="empty-content">
+
+                  <div class="empty-icon">
+                    ⏳
+                  </div>
+
+                  <h3>
+                    Loading Materials...
+                  </h3>
+
+                  <p>
+                    Please wait while materials are loaded.
+                  </p>
 
                 </div>
 
@@ -541,12 +549,13 @@
 
       <div class="modal-add">
 
+
         <!-- Modal Header -->
 
         <div class="modal-header">
 
           <div>
-    
+
             <h2>Add Material Usage</h2>
 
             <p>
@@ -572,6 +581,7 @@
         ================================================== -->
 
         <div class="form-grid">
+
 
           <!-- Date -->
 
@@ -612,10 +622,25 @@
               Material Name *
             </label>
 
-            <input
-              type="text"
-              placeholder="e.g. Cement"
-              [(ngModel)]="material.materialName">
+            <select
+              [(ngModel)]="material.materialId"
+              (ngModelChange)="onMaterialSelected($event)">
+
+              <option [ngValue]="0">
+                Select Material
+              </option>
+
+              @for(item of availableMaterials; track item.material_id) {
+
+                <option [ngValue]="item.material_id">
+
+                  {{ item.material_name }}
+
+                </option>
+
+              }
+
+            </select>
 
           </div>
 
@@ -694,13 +719,14 @@
             </label>
 
             <select
-              [(ngModel)]="material.unit">
+              [(ngModel)]="material.unit"
+              >
 
               <option value="">
                 Select Unit
               </option>
 
-              <option value="Bags">
+              <option value="BAG">
                 Bags
               </option>
 
@@ -799,12 +825,22 @@
 
           </button>
 
+
           <button
             class="save-btn"
             type="button"
+            [disabled]="isSaving"
             (click)="saveMaterial()">
 
-            Save Material Usage
+            @if(isSaving) {
+
+              Saving...
+
+            } @else {
+
+              Save Material Usage
+
+            }
 
           </button>
 

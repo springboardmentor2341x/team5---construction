@@ -1,165 +1,271 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import {
+  DelayRecordService,
+  DelayRecord,
+  CreateDelayRecord
+} from '../../../services/delay-record.service';
 
 interface Delay {
-
-  id:number;
-
-  date:string;
-
-  workCategory:string;
-
-  reason:string;
-
-  duration:string;
-
-  impact:string;
-
-  status:string;
-
+  id: number;
+  reportId: number;
+  reasonForDelay: string;
+  durationHours: string;
+  impactOnProjectTimeline: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string | null;
 }
 
 @Component({
   selector: 'app-delay-tracking',
-  imports: [CommonModule,RouterLink,FormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    FormsModule
+  ],
   templateUrl: './delay-tracking.html',
-  styleUrl: './delay-tracking.css',
+  styleUrl: './delay-tracking.css'
 })
-export class DelayTracking {
+export class DelayTracking implements OnInit {
 
+  private delayRecordService = inject(DelayRecordService);
+constructor(private cdr:ChangeDetectorRef){}
+  // =========================
+  // Form Data
+  // =========================
 
-  delay: Delay = {
+  delay: CreateDelayRecord = {
+    report_id: 0,
+    reason_for_delay: '',
+    duration_hours: 0,
+    impact_on_project_timeline: '',
+    description: ''
+  };
 
-      id: 0,
+  // =========================
+  // Delay Records
+  // =========================
 
-      date:'',
+  delays: Delay[] = [];
 
-      workCategory:'',
+  // =========================
+  // Modal
+  // =========================
 
-      reason:'',
+  showAddDelay = false;
 
-      duration:'',
+  // =========================
+  // Loading / Error
+  // =========================
 
-      impact:'',
+  isLoading = false;
+  isSaving = false;
+  deletingId: number | null = null;
 
-      status:''
+  // =========================
+  // Lifecycle
+  // =========================
+
+  ngOnInit(): void {
+    this.loadDelayRecords();
   }
 
+  // =========================
+  // GET API
+  // =========================
 
-   delays:Delay[]=[
+  loadDelayRecords(): void {
+    this.isLoading = true;
 
-    {
+    this.delayRecordService.getAllDelayRecords().subscribe({
+      next: (data: DelayRecord[]) => {
 
-      id:1,
+        this.delays = data.map((item: DelayRecord) => ({
+          id: item.delay_id,
+          reportId: item.report_id,
+          reasonForDelay: item.reason_for_delay,
+          durationHours: String(item.duration_hours),
+          impactOnProjectTimeline: item.impact_on_project_timeline,
+          description: item.description,
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
 
-      date:'05 Aug 2026',
+        this.isLoading = false;
+        this.cdr.detectChanges()
+      },
 
-      workCategory:'Foundation',
+      error: (error) => {
+        console.error('Error loading delay records:', error);
+        alert('Failed to load delay records.');
+        this.isLoading = false;
+      }
+    });
+  }
 
-      reason:'Heavy Rainfall',
+  // =========================
+  // Open Modal
+  // =========================
 
-      duration:'2 Hours',
+  openAddDelay(): void {
+    this.resetDelayForm();
+    this.showAddDelay = true;
+  }
 
-      impact:'Minor',
+  // =========================
+  // Close Modal
+  // =========================
 
-      status:'Resolved'
+  closeAddDelay(): void {
+    this.showAddDelay = false;
+    this.resetDelayForm();
+  }
 
-    },
+  // =========================
+  // POST API
+  // =========================
 
-    {
+  saveDelayinfo(): void {
 
-      id:2,
-
-      date:'07 Aug 2026',
-
-      workCategory:'Concrete Work',
-
-      reason:'Material Delivery Delay',
-
-      duration:'1 Day',
-
-      impact:'Medium',
-
-      status:'Pending'
-
+    if (
+      !this.delay.report_id ||
+      !this.delay.reason_for_delay ||
+      this.delay.duration_hours === null ||
+      this.delay.duration_hours === undefined ||
+      !this.delay.impact_on_project_timeline ||
+      !this.delay.description
+    ) {
+      alert('Please fill all required fields.');
+      return;
     }
 
-  ];
+    const payload: CreateDelayRecord = {
+      report_id: Number(this.delay.report_id),
+      reason_for_delay: this.delay.reason_for_delay,
+      duration_hours: Number(this.delay.duration_hours),
+      impact_on_project_timeline: this.delay.impact_on_project_timeline,
+      description: this.delay.description
+    };
 
-showAddDelay:boolean = false;
+    this.isSaving = true;
 
+    this.delayRecordService.createDelayRecord(payload).subscribe({
+      next: (data: DelayRecord) => {
 
- openAddDelay(): void{
-  this.showAddDelay = true
- }
-
- closeAddDelay(): void{
-  this.showAddDelay = false;
-  this.resetDelayForm();
- }
-
- saveDelayinfo(): void{
-      if(
-        !this.delay.date ||
-        !this.delay.workCategory ||
-        !this.delay.reason ||
-        !this.delay.duration ||
-        !this.delay.impact ||
-        !this.delay.status 
-      
-      ){
-        alert('Please fill all required fields.');
-        return
-      }
-
-
-        const newdelay: Delay ={
-           id: this.delays.length > 0
-              ? Math.max(...this.delays.map(m => m.id)) + 1
-              : 1,
-            date: this.delay.date,
-
-            workCategory: this.delay.workCategory ,
-
-            reason: this.delay.reason,
-
-            duration: this.delay.duration,
-
-            impact: this.delay.impact,
-
-            status:this.delay.status
-
+        const newDelay: Delay = {
+          id: data.delay_id,
+          reportId: data.report_id,
+          reasonForDelay: data.reason_for_delay,
+          durationHours: String(data.duration_hours),
+          impactOnProjectTimeline: data.impact_on_project_timeline,
+          description: data.description,
+          createdAt: data.created_at,
+          updatedAt: data.updated_at
         };
 
+        // New record ko top par show karenge
+        this.delays.unshift(newDelay);
 
-        this.delays.unshift(newdelay);
-
+        this.isSaving = false;
+        this.showAddDelay = false;
         this.resetDelayForm();
 
-        this.showAddDelay = false;
- }
+        alert('Delay record added successfully.');
+        this.cdr.detectChanges()
+      },
 
-  resetDelayForm(): void{
+      error: (error) => {
+        console.error('Error creating delay record:', error);
 
-    this.delay ={
-      
-      id: 0,
+        if (error.status === 422) {
+          alert('Invalid data. Please check the entered values.');
+        } else {
+          alert('Failed to create delay record.');
+        }
 
-      date:'',
+        this.isSaving = false;
+      }
+    });
+  }
 
-      workCategory:'',
+  // =========================
+  // DELETE API
+  // =========================
 
-      reason:'',
+  deleteDelay(delayId: number): void {
 
-      duration:'',
+    const confirmed = confirm(
+      'Are you sure you want to delete this delay record?'
+    );
 
-      impact:'',
+    if (!confirmed) {
+      return;
+    }
 
-      status:''
+    this.deletingId = delayId;
+
+    this.delayRecordService.deleteDelayRecord(delayId).subscribe({
+      next: () => {
+
+        this.delays = this.delays.filter(
+          delay => delay.id !== delayId
+        );
+
+        this.deletingId = null;
+
+        alert('Delay record deleted successfully.');
+        this.cdr.detectChanges()
+      },
+
+      error: (error) => {
+        console.error('Error deleting delay record:', error);
+
+        this.deletingId = null;
+
+        alert('Failed to delete delay record.');
+      }
+    });
+  }
+
+  // =========================
+  // Reset Form
+  // =========================
+
+  resetDelayForm(): void {
+    this.delay = {
+      report_id: 0,
+      reason_for_delay: '',
+      duration_hours: 0,
+      impact_on_project_timeline: '',
+      description: ''
     };
   }
 
+  // =========================
+  // Helper
+  // =========================
+
+  formatReason(reason: string): string {
+    return reason
+      .replace(/_/g, ' ')
+      .toLowerCase()
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
+
+  formatDate(date: string): string {
+    if (!date) {
+      return '';
+    }
+
+    return new Date(date).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+  }
 }
