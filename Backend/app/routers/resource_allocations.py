@@ -15,7 +15,7 @@ from app.schemas.resource_allocation import (
     PMResourceAllocationResponse,
     SiteEngineerEquipmentResponse,
 )
-
+from dependencies import get_current_user
 from app.models.maintenance_record import MaintenanceRecord
 from app.models.project_site_engineer import ProjectSiteEngineer
 from app.crud import resource_allocation as crud
@@ -74,7 +74,9 @@ def get_pm_resource_allocations(
 )
 def get_site_engineer_equipment(
     db: Session = Depends(get_db),
+    current_user = Depends(get_current_user),
 ):
+
     results = (
         db.query(
             ResourceAllocation,
@@ -103,6 +105,13 @@ def get_site_engineer_equipment(
         .outerjoin(
             MaintenanceRecord,
             MaintenanceRecord.resource_id == Resource.resource_id
+        )
+        .join(
+            ProjectSiteEngineer,
+            ProjectSiteEngineer.project_id == ResourceAllocation.project_id
+        )
+        .filter(
+            ProjectSiteEngineer.site_engineer_id == current_user.user_id
         )
         .all()
     )
