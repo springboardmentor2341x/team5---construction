@@ -533,18 +533,18 @@ export const routes: Routes = [
 
   {
     path: 'resource-management',
-  canActivate: [
-    authGuard,
-    roleGuard(['Resource Management'])
-  ],
-   canActivateChild: [
-    authGuard,
-    roleGuard(['Resource Management'])
-  ],
-    loadComponent: () =>
-      import('./layouts/resource-management-layout/resource-management-layout')
-        .then(m => m. ResourceManagementLayoutComponent),
-    //component: ResourceManagementLayoutComponent,
+  // canActivate: [
+  //   authGuard,
+  //   roleGuard(['Resource Management'])
+  // ],
+  //  canActivateChild: [
+  //   authGuard,
+  //   roleGuard(['Resource Management'])
+  // ],
+  //   loadComponent: () =>
+  //     import('./layouts/resource-management-layout/resource-management-layout')
+  //       .then(m => m. ResourceManagementLayoutComponent),
+    component: ResourceManagementLayoutComponent,
 
     children: [
 
