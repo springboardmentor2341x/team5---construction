@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, datetime
+from datetime import date
 from typing import Optional
 
 
@@ -27,7 +27,14 @@ class ProjectContractorUpdate(BaseModel):
 
 class ProjectContractorResponse(ProjectContractorBase):
     project_contractor_id: int
-    created_at: datetime
 
     class Config:
         from_attributes = True
+        
+class PMContractorAssignmentResponse(BaseModel):
+    contractor_name: str
+    company: Optional[str] = None
+    specialization: Optional[str] = None
+    contact: Optional[str] = None
+    assigned_project: str
+    status: Optional[str] = None        

@@ -34,8 +34,9 @@ class ProjectBase(BaseModel):
 # -------------------------
 
 class ProjectCreate(ProjectBase):
-    created_by: Optional[int] = None
-    updated_by: Optional[int] = None
+    pass
+    # created_by: Optional[int] = None
+    # updated_by: Optional[int] = None
 
 
 # -------------------------
@@ -60,7 +61,7 @@ class ProjectUpdate(BaseModel):
 
     project_manager_id: Optional[int] = None
     client_id: Optional[int] = None
-    updated_by: Optional[int] = None
+    # updated_by: Optional[int] = None
 
 # -------------------------
 # Response
@@ -69,12 +70,13 @@ class ProjectUpdate(BaseModel):
 class ProjectResponse(ProjectBase):
     project_id: int
 
-    created_by: Optional[int] = None
-    updated_by: Optional[int] = None
-
     created_at: datetime
     updated_at: datetime
 
+    progress_percentage: Optional[Decimal] = None
+    completed_milestones: int = 0
+    total_milestones: int = 0
+    
     class Config:
         from_attributes = True
         

@@ -1,5 +1,6 @@
 <div class="page-content">
 
+<<<<<<< HEAD
   <!-- Header -->
 
   <div class="content-heading">
@@ -138,6 +139,348 @@
     <h3>Additional Comments</h3>
 
     <p>{{ report.comments }}</p>
+=======
+  <!-- =========================
+       Loading
+  ========================== -->
+  <div
+    *ngIf="isLoading"
+  
+  >
+
+    <div class="loader"></div>
+
+    <p>Loading report details...</p>
+
+  </div>
+
+
+  <!-- =========================
+       Error
+  ========================== -->
+  <div
+    *ngIf="!isLoading && errorMessage"
+    class="error-message"
+  >
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- =========================
+       Report Details
+  ========================== -->
+  <div
+    *ngIf="!isLoading && report"
+    class="report-container"
+  >
+
+    <!-- =========================
+         Header
+    ========================== -->
+    <div class="content-heading">
+
+      <div>
+
+        <h2>Daily Report Details</h2>
+
+        <p>
+          View complete information about the submitted
+          daily progress report.
+        </p>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <button
+          class="back-btn"
+          routerLink="/site-engineer/daily-progress"
+        >
+          ← Back
+        </button>
+
+
+        <button
+          type="button"
+          class="print-btn"
+          (click)="printReport()"
+        >
+          🖨 Print
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Report Information
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Report Information</h3>
+
+      <div class="details-grid">
+
+        <div>
+
+          <strong>Report ID</strong>
+
+          <span>
+            #{{ report.report_id }}
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Report Date</strong>
+
+          <span>
+            {{ report.report_date | date:'dd MMM yyyy' }}
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Created At</strong>
+
+          <span>
+            {{ report.created_at
+              ? (report.created_at | date:'dd MMM yyyy, hh:mm a')
+              : 'Not available'
+            }}
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Updated At</strong>
+
+          <span>
+            {{ report.updated_at
+              ? (report.updated_at | date:'dd MMM yyyy, hh:mm a')
+              : 'Not updated'
+            }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Assignment Information
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Assignment Information</h3>
+
+      <div class="details-grid">
+
+        <div>
+
+          <strong>Milestone ID</strong>
+
+          <span>
+            #{{ report.milestone_id }}
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Site Engineer ID</strong>
+
+          <span>
+            #{{ report.site_engineer_id }}
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Project Contractor ID</strong>
+
+          <span>
+            #{{ report.project_contractor_id }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Progress Information
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Progress Information</h3>
+
+      <div class="details-grid">
+
+        <div>
+
+          <strong>Progress</strong>
+
+          <span class="progress-value">
+
+            {{ report.progress_percentage }}%
+
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>Weather Condition</strong>
+
+          <span
+            class="weather-badge"
+            [ngClass]="{
+              'sunny': report.weather_condition === 'SUNNY',
+              'cloudy': report.weather_condition === 'CLOUDY',
+              'rainy': report.weather_condition === 'RAINY',
+              'storm': report.weather_condition === 'STORM',
+              'foggy': report.weather_condition === 'FOGGY',
+              'windy': report.weather_condition === 'WINDY'
+            }"
+          >
+
+            {{ report.weather_condition || 'Not provided' }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+
+        <div class="progress-header">
+
+          <span>Completion</span>
+
+          <strong>
+            {{ report.progress_percentage }}%
+          </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="
+              +report.progress_percentage
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Work Details
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Work Details</h3>
+
+      <div class="text-section">
+
+        <strong>Activity Performed</strong>
+
+        <p>
+          {{ report.activity_performed || 'No activity description provided.' }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Safety Information
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Safety Information</h3>
+
+      <div class="text-section">
+
+        <strong>Safety Observations</strong>
+
+        <p>
+          {{ report.safety_observations || 'No safety observations provided.' }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Quality Inspection
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Quality Inspection</h3>
+
+      <div class="text-section">
+
+        <strong>Quality Remarks</strong>
+
+        <p>
+          {{ report.quality_remarks || 'No quality remarks provided.' }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Additional Comments
+    ========================== -->
+    <div class="details-card">
+
+      <h3>Additional Comments</h3>
+
+      <div class="text-section">
+
+        <strong>Comments</strong>
+
+        <p>
+          {{ report.additional_comments || 'No additional comments.' }}
+        </p>
+
+      </div>
+
+    </div>
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
   </div>
 

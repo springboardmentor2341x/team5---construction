@@ -14,6 +14,7 @@ class User(Base):
     password = Column(String, nullable=False)
     mobile = Column(String)
     role = Column(String)
+    status = Column(String, default="Active")
     employee_id = Column(String)
     department = Column(String)
     address = Column(String)

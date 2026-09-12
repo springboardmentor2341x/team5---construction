@@ -555,3 +555,9 @@
     }
 
 }
+
+
+.status-badge.planning {
+  background: #fff3cd;
+  color: #856404;
+}

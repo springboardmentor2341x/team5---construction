@@ -181,21 +181,23 @@ Milestone Details
 <tbody>
 
 
-<tr *ngFor="let item of milestones; let i=index">
+<tr *ngFor="let item of milestone">
 
+
+  
 
 <td>
-{{item.name}}
+{{item.milestone_name}}
 </td>
 
 
 <td>
-{{item.plannedDate}}
+{{item.planned_start_date }}
 </td>
 
 
 <td>
-{{item.actualDate}}
+{{item.actual_start_date}}
 </td>
 
 
@@ -205,7 +207,7 @@ Milestone Details
 <span class="status"
 [class.completed]="item.status=='Completed'"
 [class.progress]="item.status=='In Progress'"
-[class.pending]="item.status=='Pending'">
+[class.pending]="item.status=='Not Started'">
 
 
 {{item.status}}
@@ -218,12 +220,12 @@ Milestone Details
 
 
 <td>
-{{item.delay}}
+
 </td>
 
 
 <td>
-{{item.remarks}}
+{{item.description}}
 </td>
 
 
@@ -236,8 +238,8 @@ Edit
 </button>
 <span style="display: inline-block;width: 4px;"></span>
 
-<button class="complete-btn"
-(click)="completeMilestone(i)">
+<button class="complete-btn">
+<!-- (click)="completeMilestone(i)"> -->
 
 Complete
 
@@ -270,54 +272,76 @@ Add New Milestone
 
 
 
-<div class="form-grid">
+        <form (ngSubmit)="submitMilestone()">
 
+          <input
+            type="text"
+            name="milestone_name"
+            [(ngModel)]="milestoneForm.milestone_name"
+            placeholder="Milestone Name"
+            required
+          >
 
-<input placeholder="Milestone Name">
+          <textarea
+            name="description"
+            [(ngModel)]="milestoneForm.description"
+            placeholder="Description">
+          </textarea>
 
+          <select
+            name="status"
+            [(ngModel)]="milestoneForm.status">
 
-<input type="date">
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Delayed">Delayed</option>
 
+          </select>
 
-<input type="date">
+          <samp>progress</samp>
+          <input
+            type="number"
+            name="progress_percentage"
+            [(ngModel)]="milestoneForm.progress_percentage"
+          
+            min="0"
+            max="100"
+            
+          >
+<samp>Planned start date</samp>
+          <input
+            type="date"
+            name="planned_start_date"
+            [(ngModel)]="milestoneForm.planned_start_date"
+            required
+            
+          >
+<samp>planned_end_date</samp>
+          <input
+            type="date"
+            name="planned_end_date"
+            [(ngModel)]="milestoneForm.planned_end_date"
+            required
+          >
+<samp>actual_start_date</samp>
+          <input
+            type="date"
+            name="actual_start_date"
+            [(ngModel)]="milestoneForm.actual_start_date"
+          >
+<samp>actual_end_date</samp>
+<br>
+          <input
+            type="date"
+            name="actual_end_date"
+            [(ngModel)]="milestoneForm.actual_end_date"
+          >
 
+          <button type="submit">
+            Create Milestone
+          </button>
 
-<select>
-
-<option>
-Select Status
-</option>
-
-<option>
-Pending
-</option>
-
-<option>
-In Progress
-</option>
-
-<option>
-Completed
-</option>
-
-
-</select>
-
-
-
-<input placeholder="Delay">
-
-
-<input placeholder="Remarks">
-
-</div>
-
-<button class="primary-btn save-btn">
-
-Save Milestone
-
-</button>
-
-</div>
+        </form>
 
 </div>

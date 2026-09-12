@@ -37,3 +37,13 @@ class ProjectScheduleResponse(ProjectScheduleBase):
 
     class Config:
         from_attributes = True
+
+
+# PM Dashboard Schedule Response
+class PMScheduleResponse(BaseModel):
+    task_name: str
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+    duration: Optional[int] = None
+    assigned_engineer_name: Optional[str] = None
+    status: Optional[str] = None

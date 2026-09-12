@@ -184,25 +184,25 @@
 
 
 // }
-import { Component, OnInit } from '@angular/core';
+import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
+import { Project, ProjectService } from '../../../services/project';
 
 @Component({
 
-  selector:'app-project-details',
+  selector: 'app-project-details',
 
-  standalone:true,
+  standalone: true,
 
-  imports:[
+  imports: [
     CommonModule,
     RouterLink
   ],
 
-  templateUrl:'./pm-project-details.html',
+  templateUrl: './pm-project-details.html',
 
-  styleUrls:['./pm-project-details.css']
+  styleUrls: ['./pm-project-details.css']
 
 })
 
@@ -210,189 +210,212 @@ import { RouterLink } from '@angular/router';
 export class ProjectDetailsComponent implements OnInit {
 
 
-project:any = {
+   projects: Project[] = [];
 
-name:'',
-code:'',
-client:'',
-location:'',
-budget:'',
-startDate:'',
-endDate:'',
-priority:'',
-status:'',
-completion:0,
+  constructor(
+  
+    private ProjectService: ProjectService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-milestones:[],
-engineers:[],
-contractors:[],
-resources:[],
-materials:[]
+  project: any = {
 
-};
+    name: '',
+    code: '',
+    client: '',
+    location: '',
+    budget: '',
+    startDate: '',
+    endDate: '',
+    priority: '',
+    status: '',
+    completion: 0,
 
+    milestones: [],
+    engineers: [],
+    contractors: [],
+    resources: [],
+    materials: []
 
+  };
 
 
 
-ngOnInit():void{
 
 
-const selectedProject = history.state.project;
+  ngOnInit(): void {
 
+this.loadProjects()
 
+    const selectedProject = history.state.project;
 
-if(selectedProject){
 
 
-this.project = selectedProject;
+    if (selectedProject) {
 
 
-}
+      this.project = selectedProject;
 
-else{
 
+    }
 
-// Default project data
+    else {
 
-this.project = {
 
+      // Default project data
 
-name:'Metro Tower Construction',
+      this.project = {
 
-code:'BT-001',
 
-client:'ABC Developers',
+        name: 'Metro Tower Construction',
 
-location:'Chennai',
+        code: 'BT-001',
 
-budget:'₹2,50,000',
+        client: 'ABC Developers',
 
-startDate:'12-06-2026',
+        location: 'Chennai',
 
-endDate:'20-12-2026',
+        budget: '₹2,50,000',
 
-priority:'High',
+        startDate: '12-06-2026',
 
-status:'Ongoing',
+        endDate: '20-12-2026',
 
-completion:65,
+        priority: 'High',
 
+        status: 'Ongoing',
 
+        completion: 65,
 
-milestones:[
 
-{
-name:'Foundation Complete',
-planned:'20-06-2026',
-actual:'25-06-2026',
-status:'Completed',
-delay:'5 Days',
-remarks:'Completed successfully'
-},
 
+        milestones: [
 
-{
-name:'Structure Work',
-planned:'01-08-2026',
-actual:'-',
-status:'Ongoing',
-delay:'0',
-remarks:'Work in progress'
-}
+          {
+            name: 'Foundation Complete',
+            planned: '20-06-2026',
+            actual: '25-06-2026',
+            status: 'Completed',
+            delay: '5 Days',
+            remarks: 'Completed successfully'
+          },
 
-],
 
+          {
+            name: 'Structure Work',
+            planned: '01-08-2026',
+            actual: '-',
+            status: 'Ongoing',
+            delay: '0',
+            remarks: 'Work in progress'
+          }
 
+        ],
 
 
 
-engineers:[
 
-{
-name:'Arun Kumar',
-id:'SE101',
-contact:'9876543210',
-area:'Foundation Area'
-},
 
+        engineers: [
 
-{
-name:'Priya Sharma',
-id:'SE102',
-contact:'9876543211',
-area:'Structure Area'
-}
+          {
+            name: 'Arun Kumar',
+            id: 'SE101',
+            contact: '9876543210',
+            area: 'Foundation Area'
+          },
 
-],
 
+          {
+            name: 'Priya Sharma',
+            id: 'SE102',
+            contact: '9876543211',
+            area: 'Structure Area'
+          }
 
+        ],
 
 
 
-contractors:[
 
-{
-name:'Raj Builders',
-company:'Raj Construction Pvt Ltd',
-specialization:'Civil',
-contact:'9876500000'
-}
 
-],
+        contractors: [
 
+          {
+            name: 'Raj Builders',
+            company: 'Raj Construction Pvt Ltd',
+            specialization: 'Civil',
+            contact: '9876500000'
+          }
 
+        ],
 
 
 
-resources:[
 
-{
-name:'Excavator',
-quantity:5,
-available:2,
-allocated:3
-},
 
+        resources: [
 
-{
-name:'Crane',
-quantity:3,
-available:1,
-allocated:2
-}
+          {
+            name: 'Excavator',
+            quantity: 5,
+            available: 2,
+            allocated: 3
+          },
 
-],
 
+          {
+            name: 'Crane',
+            quantity: 3,
+            available: 1,
+            allocated: 2
+          }
 
+        ],
 
 
 
-materials:[
 
-{
-name:'Cement',
-quantity:'500 Bags',
-status:'Available'
-},
 
+        materials: [
 
-{
-name:'Steel',
-quantity:'200 Tons',
-status:'Approved'
-}
+          {
+            name: 'Cement',
+            quantity: '500 Bags',
+            status: 'Available'
+          },
 
-]
 
+          {
+            name: 'Steel',
+            quantity: '200 Tons',
+            status: 'Approved'
+          }
 
-};
+        ]
 
 
-}
+      };
 
 
-}
+    }
+   
+
+  }
+
+   loadProjects(): void {
+    this.ProjectService.getMyProjects().subscribe({
+      next: (data) => {
+        console.log('My Projects:', data);
+        this.projects = data;
+        this.cdr.detectChanges()
+
+      },
+      error: (error) => {
+        console.error('Failed to load projects:', error);
+      }
+    });
+  }
 
 
 

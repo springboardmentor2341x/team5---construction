@@ -19,7 +19,7 @@
 
     <h4>GENERAL</h4>
 
-    <a routerLink="/dashboard" routerLinkActive="active">
+    <a routerLink="/admin/dashboard" routerLinkActive="active">
 
       <mat-icon>dashboard</mat-icon>
 
@@ -51,12 +51,12 @@
 
       </mat-expansion-panel-header>
 
-      <a routerLink="/add-user">
+      <a routerLink="/admin/add-user">
         <mat-icon>person_add</mat-icon>
     Add User
 </a>
 
-      <a routerLink="/user-details">
+      <a routerLink="/admin/user-details">
         <mat-icon>badge</mat-icon>
         User Details
       </a>
@@ -79,22 +79,29 @@
 
       </mat-expansion-panel-header>
 
-      <a routerLink="/projects">
+      <a routerLink="/admin/add-project">
+        <mat-icon>folder</mat-icon>
+        Add project
+      </a>
+      <a routerLink="/admin/edit-project">
+        <mat-icon>folder</mat-icon>
+        Edit project
+      </a>
+      <a routerLink="/admin/projects">
         <mat-icon>folder</mat-icon>
         Projects
       </a>
+      <!-- <a
+      routerLink="/admin/project-details"
+      routerLinkActive="active">
 
-      <a
-  routerLink="/project-details"
-  routerLinkActive="active">
+      Project Details
 
-  Project Details
-
-</a>
+    </a> -->
 
     </mat-expansion-panel>
 
-    <a routerLink="/workforce-management" routerLinkActive="active">
+    <a routerLink="/admin/workforce-management" routerLinkActive="active">
 
       <mat-icon>engineering</mat-icon>
 
@@ -102,7 +109,7 @@
 
     </a>
 
-    <a routerLink="/contractors" routerLinkActive="active">
+    <a routerLink="/admin/contractors" routerLinkActive="active">
 
       <mat-icon>construction</mat-icon>
 
@@ -110,7 +117,7 @@
 
     </a>
 
-    <a routerLink="/site-engineers" routerLinkActive="active">
+    <a routerLink="/admin/site-engineers" routerLinkActive="active">
 
       <mat-icon>badge</mat-icon>
 
@@ -124,7 +131,7 @@
 
   <div class="menu-section">
 
-    <h4>RESOURCES</h4>
+    <!-- <h4>RESOURCES</h4>
 
     <a routerLink="/resource-management" routerLinkActive="active">
 
@@ -132,9 +139,9 @@
 
       <span>Resource Management</span>
 
-    </a>
+    </a> -->
 
-    <a routerLink="/material-inventory" routerLinkActive="active">
+    <a routerLink="/admin/material-inventory" routerLinkActive="active">
 
       <mat-icon>warehouse</mat-icon>
 

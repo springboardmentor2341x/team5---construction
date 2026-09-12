@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+=======
+import { ChangeDetectorRef, Component,OnInit,inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  WorkCompletionStatusService,
+  WorkCategoryProgress
+} from '../../../services/work-completion-status.service';
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 interface WorkCategory {
   name: string;
@@ -26,7 +35,17 @@ interface ProgressUpdate {
   templateUrl: './se-work-completion-status.html',
   styleUrl: './se-work-completion-status.css'
 })
+<<<<<<< HEAD
 export class SeWorkCompletionStatus {
+=======
+export class SeWorkCompletionStatus implements OnInit {
+
+
+   private workCompletionService = inject(
+    WorkCompletionStatusService
+  );
+  constructor(private cdr:ChangeDetectorRef){}
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
   // =========================
   // SUMMARY
@@ -46,6 +65,7 @@ export class SeWorkCompletionStatus {
   // WORK CATEGORY PROGRESS
   // =========================
 
+<<<<<<< HEAD
   workCategories: WorkCategory[] = [
 
     {
@@ -75,6 +95,45 @@ export class SeWorkCompletionStatus {
 
   ];
 
+=======
+   workCategories: WorkCategoryProgress[] = [];
+
+ isLoading = false;
+    ngOnInit(): void {
+    this.loadWorkCompletionStatus();
+  }
+
+    loadWorkCompletionStatus(): void {
+    this.isLoading = true;
+
+    this.workCompletionService
+      .getWorkCategoryProgress()
+      .subscribe({
+        next: (data) => {
+          console.log('Work Category Progress:', data);
+
+          this.workCategories = data;
+
+          this.isLoading = false;
+          this.cdr.detectChanges()
+        },
+
+        error: (error) => {
+          console.error(
+            'Work Category Progress Error:',
+            error
+          );
+
+          this.isLoading = false;
+
+          alert(
+            error?.error?.detail ||
+            'Failed to load work completion status.'
+          );
+        }
+      });
+  }
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   // =========================
   // MILESTONES
   // =========================

@@ -148,6 +148,10 @@
           All Status
         </option>
 
+        <option value="Planning">
+          Planning
+        </option>
+
         <option value="In Progress">
           In Progress
         </option>
@@ -190,10 +194,21 @@
     <!-- ===========================
          PROJECT LIST
     ============================ -->
+          <pre>
+          assignedProjectDetails:
+          {{ assignedProjectDetails | json }}
+          </pre>
+
+          <pre>
+          filteredProjects:
+          {{ filteredProjects | json }}
+          </pre>
 
     <div class="projects-list">
 
-      @for (project of filteredProjects; track project.id) {
+
+      
+      @for (project of filteredProjects; track project.project_id) {
 
         <article class="project-card">
 
@@ -205,7 +220,7 @@
 
               <span class="project-id">
 
-                {{ project.id }}
+                {{ project.project_code  }}
 
               </span>
 
@@ -224,7 +239,7 @@
               [class.low]="project.priority === 'Low'"
             >
 
-              {{ project.priority }}
+              {{ project.priority ||'N/A' }}
 
             </span>
 
@@ -238,22 +253,22 @@
 
             <div class="info-item">
               <span class="info-label">📍 Location</span>
-              <strong>{{ project.location }}</strong>
+              <strong>{{ project.location ||'N/A'}}</strong>
             </div>
 
             <div class="info-item">
-              <span class="info-label">👤 Project Manager</span>
-              <strong>{{ project.manager }}</strong>
+              <span class="info-label">👤 Project Manager ID</span>
+              <strong>{{ project.project_manager_id ||'N/A'}}</strong>
             </div>
 
             <div class="info-item">
               <span class="info-label">📅 Start Date</span>
-              <strong>{{ project.startDate }}</strong>
+              <strong>{{ project.planned_start_date ||'N/A' }}</strong>
             </div>
 
             <div class="info-item">
               <span class="info-label">⏰ Deadline</span>
-              <strong>{{ project.deadline }}</strong>
+              <strong>{{ project.expected_completion_date ||'N/A'}}</strong>
             </div>
 
           </div>
@@ -268,16 +283,16 @@
 
               <span>Project Progress</span>
 
-              <strong>{{ project.progress }}%</strong>
+              <!-- <strong>{{ project.progress??0 }}%</strong> -->
 
             </div>
 
             <div class="progress-bar">
 
-              <div
+              <!-- <div
                 class="progress-fill"
-                [style.width.%]="project.progress">
-              </div>
+                [style.width.%]="project.progress ?? 0">
+              </div> -->
 
             </div>
 
@@ -292,10 +307,11 @@
             <span
               class="status-badge"
               [class.in-progress]="project.status === 'In Progress'"
+              [class.planning]="project.status === 'Planning'"
               [class.completed]="project.status === 'Completed'"
               [class.delayed]="project.status === 'Delayed'">
 
-              {{ project.status }}
+              {{ project.status ||'N/A'}}
 
             </span>
 
@@ -337,7 +353,7 @@
       }
 
     </div>
-
+      
   </div>
 
 </section>

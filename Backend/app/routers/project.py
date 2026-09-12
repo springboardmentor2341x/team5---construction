@@ -33,7 +33,13 @@ def create_project(
 @router.get("/", response_model=list[ProjectResponse])
 def get_all_projects(db: Session = Depends(get_db)):
     return project_service.get_all_projects(db)
+@router.get("/my-projects", response_model=list[ProjectResponse])
 
+def get_my_projects(
+    db: Session = Depends(get_db),
+    current_user=Depends(allow_roles("Project Manager", "Administrator")),
+):
+    return project_service.get_projects_by_manager(db, current_user.user_id)
 
 @router.get("/{project_id}", response_model=ProjectResponse)
 def get_project(

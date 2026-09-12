@@ -103,14 +103,14 @@
         <tr>
 
           <th>Date</th>
-          <th>Project</th>
+          <th>Project id</th>
           <th>Time</th>
 
           <th>Activity Type</th>
 
           <th>Description</th>
 
-          <th>Responsible Person</th>
+          <th>Responsible Person  id</th>
 
           <th>Status</th>
 
@@ -127,14 +127,14 @@
         <tr>
 
           <td>{{ activity.date }}</td>
-          <td>{{ activity.projectName }}</td>
+          <td>{{ activity.projectId }}</td>
           <td>{{ activity.time }}</td>
 
           <td>{{ activity.activityType }}</td>
 
           <td>{{ activity.description }}</td>
 
-          <td>{{ activity.responsiblePerson }}</td>
+          <td>{{ activity.responsibleUserId }}</td>
 
           <td>
 
@@ -159,6 +159,14 @@ class="status-badge"
 
               👁 View
 
+            </button>
+            
+              <button
+              class="delete-btn"
+              type="button"
+              (click)="deleteActivity(activity.id)"
+            >
+              🗑 Delete
             </button>
 
           </td>
@@ -249,6 +257,7 @@ placeholder="Activity Type"
   type="file"
   accept="image/*"
   capture="environment"
+  style="width: 100px;height: 100px;"
   (change)="onPhotoSelected($event)"
 />
 

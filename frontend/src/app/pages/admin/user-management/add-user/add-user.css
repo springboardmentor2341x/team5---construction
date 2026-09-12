@@ -11,6 +11,11 @@
     margin-bottom:30px;
 
 }
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+}
 
 .page-header h1{
 

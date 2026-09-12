@@ -14,23 +14,17 @@
 
         <div class="form-grid">
 
-            <div class="form-group">
 
-                <label>First Name</label>
-
-                <input
-                    type="text"
-                    placeholder="Enter first name">
-
-            </div>
 
             <div class="form-group">
 
-                <label>Last Name</label>
+                <label> Name</label>
 
                 <input
                     type="text"
-                    placeholder="Enter last name">
+                    [(ngModel)]="userData.full_name"
+                    name="full_name"
+                    placeholder="Enter full name">
 
             </div>
 
@@ -38,9 +32,11 @@
 
                 <label>Email Address</label>
 
-                <input
-                    type="email"
-                    placeholder="Enter email address">
+               <input
+    type="email"
+    [(ngModel)]="userData.email"
+    name="email"
+    placeholder="Enter email">
 
             </div>
 
@@ -49,8 +45,10 @@
                 <label>Phone Number</label>
 
                 <input
-                    type="text"
-                    placeholder="Enter phone number">
+    type="text"
+    [(ngModel)]="userData.mobile"
+    name="mobile"
+    placeholder="Enter mobile number">
 
             </div>
 
@@ -84,19 +82,18 @@
 
                 <label>Role</label>
 
-                <select>
+<select
+    [(ngModel)]="userData.role"
+    name="role">
 
-                    <option>Select Role</option>
+    <option value="Administrator">Administrator</option>
+    <option value="Project Manager">Project Manager</option>
+    <option value="Site Engineer">Site Engineer</option>
+    <option value="Contractor">Contractor</option>
+    <option value="Worker">Worker</option>
+    <option value="Client">Client</option>
 
-                    <option>Administrator</option>
-
-                    <option>Site Engineer</option>
-
-                    <option>Contractor</option>
-
-                    <option>Worker</option>
-
-                </select>
+</select>
 
             </div>
 
@@ -104,9 +101,11 @@
 
                 <label>Department</label>
 
-                <input
-                    type="text"
-                    placeholder="Enter department">
+<input
+    type="text"
+    [(ngModel)]="userData.department"
+    name="department"
+    placeholder="Enter department">
 
             </div>
 
@@ -116,9 +115,33 @@
 
                 <input
                     type="text"
-                    placeholder="EMP001">
+                    [(ngModel)]="userData.employee_id"
+                    name="employee_id"
+                    placeholder="Enter employee ID">
 
             </div>
+            <div class="form-group">
+
+                <label>address </label>
+
+                <textarea
+                    [(ngModel)]="userData.address"
+                    name="address"
+                    placeholder="Enter address">
+                </textarea>
+
+            </div>
+            <div class="form-group">
+
+                <label>address </label>
+
+<input
+    type="file"
+    [(ngModel)]="userData.profile_picture"
+    name="profile_picture"
+    placeholder="Profile picture URL">
+
+            </div>            
 
             <div class="form-group">
 
@@ -146,19 +169,28 @@
 
                 <label>Password</label>
 
-                <input
-                    type="password"
-                    placeholder="Enter password">
+   <input
+    type="password"
+    [(ngModel)]="userData.password"
+    name="password"
+    placeholder="Enter password">
 
             </div>
+            @if (errorMessage) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+}
 
             <div class="form-group">
 
                 <label>Confirm Password</label>
 
-                <input
-                    type="password"
-                    placeholder="Confirm password">
+             <input
+    type="password"
+    [(ngModel)]="userData.confirm_password"
+    name="confirm_password"
+    placeholder="Confirm password">
 
             </div>
 
@@ -166,15 +198,16 @@
 
         <div class="button-group">
 
-            <button class="cancel-btn">
-
+            <button type="button" class="cancel-btn"    routerLink="/user-detail">
+              
                 Cancel
 
             </button>
 
             <button
-        class="create-btn"
-            (click)="createUser()">
+             type="button"
+             class="create-btn"
+            (click)="addUser()">
 
             Create User
 
@@ -198,6 +231,7 @@
         </p>
 
         <button
+                type="button"
             class="ok-btn"
             (click)="closePopup()">
 

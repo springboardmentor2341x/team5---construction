@@ -76,3 +76,11 @@ def delete_project_contractor(
     db.commit()
 
     return db_contractor
+def get_my_projects(db: Session, contractor_id: int):
+    return (
+        db.query(ProjectContractor)
+        .filter(
+            ProjectContractor.contractor_id == contractor_id
+        )
+        .all()
+    )

@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import {Milestone, MilestoneService } from '../../../services/milestone.service';
+import {ProjectManagerService} from '../../../services/pm-dashboard.service';
+import { ProjectService, Project } from '../../../services/project';
 
 @Component({
   selector: 'app-project-manager-dashboard',
   standalone: true,
-  imports: [RouterLink,CommonModule],
+  imports: [CommonModule],
   templateUrl: './project-manager-dashboard.html',
   styleUrls: ['./project-manager-dashboard.css']
 })
@@ -277,4 +280,59 @@ export class ProjectManagerDashboardComponent {
 
   ];
 
+  project: Project[] = [];
+  milestone: Milestone[] = [];
+
+  constructor(private milestoneService:MilestoneService,private pmService: ProjectManagerService,
+    private cdr: ChangeDetectorRef, private ProjectService:ProjectService
+  ){}
+
+ngOnInit():void{
+  this.getMilestones()
+  this.getDashboardData()
+    this.loadProjects();
+}
+
+getMilestones(): void{
+    this.milestoneService.getAllMilestones().subscribe({
+      next: (data)=>{
+        this.milestone = data;
+        this.cdr.detectChanges()
+      },
+      error: (error)=>{
+        console.log('error in pm dashboad getmilestone data line no 296', error)
+      }
+    })
+}
+
+loadProjects(): void {
+  this.ProjectService.getMyProjects().subscribe({
+    next: (data) => {
+      console.log('My Projects:', data);
+      this.project = data;
+        this.cdr.detectChanges()
+
+    },
+    error: (error) => {
+      console.error('Failed to load projects:', error);
+    }
+  });
+}
+
+ dashboardData: any;
+
+  // constructor(private pmService: ProjectManagerService) {}
+
+  getDashboardData(): void{
+    this.pmService.getDashboard().subscribe({
+      next: (response) => {
+        console.log('Dashboard Data:', response);
+        this.dashboardData = response;
+        this.cdr.detectChanges()
+      },
+      error: (error) => {
+        console.error('API Error:', error);
+      }
+    });
+  }
 }

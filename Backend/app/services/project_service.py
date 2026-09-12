@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from app.models.project import Project
 from app.models.milestone import Milestone
 from app.crud import project_crud
 from app.schemas.project import ProjectCreate, ProjectUpdate
@@ -107,3 +108,59 @@ def assign_project_manager(db: Session, project_id: int, project_manager_id: int
     db.commit()
 
     return existing_project
+def get_projects_by_manager(db: Session, manager_id: int):
+    projects = (
+        db.query(Project)
+        .filter(Project.project_manager_id == manager_id)
+        .all()
+    )
+
+    result = []
+
+    for project in projects:
+        milestones = (
+            db.query(Milestone)
+            .filter(Milestone.project_id == project.project_id)
+            .all()
+        )
+
+        total_milestones = len(milestones)
+
+        completed_milestones = sum(
+            1
+            for milestone in milestones
+            if milestone.status == "Completed"
+        )
+
+        if total_milestones > 0:
+            progress_percentage = sum(
+                float(milestone.progress_percentage or 0)
+                for milestone in milestones
+            ) / total_milestones
+        else:
+            progress_percentage = 0
+
+        project_data = {
+            "project_id": project.project_id,
+            "project_code": project.project_code,
+            "name": project.name,
+            "description": project.description,
+            "category": project.category,
+            "location": project.location,
+            "estimated_budget": project.estimated_budget,
+            "priority": project.priority,
+            "status": project.status,
+            "planned_start_date": project.planned_start_date,
+            "expected_completion_date": project.expected_completion_date,
+            "project_manager_id": project.project_manager_id,
+            "client_id": project.client_id,
+            "created_at": project.created_at,
+            "updated_at": project.updated_at,
+            "progress_percentage": progress_percentage,
+            "completed_milestones": completed_milestones,
+            "total_milestones": total_milestones,
+        }
+
+        result.append(project_data)
+
+    return result

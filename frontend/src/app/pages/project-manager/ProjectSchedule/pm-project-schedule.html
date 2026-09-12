@@ -2,28 +2,29 @@
 
   <div class="breadcrumb">
 
-  <a routerLink="/project-manager/dashboard">
+    <a routerLink="/project-manager/dashboard">
       Dashboard
     </a>
 
     <span>></span>
+
     <a routerLink="/project-manager/my-projects">
       My Projects
     </a>
+
     <span>></span>
-      
+
     <a routerLink="/project-manager/project-details">
       Project Details
     </a>
+
     <span>></span>
-    
 
-  <strong>
-    Project Schedule
-  </strong>
+    <strong>
+      Project Schedule
+    </strong>
 
-</div>
-
+  </div>
 
 
   <!-- Page Header -->
@@ -31,116 +32,103 @@
   <div class="page-header">
 
     <div>
-      <h2>Project Schedule</h2>
+
+      <h2>
+        Project Schedule
+      </h2>
 
       <p>
         Create and manage complete project planning activities
       </p>
+
     </div>
 
 
     <button class="primary-btn">
+
       + Add Schedule
+
     </button>
 
-
   </div>
-
-
 
 
   <!-- Gantt Timeline -->
 
   <div class="card">
 
-    <h3>Project Timeline</h3>
+    <h3>
+      Project Timeline
+    </h3>
 
 
     <div class="timeline">
 
+      <!-- Loading -->
 
-      <div class="timeline-item completed">
-        Foundation
+      <div
+        *ngIf="loading">
+
+        Loading...
+
       </div>
 
 
-      <div class="arrow">
-        →
-      </div>
+      <!-- Dynamic Timeline -->
+
+      <ng-container
+        *ngIf="!loading">
+
+        <ng-container
+          *ngFor="
+            let schedule of schedules;
+            let last = last
+          ">
+
+          <div
+            class="timeline-item"
+            [ngClass]="{
+              'completed':
+                schedule.status === 'Completed',
+
+              'active':
+                schedule.status === 'In Progress',
+
+              'pending':
+                schedule.status === 'Pending' ||
+                schedule.status === 'Not Started'
+            }">
+
+            {{ schedule.taskName }}
+
+          </div>
 
 
-      <div class="timeline-item active">
-        Structure
-      </div>
+          <div
+            class="arrow"
+            *ngIf="!last">
+
+            →
+
+          </div>
+
+        </ng-container>
 
 
-      <div class="arrow">
-        →
-      </div>
+        <!-- No Schedule -->
 
+        <div
+          *ngIf="schedules.length === 0">
 
-      <div class="timeline-item pending">
-        Electrical
-      </div>
+          No schedules found.
 
+        </div>
 
-      <div class="arrow">
-        →
-      </div>
-
-
-      <div class="timeline-item pending">
-        Plumbing
-      </div>
-
-
-      <div class="arrow">
-        →
-      </div>
-
-
-      <div class="timeline-item pending">
-        Painting
-      </div>
-
-
-      <div class="arrow">
-        →
-      </div>
-
-
-      <div class="timeline-item pending">
-        Finishing
-      </div>
-
-
-      <div class="arrow">
-        →
-      </div>
-
-
-      <div class="timeline-item pending">
-        Inspection
-      </div>
-
-
-      <div class="arrow">
-        →
-      </div>
-
-
-      <div class="timeline-item pending">
-        Handover
-      </div>
-
+      </ng-container>
 
     </div>
 
-
   </div>
-
-
-
 
 
   <!-- Schedule Table -->
@@ -151,97 +139,154 @@
 
     <div class="table-header">
 
-      <h3>Activity Schedule</h3>
+      <h3>
+        Activity Schedule
+      </h3>
 
     </div>
 
 
+    <!-- Error -->
+
+    <div
+      *ngIf="errorMessage"
+      class="error-message">
+
+      {{ errorMessage }}
+
+    </div>
+
 
     <table>
-
 
       <thead>
 
         <tr>
 
-          <th>Task Name</th>
+          <th>
+            Task Name
+          </th>
 
-          <th>Start Date</th>
+          <th>
+            Start Date
+          </th>
 
-          <th>End Date</th>
+          <th>
+            End Date
+          </th>
 
-          <th>Duration</th>
+          <th>
+            Duration
+          </th>
 
-          <th>Assigned Engineer</th>
+          <th>
+            Assigned Engineer
+          </th>
 
-          <th>Status</th>
+          <th>
+            Status
+          </th>
 
-          <th>Actions</th>
+          <th>
+            Actions
+          </th>
 
         </tr>
 
-
       </thead>
-
-
 
 
       <tbody>
 
 
-        <tr *ngFor="let schedule of schedules; let i=index">
+        <!-- Loading -->
+
+        <tr
+          *ngIf="loading">
+
+          <td
+            colspan="7">
+
+            Loading schedules...
+
+          </td>
+
+        </tr>
+
+
+        <!-- API DATA -->
+
+        <tr
+          *ngFor="
+            let schedule of schedules;
+            let i = index
+          ">
 
 
           <td>
-            {{schedule.taskName}}
+
+            {{ schedule.taskName }}
+
           </td>
 
 
           <td>
-            {{schedule.startDate}}
+
+            {{ schedule.startDate }}
+
           </td>
 
 
           <td>
-            {{schedule.endDate}}
+
+            {{ schedule.endDate }}
+
           </td>
 
 
           <td>
-            {{schedule.duration}}
+
+            {{ schedule.duration }}
+
           </td>
 
 
           <td>
-            {{schedule.engineer}}
-          </td>
 
+            {{ schedule.engineer }}
+
+          </td>
 
 
           <td>
 
-            <span class="status"
-            [ngClass]="schedule.status">
+            <span
+              class="status"
+              [ngClass]="schedule.status">
 
-              {{schedule.status}}
+              {{ schedule.status }}
 
             </span>
 
           </td>
 
 
-
-
           <td>
 
 
-            <button class="edit-btn">
+            <button
+              class="edit-btn"
+              type="button">
+
               Edit
+
             </button>
 
 
-            <button class="delete-btn"
-            (click)="deleteSchedule(i)">
+            <button
+              class="delete-btn"
+              type="button"
+              (click)="deleteSchedule(i)">
 
               Delete
 
@@ -254,76 +299,113 @@
         </tr>
 
 
-      </tbody>
+        <!-- NO DATA -->
 
+        <tr
+          *ngIf="
+            !loading &&
+            schedules.length === 0
+          ">
+
+          <td
+            colspan="7">
+
+            No schedule records found.
+
+          </td>
+
+        </tr>
+
+
+      </tbody>
 
     </table>
 
-
   </div>
-
-
-
 
 
   <!-- Add Schedule Form -->
 
 
-  <div class="card">
+      <div class="card">
 
+        <h3>Add New Schedule</h3>
 
-    <h3>Add New Schedule</h3>
+        <div class="form-grid">
 
+          <!-- Task Name -->
+           <span>project Id</span>
+            <input
+              type="number"
+              placeholder="Project ID"
+              [(ngModel)]="newSchedule.projectId"
+            />
 
-    <div class="form-grid">
+          <input
+            type="text"
+            placeholder="Task Name"
+            [(ngModel)]="newSchedule.taskName"
+          />
 
+          <!-- Start Date -->
+          <input
+            type="date"
+            [(ngModel)]="newSchedule.startDate"
+          />
 
-      <input placeholder="Task Name">
+          <!-- End Date -->
+          <input
+            type="date"
+            [(ngModel)]="newSchedule.endDate"
+          />
 
+          <!-- Assigned Engineer -->
+          <input
+            type="text"
+            placeholder="Assigned Engineer"
+            [(ngModel)]="newSchedule.engineer"
+          />
 
-      <input type="date">
+          <!-- Status -->
+          <select
+            [(ngModel)]="newSchedule.status"
+          >
+            <option value="Not Started">
+              Not Started
+            </option>
 
+            <option value="Pending">
+              Pending
+            </option>
 
-      <input type="date">
+            <option value="In Progress">
+              In Progress
+            </option>
 
+            <option value="Completed">
+              Completed
+            </option>
+          </select>
 
-      <input placeholder="Assigned Engineer">
+        </div>
 
+        <!-- Duration -->
+         <span>Duration</span>
+        <input
+          type="number"
+          placeholder="Duration (Days)"
+          [(ngModel)]="newSchedule.duration"
+        />
 
+        <button
+          class="primary-btn save-btn"
+          (click)="saveSchedule()"
+          [disabled]="saving"
+          
+        >
+          {{ saving ? 'Saving...' : 'Save Schedule' }}
+        </button>
 
-      <select>
-
-        <option>
-          Select Status
-        </option>
-
-        <option>
-          Pending
-        </option>
-
-        <option>
-          In Progress
-        </option>
-
-        <option>
-          Completed
-        </option>
-
-      </select>
-
-
-
-    </div>
-
-
-
-    <button class="primary-btn save-btn">
-      Save Schedule
-    </button>
-
-
-  </div>
-
-
+      </div>
 
 </div>

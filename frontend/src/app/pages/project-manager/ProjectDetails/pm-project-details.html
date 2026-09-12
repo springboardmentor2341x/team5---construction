@@ -52,40 +52,58 @@ View Milestones
     <div class="info-grid">
       <div class="info-box">
         <label>Project Code</label>
-        <p>{{project.code}}</p>
+        <p>{{projects[0].project_code}}</p>
       </div>
 
       <div class="info-box">
-        <label>Client</label>
-        <p>{{project.client}}</p>
+        <label>Client Id</label>
+        <p>{{projects[0].client_id}}</p>
+      </div>
+       <div class="info-box">
+        <label>Project Name</label>
+        <p>{{projects[0].name}}</p>
       </div>
       <div class="info-box">
         <label>Location</label>
-        <p>{{project.location}}</p>
+        <p>{{projects[0].location}}</p>
       </div>
       <div class="info-box">
         <label>Budget</label>
-        <p>{{project.budget}}</p>
+        <p>{{projects[0].estimated_budget}}</p>
       </div>
       <div class="info-box">
         <label>Start Date</label>
-        <p>{{project.startDate}}</p>
+        <p>{{projects[0].planned_start_date}}</p>
       </div>
       <div class="info-box">
         <label>End Date</label>
-        <p>{{project.endDate}}</p>
+        <p>{{projects[0].expected_completion_date}}</p>
       </div>
       <div class="info-box">
         <label>Status</label>
         <span class="status-badge">
-          {{project.status}}
+          {{projects[0].status}}
         </span>
       </div>
       <div class="info-box">
         <label>Priority</label>
         <span class="priority-badge">
-          {{project.priority}}
+          {{projects[0].priority}}
         </span>
+      </div>
+       <div class="info-box">
+        <label>Description</label>
+         <p>{{projects[0].description}}</p>
+      </div>
+       <div class="info-box">
+        <label>project manager id</label>
+        <span class="status-badge">
+          {{projects[0].project_manager_id}}
+        </span>
+      </div>
+       <div class="info-box">
+        <label>updated at</label>
+        <p>{{projects[0].updated_at}}</p>
       </div>
     </div>
   </div>
@@ -104,7 +122,8 @@ View Milestones
       </h4>
     </div>
   </div>
-  <div class="section-card">
+  
+  <!-- <div class="section-card">
     <h3>
       Milestones
     </h3>
@@ -289,7 +308,7 @@ View Milestones
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 </div>
 
 

@@ -4,7 +4,7 @@
 
         <h2>Live Projects</h2>
 
-        <button>View All</button>
+        <!-- <button>View All</button> -->
 
     </div>
 
@@ -14,13 +14,15 @@
 
             <tr>
 
+                <th>Poject Code</th>
+                <th>Client Id</th>
                 <th>Project</th>
-
                 <th>Manager</th>
-
                 <th>Progress</th>
-
                 <th>Status</th>
+                <th>priority</th>
+                <th>action</th>
+
 
             </tr>
 
@@ -28,53 +30,32 @@
 
         <tbody>
 
-            <tr>
+            <tr *ngFor="let project of project">
 
-                <td>Metro Station</td>
+                <td>{{project.project_code}}</td>
+                <td>{{project.client_id}}</td>
+                <td>{{project.name}}</td>
+                <td> saurabh</td>
+                <td> 45 %</td>
+                <td>{{project.status}}</td>
+                <td>{{project.priority}}</td>
+                <div class="table-header">
+                    <button [routerLink]="['/admin/project-details',project.project_id]">
 
-                <td>Rahul Sharma</td>
+                        View All details →
 
-                <td>82%</td>
+                    </button>
+                        <button
+                        type="button"
+                        [routerLink]="['/admin/edit-project', project.project_id]">
+                        Edit
+                        </button>
+                </div>
 
-                <td><span class="status on-track">On Track</span></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Shopping Mall</td>
-
-                <td>Priya Verma</td>
-
-                <td>65%</td>
-
-                <td><span class="status delayed">Delayed</span></td>
-
-            </tr>
-
-            <tr>
-
-                <td>Hospital Block</td>
-
-                <td>Amit Kumar</td>
-
-                <td>76%</td>
-
-                <td><span class="status on-track">On Track</span></td>
 
             </tr>
 
-            <tr>
 
-                <td>Residential Towers</td>
-
-                <td>Neha Singh</td>
-
-                <td>91%</td>
-
-                <td><span class="status completed">Completed</span></td>
-
-            </tr>
 
         </tbody>
 

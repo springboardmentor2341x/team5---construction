@@ -152,6 +152,7 @@
 
     </div>
 
+<<<<<<< HEAD
     @for(category of workCategories; track category.name){
 
       <div class="category-item">
@@ -177,6 +178,26 @@
       </div>
 
     }
+=======
+<div *ngFor="let work of workCategories" class="work-item">
+
+  <div class="work-header">
+    <span>{{ work.category }}</span>
+
+    <span>
+      {{ work.progress_percentage }}%
+    </span>
+  </div>
+
+  <div class="progress-bar">
+    <div
+      class="progress-fill"
+      [style.width.%]="work.progress_percentage"
+    ></div>
+  </div>
+
+</div>
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
   </div>
 

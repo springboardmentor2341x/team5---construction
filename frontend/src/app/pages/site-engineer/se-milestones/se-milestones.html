@@ -90,6 +90,7 @@
 
       <tbody>
 
+<<<<<<< HEAD
         @for(milestone of milestones; track milestone.id){
 
         <tr>
@@ -99,6 +100,17 @@
           <td>{{ milestone.plannedDate }}</td>
 
           <td>{{ milestone.actualDate }}</td>
+=======
+        @for(milestone of milestones(); track milestone.milestone_id){
+
+        <tr>
+
+          <td>{{ milestone.milestone_name }}</td>
+
+          <td>{{ milestone.planned_start_date }}</td>
+
+          <td>{{ milestone.actual_start_date }}</td>
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
           <td>
 
@@ -106,13 +118,21 @@
 
               <div
                 class="progress-bar"
+<<<<<<< HEAD
                 [style.width.%]="milestone.progress">
+=======
+                [style.width.%]="milestone.progress_percentage">
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
               </div>
 
             </div>
 
+<<<<<<< HEAD
             <small>{{ milestone.progress }}%</small>
+=======
+            <small>{{ milestone.progress_percentage }}%</small>
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
           </td>
 
@@ -123,7 +143,11 @@
               [ngClass]="{
                 'completed': milestone.status==='Completed',
                 'progress': milestone.status==='In Progress',
+<<<<<<< HEAD
                 'pending': milestone.status==='Pending'
+=======
+                'pending': milestone.status==='Planning'
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
               }">
 
               {{ milestone.status }}
@@ -135,7 +159,11 @@
           <td>
 
             <button class="view-btn"
+<<<<<<< HEAD
             routerLink="/site-engineer/milestone-details"
+=======
+            [routerLink]="['/site-engineer/milestone-details',milestone.milestone_id]"
+>>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
             type="button"
             >
 

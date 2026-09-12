@@ -15,7 +15,19 @@
     color:#1e293b;
     margin-bottom:6px;
 }
+.delete-btn {
+  border: none;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
 
+.delete-btn:hover {
+  background: #fecaca;
+}
 .content-heading p{
     color:#64748b;
     font-size:15px;

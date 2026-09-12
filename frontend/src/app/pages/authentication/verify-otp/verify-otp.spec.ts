@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorkforceManagement } from './workforce-management';
+import { VerifyOtpComponent } from './verify-otp';
+import { server } from 'typescript';
 
-describe('WorkforceManagement', () => {
-  let component: WorkforceManagement;
-  let fixture: ComponentFixture<WorkforceManagement>;
+describe('VerifyOtpComponent', () => {
+  let component: VerifyOtpComponent;
+  let fixture: ComponentFixture<VerifyOtpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkforceManagement],
+      imports: [VerifyOtpComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WorkforceManagement);
+    fixture = TestBed.createComponent(VerifyOtpComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
