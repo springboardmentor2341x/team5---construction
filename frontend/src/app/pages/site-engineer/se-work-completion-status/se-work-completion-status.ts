@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component,OnInit,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  WorkCompletionStatusService,
+  WorkCategoryProgress
+} from '../../../services/work-completion-status.service';
 
 interface WorkCategory {
   name: string;
@@ -26,7 +30,13 @@ interface ProgressUpdate {
   templateUrl: './se-work-completion-status.html',
   styleUrl: './se-work-completion-status.css'
 })
-export class SeWorkCompletionStatus {
+export class SeWorkCompletionStatus implements OnInit {
+
+
+   private workCompletionService = inject(
+    WorkCompletionStatusService
+  );
+  constructor(private cdr:ChangeDetectorRef){}
 
   // =========================
   // SUMMARY
@@ -46,35 +56,43 @@ export class SeWorkCompletionStatus {
   // WORK CATEGORY PROGRESS
   // =========================
 
-  workCategories: WorkCategory[] = [
+   workCategories: WorkCategoryProgress[] = [];
 
-    {
-      name: 'Foundation Work',
-      progress: 100
-    },
+ isLoading = false;
+    ngOnInit(): void {
+    this.loadWorkCompletionStatus();
+  }
 
-    {
-      name: 'Structural Work',
-      progress: 80
-    },
+    loadWorkCompletionStatus(): void {
+    this.isLoading = true;
 
-    {
-      name: 'Electrical Work',
-      progress: 60
-    },
+    this.workCompletionService
+      .getWorkCategoryProgress()
+      .subscribe({
+        next: (data) => {
+          console.log('Work Category Progress:', data);
 
-    {
-      name: 'Plumbing Work',
-      progress: 40
-    },
+          this.workCategories = data;
 
-    {
-      name: 'Finishing Work',
-      progress: 20
-    }
+          this.isLoading = false;
+          this.cdr.detectChanges()
+        },
 
-  ];
+        error: (error) => {
+          console.error(
+            'Work Category Progress Error:',
+            error
+          );
 
+          this.isLoading = false;
+
+          alert(
+            error?.error?.detail ||
+            'Failed to load work completion status.'
+          );
+        }
+      });
+  }
   // =========================
   // MILESTONES
   // =========================
