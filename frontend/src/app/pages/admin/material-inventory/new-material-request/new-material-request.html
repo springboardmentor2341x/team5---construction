@@ -1,0 +1,160 @@
+<div class="request-page">
+
+  <div class="page-header">
+    <div>
+      <span class="section-label">MATERIAL & INVENTORY</span>
+      <h1>New Material Request</h1>
+      <p>Create a material request for a construction project.</p>
+    </div>
+
+    <button
+      class="back-btn"
+      routerLink="/material-requests">
+      ← Back to Requests
+    </button>
+  </div>
+
+
+  <div class="form-card">
+
+    <div class="form-section">
+      <h2>Request Details</h2>
+      <p>Provide the material and project requirements.</p>
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Material</label>
+
+        <select [(ngModel)]="request.material">
+          <option value="">Select Material</option>
+          <option>Cement</option>
+          <option>Steel</option>
+          <option>Bricks</option>
+          <option>Sand</option>
+          <option>Electrical Cable</option>
+          <option>Plumbing Pipes</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label>Project</label>
+
+        <select [(ngModel)]="request.project">
+          <option value="">Select Project</option>
+          <option>Hyderabad Commercial Complex</option>
+          <option>Government Hospital</option>
+          <option>Residential Apartments</option>
+          <option>Office Building</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label>Quantity</label>
+
+        <input
+          type="number"
+          [(ngModel)]="request.quantity"
+          placeholder="Enter quantity">
+      </div>
+
+
+      <div class="form-group">
+        <label>Unit</label>
+
+        <select [(ngModel)]="request.unit">
+          <option value="">Select Unit</option>
+          <option>Bags</option>
+          <option>Tons</option>
+          <option>Units</option>
+          <option>Meters</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label>Required Date</label>
+
+        <input
+          type="date"
+          [(ngModel)]="request.requiredDate">
+      </div>
+
+
+      <div class="form-group">
+        <label>Priority</label>
+
+        <select [(ngModel)]="request.priority">
+          <option value="">Select Priority</option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+          <option>Urgent</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="form-group full-width">
+      <label>Purpose / Remarks</label>
+
+      <textarea
+        [(ngModel)]="request.remarks"
+        rows="5"
+        placeholder="Enter the purpose of this material request...">
+      </textarea>
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="cancel-btn"
+        routerLink="/material-requests">
+        Cancel
+      </button>
+
+      <button
+        class="submit-btn"
+        (click)="submitRequest()">
+        Submit Request
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+@if (showSuccessPopup) {
+
+  <div class="popup-overlay">
+
+    <div class="success-popup">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h2>Request Submitted!</h2>
+
+      <p>
+        Your material request has been submitted successfully.
+      </p>
+
+      <button
+  class="ok-btn"
+  (click)="closePopup()"
+  routerLink="/material-requests">
+  OK
+</button>
+
+    </div>
+
+  </div>
+
+}
