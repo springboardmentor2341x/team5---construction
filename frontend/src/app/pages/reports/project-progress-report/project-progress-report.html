@@ -1,0 +1,697 @@
+ <div class="project-progress-page">
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+  <section class="page-header">
+
+    <div class="page-title">
+           <h1>Project Progress Report</h1>
+
+      <p>
+        Monitor project status, completion, milestones, work progress and delays.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="goBack()">
+        ← Reports
+      </button>
+
+      <button
+        class="btn btn-pdf"
+        type="button"
+        (click)="downloadPdf()">
+        ↓ Download PDF
+      </button>
+
+      <button
+        class="btn btn-excel"
+        type="button"
+        (click)="exportExcel()">
+        ↓ Export Excel
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FILTER PANEL
+  ========================== -->
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+
+      <div class="filter-icon">
+        ▤
+      </div>
+
+      <div>
+        <h2>Report Filters</h2>
+        <p>Select the project and reporting period.</p>
+      </div>
+
+    </div>
+
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+
+        <label for="project">
+          Project
+        </label>
+
+        <select
+          id="project"
+          [(ngModel)]="selectedProject">
+
+          <option value="All Projects">
+            All Projects
+          </option>
+
+          <option value="Chennai Commercial Complex">
+            Chennai Commercial Complex
+          </option>
+
+          <option value="Green Valley Residential Project">
+            Green Valley Residential Project
+          </option>
+
+          <option value="Metro Infrastructure Project">
+            Metro Infrastructure Project
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label for="period">
+          Reporting Period
+        </label>
+
+        <select
+          id="period"
+          [(ngModel)]="selectedPeriod">
+
+          <option value="Current Month">
+            Current Month
+          </option>
+
+          <option value="Last Month">
+            Last Month
+          </option>
+
+          <option value="Last 3 Months">
+            Last 3 Months
+          </option>
+
+          <option value="Current Year">
+            Current Year
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label for="status">
+          Project Status
+        </label>
+
+        <select
+          id="status"
+          [(ngModel)]="selectedStatus">
+
+          <option value="All Status">
+            All Status
+          </option>
+
+          <option value="On Track">
+            On Track
+          </option>
+
+          <option value="Delayed">
+            Delayed
+          </option>
+
+          <option value="Completed">
+            Completed
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="apply-btn"
+        type="button"
+        (click)="applyFilters()">
+
+        Apply Filters
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROJECT OVERVIEW
+  ========================== -->
+  <section class="project-overview">
+
+    <div class="overview-header">
+
+      <div class="project-heading">
+
+        <div class="project-icon">
+          P
+        </div>
+
+        <div>
+
+          <span class="section-label">
+            PROJECT OVERVIEW
+          </span>
+
+          <h2>{{ project.name }}</h2>
+
+          <p>
+            {{ project.code }} • {{ project.location }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <span
+        class="status-badge"
+        [class.on-track]="project.status === 'On Track'"
+        [class.delayed]="project.status === 'Delayed'"
+        [class.completed]="project.status === 'Completed'">
+
+        {{ project.status }}
+
+      </span>
+
+    </div>
+
+
+    <div class="overview-grid">
+
+      <div class="overview-item">
+
+        <span>Project Manager</span>
+        <strong>{{ project.manager }}</strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Planned Completion</span>
+        <strong>{{ project.plannedCompletion }}</strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Days Remaining</span>
+        <strong>{{ project.daysRemaining }} days</strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Overall Progress</span>
+        <strong>{{ project.progress }}%</strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Progress -->
+    <div class="overall-progress">
+
+      <div class="progress-header">
+
+        <span>
+          Overall Project Completion
+        </span>
+
+        <strong>
+          {{ project.progress }}%
+        </strong>
+
+      </div>
+
+      <div class="progress-track">
+
+        <div
+          class="progress-fill"
+          [style.width.%]="project.progress">
+        </div>
+
+      </div>
+
+      <div class="progress-footer">
+
+        <span>Project Progress</span>
+
+        <span>
+          {{ project.progress }}% completed
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROGRESS SUMMARY
+  ========================== -->
+  <section class="metrics-grid">
+
+    <div class="metric-card">
+
+      <div class="metric-icon">
+        %
+      </div>
+
+      <div class="metric-content">
+
+        <span>Work Completed</span>
+
+        <strong>
+          {{ workCompleted }}%
+        </strong>
+
+        <small>
+          Current completion
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric-card">
+
+      <div class="metric-icon">
+        ✓
+      </div>
+
+      <div class="metric-content">
+
+        <span>Milestones</span>
+
+        <strong>
+          {{ completedMilestones }}/{{ milestones.length }}
+        </strong>
+
+        <small>
+          Completed milestones
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric-card warning-card">
+
+      <div class="metric-icon">
+        !
+      </div>
+
+      <div class="metric-content">
+
+        <span>Delayed Activities</span>
+
+        <strong>
+          {{ delayedActivities }}
+        </strong>
+
+        <small>
+          Require attention
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric-card danger-card">
+
+      <div class="metric-icon">
+        ↗
+      </div>
+
+      <div class="metric-content">
+
+        <span>Days Behind</span>
+
+        <strong>
+          {{ daysBehind }}
+        </strong>
+
+        <small>
+          Against planned schedule
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MILESTONES
+  ========================== -->
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          PROJECT SCHEDULE
+        </span>
+
+        <h2>Milestone Progress</h2>
+
+        <p>
+          Planned and actual milestone completion status.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Milestone</th>
+            <th>Planned Date</th>
+            <th>Actual Date</th>
+            <th>Progress</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (milestone of milestones; track milestone.name) {
+
+            <tr>
+
+              <td>
+                <div class="item-name">
+
+                  <div class="table-icon">
+                    ✓
+                  </div>
+
+                  <div>
+                    <strong>{{ milestone.name }}</strong>
+                    <span>{{ milestone.description }}</span>
+                  </div>
+
+                </div>
+              </td>
+
+              <td>
+                {{ milestone.plannedDate }}
+              </td>
+
+              <td>
+                {{ milestone.actualDate || '—' }}
+              </td>
+
+              <td class="progress-cell">
+
+                <div class="mini-progress">
+
+                  <div
+                    class="mini-progress-fill"
+                    [style.width.%]="milestone.progress">
+                  </div>
+
+                </div>
+
+                <span>
+                  {{ milestone.progress }}%
+                </span>
+
+              </td>
+
+              <td>
+
+                <span
+                  class="table-status"
+                  [class.completed]="milestone.status === 'Completed'"
+                  [class.progress-status]="milestone.status === 'In Progress'"
+                  [class.delayed]="milestone.status === 'Delayed'">
+
+                  {{ milestone.status }}
+
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       WORK COMPLETION
+  ========================== -->
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          WORK COMPLETION
+        </span>
+
+        <h2>Work Completion Analysis</h2>
+
+        <p>
+          Compare planned work against actual completion.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Work Item</th>
+            <th>Planned</th>
+            <th>Actual</th>
+            <th>Variance</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (item of workItems; track item.name) {
+
+            <tr>
+
+              <td>
+                <strong>{{ item.name }}</strong>
+              </td>
+
+              <td>
+                {{ item.planned }}%
+              </td>
+
+              <td>
+                {{ item.actual }}%
+              </td>
+
+              <td>
+
+                <span
+                  class="variance"
+                  [class.positive]="item.variance >= 0"
+                  [class.negative]="item.variance < 0">
+
+                  {{ item.variance > 0 ? '+' : '' }}{{ item.variance }}%
+
+                </span>
+
+              </td>
+
+              <td>
+
+                <span
+                  class="table-status"
+                  [class.completed]="item.status === 'Completed'"
+                  [class.progress-status]="item.status === 'On Track'"
+                  [class.delayed]="item.status === 'Delayed'">
+
+                  {{ item.status }}
+
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DELAYS
+  ========================== -->
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          DELAY ANALYSIS
+        </span>
+
+        <h2>Project Delays</h2>
+
+        <p>
+          Activities affecting the planned project schedule.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="delay-list">
+
+      @for (delay of delays; track delay.activity) {
+
+        <div class="delay-card">
+
+          <div class="delay-icon">
+            !
+          </div>
+
+          <div class="delay-content">
+
+            <div class="delay-top">
+
+              <strong>
+                {{ delay.activity }}
+              </strong>
+
+              <span>
+                {{ delay.days }} days
+              </span>
+
+            </div>
+
+            <p>
+              {{ delay.reason }}
+            </p>
+
+            <small>
+              Impact: {{ delay.impact }}
+            </small>
+
+          </div>
+
+          <span class="delay-status">
+            {{ delay.status }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ACCESS NOTICE
+  ========================== -->
+  <section class="access-notice">
+
+    <div class="access-icon">
+      ✓
+    </div>
+
+    <div>
+
+      <strong>
+        Role-Based Report Access
+      </strong>
+
+      <p>
+        Report data is displayed according to your assigned role,
+        project access and permissions. Project Managers can access
+        reports for their assigned projects, while Administrators
+        can access system-level project reports.
+      </p>
+
+    </div>
+
+  </section>
+
+</div> 

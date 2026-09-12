@@ -1,0 +1,448 @@
+<div class="resource-utilization-page">
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+
+    <div class="page-title">
+
+          <h1>Resource Utilization Report</h1>
+
+      <p>
+        View resource allocation, utilization and availability
+        across construction projects.
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="btn btn-back"
+        type="button"
+        (click)="goBack()">
+        ← Back
+      </button>
+
+      <button
+        class="btn btn-pdf"
+        type="button"
+        (click)="downloadPdf()">
+        ↓ Download PDF
+      </button>
+
+      <button
+        class="btn btn-excel"
+        type="button"
+        (click)="exportExcel()">
+        ↓ Export Excel
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FILTER PANEL -->
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+
+      <div class="filter-icon">
+        ⚙
+      </div>
+
+      <div>
+        <h3>Report Filters</h3>
+        <span>Select project, period and resource category</span>
+      </div>
+
+    </div>
+
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+
+        <label for="project">
+          Project
+        </label>
+
+        <select
+          id="project"
+          [(ngModel)]="selectedProject">
+
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+          <option>All Projects</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label for="period">
+          Reporting Period
+        </label>
+
+        <select
+          id="period"
+          [(ngModel)]="selectedPeriod">
+
+          <option>Current Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+          <option>Current Year</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <label for="resource">
+          Resource
+        </label>
+
+        <select
+          id="resource"
+          [(ngModel)]="selectedResource">
+
+          <option>All Resources</option>
+          <option>Heavy Equipment</option>
+          <option>Construction Equipment</option>
+          <option>Transport</option>
+          <option>Power Equipment</option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="btn btn-apply"
+        type="button"
+        (click)="applyFilters()">
+
+        Apply Filters
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY -->
+  <section class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-top">
+
+        <span>Total Resources</span>
+
+        <div class="summary-icon">
+          ⚙
+        </div>
+
+      </div>
+
+      <strong>
+        {{ totalResources }}
+      </strong>
+
+      <p>
+        Resources available in system
+      </p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-top">
+
+        <span>Allocated Resources</span>
+
+        <div class="summary-icon">
+          ↗
+        </div>
+
+      </div>
+
+      <strong>
+        {{ allocatedResources }}
+      </strong>
+
+      <p>
+        Currently allocated
+      </p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-top">
+
+        <span>Available Resources</span>
+
+        <div class="summary-icon">
+          ✓
+        </div>
+
+      </div>
+
+      <strong>
+        {{ availableResources }}
+      </strong>
+
+      <p>
+        Available for allocation
+      </p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-top">
+
+        <span>Average Utilization</span>
+
+        <div class="summary-icon">
+          %
+        </div>
+
+      </div>
+
+      <strong>
+        {{ averageUtilization }}%
+      </strong>
+
+      <p>
+        Overall resource utilization
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- REPORT CONTENT -->
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          RESOURCE ANALYSIS
+        </span>
+
+        <h2>
+          Resource Utilization Details
+        </h2>
+
+        <p>
+          Resource allocation, usage and current availability.
+        </p>
+
+      </div>
+
+
+      <button
+        class="view-report-btn"
+        type="button"
+        (click)="viewReport()">
+
+        View Full Report →
+
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Resource ID</th>
+
+            <th>Resource</th>
+
+            <th>Category</th>
+
+            <th>Allocated</th>
+
+            <th>Utilized</th>
+
+            <th>Utilization</th>
+
+            <th>Availability</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let resource of resources">
+
+            <td>
+              <strong>
+                {{ resource.id }}
+              </strong>
+            </td>
+
+
+            <td>
+              <div class="resource-name">
+
+                <span class="resource-icon">
+                  ⚙
+                </span>
+
+                <span>
+                  {{ resource.name }}
+                </span>
+
+              </div>
+            </td>
+
+
+            <td>
+              {{ resource.category }}
+            </td>
+
+
+            <td>
+              {{ resource.allocated }}
+            </td>
+
+
+            <td>
+              {{ resource.utilized }}
+            </td>
+
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="progress-track">
+
+                  <div
+                    class="progress-bar"
+                    [style.width.%]="resource.utilization">
+                  </div>
+
+                </div>
+
+                <span>
+                  {{ resource.utilization }}%
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="availability-badge"
+                [class.full]="resource.availability === 'Fully Utilized'"
+                [class.available]="resource.availability === 'Available'">
+
+                {{ resource.availability }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="status-badge"
+                [class.maintenance]="resource.status === 'Maintenance'"
+                [class.active]="resource.status === 'Active'">
+
+                {{ resource.status }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- INSIGHT -->
+  <section class="insight-card">
+
+    <div class="insight-icon">
+      i
+    </div>
+
+    <div>
+
+      <h3>
+        Resource Utilization Insight
+      </h3>
+
+      <p>
+        Resource utilization is currently {{ averageUtilization }}%.
+        Highly utilized resources should be monitored to prevent
+        operational delays and maintenance issues.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ACCESS NOTICE -->
+  <section class="access-notice">
+
+    <div class="access-icon">
+      ✓
+    </div>
+
+    <div>
+
+      <strong>
+        Role-based report access
+      </strong>
+
+      <p>
+        Administrators can access system-level resource reports.
+        Project Managers can access resource reports for their
+        assigned projects.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

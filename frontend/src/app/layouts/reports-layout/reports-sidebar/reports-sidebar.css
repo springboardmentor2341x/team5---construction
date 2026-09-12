@@ -1,0 +1,256 @@
+/* =========================================
+   MODULE 10
+   REPORTS SIDEBAR
+   DARK PLUM + BURGUNDY
+========================================= */
+
+.reports-sidebar {
+  width: 260px;
+  min-width: 260px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #2F2430;
+  color: #ffffff;
+  border-right: 1px solid #453541;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #9F1239;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.brand-info h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-info span {
+  display: block;
+  margin-top: 3px;
+  color: #CFC1C9;
+  font-size: 10px;
+}
+
+
+/* =========================================
+   MODULE HEADER
+========================================= */
+
+.module-header {
+  padding: 25px 20px 11px;
+}
+
+.module-header span {
+  color: #B9AAB3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 7px 12px;
+}
+
+.sidebar-nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 45px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: #D0C4CB;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.sidebar-nav a:hover {
+  background: #453541;
+  color: #ffffff;
+}
+
+
+/* =========================================
+   ACTIVE
+========================================= */
+
+.sidebar-nav a.active {
+  background: #9F1239;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(159, 18, 57, 0.28);
+}
+
+
+/* =========================================
+   ACTIVE INDICATOR
+========================================= */
+
+.sidebar-nav a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 3px;
+  height: 25px;
+  border-radius: 0 4px 4px 0;
+  background: #F59E0B;
+}
+
+
+/* =========================================
+   ICONS
+========================================= */
+
+.nav-icon {
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+  font-size: 17px;
+}
+
+.nav-label {
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 18px 15px;
+}
+
+.security-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.security-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: rgba(159, 18, 57, 0.25);
+  color: #F59E0B;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.security-info strong {
+  display: block;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.security-info span {
+  display: block;
+  margin-top: 3px;
+  color: #B9AAB3;
+  font-size: 9px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 850px) {
+  .reports-sidebar {
+    width: 225px;
+    min-width: 225px;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .reports-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .brand-info,
+  .module-header,
+  .nav-label,
+  .security-info {
+    display: none;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+    padding: 20px 10px;
+  }
+
+  .sidebar-nav {
+    padding: 8px;
+  }
+
+  .sidebar-nav a {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidebar-footer {
+    padding: 10px;
+  }
+
+  .security-card {
+    justify-content: center;
+    padding: 10px;
+  }
+}

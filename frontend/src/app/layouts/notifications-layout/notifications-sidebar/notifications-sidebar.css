@@ -1,0 +1,548 @@
+/* =========================================
+   MODULE 8 - NOTIFICATIONS SIDEBAR
+   Light Purple Sidebar + Blue Active Buttons
+========================================= */
+
+.notifications-sidebar {
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #E6D9FF;
+  color: #334155;
+
+  border-right: 1px solid #D4C2F5;
+
+  position: sticky;
+  top: 0;
+
+  overflow-y: auto;
+}
+
+
+/* =========================================
+   BRAND HEADER
+========================================= */
+
+.sidebar-header {
+  height: 78px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border-bottom: 1px solid #D4C2F5;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 10px;
+
+  background: #2563EB;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.20);
+}
+
+.brand-info h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+
+  color: #1E3A8A;
+}
+
+.brand-info span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
+  color: #6B5B95;
+}
+
+
+/* =========================================
+   MODULE TITLE
+========================================= */
+
+.module-title {
+  padding: 24px 20px 10px;
+}
+
+.module-title span {
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  color: #6B5B95;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-nav {
+  padding: 6px 12px;
+}
+
+.nav-item {
+  min-height: 46px;
+
+  margin-bottom: 4px;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color: #475569;
+
+  text-decoration: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.nav-item:hover {
+  background: #D8C7F5;
+  color: #1E3A8A;
+}
+
+
+/* =========================================
+   ACTIVE BUTTON
+   ALL THREE BUTTONS BECOME BLUE
+========================================= */
+
+.nav-item.active,
+.nav-item.router-link-active {
+  background: #2563EB !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 4px 10px rgba(37, 99, 235, 0.25);
+
+  border-radius: 8px;
+}
+
+
+/* ACTIVE HOVER */
+
+.nav-item.active:hover,
+.nav-item.router-link-active:hover {
+  background: #1D4ED8 !important;
+  color: #ffffff !important;
+}
+
+
+/* ACTIVE ICON */
+
+.nav-item.active .nav-icon,
+.nav-item.router-link-active .nav-icon {
+  color: #ffffff !important;
+}
+
+
+/* ACTIVE TEXT */
+
+.nav-item.active .nav-text,
+.nav-item.router-link-active .nav-text {
+  color: #ffffff !important;
+}
+
+
+/* =========================================
+   NAVIGATION ICON
+========================================= */
+
+.nav-icon {
+  width: 22px;
+
+  display: flex;
+  justify-content: center;
+
+  font-size: 16px;
+
+  color: #64748B;
+}
+
+
+/* =========================================
+   NAVIGATION TEXT
+========================================= */
+
+.nav-text {
+  flex: 1;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   UNREAD BADGE
+========================================= */
+
+.unread-badge {
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #EF4444;
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* Keep badge visible when button is active */
+
+.nav-item.active .unread-badge,
+.nav-item.router-link-active .unread-badge {
+  background: #ffffff;
+  color: #2563EB;
+}
+
+
+/* =========================================
+   NOTIFICATION CATEGORIES
+========================================= */
+
+.category-section {
+  margin-top: 12px;
+  padding: 0 12px;
+}
+
+.section-title {
+  padding: 14px 8px 10px;
+
+  color: #6B5B95;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.category-item {
+  min-height: 38px;
+
+  padding: 0 8px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #5F5475;
+
+  font-size: 12px;
+
+  border-radius: 7px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.category-item:hover {
+  background: #D8C7F5;
+  color: #1E3A8A;
+}
+
+
+/* =========================================
+   CATEGORY ICONS
+========================================= */
+
+.category-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+}
+
+.category-icon.project {
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.category-icon.task {
+  background: #DCFCE7;
+  color: #16A34A;
+}
+
+.category-icon.procurement {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.category-icon.attendance {
+  background: #CFFAFE;
+  color: #0891B2;
+}
+
+.category-icon.deadline {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.category-icon.system {
+  background: #E2E8F0;
+  color: #475569;
+}
+
+
+/* =========================================
+   BOTTOM SECTION
+========================================= */
+
+.sidebar-bottom {
+  margin-top: auto;
+
+  padding: 14px 12px 16px;
+
+  border-top: 1px solid #D4C2F5;
+}
+
+
+/* =========================================
+   HELP BOX
+========================================= */
+
+.help-box {
+  margin-bottom: 14px;
+
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: #DCCCF7;
+
+  border: 1px solid #D0BDF0;
+
+  border-radius: 9px;
+}
+
+.help-icon {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2563EB;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.help-box strong {
+  display: block;
+
+  font-size: 11px;
+
+  color: #1E3A8A;
+}
+
+.help-box span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 9px;
+
+  color: #6B5B95;
+}
+
+
+/* =========================================
+   USER FOOTER
+========================================= */
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 8px;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2563EB;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.user-info {
+  min-width: 0;
+}
+
+.user-info strong {
+  display: block;
+
+  font-size: 11px;
+
+  color: #1E3A8A;
+}
+
+.user-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 9px;
+
+  color: #6B5B95;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.notifications-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.notifications-sidebar::-webkit-scrollbar-track {
+  background: #E6D9FF;
+}
+
+.notifications-sidebar::-webkit-scrollbar-thumb {
+  background: #B9A4E8;
+  border-radius: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .notifications-sidebar {
+    width: 230px;
+    min-width: 230px;
+  }
+
+  .brand-info span {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .notifications-sidebar {
+    width: 70px;
+    min-width: 70px;
+  }
+
+  .brand-info,
+  .module-title,
+  .nav-text,
+  .unread-badge,
+  .section-title,
+  .category-item span:last-child,
+  .help-box,
+  .user-info {
+    display: none;
+  }
+
+  .sidebar-header {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .category-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidebar-bottom {
+    padding: 10px 8px;
+  }
+
+  .sidebar-footer {
+    justify-content: center;
+  }
+}

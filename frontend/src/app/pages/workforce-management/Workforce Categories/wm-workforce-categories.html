@@ -1,0 +1,500 @@
+<div class="categories-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Workforce Categories</h1>
+
+      <p>
+        Manage workforce categories, worker types, skill levels,
+        wage information and workforce classification.
+      </p>
+    </div>
+
+    <button
+      class="primary-button"
+      type="button"
+      (click)="openAddCategory()">
+
+      <span class="material-icons">add</span>
+
+      Add Category
+
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+        <span class="material-icons">groups</span>
+      </div>
+
+      <div>
+        <span>Total Categories</span>
+        <h2>{{ totalCategories }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+        <span class="material-icons">person</span>
+      </div>
+
+      <div>
+        <span>Total Workers</span>
+        <h2>{{ totalWorkers }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+        <span class="material-icons">engineering</span>
+      </div>
+
+      <div>
+        <span>Skilled Workers</span>
+        <h2>{{ skilledWorkers }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+        <span class="material-icons">verified</span>
+      </div>
+
+      <div>
+        <span>Active Categories</span>
+        <h2>{{ activeCategories }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD / UPDATE CATEGORY -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Workforce Category Setup</h2>
+
+        <p>
+          Define workforce type, skill level, worker count and wage details.
+        </p>
+      </div>
+
+      <span class="material-icons header-icon">
+        category
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- CATEGORY NAME -->
+
+      <div class="form-group">
+
+        <label>
+          Category Name <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="categoryName"
+          placeholder="Enter category name">
+
+      </div>
+
+
+      <!-- WORKFORCE TYPE -->
+
+      <div class="form-group">
+
+        <label>
+          Workforce Type <span>*</span>
+        </label>
+
+        <select [(ngModel)]="workforceType">
+
+          <option value="">
+            Select Workforce Type
+          </option>
+
+          <option value="Skilled">
+            Skilled
+          </option>
+
+          <option value="Semi-Skilled">
+            Semi-Skilled
+          </option>
+
+          <option value="Unskilled">
+            Unskilled
+          </option>
+
+          <option value="Technical">
+            Technical
+          </option>
+
+          <option value="Supervisory">
+            Supervisory
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SKILL LEVEL -->
+
+      <div class="form-group">
+
+        <label>
+          Skill Level
+        </label>
+
+        <select [(ngModel)]="skillLevel">
+
+          <option value="">
+            Select Skill Level
+          </option>
+
+          <option value="Beginner">
+            Beginner
+          </option>
+
+          <option value="Intermediate">
+            Intermediate
+          </option>
+
+          <option value="Advanced">
+            Advanced
+          </option>
+
+          <option value="Expert">
+            Expert
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORKER COUNT -->
+
+      <div class="form-group">
+
+        <label>
+          Number of Workers
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="workerCount"
+          min="0"
+          placeholder="Enter worker count">
+
+      </div>
+
+
+      <!-- DAILY WAGE -->
+
+      <div class="form-group">
+
+        <label>
+          Daily Wage
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="dailyWage"
+          min="0"
+          placeholder="Enter daily wage">
+
+      </div>
+
+
+      <!-- OVERTIME RATE -->
+
+      <div class="form-group">
+
+        <label>
+          Overtime Rate
+        </label>
+
+        <input
+          type="number"
+          [(ngModel)]="overtimeRate"
+          min="0"
+          placeholder="Enter overtime rate">
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="form-group">
+
+        <label>
+          Status
+        </label>
+
+        <select [(ngModel)]="categoryStatus">
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Inactive">
+            Inactive
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- DESCRIPTION -->
+
+      <div class="form-group full-width">
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+          [(ngModel)]="description"
+          rows="3"
+          placeholder="Enter category description">
+        </textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="clearForm()">
+
+        Cancel
+
+      </button>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="saveCategory()">
+
+        <span class="material-icons">save</span>
+
+        Save Category
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CATEGORY LIST -->
+
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Workforce Category List</h2>
+
+        <p>
+          View and manage workforce categories used across construction projects.
+        </p>
+      </div>
+
+      <button
+        class="filter-button"
+        type="button"
+        (click)="filterCategories()">
+
+        <span class="material-icons">filter_list</span>
+
+        Filter
+
+      </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Category ID</th>
+            <th>Category</th>
+            <th>Workforce Type</th>
+            <th>Skill Level</th>
+            <th>Workers</th>
+            <th>Daily Wage</th>
+            <th>Overtime Rate</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let category of categories">
+
+            <td class="category-id">
+              {{ category.id }}
+            </td>
+
+            <td>
+              <strong>{{ category.name }}</strong>
+            </td>
+
+            <td>
+              {{ category.type }}
+            </td>
+
+            <td>
+              <span class="skill-badge">
+                {{ category.skillLevel }}
+              </span>
+            </td>
+
+            <td>
+              <span class="worker-count">
+                <span class="material-icons">groups</span>
+                {{ category.workers }}
+              </span>
+            </td>
+
+            <td class="amount">
+              ₹{{ category.dailyWage | number }}
+            </td>
+
+            <td class="amount">
+              ₹{{ category.overtimeRate | number }}
+            </td>
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="getStatusClass(category.status)">
+
+                {{ category.status }}
+
+              </span>
+
+            </td>
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="View"
+                  (click)="viewCategory(category)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="Edit"
+                  (click)="editCategory(category)">
+
+                  <span class="material-icons">
+                    edit
+                  </span>
+
+                </button>
+
+                <button
+                  class="icon-button delete-button"
+                  type="button"
+                  title="Delete"
+                  (click)="deleteCategory(category)">
+
+                  <span class="material-icons">
+                    delete
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <tr *ngIf="categories.length === 0">
+
+            <td
+              colspan="9"
+              class="empty-state">
+
+              <span class="material-icons">
+                category
+              </span>
+
+              <h3>No Workforce Categories Found</h3>
+
+              <p>
+                Add a workforce category to get started.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

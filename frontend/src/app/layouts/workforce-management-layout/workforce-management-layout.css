@@ -1,0 +1,39 @@
+.workforce-layout {
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+
+/* MAIN AREA */
+
+.main-area {
+  min-height: 100vh;
+  margin-left: 270px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* CONTENT */
+
+.page-content {
+  flex: 1;
+
+  padding: 28px 30px;
+
+  box-sizing: border-box;
+
+  background: #f1f5f9;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .main-area {
+    margin-left: 0;
+  }
+
+}

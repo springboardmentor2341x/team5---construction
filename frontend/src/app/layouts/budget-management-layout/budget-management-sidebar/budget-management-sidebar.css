@@ -1,0 +1,317 @@
+/* =========================================
+   MODULE 11 - BUDGET & COST MANAGEMENT
+   SIDEBAR
+========================================= */
+
+.bc-sidebar {
+  width: 260px;
+  min-width: 260px;
+
+  height: 100vh;
+  min-height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: #2b1620;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 22px 14px;
+  box-sizing: border-box;
+
+  border-right: 1px solid #4a2530;
+
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.bc-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 8px 10px 25px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 10px;
+
+  background: #b45309;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  box-shadow: 0 5px 15px rgba(180, 83, 9, 0.25);
+
+  flex-shrink: 0;
+}
+
+.brand-text h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.brand-text span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #e7c58a;
+  font-size: 11px;
+}
+
+/* =========================================
+   SIDEBAR SECTION
+========================================= */
+
+.sidebar-section {
+  padding-top: 25px;
+}
+
+.section-title {
+  display: block;
+
+  padding: 0 12px 10px;
+
+  color: #d6a85f;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+}
+
+/* =========================================
+   SIDEBAR LINKS
+========================================= */
+
+.sidebar-link {
+  height: 46px;
+
+  margin: 4px 0;
+  padding: 0 12px;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  color: #f3e4c7;
+  background: transparent;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HOVER
+========================================= */
+
+.sidebar-link:hover {
+  background: #4a2530;
+
+  color: #ffffff;
+
+  border-color: #6b3543;
+}
+
+/* =========================================
+   ACTIVE LINK
+   GOLD ACTIVE BUTTON
+========================================= */
+
+.sidebar-link.active {
+  background: #d6a85f;
+
+  color: #2b1620;
+
+  border: 1px solid #e7c58a;
+
+  box-shadow:
+    0 5px 14px rgba(214, 168, 95, 0.30);
+
+  font-weight: 700;
+}
+
+.sidebar-link.active .nav-icon {
+  color: #2b1620;
+}
+
+/* =========================================
+   NAVIGATION ICON
+========================================= */
+
+.nav-icon {
+  width: 20px;
+
+  text-align: center;
+
+  font-size: 17px;
+
+  color: #d6a85f;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+   BOTTOM SECTION
+========================================= */
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* =========================================
+   SECURE ACCESS
+========================================= */
+
+.security-box {
+  margin: 20px 4px;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: #3a2029;
+
+  border: 1px solid #5a303c;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.security-icon {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+
+  flex-shrink: 0;
+}
+
+.security-box strong {
+  display: block;
+
+  color: #fffaf0;
+
+  font-size: 11px;
+}
+
+.security-box small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #d6b98c;
+
+  font-size: 9px;
+}
+
+/* =========================================
+   MODULE VERSION
+========================================= */
+
+.module-version {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 12px;
+
+  color: #c99b52;
+
+  font-size: 10px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .bc-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .bc-sidebar {
+    width: 70px;
+    min-width: 70px;
+
+    padding: 15px 8px;
+  }
+
+  .brand-text,
+  .section-title,
+  .sidebar-link span:not(.nav-icon),
+  .security-box div:not(.security-icon),
+  .module-version {
+    display: none;
+  }
+
+  .bc-brand {
+    justify-content: center;
+  }
+
+  .sidebar-link {
+    justify-content: center;
+  }
+
+  .security-box {
+    justify-content: center;
+  }
+
+}

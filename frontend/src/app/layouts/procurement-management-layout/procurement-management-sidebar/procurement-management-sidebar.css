@@ -1,0 +1,455 @@
+/* =========================================================
+   PROCUREMENT SIDEBAR
+   Professional Teal + Deep Navy Theme
+   ========================================================= */
+
+.sidebar {
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+  min-height: 100vh;
+
+  background: #12343b;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+
+  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+
+  border-right: 1px solid #28545b;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.12);
+
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+   ========================================================= */
+
+.sidebar-header {
+  padding: 24px 20px;
+  min-height: 88px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+
+  border-radius: 11px;
+
+  background: #20b2aa;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  box-shadow: 0 5px 14px rgba(32, 178, 170, 0.28);
+}
+
+.logo-text h2 {
+  margin: 0;
+
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.logo-text span {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+  line-height: 1.2;
+
+  color: #a9c4c7;
+}
+
+
+/* =========================================================
+   MODULE TITLE
+   ========================================================= */
+
+.module-title {
+  padding: 25px 20px 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  color: #76c7c2;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.navigation {
+  padding: 0 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.nav-item {
+  position: relative;
+
+  width: 100%;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 12px 15px;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  color: #c5d8da;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  line-height: 1.3;
+
+  box-sizing: border-box;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* Hover */
+
+.nav-item:hover {
+  background: #1d4b52;
+  color: #ffffff;
+
+  transform: translateX(2px);
+}
+
+
+/* Active */
+
+.nav-item.active {
+  background: #20a89f;
+  color: #ffffff;
+
+  font-weight: 600;
+
+  box-shadow: 0 5px 14px rgba(32, 168, 159, 0.22);
+}
+
+
+/* Active left indicator */
+
+.nav-item.active::before {
+  content: '';
+
+  position: absolute;
+
+  left: -12px;
+  top: 7px;
+  bottom: 7px;
+
+  width: 4px;
+
+  border-radius: 0 4px 4px 0;
+
+  background: #8ee7df;
+}
+
+
+/* =========================================================
+   NAV ICON
+   ========================================================= */
+
+.nav-icon {
+  width: 24px;
+  min-width: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  font-size: 18px;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   NAV TEXT
+   ========================================================= */
+
+.nav-text {
+  white-space: nowrap;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+  margin-top: auto;
+
+  padding: 18px 16px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HELP BOX
+   ========================================================= */
+
+.help-box {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 11px;
+
+  background: #173f46;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  box-sizing: border-box;
+}
+
+
+.help-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  border-radius: 50%;
+
+  background: #235962;
+
+  color: #a9e2de;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+.help-content {
+  min-width: 0;
+}
+
+
+.help-box strong {
+  display: block;
+
+  font-size: 13px;
+  line-height: 1.3;
+
+  color: #ffffff;
+}
+
+
+.help-box span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  color: #9bbabd;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #12343b;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #31656b;
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #4b858a;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   PROCUREMENT LAYOUT MUST LEAVE SPACE FOR FIXED SIDEBAR
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  :host {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .nav-item {
+    font-size: 13px;
+  }
+
+  .nav-text {
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .sidebar {
+    width: 76px;
+    min-width: 76px;
+  }
+
+  :host {
+    width: 76px;
+    min-width: 76px;
+  }
+
+  .sidebar-header {
+    padding: 18px 10px;
+    justify-content: center;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .module-title {
+    display: none;
+  }
+
+  .navigation {
+    padding: 0 9px;
+  }
+
+  .nav-item {
+    justify-content: center;
+
+    padding: 13px 8px;
+
+    min-height: 48px;
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .nav-icon {
+    font-size: 19px;
+  }
+
+  .nav-item.active::before {
+    left: -9px;
+  }
+
+  .sidebar-footer {
+    padding: 10px;
+  }
+
+  .help-box {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .help-content {
+    display: none;
+  }
+}

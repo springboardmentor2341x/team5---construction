@@ -1,0 +1,263 @@
+<aside class="dashboard-sidebar">
+
+  <!-- =========================================
+       BRAND
+  ========================================== -->
+  <div class="sidebar-brand">
+
+    <div class="brand-icon">
+      <span>BT</span>
+    </div>
+
+    <div class="brand-details">
+      <h2>BuildTrack</h2>
+      <span>Dashboard &amp; Analytics</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       ROLE
+  ========================================== -->
+  <div class="role-section">
+
+    <div class="role-avatar">
+      <span>{{ userInitial }}</span>
+    </div>
+
+    <div class="role-info">
+      <span class="role-label">Logged in as</span>
+      <strong>{{ userRole }}</strong>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       NAVIGATION
+  ========================================== -->
+  <nav class="sidebar-navigation">
+
+    <div class="navigation-title">
+      MAIN MENU
+    </div>
+
+
+    <!-- =====================================
+         PROJECT MANAGER
+    ====================================== -->
+    <ng-container *ngIf="userRole === 'Project Manager'">
+
+      <!-- Dashboard -->
+      <a
+        routerLink="/dashboard-and-analytics/project-manager"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">Dashboard</span>
+
+      </a>
+
+
+      <!-- My Projects -->
+      <a
+        routerLink="/project-manager/my-projects"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">▤</span>
+        <span class="nav-label">My Projects</span>
+
+      </a>
+
+
+      <!-- Resources -->
+      <a
+        routerLink="/resource-management/dashboard"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">⚙</span>
+        <span class="nav-label">Resources</span>
+
+      </a>
+
+
+      <!-- Workforce -->
+      <a
+        routerLink="/workforce-management/dashboard"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">♟</span>
+        <span class="nav-label">Workforce</span>
+
+      </a>
+
+
+      <!-- Procurement -->
+      <a
+        routerLink="/procurement-management/dashboard"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">▱</span>
+        <span class="nav-label">Procurement</span>
+
+      </a>
+
+
+      <!-- Budget & Cost -->
+      <a
+        routerLink="/budget-management/dashboard"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">₹</span>
+        <span class="nav-label">Budget &amp; Cost</span>
+
+      </a>
+
+
+      <!-- Reports -->
+      <a
+        routerLink="/project-manager/reports"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Reports</span>
+
+      </a>
+
+    </ng-container>
+
+
+    <!-- =====================================
+         ADMINISTRATOR
+    ====================================== -->
+    <ng-container *ngIf="userRole === 'Administrator'">
+
+      <!-- Dashboard -->
+      <a
+        routerLink="/dashboard-and-analytics/admin"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">Dashboard</span>
+
+      </a>
+
+
+      <!-- User Management -->
+      <a
+        routerLink="/admin/user-details"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">♟</span>
+        <span class="nav-label">User Management</span>
+
+      </a>
+
+
+      <!-- Project Monitoring -->
+      <a
+        routerLink="/admin/projects"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">▤</span>
+        <span class="nav-label">Project Monitoring</span>
+
+      </a>
+
+
+      <!-- System Analytics -->
+<a
+  routerLink="/admin/analytics"
+  routerLinkActive="active"
+  class="nav-item">
+
+  <span class="nav-icon">◫</span>
+  <span class="nav-label">System Analytics</span>
+
+</a>
+
+
+      <!-- Reports Management -->
+      <a
+        routerLink="/admin/report"
+        routerLinkActive="active"
+        class="nav-item">
+
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Reports Management</span>
+
+      </a>
+
+
+ <!-- Activity Monitoring -->
+<a
+  routerLink="/admin/audit-logs"
+  routerLinkActive="active"
+  class="nav-item">
+
+  <span class="nav-icon">◷</span>
+  <span class="nav-label">Activity Monitoring</span>
+
+</a>
+    
+
+
+    </ng-container>
+
+
+    <!-- =========================================
+         SYSTEM
+    ========================================== -->
+    <div class="navigation-title secondary-title">
+      SYSTEM
+    </div>
+
+
+    <!-- Notifications -->
+    <a
+      routerLink="/notifications"
+      routerLinkActive="active"
+      class="nav-item">
+
+      <span class="nav-icon notification-icon">♢</span>
+      <span class="nav-label">Notifications</span>
+
+      <span class="notification-badge">3</span>
+
+    </a>
+
+  </nav>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+  <div class="sidebar-footer">
+
+    <div class="security-status">
+
+      <span class="status-dot"></span>
+
+      <div>
+        <strong>System Online</strong>
+        <small>BuildTrack</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</aside>

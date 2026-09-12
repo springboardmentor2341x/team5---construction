@@ -1,0 +1,1598 @@
+/* =====================================================
+   PROCUREMENT REPORTS PAGE
+===================================================== */
+
+.reports-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 28px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  color: #1f2937;
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 26px;
+}
+
+.page-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+
+/* =====================================================
+   SUMMARY GRID
+===================================================== */
+
+.summary-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+
+  width: 100%;
+}
+
+.summary-card {
+  min-height: 105px;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  overflow: hidden;
+}
+
+
+/* Card content */
+.summary-card > div:last-child {
+  min-width: 0;
+  flex: 1;
+}
+
+
+/* Summary icon */
+.summary-icon {
+  width: 44px;
+
+  height: 44px;
+
+  min-width: 44px;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.summary-icon.total {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.summary-icon.generated {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.summary-icon.requests {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.summary-icon.orders {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.summary-icon.amount {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.summary-icon.pending {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+
+/* Summary text */
+.summary-card span {
+  display: block;
+
+  font-size: 12px;
+
+  color: #64748b;
+
+  margin-bottom: 5px;
+
+  white-space: nowrap;
+}
+
+.summary-card strong {
+  display: block;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  white-space: nowrap;
+
+  overflow: visible;
+
+  text-overflow: clip;
+}
+
+
+/* Currency cards */
+.summary-card:has(.summary-icon.amount) strong,
+.summary-card:has(.summary-icon.pending) strong {
+  font-size: 17px;
+
+  letter-spacing: -0.4px;
+}
+
+
+/* =====================================================
+   FILTER SECTION
+===================================================== */
+
+.filter-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  padding: 16px;
+
+  margin-bottom: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  box-sizing: border-box;
+}
+
+.search-box {
+  flex: 1;
+
+  min-width: 260px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+.search-box span {
+  font-size: 20px;
+
+  color: #64748b;
+
+  flex-shrink: 0;
+}
+
+.search-box input {
+  width: 100%;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-size: 13px;
+
+  color: #1f2937;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.filter-card select {
+  height: 42px;
+
+  min-width: 160px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #374151;
+
+  font-size: 13px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.filter-card select:focus,
+.search-box:focus-within {
+  border-color: #6366f1;
+}
+
+.clear-btn {
+  height: 42px;
+
+  padding: 0 16px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #475569;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  white-space: nowrap;
+}
+
+.clear-btn:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.table-card {
+  width: 100%;
+
+  max-width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  box-sizing: border-box;
+}
+
+.table-header {
+  min-height: 82px;
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  box-sizing: border-box;
+}
+
+.table-header h2 {
+  margin: 0;
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.table-header p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  color: #64748b;
+}
+
+.record-count {
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+  width: 100%;
+
+  max-width: 100%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+.table-wrapper table {
+  width: 100%;
+
+  max-width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   COLUMN WIDTHS
+===================================================== */
+
+/* Report ID */
+.table-wrapper th:nth-child(1),
+.table-wrapper td:nth-child(1) {
+  width: 7%;
+}
+
+/* Report */
+.table-wrapper th:nth-child(2),
+.table-wrapper td:nth-child(2) {
+  width: 13%;
+}
+
+/* Report Type */
+.table-wrapper th:nth-child(3),
+.table-wrapper td:nth-child(3) {
+  width: 10%;
+}
+
+/* Project */
+.table-wrapper th:nth-child(4),
+.table-wrapper td:nth-child(4) {
+  width: 9%;
+}
+
+/* Period */
+.table-wrapper th:nth-child(5),
+.table-wrapper td:nth-child(5) {
+  width: 8%;
+}
+
+/* Requests */
+.table-wrapper th:nth-child(6),
+.table-wrapper td:nth-child(6) {
+  width: 10%;
+}
+
+/* Purchase Orders */
+.table-wrapper th:nth-child(7),
+.table-wrapper td:nth-child(7) {
+  width: 8%;
+}
+
+/* Invoice Amount */
+.table-wrapper th:nth-child(8),
+.table-wrapper td:nth-child(8) {
+  width: 8%;
+}
+
+/* Pending Amount */
+.table-wrapper th:nth-child(9),
+.table-wrapper td:nth-child(9) {
+  width: 8%;
+}
+
+/* Status */
+.table-wrapper th:nth-child(10),
+.table-wrapper td:nth-child(10) {
+  width: 8%;
+}
+
+/* Generated Date */
+.table-wrapper th:nth-child(11),
+.table-wrapper td:nth-child(11) {
+  width: 6%;
+}
+
+/* Actions */
+.table-wrapper th:nth-child(12),
+.table-wrapper td:nth-child(12) {
+  width: 5%;
+}
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+thead {
+  background: #f8fafc;
+}
+
+.table-wrapper th {
+  padding: 12px 5px;
+
+  text-align: left;
+
+  vertical-align: middle;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.1px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+
+  word-break: normal;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   TABLE BODY
+===================================================== */
+
+.table-wrapper td {
+  padding: 13px 5px;
+
+  vertical-align: middle;
+
+  font-size: 11px;
+
+  line-height: 1.35;
+
+  color: #374151;
+
+  border-bottom: 1px solid #eef2f7;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+
+  word-break: normal;
+
+  box-sizing: border-box;
+}
+
+tbody tr:hover {
+  background: #fafbff;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =====================================================
+   REPORT ID
+===================================================== */
+
+.report-id {
+  display: inline-block;
+
+  padding: 4px 5px;
+
+  border-radius: 6px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   REPORT INFORMATION
+===================================================== */
+
+.report-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 0;
+
+  width: 100%;
+}
+
+.report-icon {
+  width: 28px;
+
+  height: 28px;
+
+  min-width: 28px;
+
+  border-radius: 7px;
+
+  background: #eef2ff;
+
+  color: #4f46e5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.report-info > div:last-child {
+  min-width: 0;
+
+  width: 100%;
+}
+
+.report-info strong {
+  display: block;
+
+  color: #1f2937;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
+}
+
+.report-info small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #94a3b8;
+
+  font-size: 8px;
+
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   REPORT TYPE
+===================================================== */
+
+.type-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  max-width: 100%;
+
+  padding: 4px 5px;
+
+  border-radius: 6px;
+
+  font-size: 8px;
+
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.type-summary {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.type-vendor {
+  background: #ecfeff;
+  color: #0891b2;
+}
+
+.type-purchase-order {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.type-invoice {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.type-category {
+  background: #fdf4ff;
+  color: #a21caf;
+}
+
+.type-project {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.type-pending {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+
+/* =====================================================
+   PROJECT
+===================================================== */
+
+.project-text {
+  display: block;
+
+  color: #374151;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   PERIOD
+===================================================== */
+
+.period-text {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   REQUEST INFORMATION
+===================================================== */
+
+.request-info {
+  min-width: 0;
+
+  width: 100%;
+}
+
+.request-info strong {
+  display: block;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+
+  color: #111827;
+
+  white-space: nowrap;
+}
+
+.request-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #94a3b8;
+
+  font-size: 8px;
+
+  line-height: 1.3;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+}
+
+
+/* =====================================================
+   NUMBERS
+===================================================== */
+
+.number-text {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #1f2937;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   AMOUNTS
+===================================================== */
+
+.amount-text {
+  display: block;
+
+  color: #047857;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: normal;
+
+  overflow: visible;
+
+  text-overflow: clip;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
+}
+
+.pending-amount {
+  display: block;
+
+  color: #dc2626;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: normal;
+
+  overflow: visible;
+
+  text-overflow: clip;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.table-wrapper th:nth-child(10),
+.table-wrapper td:nth-child(10) {
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 60px;
+
+  height: 26px;
+
+  padding: 0 5px;
+
+  box-sizing: border-box;
+
+  border-radius: 20px;
+
+  font-size: 8px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  word-break: keep-all;
+}
+
+.status-generated {
+  background: #ecfdf5;
+
+  color: #047857;
+}
+
+.status-processing {
+  background: #fff7ed;
+
+  color: #c2410c;
+}
+
+.status-pending {
+  background: #fef2f2;
+
+  color: #dc2626;
+}
+
+
+/* =====================================================
+   GENERATED DATE
+===================================================== */
+
+.table-wrapper th:nth-child(11),
+.table-wrapper td:nth-child(11) {
+  text-align: center;
+}
+
+.date-text {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 9px;
+
+  line-height: 1.3;
+
+  /*
+    Keep date together.
+    It will never become:
+    2026-08-
+    28
+  */
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   ACTION BUTTON
+===================================================== */
+
+.table-wrapper th:nth-child(12),
+.table-wrapper td:nth-child(12) {
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 100%;
+
+  white-space: nowrap;
+}
+
+.action-buttons button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 42px;
+
+  min-width: 42px;
+
+  height: 28px;
+
+  padding: 0;
+
+  border-radius: 6px;
+
+  font-size: 9px;
+
+  line-height: 1;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  word-break: keep-all;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.view-btn {
+  border: 1px solid #c7d2fe;
+
+  background: #eef2ff;
+
+  color: #4338ca;
+}
+
+.view-btn:hover {
+  background: #e0e7ff;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-row td {
+  padding: 0;
+}
+
+.empty-state {
+  padding: 60px 20px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 50px;
+
+  height: 50px;
+
+  margin: 0 auto 12px;
+
+  border-radius: 12px;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  color: #374151;
+
+  font-size: 17px;
+}
+
+.empty-state p {
+  margin: 6px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.report-modal {
+  width: 100%;
+
+  max-width: 850px;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.modal-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  padding: 22px 24px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #6366f1;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 20px;
+}
+
+.modal-header p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.close-btn {
+  width: 34px;
+
+  height: 34px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 21px;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #e2e8f0;
+}
+
+
+/* =====================================================
+   DETAILS GRID
+===================================================== */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+
+  padding: 24px;
+}
+
+.detail-item {
+  padding: 14px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  min-width: 0;
+}
+
+.detail-item span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.detail-item strong {
+  display: block;
+
+  color: #1f2937;
+
+  font-size: 13px;
+
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   MODAL FOOTER
+===================================================== */
+
+.modal-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 16px 24px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-btn {
+  height: 38px;
+
+  padding: 0 17px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #f8fafc;
+}
+
+
+/* =====================================================
+   RESPONSIVE - 1400px
+===================================================== */
+
+@media (max-width: 1400px) {
+
+  .summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - 1100px
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  th {
+    font-size: 9px;
+
+    padding: 10px 4px;
+  }
+
+  td {
+    font-size: 10px;
+
+    padding: 11px 4px;
+  }
+
+  .report-info strong {
+    font-size: 10px;
+  }
+
+  .project-text,
+  .period-text {
+    font-size: 9px;
+  }
+
+  .amount-text,
+  .pending-amount {
+    font-size: 9px;
+  }
+
+  .date-text {
+    font-size: 8px;
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - 900px
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .reports-page {
+    padding: 20px;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-card {
+    align-items: stretch;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+
+  .filter-card select {
+    flex: 1;
+  }
+
+  /*
+    NO TABLE SCROLLBAR
+  */
+  .table-wrapper {
+    overflow: hidden;
+  }
+
+  .table-wrapper table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  th {
+    font-size: 8px;
+
+    padding: 8px 3px;
+  }
+
+  td {
+    font-size: 9px;
+
+    padding: 9px 3px;
+  }
+
+  .report-icon {
+    display: none;
+  }
+
+  .report-info strong {
+    font-size: 9px;
+  }
+
+  .report-info small {
+    font-size: 7px;
+  }
+
+  .type-badge {
+    font-size: 7px;
+
+    padding: 3px 4px;
+  }
+
+  .status-badge {
+    min-width: 52px;
+
+    height: 25px;
+
+    padding: 0 4px;
+
+    font-size: 7px;
+  }
+
+  .action-buttons button {
+    width: 38px;
+
+    min-width: 38px;
+
+    height: 26px;
+
+    font-size: 8px;
+  }
+
+  .date-text {
+    font-size: 7px;
+  }
+
+  .amount-text,
+  .pending-amount {
+    font-size: 8px;
+  }
+}
+
+
+/* =====================================================
+   RESPONSIVE - 600px
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .reports-page {
+    padding: 15px;
+  }
+
+  .page-header h1 {
+    font-size: 23px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card {
+    min-height: 90px;
+  }
+
+  .summary-card strong {
+    font-size: 20px;
+  }
+
+  .summary-card:has(.summary-icon.amount) strong,
+  .summary-card:has(.summary-icon.pending) strong {
+    font-size: 17px;
+  }
+
+  .filter-card {
+    flex-direction: column;
+  }
+
+  .filter-card select,
+  .clear-btn {
+    width: 100%;
+  }
+
+  /*
+    NO HORIZONTAL OR VERTICAL TABLE SCROLLBAR
+  */
+  .table-wrapper {
+    width: 100%;
+
+    overflow: hidden;
+  }
+
+  .table-wrapper table {
+    width: 100%;
+
+    min-width: 0;
+
+    table-layout: fixed;
+  }
+
+  th {
+    font-size: 7px;
+
+    padding: 6px 2px;
+  }
+
+  td {
+    font-size: 8px;
+
+    padding: 7px 2px;
+  }
+
+  .report-info strong {
+    font-size: 8px;
+  }
+
+  .report-info small {
+    display: none;
+  }
+
+  .project-text,
+  .period-text {
+    font-size: 8px;
+  }
+
+  .amount-text,
+  .pending-amount {
+    font-size: 7px;
+  }
+
+  .date-text {
+    font-size: 6.5px;
+
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    min-width: 45px;
+
+    height: 23px;
+
+    font-size: 6.5px;
+  }
+
+  .action-buttons button {
+    width: 35px;
+
+    min-width: 35px;
+
+    height: 25px;
+
+    font-size: 7px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+
+    padding: 18px;
+  }
+
+  .modal-header {
+    padding: 18px;
+  }
+
+  .modal-footer {
+    padding: 14px 18px;
+  }
+}
+
+
+/* =====================================================
+   FINAL OVERFLOW PROTECTION
+===================================================== */
+
+html,
+body {
+  max-width: 100%;
+
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}

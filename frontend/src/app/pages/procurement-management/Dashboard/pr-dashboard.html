@@ -1,0 +1,646 @@
+<div class="dashboard">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-title">
+      <h1>Procurement Dashboard</h1>
+
+      <p>
+        Monitor procurement requests, vendors, purchase orders,
+        invoices and purchasing activities.
+      </p>
+    </div>
+
+    <button class="primary-btn" routerLink="/procurement-management/procurement-requests">
+      <span>＋</span>
+      New Procurement Request
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY CARDS
+       ===================================================== -->
+
+  <div class="summary-grid">
+
+    <!-- Total Requests -->
+    <div class="summary-card">
+
+      <div class="card-top">
+        <div class="card-icon">📋</div>
+      </div>
+
+      <h3 class="card-number">42</h3>
+
+      <p class="card-label">
+        Total Procurement Requests
+      </p>
+
+    </div>
+
+
+    <!-- Pending Approvals -->
+    <div class="summary-card">
+
+      <div class="card-top">
+        <div class="card-icon">✓</div>
+      </div>
+
+      <h3 class="card-number">18</h3>
+
+      <p class="card-label">
+        Pending Approvals
+      </p>
+
+    </div>
+
+
+    <!-- Purchase Orders -->
+    <div class="summary-card">
+
+      <div class="card-top">
+        <div class="card-icon">🛒</div>
+      </div>
+
+      <h3 class="card-number">27</h3>
+
+      <p class="card-label">
+        Active Purchase Orders
+      </p>
+
+    </div>
+
+
+    <!-- Procurement Value -->
+    <div class="summary-card">
+
+      <div class="card-top">
+        <div class="card-icon">₹</div>
+      </div>
+
+      <h3 class="card-number">
+        ₹8.4L
+      </h3>
+
+      <p class="card-label">
+        Total Procurement Value
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MIDDLE CONTENT
+       ===================================================== -->
+
+  <div class="content-grid">
+
+
+    <!-- ===================================================
+         PROCUREMENT REQUEST STATUS
+         =================================================== -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <h2>
+          Procurement Request Status
+        </h2>
+
+        <span>
+          Current Overview
+        </span>
+
+      </div>
+
+
+      <div class="status-list">
+
+
+        <!-- Pending -->
+
+        <div class="status-row">
+
+          <span class="status-name">
+            Pending
+          </span>
+
+          <div class="progress-container">
+
+            <div
+              class="progress-bar"
+              style="width: 35%;">
+            </div>
+
+          </div>
+
+          <span class="status-value">
+            15
+          </span>
+
+        </div>
+
+
+        <!-- Approved -->
+
+        <div class="status-row">
+
+          <span class="status-name">
+            Approved
+          </span>
+
+          <div class="progress-container">
+
+            <div
+              class="progress-bar"
+              style="width: 55%;">
+            </div>
+
+          </div>
+
+          <span class="status-value">
+            23
+          </span>
+
+        </div>
+
+
+        <!-- Processing -->
+
+        <div class="status-row">
+
+          <span class="status-name">
+            Processing
+          </span>
+
+          <div class="progress-container">
+
+            <div
+              class="progress-bar"
+              style="width: 40%;">
+            </div>
+
+          </div>
+
+          <span class="status-value">
+            17
+          </span>
+
+        </div>
+
+
+        <!-- Completed -->
+
+        <div class="status-row">
+
+          <span class="status-name">
+            Completed
+          </span>
+
+          <div class="progress-container">
+
+            <div
+              class="progress-bar"
+              style="width: 70%;">
+            </div>
+
+          </div>
+
+          <span class="status-value">
+            29
+          </span>
+
+        </div>
+
+
+        <!-- Rejected -->
+
+        <div class="status-row">
+
+          <span class="status-name">
+            Rejected
+          </span>
+
+          <div class="progress-container">
+
+            <div
+              class="progress-bar"
+              style="width: 18%;">
+            </div>
+
+          </div>
+
+          <span class="status-value">
+            7
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         QUICK OVERVIEW
+         =================================================== -->
+
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <h2>
+          Quick Overview
+        </h2>
+
+      </div>
+
+
+      <div class="overview-list">
+
+
+        <!-- Active Vendors -->
+
+        <div class="overview-item">
+
+          <div class="overview-left">
+
+            <div class="overview-icon">
+              🏢
+            </div>
+
+            <div class="overview-text">
+
+              <strong>
+                Active Vendors
+              </strong>
+
+              <span>
+                Registered suppliers
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="overview-value">
+            36
+          </div>
+
+        </div>
+
+
+        <!-- Items Ordered -->
+
+        <div class="overview-item">
+
+          <div class="overview-left">
+
+            <div class="overview-icon">
+              📦
+            </div>
+
+            <div class="overview-text">
+
+              <strong>
+                Items Ordered
+              </strong>
+
+              <span>
+                This month
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="overview-value">
+            184
+          </div>
+
+        </div>
+
+
+        <!-- Pending Invoices -->
+
+        <div class="overview-item">
+
+          <div class="overview-left">
+
+            <div class="overview-icon">
+              🧾
+            </div>
+
+            <div class="overview-text">
+
+              <strong>
+                Pending Invoices
+              </strong>
+
+              <span>
+                Awaiting payment
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="overview-value">
+            12
+          </div>
+
+        </div>
+
+
+        <!-- Overdue Invoices -->
+
+        <div class="overview-item">
+
+          <div class="overview-left">
+
+            <div class="overview-icon">
+              ⚠
+            </div>
+
+            <div class="overview-text">
+
+              <strong>
+                Overdue Invoices
+              </strong>
+
+              <span>
+                Requires attention
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="overview-value">
+            4
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       RECENT PROCUREMENT
+       ===================================================== -->
+
+  <div class="recent-card">
+
+
+    <div class="card-header">
+
+      <h2>
+        Recent Procurement
+      </h2>
+
+      <span>
+        Latest procurement activities
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table class="procurement-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              PO Number
+            </th>
+
+            <th>
+              Project
+            </th>
+
+            <th>
+              Vendor
+            </th>
+
+            <th>
+              Category
+            </th>
+
+            <th>
+              Amount
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <!-- PO 001 -->
+
+          <tr>
+
+            <td class="po-number">
+              PO-2026-001
+            </td>
+
+            <td>
+              Chennai Metro Project
+            </td>
+
+            <td>
+              ABC Building Supplies
+            </td>
+
+            <td>
+              Raw Materials
+            </td>
+
+            <td>
+              ₹1,25,000
+            </td>
+
+            <td>
+
+              <span class="status-badge status-approved">
+                Approved
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- PO 002 -->
+
+          <tr>
+
+            <td class="po-number">
+              PO-2026-002
+            </td>
+
+            <td>
+              Residential Tower A
+            </td>
+
+            <td>
+              BuildTech Equipment
+            </td>
+
+            <td>
+              Equipment
+            </td>
+
+            <td>
+              ₹2,40,000
+            </td>
+
+            <td>
+
+              <span class="status-badge status-processing">
+                Processing
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- PO 003 -->
+
+          <tr>
+
+            <td class="po-number">
+              PO-2026-003
+            </td>
+
+            <td>
+              Highway Expansion
+            </td>
+
+            <td>
+              SafeGuard Industries
+            </td>
+
+            <td>
+              Safety Equipment
+            </td>
+
+            <td>
+              ₹68,500
+            </td>
+
+            <td>
+
+              <span class="status-badge status-pending">
+                Pending
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- PO 004 -->
+
+          <tr>
+
+            <td class="po-number">
+              PO-2026-004
+            </td>
+
+            <td>
+              Commercial Complex
+            </td>
+
+            <td>
+              Prime Machinery Ltd
+            </td>
+
+            <td>
+              Machinery
+            </td>
+
+            <td>
+              ₹3,20,000
+            </td>
+
+            <td>
+
+              <span class="status-badge status-completed">
+                Completed
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- PO 005 -->
+
+          <tr>
+
+            <td class="po-number">
+              PO-2026-005
+            </td>
+
+            <td>
+              Green Valley Project
+            </td>
+
+            <td>
+              OfficeMart Supplies
+            </td>
+
+            <td>
+              Office Supplies
+            </td>
+
+            <td>
+              ₹42,800
+            </td>
+
+            <td>
+
+              <span class="status-badge status-approved">
+                Approved
+              </span>
+
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,673 @@
+<div class="reports-dashboard">
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+
+    <div class="page-title">
+      <h1>Reports Dashboard</h1>
+      <p>View, generate and export project reports.</p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="btn-secondary"
+        type="button"
+        (click)="refreshReports()">
+        ↻ Refresh
+      </button>
+
+      <button
+        class="btn-primary"
+        type="button"
+        (click)="generateReport()">
+        + Generate Report
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FILTER PANEL -->
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+      <div class="filter-icon">▣</div>
+
+      <div>
+        <h3>Report Filters</h3>
+        <span>Select project and reporting period</span>
+      </div>
+    </div>
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+        <label for="project">Project</label>
+
+        <select
+          id="project"
+          [(ngModel)]="selectedProject">
+
+          <option>All Projects</option>
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="period">Report Period</label>
+
+        <select
+          id="period"
+          [(ngModel)]="selectedPeriod">
+
+          <option>Current Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+          <option>Current Year</option>
+
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="status">Status</label>
+
+        <select
+          id="status"
+          [(ngModel)]="selectedStatus">
+
+          <option>All Status</option>
+          <option>On Track</option>
+          <option>Delayed</option>
+          <option>Completed</option>
+
+        </select>
+      </div>
+
+      <button
+        class="btn-primary"
+        type="button"
+        (click)="applyFilters()">
+        Apply Filters
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY CARDS -->
+  <section class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Total Reports</span>
+        <div class="summary-icon">▤</div>
+      </div>
+
+      <strong>{{ totalReports }}</strong>
+      <p>Generated reports</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Active Projects</span>
+        <div class="summary-icon">⌂</div>
+      </div>
+
+      <strong>{{ activeProjects }}</strong>
+      <p>Projects available</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Pending Reports</span>
+        <div class="summary-icon">◷</div>
+      </div>
+
+      <strong>{{ pendingReports }}</strong>
+      <p>Reports pending</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Last Generated</span>
+        <div class="summary-icon">✓</div>
+      </div>
+
+      <strong>{{ lastGenerated }}</strong>
+      <p>Latest report</p>
+    </div>
+
+  </section>
+
+
+  <!-- REPORT CATEGORIES -->
+  <section class="section-block">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="section-label">REPORTING</span>
+
+        <h2>Report Categories</h2>
+
+        <p>
+          Access reports generated from connected project modules.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="report-grid">
+
+
+      <!-- PROJECT PROGRESS -->
+      <article class="report-card">
+
+        <div class="report-card-top">
+          <div class="report-icon">↗</div>
+          <span class="report-status">LIVE DATA</span>
+        </div>
+
+        <h3>Project Progress</h3>
+
+        <p>
+          Project status, progress, milestones, work completion
+          and delays.
+        </p>
+
+        <div class="report-source">
+          <span>Data Source</span>
+          <strong>Project Management / Site Progress</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Project Progress')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Project Progress')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Project Progress')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- RESOURCE UTILIZATION -->
+      <article class="report-card">
+
+        <div class="report-card-top">
+          <div class="report-icon">⚙</div>
+          <span class="report-status">LIVE DATA</span>
+        </div>
+
+        <h3>Resource Utilization</h3>
+
+        <p>
+          Allocated resources, utilization, availability
+          and resource usage.
+        </p>
+
+        <div class="report-source">
+          <span>Data Source</span>
+          <strong>Module 4 – Resource Management</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Resource Utilization')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Resource Utilization')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Resource Utilization')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- WORKFORCE -->
+      <article class="report-card">
+
+        <div class="report-card-top">
+          <div class="report-icon">♙</div>
+          <span class="report-status">LIVE DATA</span>
+        </div>
+
+        <h3>Workforce Report</h3>
+
+        <p>
+          Worker allocation, attendance and workforce status
+          for projects.
+        </p>
+
+        <div class="report-source">
+          <span>Data Source</span>
+          <strong>Module 6 – Workforce Management</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Workforce Report')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Workforce Report')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Workforce Report')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROCUREMENT -->
+      <article class="report-card">
+
+        <div class="report-card-top">
+          <div class="report-icon">▣</div>
+          <span class="report-status">LIVE DATA</span>
+        </div>
+
+        <h3>Procurement Report</h3>
+
+        <p>
+          Procurement requests, purchase orders, vendors,
+          suppliers and invoices.
+        </p>
+
+        <div class="report-source">
+          <span>Data Source</span>
+          <strong>Module 7 – Procurement Management</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Procurement Report')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Procurement Report')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Procurement Report')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- BUDGET -->
+      <article class="report-card">
+
+        <div class="report-card-top">
+          <div class="report-icon">₹</div>
+          <span class="report-status">LIVE DATA</span>
+        </div>
+
+        <h3>Budget Report</h3>
+
+        <p>
+          Planned budget, estimated cost, actual expenses,
+          utilized and remaining amount.
+        </p>
+
+        <div class="report-source">
+          <span>Data Source</span>
+          <strong>Module 11 – Budget & Cost Management</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Budget Report')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Budget Report')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Budget Report')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT SUMMARY -->
+      <article class="report-card summary-report">
+
+        <div class="report-card-top">
+          <div class="report-icon">▤</div>
+          <span class="report-status">SUMMARY</span>
+        </div>
+
+        <h3>Project Summary Report</h3>
+
+        <p>
+          Combined overview covering progress, resources,
+          workforce, procurement and budget.
+        </p>
+
+        <div class="report-source">
+          <span>Data Sources</span>
+          <strong>Modules 2–7 + Module 11</strong>
+        </div>
+
+        <div class="report-actions">
+
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewReport('Project Summary Report')">
+            View Report
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportPdf('Project Summary Report')">
+            PDF
+          </button>
+
+          <button
+            class="export-btn"
+            type="button"
+            (click)="exportExcel('Project Summary Report')">
+            XLS
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- RECENT REPORTS -->
+  <section class="section-block recent-section">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="section-label">HISTORY</span>
+
+        <h2>Recent Reports</h2>
+
+        <p>Recently generated project reports.</p>
+      </div>
+
+      <button
+        class="text-btn"
+        type="button"
+        (click)="viewAllReports()">
+        View All →
+      </button>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Report</th>
+            <th>Project</th>
+            <th>Generated By</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- PROJECT PROGRESS -->
+          <tr>
+
+            <td>
+              <div class="report-name">
+                <span class="table-icon">↗</span>
+                <strong>Project Progress Report</strong>
+              </div>
+            </td>
+
+            <td>Chennai Commercial Complex</td>
+            <td>Admin User</td>
+            <td>04 Sep 2026</td>
+
+            <td>
+              <span class="status-badge completed">
+                Completed
+              </span>
+            </td>
+
+            <td>
+              <div class="table-actions">
+
+                <button
+                  type="button"
+                  (click)="viewReport('Project Progress')">
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportPdf('Project Progress')">
+                  PDF
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportExcel('Project Progress')">
+                  XLS
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+
+          <!-- BUDGET -->
+          <tr>
+
+            <td>
+              <div class="report-name">
+                <span class="table-icon">₹</span>
+                <strong>Budget Report</strong>
+              </div>
+            </td>
+
+            <td>Green Valley Residential Project</td>
+            <td>Project Manager</td>
+            <td>03 Sep 2026</td>
+
+            <td>
+              <span class="status-badge completed">
+                Completed
+              </span>
+            </td>
+
+            <td>
+              <div class="table-actions">
+
+                <button
+                  type="button"
+                  (click)="viewReport('Budget Report')">
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportPdf('Budget Report')">
+                  PDF
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportExcel('Budget Report')">
+                  XLS
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+
+          <!-- PROCUREMENT -->
+          <tr>
+
+            <td>
+              <div class="report-name">
+                <span class="table-icon">▣</span>
+                <strong>Procurement Report</strong>
+              </div>
+            </td>
+
+            <td>Metro Infrastructure Project</td>
+            <td>Admin User</td>
+            <td>02 Sep 2026</td>
+
+            <td>
+              <span class="status-badge pending">
+                Pending
+              </span>
+            </td>
+
+            <td>
+              <div class="table-actions">
+
+                <button
+                  type="button"
+                  (click)="viewReport('Procurement Report')">
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportPdf('Procurement Report')">
+                  PDF
+                </button>
+
+                <button
+                  type="button"
+                  (click)="exportExcel('Procurement Report')">
+                  XLS
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- ROLE ACCESS -->
+  <section class="access-notice">
+
+    <div class="access-icon">✓</div>
+
+    <div>
+
+      <strong>Role-based report access</strong>
+
+      <p>
+        Administrators can access system-level reports.
+        Project Managers can access reports for their assigned projects.
+        Backend permissions verify access.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,621 @@
+<div class="pm-dashboard">
+
+  <!-- =========================================
+       PAGE HEADER
+  ========================================== -->
+
+  <div class="page-header">
+
+    <div>
+            <h1>Project Manager Dashboard</h1>
+
+      <p>
+        Monitor your assigned projects, budget, workforce, resources and procurement.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button class="refresh-btn" type="button" (click)="refreshDashboard()">
+        <span>↻</span>
+        Refresh
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       PROJECT SELECTION
+  ========================================== -->
+
+  <section class="project-selector-card">
+
+    <div class="selector-info">
+
+      <div class="selector-icon">
+        ▣
+      </div>
+
+      <div>
+        <span class="section-label">CURRENT PROJECT</span>
+        <h2>{{ selectedProject.name }}</h2>
+        <p>{{ selectedProject.location }}</p>
+      </div>
+
+    </div>
+
+    <div class="selector-control">
+
+      <label for="projectSelect">Select Project</label>
+
+      <select
+        id="projectSelect"
+        [(ngModel)]="selectedProjectId"
+        (change)="changeProject()">
+
+        <option
+          *ngFor="let project of projects"
+          [value]="project.id">
+
+          {{ project.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       SUMMARY CARDS
+  ========================================== -->
+
+  <section class="summary-grid">
+
+    <!-- Project Progress -->
+    <div class="summary-card">
+
+      <div class="card-top">
+        <div>
+          <span class="card-label">PROJECT PROGRESS</span>
+          <h3>{{ selectedProject.progress }}%</h3>
+        </div>
+
+        <div class="card-icon progress-icon">
+          ↗
+        </div>
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="selectedProject.progress">
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span>Overall completion</span>
+        <strong class="success-text">On Track</strong>
+      </div>
+
+    </div>
+
+
+    <!-- Budget -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">BUDGET UTILIZATION</span>
+          <h3>{{ selectedProject.budgetUtilization }}%</h3>
+        </div>
+
+        <div class="card-icon budget-icon">
+          ₹
+        </div>
+
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill budget-fill"
+          [style.width.%]="selectedProject.budgetUtilization">
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span>₹{{ formatAmount(selectedProject.usedBudget) }} used</span>
+        <strong>₹{{ formatAmount(selectedProject.remainingBudget) }} left</strong>
+      </div>
+
+    </div>
+
+
+    <!-- Workforce -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">WORKFORCE</span>
+          <h3>{{ selectedProject.totalWorkers }}</h3>
+        </div>
+
+        <div class="card-icon workforce-icon">
+          ♟
+        </div>
+
+      </div>
+
+      <div class="mini-stat-row">
+
+        <span>
+          <b>{{ selectedProject.presentWorkers }}</b> Present
+        </span>
+
+        <span>
+          <b>{{ selectedProject.absentWorkers }}</b> Absent
+        </span>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Attendance</span>
+        <strong class="success-text">
+          {{ selectedProject.attendance }}%
+        </strong>
+      </div>
+
+    </div>
+
+
+    <!-- Resources -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">RESOURCE UTILIZATION</span>
+          <h3>{{ selectedProject.resourceUtilization }}%</h3>
+        </div>
+
+        <div class="card-icon resource-icon">
+          ⚙
+        </div>
+
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill resource-fill"
+          [style.width.%]="selectedProject.resourceUtilization">
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span>{{ selectedProject.allocatedResources }} Allocated</span>
+        <strong>{{ selectedProject.availableResources }} Available</strong>
+      </div>
+
+    </div>
+
+
+    <!-- Procurement -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">PROCUREMENT</span>
+          <h3>{{ selectedProject.pendingProcurement }}</h3>
+        </div>
+
+        <div class="card-icon procurement-icon">
+          ▱
+        </div>
+
+      </div>
+
+      <div class="mini-stat-row">
+
+        <span>
+          <b>{{ selectedProject.procurementRequests }}</b> Requests
+        </span>
+
+        <span>
+          <b>{{ selectedProject.purchaseOrders }}</b> Orders
+        </span>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Pending actions</span>
+        <strong class="warning-text">
+          {{ selectedProject.pendingProcurement }}
+        </strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       PROJECT PROGRESS + BUDGET
+  ========================================== -->
+
+  <section class="two-column-grid">
+
+    <!-- Project Progress -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">PROJECT PROGRESS</span>
+          <h2>Project Completion</h2>
+        </div>
+
+        <span class="status-badge success">
+          On Track
+        </span>
+
+      </div>
+
+      <div class="progress-overview">
+
+        <div class="large-progress">
+          <div
+            class="large-progress-circle"
+            [style.--progress]="selectedProject.progress + '%'">
+
+            <strong>{{ selectedProject.progress }}%</strong>
+            <span>Completed</span>
+
+          </div>
+        </div>
+
+        <div class="project-details">
+
+          <div class="detail-row">
+            <span>Project Status</span>
+            <strong>{{ selectedProject.status }}</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Start Date</span>
+            <strong>{{ selectedProject.startDate }}</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Expected Completion</span>
+            <strong>{{ selectedProject.expectedCompletion }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Budget Utilization -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">BUDGET UTILIZATION</span>
+          <h2>Financial Overview</h2>
+        </div>
+
+        <span class="status-badge neutral">
+          {{ selectedProject.budgetUtilization }}% Used
+        </span>
+
+      </div>
+
+      <div class="budget-list">
+
+        <div class="budget-item">
+          <span>Planned Budget</span>
+          <strong>₹{{ formatAmount(selectedProject.plannedBudget) }}</strong>
+        </div>
+
+        <div class="budget-item">
+          <span>Amount Utilized</span>
+          <strong>₹{{ formatAmount(selectedProject.usedBudget) }}</strong>
+        </div>
+
+        <div class="budget-item remaining">
+          <span>Remaining Budget</span>
+          <strong>₹{{ formatAmount(selectedProject.remainingBudget) }}</strong>
+        </div>
+
+      </div>
+
+      <div class="budget-progress">
+
+        <div class="budget-progress-header">
+          <span>Budget Consumption</span>
+          <strong>{{ selectedProject.budgetUtilization }}%</strong>
+        </div>
+
+        <div class="progress-bar large">
+          <div
+            class="progress-fill budget-fill"
+            [style.width.%]="selectedProject.budgetUtilization">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       WORKFORCE + RESOURCE
+  ========================================== -->
+
+  <section class="two-column-grid">
+
+    <!-- Workforce Status -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">WORKFORCE STATUS</span>
+          <h2>Workforce Overview</h2>
+        </div>
+
+        <span class="attendance-badge">
+          {{ selectedProject.attendance }}% Attendance
+        </span>
+
+      </div>
+
+      <div class="workforce-stats">
+
+        <div class="workforce-stat">
+          <span class="stat-number">
+            {{ selectedProject.totalWorkers }}
+          </span>
+          <span class="stat-label">Total Workers</span>
+        </div>
+
+        <div class="workforce-stat">
+          <span class="stat-number">
+            {{ selectedProject.presentWorkers }}
+          </span>
+          <span class="stat-label">Present</span>
+        </div>
+
+        <div class="workforce-stat">
+          <span class="stat-number">
+            {{ selectedProject.absentWorkers }}
+          </span>
+          <span class="stat-label">Absent</span>
+        </div>
+
+        <div class="workforce-stat">
+          <span class="stat-number">
+            {{ selectedProject.leaveWorkers }}
+          </span>
+          <span class="stat-label">On Leave</span>
+        </div>
+
+      </div>
+
+      <div class="attendance-progress">
+
+        <div class="progress-bar large">
+          <div
+            class="progress-fill"
+            [style.width.%]="selectedProject.attendance">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Resource Utilization -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">RESOURCE UTILIZATION</span>
+          <h2>Equipment Overview</h2>
+        </div>
+
+        <span class="status-badge neutral">
+          {{ selectedProject.resourceUtilization }}% Utilized
+        </span>
+
+      </div>
+
+      <div class="resource-stats">
+
+        <div class="resource-stat">
+          <span class="resource-number">
+            {{ selectedProject.totalResources }}
+          </span>
+          <span>Total Equipment</span>
+        </div>
+
+        <div class="resource-stat">
+          <span class="resource-number">
+            {{ selectedProject.allocatedResources }}
+          </span>
+          <span>Allocated</span>
+        </div>
+
+        <div class="resource-stat">
+          <span class="resource-number">
+            {{ selectedProject.availableResources }}
+          </span>
+          <span>Available</span>
+        </div>
+
+      </div>
+
+      <div class="resource-progress">
+
+        <div class="progress-bar large">
+          <div
+            class="progress-fill resource-fill"
+            [style.width.%]="selectedProject.resourceUtilization">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       MILESTONES + PROCUREMENT
+  ========================================== -->
+
+  <section class="two-column-grid">
+
+    <!-- Milestones -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">PROJECT MILESTONES</span>
+          <h2>Milestone Status</h2>
+        </div>
+
+        <button class="view-btn" type="button">
+          View All
+        </button>
+
+      </div>
+
+      <div class="milestone-list">
+
+        <div
+          class="milestone-item"
+          *ngFor="let milestone of selectedProject.milestones">
+
+          <div
+            class="milestone-indicator"
+            [class.completed]="milestone.status === 'Completed'"
+            [class.progressing]="milestone.status === 'In Progress'"
+            [class.pending]="milestone.status === 'Pending'">
+          </div>
+
+          <div class="milestone-info">
+
+            <strong>{{ milestone.name }}</strong>
+
+            <span>
+              {{ milestone.status }}
+            </span>
+
+          </div>
+
+          <strong class="milestone-progress">
+            {{ milestone.progress }}%
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Procurement -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">PROCUREMENT OVERVIEW</span>
+          <h2>Recent Procurement</h2>
+        </div>
+
+        <button class="view-btn" type="button">
+          View All
+        </button>
+
+      </div>
+
+      <div class="procurement-table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Request</th>
+              <th>Item</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let item of selectedProject.procurement">
+
+              <td>{{ item.requestId }}</td>
+
+              <td>{{ item.item }}</td>
+
+              <td>
+                <span
+                  class="table-status"
+                  [class.approved]="item.status === 'Approved'"
+                  [class.pending]="item.status === 'Pending'"
+                  [class.processing]="item.status === 'Processing'">
+
+                  {{ item.status }}
+
+                </span>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       LAST UPDATED
+  ========================================== -->
+
+  <div class="dashboard-footer">
+
+    <span>
+      Last updated: {{ lastUpdated }}
+    </span>
+
+    <span>
+      Data will be synchronized with the BuildTrack backend.
+    </span>
+
+  </div>
+
+</div>

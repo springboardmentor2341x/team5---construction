@@ -1,0 +1,305 @@
+<div class="workforce-report-page">
+
+  <section class="page-header">
+    <div class="page-title">
+    
+      <h1>Workforce Report</h1>
+      <p>View worker allocation, attendance and workforce status across construction projects.</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-back" type="button" (click)="goBack()">← Back</button>
+      <button class="btn btn-pdf" type="button" (click)="downloadPdf()">
+        ↓ Download PDF
+      </button>
+      <button class="btn btn-excel" type="button" (click)="exportExcel()">
+        ↓ Export Excel
+      </button>
+    </div>
+  </section>
+
+
+  <section class="filter-panel">
+
+    <div class="filter-heading">
+      <div class="filter-icon">👥</div>
+
+      <div>
+        <h3>Report Filters</h3>
+        <span>Select project, reporting period and workforce status</span>
+      </div>
+    </div>
+
+    <div class="filter-fields">
+
+      <div class="filter-group">
+        <label for="project">Project</label>
+
+        <select id="project" [(ngModel)]="selectedProject">
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+          <option>All Projects</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="period">Reporting Period</label>
+
+        <select id="period" [(ngModel)]="selectedPeriod">
+          <option>Current Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+          <option>Current Year</option>
+        </select>
+      </div>
+
+
+      <div class="filter-group">
+        <label for="status">Workforce Status</label>
+
+        <select id="status" [(ngModel)]="selectedStatus">
+          <option>All Status</option>
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>On Leave</option>
+        </select>
+      </div>
+
+
+      <button
+        class="btn btn-apply"
+        type="button"
+        (click)="applyFilters()">
+        Apply Filters
+      </button>
+
+    </div>
+  </section>
+
+
+  <section class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Total Workers</span>
+        <div class="summary-icon">👥</div>
+      </div>
+
+      <strong>{{ totalWorkers }}</strong>
+      <p>Total registered workforce</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Allocated Workers</span>
+        <div class="summary-icon">↗</div>
+      </div>
+
+      <strong>{{ allocatedWorkers }}</strong>
+      <p>Currently assigned to projects</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Present Workers</span>
+        <div class="summary-icon">✓</div>
+      </div>
+
+      <strong>{{ presentWorkers }}</strong>
+      <p>Workers present today</p>
+    </div>
+
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span>Attendance</span>
+        <div class="summary-icon">%</div>
+      </div>
+
+      <strong>{{ attendancePercentage }}%</strong>
+      <p>Current workforce attendance</p>
+    </div>
+
+  </section>
+
+
+  <section class="report-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-label">WORKFORCE ANALYSIS</span>
+
+        <h2>Workforce Details</h2>
+
+        <p>
+          Worker allocation, attendance and current workforce status.
+        </p>
+      </div>
+
+      <button
+        class="view-report-btn"
+        type="button"
+        (click)="viewReport()">
+        View Full Report →
+      </button>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Worker ID</th>
+            <th>Worker</th>
+            <th>Category</th>
+            <th>Skill / Work Type</th>
+            <th>Contractor</th>
+            <th>Project</th>
+            <th>Attendance</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let worker of workforce">
+
+            <td>
+              <strong>{{ worker.id }}</strong>
+            </td>
+
+
+            <td>
+              <div class="worker-name">
+                <span class="worker-icon">👤</span>
+                <span>{{ worker.name }}</span>
+              </div>
+            </td>
+
+
+            <td>
+              {{ worker.category }}
+            </td>
+
+
+            <td>
+              {{ worker.skill }}
+            </td>
+
+
+            <td>
+              {{ worker.contractor }}
+            </td>
+
+
+            <td>
+              {{ worker.project }}
+            </td>
+
+
+            <td>
+
+              <span
+                class="attendance-badge"
+                [class.present]="worker.attendance === 'Present'"
+                [class.absent]="worker.attendance === 'Absent'"
+                [class.leave]="worker.attendance === 'On Leave'">
+
+                {{ worker.attendance }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="status-badge"
+                [class.active]="worker.status === 'Active'"
+                [class.inactive]="worker.status === 'Inactive'">
+
+                {{ worker.status }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <section class="attendance-summary">
+
+    <div class="attendance-item">
+      <span class="attendance-label">Present</span>
+      <strong>{{ presentWorkers }}</strong>
+    </div>
+
+    <div class="attendance-item">
+      <span class="attendance-label">Absent</span>
+      <strong>{{ absentWorkers }}</strong>
+    </div>
+
+    <div class="attendance-item">
+      <span class="attendance-label">On Leave</span>
+      <strong>{{ leaveWorkers }}</strong>
+    </div>
+
+    <div class="attendance-item">
+      <span class="attendance-label">Attendance Rate</span>
+      <strong>{{ attendancePercentage }}%</strong>
+    </div>
+
+  </section>
+
+
+  <section class="insight-card">
+
+    <div class="insight-icon">i</div>
+
+    <div>
+      <h3>Workforce Insight</h3>
+
+      <p>
+        Current workforce attendance is {{ attendancePercentage }}%.
+        Workforce allocation and attendance should be monitored regularly
+        to maintain project productivity.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section class="access-notice">
+
+    <div class="access-icon">✓</div>
+
+    <div>
+      <strong>Role-based report access</strong>
+
+      <p>
+        Administrators can access system-level workforce reports.
+        Project Managers can access workforce reports for their assigned projects.
+      </p>
+    </div>
+
+  </section>
+
+</div>

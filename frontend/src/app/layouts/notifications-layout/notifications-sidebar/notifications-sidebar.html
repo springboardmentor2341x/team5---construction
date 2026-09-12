@@ -1,0 +1,159 @@
+<aside class="notifications-sidebar">
+
+  <!-- Logo -->
+  <div class="sidebar-header">
+    <div class="brand-icon">
+      <span>BT</span>
+    </div>
+
+    <div class="brand-info">
+      <h2>BuildTrack</h2>
+      <span>Project Management</span>
+    </div>
+  </div>
+
+
+  <!-- Module Title -->
+  <div class="module-title">
+    <span>NOTIFICATION SYSTEM</span>
+  </div>
+
+
+  <!-- Main Navigation -->
+  <nav class="sidebar-nav">
+
+    <!-- Notifications -->
+    <a
+      routerLink="/notifications/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item">
+
+      <span class="nav-icon">🔔</span>
+
+      <span class="nav-text">
+        Notifications
+      </span>
+
+      <span class="unread-badge">5</span>
+
+    </a>
+
+
+    <!-- Notification Details -->
+    <a
+      routerLink="/notifications/details/1"
+      routerLinkActive="active"
+      class="nav-item">
+
+      <span class="nav-icon">📋</span>
+
+      <span class="nav-text">
+        Notification Details
+      </span>
+
+    </a>
+
+
+    <!-- Notification Management -->
+    <a
+      routerLink="/notifications/management"
+      routerLinkActive="active"
+      class="nav-item">
+
+      <span class="nav-icon">⚙️</span>
+
+      <span class="nav-text">
+        Notification Management
+      </span>
+
+    </a>
+
+  </nav>
+
+
+  <!-- Notification Categories -->
+  <div class="category-section">
+
+    <div class="section-title">
+      Notification Types
+    </div>
+
+
+    <!-- Project Updates -->
+    <div class="category-item">
+      <span class="category-icon project">📊</span>
+      <span>Project Updates</span>
+    </div>
+
+
+    <!-- Task Assignments -->
+    <div class="category-item">
+      <span class="category-icon task">✓</span>
+      <span>Task Assignments</span>
+    </div>
+
+
+    <!-- Procurement Alerts -->
+    <div class="category-item">
+      <span class="category-icon procurement">🛒</span>
+      <span>Procurement Alerts</span>
+    </div>
+
+
+    <!-- Attendance Alerts -->
+    <div class="category-item">
+      <span class="category-icon attendance">👷</span>
+      <span>Attendance Alerts</span>
+    </div>
+
+
+    <!-- Deadline Notifications -->
+    <div class="category-item">
+      <span class="category-icon deadline">⏰</span>
+      <span>Deadline Notifications</span>
+    </div>
+
+
+    <!-- System Notifications -->
+    <div class="category-item">
+      <span class="category-icon system">⚙</span>
+      <span>System Notifications</span>
+    </div>
+
+  </div>
+
+
+  <!-- Bottom Section -->
+  <div class="sidebar-bottom">
+
+    <!-- Help -->
+    <div class="help-box">
+
+      <div class="help-icon">?</div>
+
+      <div>
+        <strong>Need Help?</strong>
+        <span>Contact system support</span>
+      </div>
+
+    </div>
+
+
+    <!-- User -->
+    <div class="sidebar-footer">
+
+      <div class="user-avatar">
+        AU
+      </div>
+
+      <div class="user-info">
+        <strong>Admin User</strong>
+        <span>Administrator</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</aside>

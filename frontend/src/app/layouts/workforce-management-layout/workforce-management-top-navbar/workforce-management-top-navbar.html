@@ -1,0 +1,44 @@
+<header class="top-navbar">
+
+  <div class="page-heading">
+    <h1>Workforce Management</h1>
+    <p>Manage workforce, assignments, attendance and payroll</p>
+  </div>
+
+  <div class="navbar-actions">
+
+    <div class="search-box">
+      <span class="material-icons">search</span>
+      <input type="text" placeholder="Search workforce...">
+    </div>
+
+    <button class="notification-btn">
+      <span class="material-icons">notifications_none</span>
+
+      @if (notifications > 0) {
+        <span class="notification-badge">
+          {{ notifications }}
+        </span>
+      }
+    </button>
+
+    <div class="profile">
+
+      <div class="avatar">
+        <span class="material-icons">person</span>
+      </div>
+
+      <div class="profile-info">
+        <strong>Workforce Manager</strong>
+        <span>Administrator</span>
+      </div>
+
+      <span class="material-icons dropdown-icon">
+        keyboard_arrow_down
+      </span>
+
+    </div>
+
+  </div>
+
+</header>

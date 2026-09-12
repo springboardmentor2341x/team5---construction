@@ -1,0 +1,575 @@
+<div class="financial-summary">
+
+  <!-- Header -->
+  <div class="page-header">
+
+    <div>
+            <h1>Financial Summary</h1>
+
+      <p class="subtitle">
+        Consolidated financial overview of project budget, estimated costs,
+        actual expenses and remaining budget.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="secondary-btn"
+        (click)="refreshSummary()">
+        ↻ Refresh
+      </button>
+
+       <button
+        class="primary-btn"
+        (click)="generateFinancialReport()">
+        Generate Report
+      </button> 
+
+    </div>
+
+  </div>
+
+
+  <!-- Project and Period Filters -->
+  <section class="filter-panel">
+
+    <div class="filter-item">
+
+      <label>Project</label>
+
+      <select
+        [(ngModel)]="selectedProject"
+        (change)="refreshSummary()">
+
+        <option
+          *ngFor="let project of projects"
+          [value]="project">
+          {{ project }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-item">
+
+      <label>Reporting Period</label>
+
+      <select
+        [(ngModel)]="reportPeriod"
+        (change)="refreshSummary()">
+
+        <option
+          *ngFor="let period of periods"
+          [value]="period">
+          {{ period }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="report-info">
+
+      <span class="info-label">Report Scope</span>
+
+      <strong>
+        {{ selectedProject }}
+      </strong>
+
+      <small>
+        {{ reportPeriod }}
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- Financial Summary Cards -->
+  <section class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="card-icon">
+        ₹
+      </div>
+
+      <div>
+
+        <span class="card-label">
+          Total Planned Budget
+        </span>
+
+        <h2>
+          {{ formatCurrency(totalPlanned) }}
+        </h2>
+
+        <p class="card-note">
+          Approved project budget
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="card-icon">
+        ≈
+      </div>
+
+      <div>
+
+        <span class="card-label">
+          Total Estimated Cost
+        </span>
+
+        <h2>
+          {{ formatCurrency(totalEstimated) }}
+        </h2>
+
+        <p class="card-note">
+          {{ estimatedUtilization }}% of planned budget
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="card-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <span class="card-label">
+          Actual Amount Spent
+        </span>
+
+        <h2>
+          {{ formatCurrency(totalActual) }}
+        </h2>
+
+        <p class="card-note">
+          {{ utilization }}% utilized
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card highlight">
+
+      <div class="card-icon">
+        ↓
+      </div>
+
+      <div>
+
+        <span class="card-label">
+          Remaining Budget
+        </span>
+
+        <h2>
+          {{ formatCurrency(remainingBudget) }}
+        </h2>
+
+        <p class="card-note">
+          Available project budget
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Financial Health -->
+  <section class="overview-grid">
+
+    <div class="panel utilization-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="section-label">
+            BUDGET UTILIZATION
+          </span>
+
+          <h2>
+            Financial Health
+          </h2>
+        </div>
+
+        <span
+          class="status-badge"
+          [ngClass]="financialStatusClass">
+
+          {{ financialStatus }}
+
+        </span>
+
+      </div>
+
+
+      <div class="utilization-content">
+
+        <div
+          class="progress-circle"
+          [style.--utilization-angle]="(utilization * 3.6) + 'deg'">
+
+          <div class="circle-inner">
+
+            <strong>
+              {{ utilization }}%
+            </strong>
+
+            <span>
+              Used
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="utilization-details">
+
+          <div class="detail-row">
+
+            <span>Planned Budget</span>
+
+            <strong>
+              {{ formatCurrency(totalPlanned) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>Estimated Cost</span>
+
+            <strong>
+              {{ formatCurrency(totalEstimated) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>Actual Spent</span>
+
+            <strong>
+              {{ formatCurrency(totalActual) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>Remaining</span>
+
+            <strong class="remaining-value">
+              {{ formatCurrency(remainingBudget) }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Variance Overview -->
+    <div class="panel variance-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="section-label">
+            VARIANCE ANALYSIS
+          </span>
+
+          <h2>
+            Cost Position
+          </h2>
+        </div>
+
+      </div>
+
+
+      <div class="variance-list">
+
+        <div class="variance-item">
+
+          <div>
+            <span>
+              Budget vs Estimate
+            </span>
+
+            <small>
+              Unallocated / available budget
+            </small>
+          </div>
+
+          <strong>
+            {{ formatCurrency(budgetVariance) }}
+          </strong>
+
+        </div>
+
+
+        <div class="variance-item">
+
+          <div>
+            <span>
+              Estimate vs Actual
+            </span>
+
+            <small>
+              Difference between estimated and actual
+            </small>
+          </div>
+
+          <strong>
+            {{ formatCurrency(actualVariance) }}
+          </strong>
+
+        </div>
+
+
+        <div class="variance-item">
+
+          <div>
+            <span>
+              Estimated Utilization
+            </span>
+
+            <small>
+              Estimated cost against budget
+            </small>
+          </div>
+
+          <strong>
+            {{ estimatedUtilization }}%
+          </strong>
+
+        </div>
+
+
+        <div class="variance-item">
+
+          <div>
+            <span>
+              Actual Utilization
+            </span>
+
+            <small>
+              Actual spending against budget
+            </small>
+          </div>
+
+          <strong>
+            {{ utilization }}%
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Category Financial Summary -->
+  <section class="panel category-panel">
+
+    <div class="panel-heading">
+
+      <div>
+
+        <span class="section-label">
+          COST CATEGORY BREAKDOWN
+        </span>
+
+        <h2>
+          Financial Summary by Category
+        </h2>
+
+        <p>
+          Comparison of planned allocation, estimated cost and actual
+          expenditure across project cost categories.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Cost Category</th>
+
+            <th>Planned</th>
+
+            <th>Estimated</th>
+
+            <th>Actual Spent</th>
+
+            <th>Remaining</th>
+
+            <th>Utilization</th>
+
+            <th>Variance</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let category of categories">
+
+            <td>
+
+              <div class="category-name">
+
+                <span class="category-dot"></span>
+
+                <strong>
+                  {{ category.name }}
+                </strong>
+
+              </div>
+
+            </td>
+
+
+            <td>
+              {{ formatCurrency(category.planned) }}
+            </td>
+
+
+            <td>
+              {{ formatCurrency(category.estimated) }}
+            </td>
+
+
+            <td class="actual-amount">
+              {{ formatCurrency(category.actual) }}
+            </td>
+
+
+            <td class="remaining-amount">
+
+              {{
+                formatCurrency(
+                  getRemaining(
+                    category.planned,
+                    category.actual
+                  )
+                )
+              }}
+
+            </td>
+
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="mini-progress">
+
+                  <span
+                    [style.width.%]="
+                      getUtilization(
+                        category.actual,
+                        category.planned
+                      )
+                    ">
+                  </span>
+
+                </div>
+
+                <strong>
+                  {{
+                    getUtilization(
+                      category.actual,
+                      category.planned
+                    )
+                  }}%
+                </strong>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="variance-badge">
+
+                {{
+                  formatCurrency(
+                    getVariance(
+                      category.estimated,
+                      category.actual
+                    )
+                  )
+                }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+ 
+  <!-- Database Note -->
+  <div class="data-note">
+
+    <strong>Financial Data Source</strong>
+
+    <span>
+      Budget, estimation and expense values should be loaded from the
+      project database. Summary calculations update automatically when
+      budget or expense records change.
+    </span>
+
+  </div>
+
+</div>

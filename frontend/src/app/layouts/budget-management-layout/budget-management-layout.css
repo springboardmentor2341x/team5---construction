@@ -1,0 +1,94 @@
+/* =========================================
+   MODULE 11 - BUDGET & COST MANAGEMENT
+   LAYOUT
+========================================= */
+
+.bm-layout {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #f8fafc;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   MAIN CONTENT AREA
+========================================= */
+
+.bm-main {
+  width: calc(100% - 260px);
+  min-height: 100vh;
+
+  margin-left: 260px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   TOP NAVBAR
+========================================= */
+
+.bm-main app-budget-management-top-navbar {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================
+   PAGE CONTENT
+========================================= */
+
+.bm-content {
+  width: 100%;
+  min-width: 0;
+
+  flex: 1;
+
+  padding: 28px;
+
+  box-sizing: border-box;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .bm-main {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+  }
+
+  .bm-content {
+    padding: 22px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .bm-main {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+
+  .bm-content {
+    padding: 18px;
+  }
+
+}

@@ -1,0 +1,746 @@
+<div class="categories-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+
+      <h1>Procurement Categories</h1>
+
+      <p>
+        Manage procurement categories, purchased items and active procurement requirements.
+      </p>
+    </div>
+
+    <button
+      class="add-btn"
+      type="button"
+      (click)="openAddModal()"
+    >
+      <span>+</span>
+      Add Category
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-icon total">#</div>
+      <div>
+        <span>Total Categories</span>
+        <strong>{{ totalCategories }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon active">✓</div>
+      <div>
+        <span>Active Categories</span>
+        <strong>{{ activeCategories }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon items">I</div>
+      <div>
+        <span>Total Items</span>
+        <strong>{{ totalItems }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon requests">R</div>
+      <div>
+        <span>Active Requests</span>
+        <strong>{{ totalActiveRequests }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-icon purchased">₹</div>
+      <div>
+        <span>Total Purchased</span>
+        <strong>{{ formatAmount(totalPurchasedAmount) }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- FILTER SECTION -->
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search category or description..."
+      />
+
+    </div>
+
+    <select [(ngModel)]="selectedStatus">
+
+      <option value="All">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+
+    </select>
+
+    <button
+      class="clear-btn"
+      type="button"
+      (click)="clearFilters()"
+    >
+      Clear Filters
+    </button>
+
+  </div>
+
+
+  <!-- CATEGORY TABLE -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Procurement Categories</h2>
+
+        <p>
+          Categories used to organize procurement requirements and purchases.
+        </p>
+      </div>
+
+      <span class="record-count">
+        {{ filteredCategories.length }} Records
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Category ID</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Items</th>
+            <th>Active Requests</th>
+            <th>Total Purchased</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let category of filteredCategories">
+
+            <!-- CATEGORY ID -->
+            <td>
+              <span class="category-id">
+                {{ category.id }}
+              </span>
+            </td>
+
+
+            <!-- CATEGORY -->
+            <td>
+
+              <div class="category-info">
+
+                <div>
+                  <strong>
+                    {{ category.categoryName }}
+                  </strong>
+
+                  <small>
+                    Procurement Category
+                  </small>
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- DESCRIPTION -->
+            <td>
+              <span class="description-text">
+                {{ category.description }}
+              </span>
+            </td>
+
+
+            <!-- ITEMS -->
+            <td>
+              <strong class="number-text">
+                {{ category.itemCount }}
+              </strong>
+            </td>
+
+
+            <!-- ACTIVE REQUESTS -->
+            <td>
+              <span class="request-count">
+                {{ category.activeRequests }}
+              </span>
+            </td>
+
+
+            <!-- TOTAL PURCHASED -->
+            <td>
+              <strong class="amount-text">
+                {{ formatAmount(category.totalPurchased) }}
+              </strong>
+            </td>
+
+
+            <!-- STATUS -->
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(category.status)"
+              >
+                {{ category.status }}
+              </span>
+
+            </td>
+
+
+            <!-- LAST UPDATED -->
+            <td>
+              <span class="date-text">
+                {{ category.lastUpdated }}
+              </span>
+            </td>
+
+
+            <!-- ACTIONS -->
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewCategory(category)"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="editCategory(category)"
+                >
+                  Edit
+                </button>
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteCategory(category)"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+          <tr
+            *ngIf="filteredCategories.length === 0"
+            class="empty-row"
+          >
+
+            <td colspan="9">
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  #
+                </div>
+
+                <h3>
+                  No categories found
+                </h3>
+
+                <p>
+                  Try changing your search or filter options.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ADD CATEGORY MODAL -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showAddModal"
+>
+
+  <div class="category-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT MANAGEMENT
+        </span>
+
+        <h2>
+          Add Procurement Category
+        </h2>
+
+        <p>
+          Create a new category for procurement records.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeAddModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Category Name <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newCategory.categoryName"
+          placeholder="Enter category name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Status
+        </label>
+
+        <select [(ngModel)]="newCategory.status">
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Inactive">
+            Inactive
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Description <span>*</span>
+        </label>
+
+        <textarea
+          [(ngModel)]="newCategory.description"
+          placeholder="Enter category description..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Item Count
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="newCategory.itemCount"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Active Requests
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="newCategory.activeRequests"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Total Purchased
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="newCategory.totalPurchased"
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeAddModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="addCategory()"
+      >
+        Add Category
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- VIEW CATEGORY MODAL -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewModal && selectedCategory"
+>
+
+  <div class="category-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          CATEGORY DETAILS
+        </span>
+
+        <h2>
+          {{ selectedCategory.categoryName }}
+        </h2>
+
+        <p>
+          Procurement category information
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+        <span>Category ID</span>
+        <strong>{{ selectedCategory.id }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span>Category Name</span>
+        <strong>{{ selectedCategory.categoryName }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span>Item Count</span>
+        <strong>{{ selectedCategory.itemCount }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span>Active Requests</span>
+        <strong>{{ selectedCategory.activeRequests }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span>Total Purchased</span>
+        <strong>
+          {{ formatAmount(selectedCategory.totalPurchased) }}
+        </strong>
+      </div>
+
+      <div class="detail-item">
+
+        <span>Status</span>
+
+        <strong
+          class="status-badge"
+          [ngClass]="getStatusClass(selectedCategory.status)"
+        >
+          {{ selectedCategory.status }}
+        </strong>
+
+      </div>
+
+      <div class="detail-item">
+
+        <span>Last Updated</span>
+
+        <strong>
+          {{ selectedCategory.lastUpdated }}
+        </strong>
+
+      </div>
+
+      <div class="detail-item full-width">
+
+        <span>Description</span>
+
+        <strong>
+          {{ selectedCategory.description }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewModal()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- EDIT CATEGORY MODAL -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showEditModal && selectedCategory"
+>
+
+  <div class="category-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT MANAGEMENT
+        </span>
+
+        <h2>
+          Edit Category
+        </h2>
+
+        <p>
+          Update procurement category information.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeEditModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          Category Name <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedCategory.categoryName"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Status
+        </label>
+
+        <select [(ngModel)]="selectedCategory.status">
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Inactive">
+            Inactive
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Description <span>*</span>
+        </label>
+
+        <textarea
+          [(ngModel)]="selectedCategory.description"
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Item Count
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="selectedCategory.itemCount"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Active Requests
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="selectedCategory.activeRequests"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Total Purchased
+        </label>
+
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="selectedCategory.totalPurchased"
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeEditModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="updateCategory()"
+      >
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

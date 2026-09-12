@@ -1,0 +1,507 @@
+<div class="allocation-page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">WORKFORCE MANAGEMENT</span>
+
+      <h1>Workforce Allocation</h1>
+
+      <p>
+        Assign and manage workers across projects, work areas,
+        contractors and shifts.
+      </p>
+    </div>
+
+    <button
+      class="primary-button"
+      type="button"
+      (click)="allocateWorker()">
+
+      <span class="material-icons">person_add</span>
+
+      Allocate Worker
+
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+        <span class="material-icons">groups</span>
+      </div>
+
+      <div>
+        <span>Active Allocations</span>
+        <h2>{{ activeAllocations }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+        <span class="material-icons">assignment_turned_in</span>
+      </div>
+
+      <div>
+        <span>Projects Covered</span>
+        <h2>{{ projectCount }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon orange">
+        <span class="material-icons">engineering</span>
+      </div>
+
+      <div>
+        <span>Workforce Categories</span>
+        <h2>{{ categories.length }}</h2>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+        <span class="material-icons">task_alt</span>
+      </div>
+
+      <div>
+        <span>Completed</span>
+        <h2>{{ completedAllocations }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEW WORKFORCE ALLOCATION -->
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>New Workforce Allocation</h2>
+
+        <p>
+          Assign workforce to a project and work area.
+        </p>
+      </div>
+
+      <span class="material-icons header-icon">
+        assignment
+      </span>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- PROJECT -->
+      <div class="form-group">
+
+        <label>
+          Project <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option value="">
+            Select Project
+          </option>
+
+          <option
+            *ngFor="let project of projects"
+            [value]="project">
+
+            {{ project }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CATEGORY -->
+      <div class="form-group">
+
+        <label>
+          Workforce Category <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedCategory">
+
+          <option value="">
+            Select Category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CONTRACTOR -->
+      <div class="form-group">
+
+        <label>
+          Contractor <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedContractor">
+
+          <option value="">
+            Select Contractor
+          </option>
+
+          <option
+            *ngFor="let contractor of contractors"
+            [value]="contractor">
+
+            {{ contractor }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SHIFT -->
+      <div class="form-group">
+
+        <label>
+          Shift <span>*</span>
+        </label>
+
+        <select [(ngModel)]="selectedShift">
+
+          <option value="">
+            Select Shift
+          </option>
+
+          <option
+            *ngFor="let shift of shifts"
+            [value]="shift">
+
+            {{ shift }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- WORK AREA -->
+      <div class="form-group">
+
+        <label>
+          Work Area <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="selectedWorkArea"
+          placeholder="Enter work area">
+
+      </div>
+
+
+      <!-- WORKER COUNT -->
+      <div class="form-group">
+
+        <label>
+          Number of Workers
+        </label>
+
+        <input
+          type="number"
+          min="1"
+          placeholder="Enter worker count">
+
+      </div>
+
+
+      <!-- START DATE -->
+      <div class="form-group">
+
+        <label>
+          Start Date
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="selectedStartDate">
+
+      </div>
+
+
+      <!-- END DATE -->
+      <div class="form-group">
+
+        <label>
+          End Date
+        </label>
+
+        <input
+          type="date"
+          [(ngModel)]="selectedEndDate">
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="clearForm()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="allocateWorker()">
+
+        <span class="material-icons">
+          check
+        </span>
+
+        Confirm Allocation
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CURRENT ALLOCATIONS -->
+  <div class="content-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Current Workforce Allocations</h2>
+
+        <p>
+          Monitor workforce assignments across active projects.
+        </p>
+      </div>
+
+      <button
+        class="filter-button"
+        type="button">
+
+        <span class="material-icons">
+          filter_list
+        </span>
+
+        Filter
+
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Allocation ID</th>
+            <th>Worker</th>
+            <th>Category</th>
+            <th>Project</th>
+            <th>Work Area</th>
+            <th>Contractor</th>
+            <th>Shift</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let allocation of allocations">
+
+            <td class="allocation-id">
+              {{ allocation.id }}
+            </td>
+
+
+            <td>
+              <strong>
+                {{ allocation.worker }}
+              </strong>
+            </td>
+
+
+            <td>
+              {{ allocation.category }}
+            </td>
+
+
+            <td>
+              {{ allocation.project }}
+            </td>
+
+
+            <td>
+              {{ allocation.workArea }}
+            </td>
+
+
+            <td>
+              {{ allocation.contractor }}
+            </td>
+
+
+            <td>
+              {{ allocation.shift }}
+            </td>
+
+
+            <td>
+              {{ allocation.startDate }}
+            </td>
+
+
+            <td>
+              {{ allocation.endDate }}
+            </td>
+
+
+            <td>
+
+              <span
+                class="status"
+                [ngClass]="getStatusClass(allocation.status)">
+
+                {{ allocation.status }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <!-- VIEW -->
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="View"
+                  (click)="viewAllocation(allocation)">
+
+                  <span class="material-icons">
+                    visibility
+                  </span>
+
+                </button>
+
+
+                <!-- REASSIGN -->
+                <button
+                  class="icon-button"
+                  type="button"
+                  title="Reassign"
+                  (click)="reassignWorker(allocation)">
+
+                  <span class="material-icons">
+                    sync_alt
+                  </span>
+
+                </button>
+
+
+                <!-- DELETE -->
+                <button
+                  class="icon-button delete-button"
+                  type="button"
+                  title="Delete"
+                  (click)="deleteAllocation(allocations.indexOf(allocation))">
+
+                  <span class="material-icons">
+                    delete
+                  </span>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- EMPTY STATE -->
+          <tr *ngIf="allocations.length === 0">
+
+            <td
+              colspan="11"
+              class="empty-state">
+
+              <span class="material-icons">
+                groups
+              </span>
+
+              <p>
+                No workforce allocations available.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

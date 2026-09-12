@@ -1,0 +1,737 @@
+<div class="reports-page">
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-label">PROCUREMENT MANAGEMENT</span>
+
+      <h1>Procurement Reports</h1>
+
+      <p>
+        View procurement summaries, vendor performance, purchase orders,
+        invoices, categories and project procurement costs.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SUMMARY CARDS
+  ========================== -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon total">
+        #
+      </div>
+
+      <div>
+        <span>Total Reports</span>
+        <strong>{{ totalReports }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon generated">
+        ✓
+      </div>
+
+      <div>
+        <span>Generated Reports</span>
+        <strong>{{ generatedReports }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon requests">
+        R
+      </div>
+
+      <div>
+        <span>Total Requests</span>
+        <strong>{{ totalRequests }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon orders">
+        P
+      </div>
+
+      <div>
+        <span>Purchase Orders</span>
+        <strong>{{ totalPurchaseOrders }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon amount">
+        ₹
+      </div>
+
+      <div>
+        <span>Invoice Amount</span>
+        <strong>{{ formatAmount(totalInvoiceAmount) }}</strong>
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon pending">
+        !
+      </div>
+
+      <div>
+        <span>Pending Amount</span>
+        <strong>{{ formatAmount(totalPendingAmount) }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FILTER SECTION
+  ========================== -->
+
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search report, project or report type..."
+      />
+
+    </div>
+
+
+    <select [(ngModel)]="selectedReportType">
+
+      <option value="All">
+        All Report Types
+      </option>
+
+      <option value="Procurement Summary">
+        Procurement Summary
+      </option>
+
+      <option value="Vendor Report">
+        Vendor Report
+      </option>
+
+      <option value="Purchase Order Report">
+        Purchase Order Report
+      </option>
+
+      <option value="Invoice Report">
+        Invoice Report
+      </option>
+
+      <option value="Category Report">
+        Category Report
+      </option>
+
+      <option value="Project Cost Report">
+        Project Cost Report
+      </option>
+
+      <option value="Pending Report">
+        Pending Report
+      </option>
+
+    </select>
+
+
+    <select [(ngModel)]="selectedProject">
+
+      <option value="All">
+        All Projects
+      </option>
+
+      <option value="Green Valley Apartments">
+        Green Valley Apartments
+      </option>
+
+      <option value="City Center Mall">
+        City Center Mall
+      </option>
+
+      <option value="Tech Park Phase II">
+        Tech Park Phase II
+      </option>
+
+    </select>
+
+
+    <select [(ngModel)]="selectedStatus">
+
+      <option value="All">
+        All Status
+      </option>
+
+      <option value="Generated">
+        Generated
+      </option>
+
+      <option value="Processing">
+        Processing
+      </option>
+
+      <option value="Pending">
+        Pending
+      </option>
+
+    </select>
+
+
+    <button
+      class="clear-btn"
+      type="button"
+      (click)="clearFilters()"
+    >
+      Clear Filters
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       REPORT TABLE
+  ========================== -->
+
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Procurement Reports</h2>
+
+        <p>
+          Procurement reports and purchasing performance information.
+        </p>
+
+      </div>
+
+      <span class="record-count">
+        {{ filteredReports.length }} Records
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Report ID</th>
+
+            <th>Report</th>
+
+            <th>Report Type</th>
+
+            <th>Project</th>
+
+            <th>Period</th>
+
+            <th>Requests</th>
+
+            <th>Purchase Orders</th>
+
+            <th>Invoice Amount</th>
+
+            <th>Pending Amount</th>
+
+            <th>Status</th>
+
+            <th>Generated Date</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let report of filteredReports"
+          >
+
+            <!-- Report ID -->
+
+            <td>
+
+              <span class="report-id">
+                {{ report.id }}
+              </span>
+
+            </td>
+
+
+            <!-- Report -->
+
+            <td>
+
+              <div class="report-info">
+
+                <div class="report-icon">
+                  R
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ report.reportName }}
+                  </strong>
+
+                  <small>
+                    Procurement Report
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Report Type -->
+
+            <td>
+
+              <span
+                class="type-badge"
+                [ngClass]="getReportTypeClass(report.reportType)"
+              >
+                {{ report.reportType }}
+              </span>
+
+            </td>
+
+
+            <!-- Project -->
+
+            <td>
+
+              <span class="project-text">
+                {{ report.project }}
+              </span>
+
+            </td>
+
+
+            <!-- Period -->
+
+            <td>
+
+              <span class="period-text">
+                {{ report.period }}
+              </span>
+
+            </td>
+
+
+            <!-- Requests -->
+
+            <td>
+
+              <div class="request-info">
+
+                <strong>
+                  {{ report.totalRequests }}
+                </strong>
+
+                <small>
+                  {{ report.approvedRequests }} approved /
+                  {{ report.pendingRequests }} pending
+                </small>
+
+              </div>
+
+            </td>
+
+
+            <!-- Purchase Orders -->
+
+            <td>
+
+              <strong class="number-text">
+                {{ report.totalPurchaseOrders }}
+              </strong>
+
+            </td>
+
+
+            <!-- Invoice Amount -->
+
+            <td>
+
+              <strong class="amount-text">
+                {{ formatAmount(report.totalInvoiceAmount) }}
+              </strong>
+
+            </td>
+
+
+            <!-- Pending Amount -->
+
+            <td>
+
+              <strong class="pending-amount">
+                {{ formatAmount(report.pendingAmount) }}
+              </strong>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(report.status)"
+              >
+                {{ report.status }}
+              </span>
+
+            </td>
+
+
+            <!-- Generated Date -->
+
+            <td>
+
+              <span class="date-text">
+                {{ report.generatedDate }}
+              </span>
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewReport(report)"
+                >
+                  View
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- =========================
+               EMPTY STATE
+          ========================== -->
+
+          <tr
+            *ngIf="filteredReports.length === 0"
+            class="empty-row"
+          >
+
+            <td colspan="12">
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  #
+                </div>
+
+                <h3>
+                  No reports found
+                </h3>
+
+                <p>
+                  Try changing your search or filter options.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW REPORT MODAL
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showViewModal && selectedReport"
+>
+
+  <div class="report-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          PROCUREMENT REPORT
+        </span>
+
+        <h2>
+          {{ selectedReport.reportName }}
+        </h2>
+
+        <p>
+          Detailed procurement report information.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeViewModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+
+        <span>
+          Report ID
+        </span>
+
+        <strong>
+          {{ selectedReport.id }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Report Type
+        </span>
+
+        <strong>
+          {{ selectedReport.reportType }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Project
+        </span>
+
+        <strong>
+          {{ selectedReport.project }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Period
+        </span>
+
+        <strong>
+          {{ selectedReport.period }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Total Requests
+        </span>
+
+        <strong>
+          {{ selectedReport.totalRequests }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Approved Requests
+        </span>
+
+        <strong>
+          {{ selectedReport.approvedRequests }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Pending Requests
+        </span>
+
+        <strong>
+          {{ selectedReport.pendingRequests }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Purchase Orders
+        </span>
+
+        <strong>
+          {{ selectedReport.totalPurchaseOrders }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Total Invoice Amount
+        </span>
+
+        <strong>
+          {{ formatAmount(selectedReport.totalInvoiceAmount) }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Paid Amount
+        </span>
+
+        <strong>
+          {{ formatAmount(selectedReport.paidAmount) }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Pending Amount
+        </span>
+
+        <strong>
+          {{ formatAmount(selectedReport.pendingAmount) }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Status
+        </span>
+
+        <strong
+          class="status-badge"
+          [ngClass]="getStatusClass(selectedReport.status)"
+        >
+          {{ selectedReport.status }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span>
+          Generated Date
+        </span>
+
+        <strong>
+          {{ selectedReport.generatedDate }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeViewModal()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

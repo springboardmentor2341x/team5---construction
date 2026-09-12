@@ -1,0 +1,432 @@
+<div class="budget-monitoring">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div>
+      <span class="eyebrow">BUDGET MANAGEMENT</span>
+
+      <h2>Budget Monitoring</h2>
+
+      <p>
+        Monitor planned budget, estimated cost, actual spending and remaining funds.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- PROJECT SELECTION -->
+  <div class="panel project-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Project Selection</h3>
+
+        <p>
+          Select the project for budget monitoring.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="project-form">
+
+      <div class="form-group">
+
+        <label>PROJECT</label>
+
+        <select [(ngModel)]="selectedProject">
+
+          <option>Chennai Commercial Complex</option>
+          <option>Green Valley Residential Project</option>
+          <option>Metro Infrastructure Project</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FINANCIAL SUMMARY -->
+  <div class="summary-grid">
+
+    <div class="summary-card blue">
+
+      <span class="card-label">TOTAL PLANNED</span>
+
+      <strong>
+        {{ formatCurrency(totalPlanned) }}
+      </strong>
+
+      <small>
+        Approved project budget
+      </small>
+
+    </div>
+
+
+    <div class="summary-card purple">
+
+      <span class="card-label">ESTIMATED COST</span>
+
+      <strong>
+        {{ formatCurrency(estimatedCost) }}
+      </strong>
+
+      <small>
+        Current estimated requirement
+      </small>
+
+    </div>
+
+
+    <div class="summary-card orange">
+
+      <span class="card-label">ACTUAL SPENT</span>
+
+      <strong>
+        {{ formatCurrency(actualSpent) }}
+      </strong>
+
+      <small>
+        Recorded actual expenses
+      </small>
+
+    </div>
+
+
+    <div class="summary-card green">
+
+      <span class="card-label">REMAINING BUDGET</span>
+
+      <strong>
+        {{ formatCurrency(remainingBudget) }}
+      </strong>
+
+      <small>
+        Available budget balance
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- UTILIZATION -->
+  <div class="monitoring-grid">
+
+    <div class="panel utilization-panel">
+
+      <div class="panel-header">
+
+        <div>
+          <h3>Budget Utilization</h3>
+
+          <p>
+            Actual spending against the planned project budget.
+          </p>
+        </div>
+
+        <span class="status-badge">
+          {{ utilization }}%
+        </span>
+
+      </div>
+
+
+      <div class="utilization-content">
+
+        <div
+          class="progress-circle"
+          [style.--utilization-angle]="(utilization * 3.6) + 'deg'">
+
+          <div class="circle-inner">
+
+            <strong>{{ utilization }}%</strong>
+
+            <span>Utilized</span>
+
+          </div>
+
+        </div>
+
+
+        <div class="utilization-details">
+
+          <div class="detail-row">
+
+            <span>
+              <i class="dot planned-dot"></i>
+              Planned Budget
+            </span>
+
+            <strong>
+              {{ formatCurrency(totalPlanned) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>
+              <i class="dot estimated-dot"></i>
+              Estimated Cost
+            </span>
+
+            <strong>
+              {{ formatCurrency(estimatedCost) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>
+              <i class="dot actual-dot"></i>
+              Actual Spent
+            </span>
+
+            <strong>
+              {{ formatCurrency(actualSpent) }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row remaining-row">
+
+            <span>
+              Remaining Budget
+            </span>
+
+            <strong>
+              {{ formatCurrency(remainingBudget) }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COST STATUS -->
+    <div class="panel status-panel">
+
+      <div class="panel-header">
+
+        <div>
+          <h3>Budget Status</h3>
+
+          <p>
+            Current financial position of the project.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="status-content">
+
+        <div class="status-item">
+
+          <span>Budget Utilization</span>
+
+          <strong>{{ utilization }}%</strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+          <span>Estimated Utilization</span>
+
+          <strong>{{ estimatedUtilization }}%</strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+          <span>Estimated Variance</span>
+
+          <strong class="positive">
+            {{ formatCurrency(variance) }}
+          </strong>
+
+        </div>
+
+
+        <div class="status-message">
+
+          <div class="status-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <strong>
+              {{ utilization < 80
+                ? 'Budget is within monitoring limit'
+                : 'Budget utilization requires attention'
+              }}
+            </strong>
+
+            <p>
+              {{ formatCurrency(remainingBudget) }}
+              remains available from the planned budget.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CATEGORY MONITORING -->
+  <div class="panel category-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <h3>Category-wise Budget Monitoring</h3>
+
+        <p>
+          Compare planned, estimated and actual costs for each category.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>COST CATEGORY</th>
+            <th>PLANNED</th>
+            <th>ESTIMATED</th>
+            <th>ACTUAL SPENT</th>
+            <th>REMAINING</th>
+            <th>UTILIZATION</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let category of categories">
+
+            <td>
+              <strong>
+                {{ category.name }}
+              </strong>
+            </td>
+
+
+            <td>
+              {{ formatCurrency(category.planned) }}
+            </td>
+
+
+            <td>
+              {{ formatCurrency(category.estimated) }}
+            </td>
+
+
+            <td>
+              <strong class="actual-value">
+                {{ formatCurrency(category.actual) }}
+              </strong>
+            </td>
+
+
+            <td>
+
+              <span
+                [class.negative]="
+                  getCategoryRemaining(
+                    category.planned,
+                    category.actual
+                  ) < 0
+                "
+                [class.positive]="
+                  getCategoryRemaining(
+                    category.planned,
+                    category.actual
+                  ) >= 0
+                ">
+
+                {{
+                  formatCurrency(
+                    getCategoryRemaining(
+                      category.planned,
+                      category.actual
+                    )
+                  )
+                }}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <div class="utilization-cell">
+
+                <div class="mini-progress">
+
+                  <span
+                    [style.width.%]="
+                      getCategoryUtilization(
+                        category.actual,
+                        category.planned
+                      )
+                    ">
+                  </span>
+
+                </div>
+
+                <small>
+                  {{
+                    getCategoryUtilization(
+                      category.actual,
+                      category.planned
+                    )
+                  }}%
+                </small>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

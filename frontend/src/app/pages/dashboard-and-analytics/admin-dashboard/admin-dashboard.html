@@ -1,0 +1,493 @@
+<div class="admin-dashboard">
+
+  <!-- =========================================
+       PAGE HEADER
+  ========================================== -->
+
+  <div class="page-header">
+
+    <div>
+           <h1>Administrator Dashboard</h1>
+
+      <p>
+        Monitor users, projects, system activity, analytics and reports.
+      </p>
+    </div>
+
+    <button
+      class="refresh-btn"
+      type="button"
+      (click)="refreshDashboard()">
+
+      <span>↻</span>
+      Refresh
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================
+       SYSTEM SUMMARY CARDS
+  ========================================== -->
+
+  <section class="summary-grid">
+
+    <!-- Total Users -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">TOTAL USERS</span>
+          <h3>{{ totalUsers }}</h3>
+        </div>
+
+        <div class="card-icon users-icon">
+          ♟
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Registered users</span>
+        <strong>{{ activeUsers }} Active</strong>
+      </div>
+
+    </div>
+
+
+    <!-- Active Projects -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">ACTIVE PROJECTS</span>
+          <h3>{{ activeProjects }}</h3>
+        </div>
+
+        <div class="card-icon projects-icon">
+          ▤
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Total projects</span>
+        <strong class="success-text">
+          {{ onTrackProjects }} On Track
+        </strong>
+      </div>
+
+    </div>
+
+
+    <!-- System Activity -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">SYSTEM ACTIVITIES</span>
+          <h3>{{ todayActivities }}</h3>
+        </div>
+
+        <div class="card-icon activity-icon">
+          ◷
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Today's activities</span>
+        <strong>{{ criticalActivities }} Critical</strong>
+      </div>
+
+    </div>
+
+
+    <!-- Reports -->
+    <div class="summary-card">
+
+      <div class="card-top">
+
+        <div>
+          <span class="card-label">REPORTS</span>
+          <h3>{{ totalReports }}</h3>
+        </div>
+
+        <div class="card-icon reports-icon">
+          ▥
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <span>Generated reports</span>
+        <strong>{{ pendingReports }} Pending</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       USER MANAGEMENT + SYSTEM ANALYTICS
+  ========================================== -->
+
+  <section class="two-column-grid">
+
+    <!-- USER MANAGEMENT -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">USER MANAGEMENT</span>
+          <h2>Users by Role</h2>
+        </div>
+
+        <button class="view-btn" type="button">
+          Manage Users
+        </button>
+
+      </div>
+
+      <div class="role-list">
+
+        <div
+          class="role-row"
+          *ngFor="let role of userRoles">
+
+          <div class="role-name">
+
+            <div class="role-icon">
+              {{ role.icon }}
+            </div>
+
+            <div>
+              <strong>{{ role.name }}</strong>
+              <span>{{ role.description }}</span>
+            </div>
+
+          </div>
+
+          <div class="role-count">
+            {{ role.count }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SYSTEM ANALYTICS -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">SYSTEM ANALYTICS</span>
+          <h2>System Overview</h2>
+        </div>
+
+        <span class="status-badge success">
+          System Healthy
+        </span>
+
+      </div>
+
+      <div class="analytics-grid">
+
+        <div class="analytics-item">
+
+          <span class="analytics-number">
+            {{ systemUptime }}%
+          </span>
+
+          <span class="analytics-label">
+            System Uptime
+          </span>
+
+        </div>
+
+        <div class="analytics-item">
+
+          <span class="analytics-number">
+            {{ activeSessions }}
+          </span>
+
+          <span class="analytics-label">
+            Active Sessions
+          </span>
+
+        </div>
+
+        <div class="analytics-item">
+
+          <span class="analytics-number">
+            {{ completedProjects }}
+          </span>
+
+          <span class="analytics-label">
+            Completed Projects
+          </span>
+
+        </div>
+
+        <div class="analytics-item">
+
+          <span class="analytics-number">
+            {{ pendingActions }}
+          </span>
+
+          <span class="analytics-label">
+            Pending Actions
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="analytics-chart">
+
+        <div class="chart-header">
+          <span>Monthly Project Activity</span>
+          <strong>{{ monthlyActivity }}%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [style.width.%]="monthlyActivity">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       PROJECT MONITORING
+  ========================================== -->
+
+  <section class="dashboard-card">
+
+    <div class="card-header">
+
+      <div>
+        <span class="section-label">PROJECT MONITORING</span>
+        <h2>Project Status Overview</h2>
+      </div>
+
+      <button class="view-btn" type="button">
+        View All Projects
+      </button>
+
+    </div>
+
+    <div class="project-table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Project</th>
+            <th>Manager</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Budget</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let project of projects">
+
+            <td>
+              <div class="project-name">
+                <strong>{{ project.name }}</strong>
+                <span>{{ project.location }}</span>
+              </div>
+            </td>
+
+            <td>
+              {{ project.manager }}
+            </td>
+
+            <td>
+
+              <div class="table-progress">
+
+                <div class="progress-bar">
+                  <div
+                    class="progress-fill"
+                    [style.width.%]="project.progress">
+                  </div>
+                </div>
+
+                <span>{{ project.progress }}%</span>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <span
+                class="table-status"
+                [class.success]="project.status === 'On Track'"
+                [class.warning]="project.status === 'At Risk'"
+                [class.completed]="project.status === 'Completed'">
+
+                {{ project.status }}
+
+              </span>
+
+            </td>
+
+            <td>
+              ₹{{ formatAmount(project.budget) }}
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       REPORTS + ACTIVITY MONITORING
+  ========================================== -->
+
+  <section class="two-column-grid">
+
+    <!-- REPORTS MANAGEMENT -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">REPORTS MANAGEMENT</span>
+          <h2>Recent Reports</h2>
+        </div>
+
+        <button class="view-btn" type="button">
+          View Reports
+        </button>
+
+      </div>
+
+      <div class="report-list">
+
+        <div
+          class="report-row"
+          *ngFor="let report of reports">
+
+          <div class="report-icon">
+            ▥
+          </div>
+
+          <div class="report-info">
+
+            <strong>{{ report.name }}</strong>
+
+            <span>
+              {{ report.date }} · {{ report.type }}
+            </span>
+
+          </div>
+
+          <button
+            class="action-btn"
+            type="button">
+
+            View
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVITY MONITORING -->
+    <div class="dashboard-card">
+
+      <div class="card-header">
+
+        <div>
+          <span class="section-label">ACTIVITY MONITORING</span>
+          <h2>Recent System Activities</h2>
+        </div>
+
+        <button class="view-btn" type="button">
+          View All
+        </button>
+
+      </div>
+
+      <div class="activity-list">
+
+        <div
+          class="activity-row"
+          *ngFor="let activity of activities">
+
+          <div
+            class="activity-dot"
+            [class.warning]="activity.type === 'warning'"
+            [class.danger]="activity.type === 'danger'">
+          </div>
+
+          <div class="activity-info">
+
+            <strong>{{ activity.action }}</strong>
+
+            <span>
+              {{ activity.user }} · {{ activity.time }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <div class="dashboard-footer">
+
+    <span>
+      Last updated: {{ lastUpdated }}
+    </span>
+
+    <span>
+      Administrator data is restricted according to system permissions.
+    </span>
+
+  </div>
+
+</div>
