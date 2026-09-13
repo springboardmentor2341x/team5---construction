@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-=======
 import { ChangeDetectorRef, Component,OnInit,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   WorkCompletionStatusService,
   WorkCategoryProgress
 } from '../../../services/work-completion-status.service';
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 interface WorkCategory {
   name: string;
@@ -35,9 +30,6 @@ interface ProgressUpdate {
   templateUrl: './se-work-completion-status.html',
   styleUrl: './se-work-completion-status.css'
 })
-<<<<<<< HEAD
-export class SeWorkCompletionStatus {
-=======
 export class SeWorkCompletionStatus implements OnInit {
 
 
@@ -45,7 +37,6 @@ export class SeWorkCompletionStatus implements OnInit {
     WorkCompletionStatusService
   );
   constructor(private cdr:ChangeDetectorRef){}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
   // =========================
   // SUMMARY
@@ -65,37 +56,6 @@ export class SeWorkCompletionStatus implements OnInit {
   // WORK CATEGORY PROGRESS
   // =========================
 
-<<<<<<< HEAD
-  workCategories: WorkCategory[] = [
-
-    {
-      name: 'Foundation Work',
-      progress: 100
-    },
-
-    {
-      name: 'Structural Work',
-      progress: 80
-    },
-
-    {
-      name: 'Electrical Work',
-      progress: 60
-    },
-
-    {
-      name: 'Plumbing Work',
-      progress: 40
-    },
-
-    {
-      name: 'Finishing Work',
-      progress: 20
-    }
-
-  ];
-
-=======
    workCategories: WorkCategoryProgress[] = [];
 
  isLoading = false;
@@ -133,7 +93,6 @@ export class SeWorkCompletionStatus implements OnInit {
         }
       });
   }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   // =========================
   // MILESTONES
   // =========================

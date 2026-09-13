@@ -1,13 +1,8 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-//import { RouterLink} from '@angular/router';
-=======
 import { Component, signal,computed } from '@angular/core';
 //import { RouterLink} from '@angular/router';
 import {Milestone,ProjectSiteEngineerService } from '../../../services/project-site-engineer.service';
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 interface WorkProgress {
   category: string;
@@ -113,36 +108,6 @@ export class SiteEngineerDashboard {
   // MILESTONES
   // =========================
 
-<<<<<<< HEAD
-  milestones = [
-
-    {
-      name: 'Foundation',
-      status: 'Completed'
-    },
-
-    {
-      name: 'Structural',
-      status: 'In Progress'
-    },
-
-    {
-      name: 'Electrical',
-      status: 'Pending'
-    },
-
-    {
-      name: 'Plumbing',
-      status: 'Pending'
-    },
-
-    {
-      name: 'Finishing',
-      status: 'Pending'
-    }
-
-  ];
-=======
   // milestones = [
 
   //   {
@@ -178,7 +143,6 @@ export class SiteEngineerDashboard {
     status: item.status
   }))
 );
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
   // =========================
   // ACTIVITY LOGS
@@ -246,8 +210,6 @@ export class SiteEngineerDashboard {
 
   ];
 
-<<<<<<< HEAD
-=======
   constructor(private ProjectSiteEngineerService:ProjectSiteEngineerService){}
   
     ngOnInit(): any {
@@ -273,5 +235,4 @@ export class SiteEngineerDashboard {
        
     }
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 }

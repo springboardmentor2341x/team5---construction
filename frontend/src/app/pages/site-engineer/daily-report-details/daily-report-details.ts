@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-//import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-=======
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
@@ -13,63 +6,10 @@ import {
   DailyProgressService,
   DailyProgressResponse
 } from '../../../services/daily-progress.service';
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 @Component({
   selector: 'app-daily-report-details',
   standalone: true,
-<<<<<<< HEAD
-  imports: [CommonModule,FormsModule,RouterLink],
-  templateUrl: './daily-report-details.html',
-  styleUrl: './daily-report-details.css'
-})
-export class DailyReportDetails {
-
-
-
-    
-
-  report = {
-
-    projectName: 'City Mall Construction',
-
-    reportDate: '04 Aug 2026',
-
-    workCategory: 'Foundation',
-
-    activity:
-      'Foundation excavation completed successfully for Block A.',
-
-    completion: 80,
-
-    contractor: 'ABC Construction',
-
-    workersPresent: 42,
-
-    workersAbsent: 3,
-
-    equipment: 'Excavator, Concrete Mixer',
-
-    materials: '300 Cement Bags, 5 Tons Steel',
-
-    weather: 'Sunny',
-
-    safetyObservation:
-      'All workers were wearing PPE kits.',
-
-    qualityRemarks:
-      'Concrete quality passed inspection.',
-
-    delay: 'No',
-
-    delayReason: '-',
-
-    comments:
-      'Work completed according to schedule.'
-
-  };
-
-=======
   imports: [
     CommonModule,
     RouterLink
@@ -164,5 +104,4 @@ export class DailyReportDetails implements OnInit {
     window.print();
 
   }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 }

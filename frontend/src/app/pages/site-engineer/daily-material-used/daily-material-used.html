@@ -7,19 +7,13 @@
   <div class="page-heading">
 
     <div>
-<<<<<<< HEAD
-=======
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
       <h2>Daily Material Used</h2>
 
       <p>
         Track materials consumed during daily construction activities.
       </p>
-<<<<<<< HEAD
-=======
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
     </div>
 
     <button
@@ -132,11 +126,6 @@
 
   <div class="content-card">
 
-<<<<<<< HEAD
-    <!-- Card Header -->
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
     <div class="card-header">
 
       <div>
@@ -180,13 +169,7 @@
         @for(category of categories; track category) {
 
           <option [value]="category">
-<<<<<<< HEAD
-
             {{ category }}
-
-=======
-            {{ category }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
           </option>
 
         }
@@ -202,13 +185,7 @@
         @for(project of projects; track project) {
 
           <option [value]="project">
-<<<<<<< HEAD
-
             {{ project }}
-
-=======
-            {{ project }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
           </option>
 
         }
@@ -264,11 +241,7 @@
 
             <th>Used By</th>
 
-<<<<<<< HEAD
-            <!-- <th>Action</th> -->
-=======
             <th>Action</th>
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
           </tr>
 
@@ -286,13 +259,7 @@
               <td>
 
                 <span class="date-text">
-<<<<<<< HEAD
-
                   {{ material.date }}
-
-=======
-                  {{ material.date }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                 </span>
 
               </td>
@@ -305,13 +272,7 @@
                 <div class="material-info">
 
                   <div class="material-icon">
-<<<<<<< HEAD
-
                     📦
-
-=======
-                    📦
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                   </div>
 
                   <div>
@@ -321,11 +282,7 @@
                     </strong>
 
                     <span>
-<<<<<<< HEAD
-                      MAT-{{ material.id.toString().padStart(3, '0') }}
-=======
                       MAT-{{ material.materialId.toString().padStart(3, '0') }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                     </span>
 
                   </div>
@@ -340,13 +297,7 @@
               <td>
 
                 <span class="category-badge">
-<<<<<<< HEAD
-
                   {{ material.category }}
-
-=======
-                  {{ material.category }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                 </span>
 
               </td>
@@ -355,13 +306,7 @@
               <!-- Project -->
 
               <td>
-<<<<<<< HEAD
-
                 {{ material.project }}
-
-=======
-                {{ material.project }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
               </td>
 
 
@@ -370,13 +315,7 @@
               <td>
 
                 <strong class="quantity">
-<<<<<<< HEAD
-
                   {{ material.quantityUsed }}
-
-=======
-                  {{ material.quantityUsed }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                 </strong>
 
                 {{ material.unit }}
@@ -387,13 +326,7 @@
               <!-- Activity -->
 
               <td>
-<<<<<<< HEAD
-
                 {{ material.activity }}
-
-=======
-                {{ material.activity }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
               </td>
 
 
@@ -404,23 +337,11 @@
                 <div class="person-info">
 
                   <div class="person-icon">
-<<<<<<< HEAD
-
-                    👷
-
-                  </div>
-
-                  <span>
-
-                    {{ material.usedBy }}
-
-=======
                     👷
                   </div>
 
                   <span>
                     {{ material.usedBy }}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                   </span>
 
                 </div>
@@ -428,28 +349,13 @@
               </td>
 
 
-<<<<<<< HEAD
-              <!-- Action -->
-
-              <!-- <td>
-=======
               <!-- DELETE -->
 
               <td>
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
                 <button
                   class="view-btn"
                   type="button"
-<<<<<<< HEAD
-                  routerLink="/site-engineer/daily-material-details">
-
-                  👁 View
-
-                </button>
-
-              </td> -->
-=======
                   [disabled]="isDeleting"
                   (click)="deleteMaterial(material)">
 
@@ -458,7 +364,6 @@
                 </button>
 
               </td>
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
             </tr>
 
@@ -469,11 +374,7 @@
                EMPTY STATE
           ================================================== -->
 
-<<<<<<< HEAD
-          @if(filteredMaterials.length === 0) {
-=======
           @if(filteredMaterials.length === 0 && !isLoading) {
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
             <tr>
 
@@ -484,23 +385,6 @@
                 <div class="empty-content">
 
                   <div class="empty-icon">
-<<<<<<< HEAD
-
-                    📦
-
-                  </div>
-
-                  <h3>
-
-                    No Material Records Found
-
-                  </h3>
-
-                  <p>
-
-                    Try changing your search or filter options.
-
-=======
                     📦
                   </div>
 
@@ -510,7 +394,6 @@
 
                   <p>
                     Try changing your search or filter options.
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                   </p>
 
                   <button
@@ -530,8 +413,6 @@
 
           }
 
-<<<<<<< HEAD
-=======
 
           <!-- LOADING -->
 
@@ -565,7 +446,6 @@
 
           }
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
         </tbody>
 
       </table>
@@ -669,20 +549,13 @@
 
       <div class="modal-add">
 
-<<<<<<< HEAD
-=======
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
         <!-- Modal Header -->
 
         <div class="modal-header">
 
           <div>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
             <h2>Add Material Usage</h2>
 
             <p>
@@ -709,10 +582,7 @@
 
         <div class="form-grid">
 
-<<<<<<< HEAD
-=======
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
           <!-- Date -->
 
           <div class="form-group">
@@ -752,12 +622,6 @@
               Material Name *
             </label>
 
-<<<<<<< HEAD
-            <input
-              type="text"
-              placeholder="e.g. Cement"
-              [(ngModel)]="material.materialName">
-=======
             <select
               [(ngModel)]="material.materialId"
               (ngModelChange)="onMaterialSelected($event)">
@@ -777,7 +641,6 @@
               }
 
             </select>
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
           </div>
 
@@ -856,22 +719,14 @@
             </label>
 
             <select
-<<<<<<< HEAD
-              [(ngModel)]="material.unit">
-=======
               [(ngModel)]="material.unit"
               >
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
               <option value="">
                 Select Unit
               </option>
 
-<<<<<<< HEAD
-              <option value="Bags">
-=======
               <option value="BAG">
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
                 Bags
               </option>
 
@@ -970,14 +825,6 @@
 
           </button>
 
-<<<<<<< HEAD
-          <button
-            class="save-btn"
-            type="button"
-            (click)="saveMaterial()">
-
-            Save Material Usage
-=======
 
           <button
             class="save-btn"
@@ -994,7 +841,6 @@
               Save Material Usage
 
             }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
           </button>
 

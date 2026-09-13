@@ -1,13 +1,4 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-
-
-interface MaterialUsage {
-  id: number;
-=======
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -19,7 +10,6 @@ import {
 interface MaterialUsage {
   id: number;
   
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   date: string;
   materialName: string;
   category: string;
@@ -29,21 +19,6 @@ interface MaterialUsage {
   activity: string;
   usedBy: string;
   remarks: string;
-<<<<<<< HEAD
-}
-
-
-
-@Component({
-  selector: 'app-daily-material-used',
-  imports: [CommonModule,FormsModule],
-  templateUrl: './daily-material-used.html',
-  styleUrl: './daily-material-used.css',
-})
-export class DailyMaterialUsed {
-
-
-=======
 
   // Backend material ID
   materialId: number;
@@ -60,7 +35,6 @@ export class DailyMaterialUsed implements OnInit {
 
   private materialService = inject(MaterialService);
 constructor(private cdr:ChangeDetectorRef){}
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   /* =====================================================
      SEARCH & FILTER
   ===================================================== */
@@ -82,8 +56,6 @@ constructor(private cdr:ChangeDetectorRef){}
 
 
   /* =====================================================
-<<<<<<< HEAD
-=======
      API STATE
   ===================================================== */
 
@@ -95,34 +67,10 @@ constructor(private cdr:ChangeDetectorRef){}
 
 
   /* =====================================================
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
      NEW MATERIAL FORM
   ===================================================== */
 
   material: MaterialUsage = {
-<<<<<<< HEAD
-
-    id: 0,
-
-    date: '',
-
-    materialName: '',
-
-    category: '',
-
-    project: '',
-
-    quantityUsed: 0,
-
-    unit: '',
-
-    activity: '',
-
-    usedBy: 'Site Engineer',
-
-    remarks: ''
-
-=======
     id: 0,
     materialId: 0,
     date: '',
@@ -134,7 +82,6 @@ constructor(private cdr:ChangeDetectorRef){}
     activity: '',
     usedBy: 'Site Engineer',
     remarks: ''
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   };
 
 
@@ -142,76 +89,6 @@ constructor(private cdr:ChangeDetectorRef){}
      MATERIAL USAGE DATA
   ===================================================== */
 
-<<<<<<< HEAD
-  materials: MaterialUsage[] = [
-
-    {
-      id: 1,
-      date: '08 Aug 2026',
-      materialName: 'Cement',
-      category: 'Construction Material',
-      project: 'City Mall Construction',
-      quantityUsed: 300,
-      unit: 'Bags',
-      activity: 'Foundation Work',
-      usedBy: 'Site Engineer',
-      remarks: 'Used for foundation concrete work.'
-    },
-
-    {
-      id: 2,
-      date: '08 Aug 2026',
-      materialName: 'Steel Rods',
-      category: 'Construction Material',
-      project: 'City Mall Construction',
-      quantityUsed: 2,
-      unit: 'Tons',
-      activity: 'Structural Work',
-      usedBy: 'Site Engineer',
-      remarks: 'Used for column reinforcement.'
-    },
-
-    {
-      id: 3,
-      date: '08 Aug 2026',
-      materialName: 'Sand',
-      category: 'Construction Material',
-      project: 'City Mall Construction',
-      quantityUsed: 5,
-      unit: 'Tons',
-      activity: 'Concrete Work',
-      usedBy: 'Site Engineer',
-      remarks: 'Used for concrete mixing.'
-    },
-
-    {
-      id: 4,
-      date: '07 Aug 2026',
-      materialName: 'Bricks',
-      category: 'Construction Material',
-      project: 'Green Valley Residential Project',
-      quantityUsed: 1500,
-      unit: 'Pieces',
-      activity: 'Wall Construction',
-      usedBy: 'Site Engineer',
-      remarks: 'Used for ground floor wall construction.'
-    },
-
-    {
-      id: 5,
-      date: '07 Aug 2026',
-      materialName: 'Concrete',
-      category: 'Construction Material',
-      project: 'Highway Expansion Project',
-      quantityUsed: 12,
-      unit: 'Cubic Meter',
-      activity: 'Road Construction',
-      usedBy: 'Site Engineer',
-      remarks: 'Used for road slab work.'
-    }
-
-  ];
-=======
   materials: MaterialUsage[] = [];
 availableMaterials: Material[] = [];
 
@@ -281,7 +158,6 @@ availableMaterials: Material[] = [];
 
     });
   }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 
   /* =====================================================
@@ -290,14 +166,9 @@ availableMaterials: Material[] = [];
 
   openAddMaterial(): void {
 
-<<<<<<< HEAD
-    this.showAddMaterialModal = true;
-
-=======
     this.resetMaterialForm();
 
     this.showAddMaterialModal = true;
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -310,20 +181,12 @@ availableMaterials: Material[] = [];
     this.showAddMaterialModal = false;
 
     this.resetMaterialForm();
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
   /* =====================================================
-<<<<<<< HEAD
-     SAVE MATERIAL USAGE
-=======
      SAVE MATERIAL
      POST /materials/
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   ===================================================== */
 
   saveMaterial(): void {
@@ -341,35 +204,6 @@ availableMaterials: Material[] = [];
       alert('Please fill all required fields.');
 
       return;
-<<<<<<< HEAD
-
-    }
-
-
-    const newMaterial: MaterialUsage = {
-
-      id: this.materials.length > 0
-        ? Math.max(...this.materials.map(m => m.id)) + 1
-        : 1,
-
-      date: this.material.date,
-
-      materialName: this.material.materialName,
-
-      category: this.material.category,
-
-      project: this.material.project,
-
-      quantityUsed: Number(this.material.quantityUsed),
-
-      unit: this.material.unit,
-
-      activity: this.material.activity,
-
-      usedBy: this.material.usedBy || 'Site Engineer',
-
-      remarks: this.material.remarks
-=======
     }
 
 
@@ -390,20 +224,10 @@ availableMaterials: Material[] = [];
        unit: this.getApiUnit(this.material.unit),
         
       status: 'ACTIVE'
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
     };
 
 
-<<<<<<< HEAD
-    this.materials.unshift(newMaterial);
-
-
-    this.resetMaterialForm();
-
-    this.showAddMaterialModal = false;
-
-=======
     this.isSaving = true;
 
 
@@ -558,7 +382,6 @@ availableMaterials: Material[] = [];
 
       });
       this.cdr.detectChanges()
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -572,11 +395,8 @@ availableMaterials: Material[] = [];
 
       id: 0,
 
-<<<<<<< HEAD
-=======
       materialId: 0,
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
       date: '',
 
       materialName: '',
@@ -596,10 +416,6 @@ availableMaterials: Material[] = [];
       remarks: ''
 
     };
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -675,11 +491,7 @@ availableMaterials: Material[] = [];
       );
 
     });
-<<<<<<< HEAD
-
-=======
     
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -691,16 +503,9 @@ availableMaterials: Material[] = [];
 
     const parts = date.split(' ');
 
-<<<<<<< HEAD
-    if (parts.length !== 3) {
-
-      return '';
-
-=======
 
     if (parts.length !== 3) {
       return '';
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
     }
 
 
@@ -714,18 +519,6 @@ availableMaterials: Material[] = [];
     const months: { [key: string]: string } = {
 
       Jan: '01',
-<<<<<<< HEAD
-      Feb: '02',
-      Mar: '03',
-      Apr: '04',
-      May: '05',
-      Jun: '06',
-      Jul: '07',
-      Aug: '08',
-      Sep: '09',
-      Oct: '10',
-      Nov: '11',
-=======
 
       Feb: '02',
 
@@ -747,16 +540,12 @@ availableMaterials: Material[] = [];
 
       Nov: '11',
 
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
       Dec: '12'
 
     };
 
 
     return `${year}-${months[month]}-${day.padStart(2, '0')}`;
-<<<<<<< HEAD
-
-=======
     
   }
 
@@ -919,7 +708,6 @@ availableMaterials: Material[] = [];
 
 
     return 'Other';
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -930,10 +718,6 @@ availableMaterials: Material[] = [];
   get totalEntries(): number {
 
     return this.materials.length;
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -943,16 +727,6 @@ availableMaterials: Material[] = [];
 
   get materialsUsedToday(): number {
 
-<<<<<<< HEAD
-    const today = '08 Aug 2026';
-
-    return this.materials.filter(
-
-      material => material.date === today
-
-    ).length;
-
-=======
     const today = new Date();
 
     const todayString = today.toLocaleDateString('en-GB', {
@@ -971,7 +745,6 @@ availableMaterials: Material[] = [];
       material => material.date === todayString
 
     ).length;
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -990,10 +763,6 @@ availableMaterials: Material[] = [];
       0
 
     );
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -1018,10 +787,6 @@ availableMaterials: Material[] = [];
       )
 
     ];
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -1046,10 +811,6 @@ availableMaterials: Material[] = [];
       )
 
     ];
-<<<<<<< HEAD
-
-=======
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -1059,13 +820,6 @@ availableMaterials: Material[] = [];
 
   get todayTotalUsage(): number {
 
-<<<<<<< HEAD
-    const today = '08 Aug 2026';
-
-    return this.materials
-
-      .filter(material => material.date === today)
-=======
     const today = new Date();
 
     const todayString = today.toLocaleDateString('en-GB', {
@@ -1086,7 +840,6 @@ availableMaterials: Material[] = [];
         material => material.date === todayString
 
       )
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
       .reduce(
 
@@ -1097,11 +850,7 @@ availableMaterials: Material[] = [];
         0
 
       );
-<<<<<<< HEAD
-
-=======
       
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
   }
 
 
@@ -1118,11 +867,6 @@ availableMaterials: Material[] = [];
     this.selectedProject = 'All';
 
     this.selectedDate = '';
-<<<<<<< HEAD
-
-  }
-}
-=======
   }
 
 
@@ -1152,4 +896,3 @@ availableMaterials: Material[] = [];
   }
 
 }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c

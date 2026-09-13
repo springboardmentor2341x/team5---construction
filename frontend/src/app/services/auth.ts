@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
-import { Observable } from 'rxjs';
-=======
 import { Observable, tap } from 'rxjs';
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 
 export interface LoginRequest {
   email: string;
@@ -34,10 +30,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
       data
-<<<<<<< HEAD
-    );
-  }
-=======
     ).pipe(
       tap((response) => {
 
@@ -73,5 +65,4 @@ export class AuthService {
     localStorage.removeItem('role');
     localStorage.removeItem('full_name');
   }
->>>>>>> a25601018d2b438034d0eae4f16f47f716fe060c
 }
