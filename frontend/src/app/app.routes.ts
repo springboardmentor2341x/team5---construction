@@ -544,7 +544,7 @@ export const routes: Routes = [
   //   loadComponent: () =>
   //     import('./layouts/resource-management-layout/resource-management-layout')
   //       .then(m => m. ResourceManagementLayoutComponent),
-    component: ResourceManagementLayoutComponent,
+     component: ResourceManagementLayoutComponent,
 
     children: [
 
@@ -989,8 +989,8 @@ export const routes: Routes = [
   {
     path: 'dashboard-and-analytics',
     component: DashboardAndAnalyticsLayoutComponent,
-    canActivate: [authGuard],
-    canActivateChild: [authGuard],
+    // canActivate: [authGuard],
+    // canActivateChild: [authGuard],
 
     children: [
 
