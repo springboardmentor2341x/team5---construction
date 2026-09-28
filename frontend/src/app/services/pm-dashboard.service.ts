@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ProjectManagerService {
 
-  private apiUrl = 'http://127.0.0.1:8000/project-manager/dashboard';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/project-manager/dashboard';
 
   constructor(private http: HttpClient) {}
 

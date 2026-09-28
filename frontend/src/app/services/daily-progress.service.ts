@@ -26,7 +26,7 @@ export interface DailyProgressResponse extends DailyProgressCreate {
 })
 export class DailyProgressService {
 
-  private apiUrl = 'http://127.0.0.1:8000/daily-progress';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/daily-progress';
 
   constructor(private http: HttpClient) {}
 

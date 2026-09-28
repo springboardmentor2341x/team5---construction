@@ -43,7 +43,7 @@ export interface ProjectCreate {
 })
 export class ProjectService {
 
-  private apiUrl = 'http://127.0.0.1:8000/projects';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/projects';
 
   constructor(private http: HttpClient) {}
 

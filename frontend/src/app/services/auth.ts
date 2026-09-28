@@ -22,7 +22,7 @@ export interface LoginResponse {
 })
 export class AuthService {
 
-  private apiUrl = 'http://127.0.0.1:8000';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com';
 
   constructor(private http: HttpClient) {}
 

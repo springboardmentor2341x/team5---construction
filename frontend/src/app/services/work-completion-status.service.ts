@@ -15,7 +15,7 @@ export class WorkCompletionStatusService {
   private http = inject(HttpClient);
 
   private apiUrl =
-    'http://127.0.0.1:8000/milestones/site-engineer/work-category-progress';
+    'https://buildtrack-backend-obv7.onrender.com/milestones/site-engineer/work-category-progress';
 
   getWorkCategoryProgress(): Observable<WorkCategoryProgress[]> {
     return this.http.get<WorkCategoryProgress[]>(this.apiUrl);

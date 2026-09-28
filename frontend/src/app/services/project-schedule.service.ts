@@ -36,7 +36,7 @@ export class ProjectScheduleService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://127.0.0.1:8000/project-schedules';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/project-schedules';
 
   // GET
   getAllSchedules(): Observable<ProjectSchedule[]> {

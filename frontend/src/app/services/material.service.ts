@@ -24,7 +24,7 @@ export class MaterialService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://127.0.0.1:8000/materials';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/materials';
   //private apiUrl = '/api/materials';
 
   // GET /materials/

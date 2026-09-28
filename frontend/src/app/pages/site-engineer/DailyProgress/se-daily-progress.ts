@@ -135,7 +135,7 @@ export class SeDailyProgress implements OnInit {
     // this.errorMessage = '';
 
     this.http
-      .get<Project[]>('http://127.0.0.1:8000/projects/')
+      .get<Project[]>('https://buildtrack-backend-obv7.onrender.com/projects/')
       .subscribe({
 
         next: (data) => {

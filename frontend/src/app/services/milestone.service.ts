@@ -45,7 +45,7 @@ export interface MilestoneUpdate {
 })
 export class MilestoneService {
 
-  private apiUrl = 'http://127.0.0.1:8000/milestones';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/milestones';
 
   constructor(private http: HttpClient) {}
 

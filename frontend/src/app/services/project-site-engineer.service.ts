@@ -53,7 +53,7 @@ export interface Milestone {
 export class ProjectSiteEngineerService {
     constructor(private http: HttpClient) {}
 
-      private milestoneapiUrl = 'http://127.0.0.1:8000/milestones'
+      private milestoneapiUrl = 'https://buildtrack-backend-obv7.onrender.com/milestones'
      
 
     getmilestonedetail():Observable<Milestone[] > {
@@ -65,7 +65,7 @@ export class ProjectSiteEngineerService {
       return this.http.get<Milestone>(`${this.milestoneapiUrl}/${id}`);
 
     }
-      private apiUrl = 'http://127.0.0.1:8000/project-site-engineers';
+      private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/project-site-engineers';
 
   
 

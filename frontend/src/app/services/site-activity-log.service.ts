@@ -32,7 +32,7 @@ export class SiteActivityLogService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://127.0.0.1:8000/site-activity-logs';
+  private apiUrl = 'https://buildtrack-backend-obv7.onrender.com/site-activity-logs';
 
   // GET - Get all site activity logs
   getAllActivityLogs(): Observable<SiteActivityLog[]> {
